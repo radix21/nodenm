@@ -13,8 +13,13 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
+app.get("/test", function(req, res){
+    res.send("Test");
+})
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
 
 
