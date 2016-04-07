@@ -1,38 +1,14 @@
-/**var cool = require('cool-ascii-faces');
-var express = require('express');
-var app = express();
-
-app.set('port', (process.env.PORT || 5000));
-
-app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-app.get('/', function(request, response) {
-    //response.render('pages/index')
-    response.send("hello");
-});
-
-app.get('/cool', function(request, response) {
-    response.send(cool());
-});
-
-app.listen(app.get('port'), function() {
-    console.log('Node app is running on port', app.get('port'));
-});*/
-
 main = require("./apps/main");
-account = require("./apps/account");
+account = require("./urls/account")
 app = main.getServer();
-account.urls(app);
+settings = require("./apps/settings.js");
+settings.use(app);
+app.set('view engine', 'ejs');
+account.set(app, public_html);
 app.set('port', (process.env.PORT || 5000));
-
 app.get("/", function(req, res){
-    res.send("hello");
+    res.render("pages/index", {status:"logged"});
 })
-app.listen(app.get("port"), function(){
-    
-        console.log('Node app is running on port', app.get('port'));
+server.listen(app.get("port"), function(){
+    console.log('Node app is running on port', app.get('port'));
 });
