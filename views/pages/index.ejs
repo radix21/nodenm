@@ -1,59 +1,66 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <% include ../partials/header.ejs %>
-</head>
+<html class="no-js" ng-app="App" lang="es">
+    <head>
+    <!--<base href="/" />-->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Marketing University: Entrenate, Certifica tus conocimientos en Marketing Digital</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0">
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,300,200,500,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'>
 
-<body>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="css/css-circle/css/circle.css">
+        <script src="js/jquery.min.js"></script>
 
-  <% include ../partials/nav.ejs %>
-  <% if (status == 'logged'){ %>
-    test
-  <% } %>
+        <script src="angular/angular/angular.min.js"></script>
+        <script src="angular/angular-route/angular-route.min.js"></script>
+        <script src="js/angular-animate.js"></script>
+        <script src="ui-bootstrap/ui-bootstrap-custom-0.13.4.js"></script>
+        <script src="ui-bootstrap/ui-bootstrap-custom-tpls-0.13.4.js"></script>
+        <script src="js/loader.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script> 
+        <script src="js/pace.min.js"></script>
+        <script>
+        </script>
+        <link rel="stylesheet" href="css/loader.css">
+        <!-- Configuration file -->
+        <script src="js/config.json"></script>
+        <!-- Exceptions -->
+        <script src="js/exceptions.js"></script>
+        <!-- Functions -->
+        <script src="js/functions.js"></script>
+        <!--- //// MVC ///// -->
+        <!-- Ellipsis -->
+        <script src="js/angular-ellipsis.js"></script>
+        <script src="js/truncate.js"></script>
 
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/lang-logo.png">
-    </a>
-    <h1>Getting Started with Node on Heroku</h1>
-    <p>This is a sample Node application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-nodejs"><span class="glyphicon glyphicon-flash"></span> Getting Started with Node</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/node-js-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-  </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs" class="alert-link">Getting Started with Node on Heroku</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/node-js-getting-started">Heroku Button</a> on the repository.</li>
-
-        <li>When Heroku received the source code, it grabbed all the dependencies in the <a href="https://github.com/heroku/node-js-getting-started/blob/master/package.json">package.json</a>.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-        <li>Check out the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started</a> guide to learn more!</li>
-      </ul>
-    </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started with Node on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-nodejs">Deploying Node Apps on Heroku</a></li>
-      </ul>
-    </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
-</div>
-
-
-</body>
+        <!-- App -->
+        <script src="js/main.js"></script>
+        <script src="js/services.js"></script>
+        <script src="models/models.js"></script>
+        <script src="js/directives.js"></script>
+        <!-- Controllers -->
+        <script src="controllers/homeController.js"></script>
+        <script src="controllers/courseContentController.js"></script>
+        <script src="controllers/navbarController.js"></script>
+        <!-- Models -->
+        <!-- Directives -->
+    </head>
+    <body>
+        
+        <!-- Navbar -->
+        <navbar></navbar>
+        <!-- contenedor Dinamico -->
+        <div  ng-view id="content-app"></div>
+        <!-- footer -->
+        <div class="" ng-include="'views/footer.html'"></div>
+        <!--  MODAL DE INGRESO  -->
+    </body>
 </html>
+
