@@ -10,6 +10,18 @@
  *      statements : {Object[]} 
  * }
  **/
-getStatements = function(){
+getStatements = function(req, res){
+    data = http.get(KME_API.get_statements, function(response){
+        str = "";
+        response.on("data", function(data){
+            str += data;
+            console.log(data);
+        })
+        response.on("end", function(){
+            console.log(str);
+            res.send(str);
+        })
+    })
+
 
 }

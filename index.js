@@ -8,7 +8,9 @@ ejs = require("ejs");
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 account.set(app, public_html, http);
-app.set('port', (process.env.PORT || 5000));
+xapi.set(app);
+//app.set('port', (process.env.PORT || 5000));
+app.set('port', (4000));
 app.use(express.static(__dirname + '/public'));
 app.get("/", function(req, res){
     res.render("pages/home", {session : req.session});

@@ -1,6 +1,7 @@
 http = require("http");
 server = http.createServer(app, function(req, res){});
 session = require("express-session");
+SECRET_KEY = "13d4ad9c5ef"; 
 cookieParser = require("cookie-parser");
 bodyParser = require("body-parser");
 public_html = __dirname;

@@ -50,28 +50,41 @@ loginView = function(req, res){
 login = function(req, res){
     username = req.body.username;
     password = req.body.password;
+    console.log(KME_API.login);
     data = http.get(KME_API.login+"/?username="+username+"&password="+password, function(response){
         str = "";
         response.on("data", function(data){
             str += data;
         })
+        response.on("error", function(err){
+            console.log(err)
+        })
         response.on("end", function(){
-            response = JSON.parse(str);
-            if(response.status != false){
+            try{
+                console.log(str);
+                response = JSON.parse(str);
+                req.session.user = response.user;
+                req.session.token = response.token;
+                if(response.status == "ok"){
+                    response = {
+                        status : "ok"
+                    }
+                    res.send(response)
+                }else{
+                    response = {
+                        status : "failed",
+                        message : "username and/or password are incorrect"
+                    }
+                    res.status(400).send(response);
+                }
+            }catch(err){
+                console.log(err)
                 response = {
-                    status : "ok"
+                    "status" : "error",
+                    "message" : err
                 }
-                req.session.user = {
-                    logged : true,
-                    username : username
-                }
-            }else{
-                response = {
-                    status : "failed",
-                    message : "username and/or password are incorrect"
-                }
+                res.send(response);
             }
-            res.send(response);
         })
     });;
 }
@@ -98,19 +111,27 @@ logout = function(){
             str += data;
         })
         response.on("end", function(){
-            response = JSON.parse(str);
-            if(response.status == "ok"){
-                response = {
-                    status : "ok"
+            try{
+                response = JSON.parse(str);
+                if(response.status == "ok"){
+                    response = {
+                        status : "ok"
+                    }
+                    req.session.destroy();
+                }else{
+                    response = {
+                        status : "failed",
+                        message : "username and/or password are incorrect"
+                    }
                 }
-                req.session.destroy();
-            }else{
+                res.send(response);
+            }catch(err){
                 response = {
-                    status : "failed",
-                    message : "username and/or password are incorrect"
+                    "status" : "error",
+                    "message" : "Bad Request"
                 }
+                res.status(400).send(response);
             }
-            res.send(response);
         })
     });;
 }
@@ -206,6 +227,4 @@ isAuthenticated = function(req, res){
         "logged" : logged
     }
     res.send(response);
-
-    
 }
