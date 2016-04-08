@@ -1,15 +1,22 @@
 main = require("./apps/main");
 account = require("./urls/account")
-app = main.getServer();
+xapi = require("./urls/xapi")
+app = main.server();
 settings = require("./apps/settings.js");
 settings.use(app);
-app.set('view engine', 'ejs');
-account.set(app, public_html);
+ejs = require("ejs");
+app.set('view engine', 'html');
+app.engine('html', ejs.renderFile);
+account.set(app, public_html, http);
 app.set('port', (process.env.PORT || 5000));
-
+app.use(express.static(__dirname + '/public'));
 app.get("/", function(req, res){
-    res.render("pages/index", {status:"logged"});
+    res.render("pages/home", {session : req.session});
 })
+
+app.get("/template/:template", function(req, res){
+    res.render("pages/"+req.params.template);
+});
 
 
 server.listen(app.get("port"), function(){

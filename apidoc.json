@@ -1,17 +1,9 @@
 {
-  "name": "apidoc-example",
-  "version": "0.3.0",
-  "description": "apiDoc example project",
-  "title": "Custom apiDoc browser title",
-  "url" : "https://api.github.com/v1",
-  "header": {
-    "title": "My own header title",
-    "filename": "header.md"
-  },
-  "footer": {
-    "title": "My own footer title",
-    "filename": "footer.md"
-  },
+  "name": "kmelx",
+  "version": "0.1.0",
+  "description": "Communication interface between KME Engine and Web Applications",
+  "title": "KME Engine Interface",
+  "url" : "",
   "order": [
     "GetUser",
     "PostUser"

@@ -1,0 +1,76 @@
+#header
+{
+	background: url(../../images/back_home_1.jpg) 50% 0 no-repeat;
+	background-size: cover;
+	background-position: fixed;
+	overflow: auto;
+	position: relative;
+	height: 100%;
+}
+#person1
+{
+	background: url(../../images/personaje_home_1.png) 50% 0 no-repeat;
+	background-size: 100%;
+	height: 100%;
+	position:fixed;
+	width: 100%;
+}
+#cerpentinas1
+{
+	background: url(../../images/back_home_cerpentinas_1.png) 50% 0 no-repeat;
+	background-size: 100%;
+	height: 100%;
+	position:absolute;
+	width: 100%;
+}
+#cerpentinas2
+{
+	background: url(../../images/back_home_cerpentinas_2.png) 50% 0 no-repeat;
+	background-size: 100%;
+	height: 100%;
+	position:absolute;
+	width: 100%;
+}
+#cerpentinas3
+{
+	background: url(../../images/back_home_cerpentinas_3.png) 50% 0 no-repeat;
+	background-size: 100%;
+	height: 100%;
+	position:absolute;
+	width: 100%;
+}
+#cerpentinas4
+{
+	background: url(../../images/back_home_cerpentinas_4.png) 50% 0 no-repeat;
+	background-size: 100%;
+	height: 100%;
+	position:absolute;
+	width: 100%;
+}
+
+/* SLIDER 2 DEL HOME */
+
+#person2
+{
+	background: url(../../images/personaje_home_2.png) 100% 0 no-repeat;
+	background-size: 100%;
+	height: 100%;
+	position:fixed;
+	width: 100%;
+}
+#burbujas1
+{
+	background: url(../../images/back_home_burbujas_1.png) 50% 0 no-repeat;
+	background-size: 100%;
+	height: 100%;
+	position:absolute;
+	width: 100%;
+}
+#burbujas2
+{
+	background: url(../../images/back_home_burbujas_2.png) 50% 0 no-repeat;
+	background-size: 100%;
+	height: 100%;
+	position:absolute;
+	width: 100%;
+}

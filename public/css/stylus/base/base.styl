@@ -1,0 +1,91 @@
+html
+	margin 0
+	padding 0
+	width 100%
+body 
+	font-family font
+	font-size 16px
+	margin 0
+	overflow-x hidden
+	padding 0
+	width 100%
+
+#preloader
+	position fixed
+	top 0
+	left 0
+	right 0
+	bottom 0
+	background azul;
+	z-index 9999
+
+#status
+	background black
+	border-radius 50%
+	box-shadow inset 5px 5px 15px 5px rgba(0,0,0,0.1)
+	height 80px
+	left 50%
+	margin -60px 0 0 -60px
+	position absolute
+	top 50%
+	width 80px
+	
+.container
+	margin-left auto
+	margin-right auto
+	max-width 1440px
+	padding 0
+	position relative
+	width 100%
+	z-index 2
+	
+.col-xs-15,.col-sm-15,.col-md-15,.col-lg-15
+	position relative
+	min-height 1px
+	padding-right 10px
+	padding-left 10px
+	width 20%
+	float left
+
+@media screen and (max-width:1440px)
+	body
+		font-size 16px
+	.container
+		max-width 1440px
+		width 100%
+	.col-lg-15
+		width 20%
+		float left
+
+/* Medium devices (large desktops, 1200px and up) */
+@media screen and (max-width:1200px)
+	body
+		font-size 16px
+	.container
+		max-width 1440px
+		width 100%
+	.col-md-15
+		width 20%
+		float left
+
+/* Smal devices (desktops, 992px and up) */
+@media screen and (max-width:992px)
+	body
+		font-size 16px
+	.container
+		max-width 1440px
+		width 100%
+	.col-sm-15
+		width 20%
+		float left
+
+/* X - Small devices (tablets, 768px and up) */
+@media screen and (max-width:768px)
+	body
+		font-size 16px
+	.container
+		max-width 1440px
+		width 100%
+	.col-xs-15
+		width 20%
+		float left
