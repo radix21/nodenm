@@ -188,4 +188,24 @@ register = function(req, res){
     });;
 }
 
+/**
+ * @api{post} /api/account/is_authenticated/ is_authenticated
+ * @apiName isAuthenticated
+ * @apiDescription  return logged status in session
+ * @apiGroup account
+ * @apiSuccessExample {JSON} Success-response
+ *  HTTP/1.1 200 OK
+ *  {
+ *      "logged" : {Boolean}
+ *  }
+ *
+ * */
+isAuthenticated = function(req, res){
+    logged = req.session.user != undefined ? rq.session.logged : false;
+    response = {
+        "logged" : logged
+    }
+    res.send(response);
 
+    
+}

@@ -35,6 +35,26 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/api/account/is_authenticated/",
+    "title": "is_authenticated",
+    "name": "isAuthenticated",
+    "description": "<p>return logged status in session</p>",
+    "group": "account",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-response",
+          "content": "HTTP/1.1 200 OK\n{\n    \"logged\" : {Boolean}\n}",
+          "type": "JSON"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./apps/account.js",
+    "groupTitle": "account"
+  },
+  {
+    "type": "post",
     "url": "/api/account/login",
     "title": "Login",
     "name": "login",
@@ -125,5 +145,29 @@ define({ "api": [
     },
     "filename": "./apps/account.js",
     "groupTitle": "account"
+  },
+  {
+    "type": "get",
+    "url": "/api/xapi/statements/",
+    "title": "get_statements",
+    "name": "getStatements",
+    "description": "<p>Get statements saved by user</p>",
+    "group": "xapi",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "200",
+            "description": "<p>Get statements by user { statements : {Object[]} }</p>"
+          }
+        ]
+      }
+    },
+    "filename": "./apps/xapi.js",
+    "groupTitle": "xapi"
   }
 ] });
