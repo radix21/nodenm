@@ -1,4 +1,4 @@
-account = require("../apps/account");
+//account = require("../apps/account");
 module.exports = {
     set : function(app, dirname, http){
         app.get("/api/xapi/statements/", getStatements);//TODO
