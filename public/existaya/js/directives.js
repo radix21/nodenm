@@ -1,9 +1,9 @@
 app.directive("buttonCourse", ['sessionsFactory','$rootScope','$routeParams', function(sessionsFactory, $rootScope, $routeParams){
     return {
         restrict : "EA",
-template : '<a href="{{url}}" class="btn btn--academy2 btn-xlg text--upper margin--t1 margin--b1" ng-class="{btnRojo:registerCourse, btnSuccess: showCourseButton}" id="buttonCourse" ng-if="showCourseButton"><span ng-if="getInCourse">Ingresar</span><span ng-if="registerCourse">Registrate</span></a>',
+        template : '<a href="{{url}}" class="btn btn--academy2 btn-xlg text--upper margin--t1 margin--b1" ng-class="{btnRojo:registerCourse, btnSuccess: showCourseButton}" id="buttonCourse" ng-if="showCourseButton"><span ng-if="getInCourse">Ingresar</span><span ng-if="registerCourse">Registrate</span></a>',
 link : function(scope, element, attrs){
-    scope.$watch("sessions", function(){
+        scope.$watch("sessions", function(){
         scope.getInCourse = false;
         scope.registerCourse = false;
         $rootScope.detailGetInCourse = false;
@@ -599,8 +599,8 @@ app.directive("coursesList", ["courses","$http", "$rootScope","$routeParams", fu
 app.directive("coursesCatalog", ["$rootScope", "courses",  function($rootScope, courses){
     return {
         restrict :  "EA",
-    templateUrl : 'views/courses/blockCourses.html',
-    link : function(scope){
+        templateUrl : 'template/blockCourses.html',
+        link : function(scope){
         switch(scope.type){
             case "me":
                 courses.myCourses().success(function(response){
@@ -623,22 +623,6 @@ app.directive("coursesCatalog", ["$rootScope", "courses",  function($rootScope, 
 
 }]);
 
-app.directive("userInfo", ["$rootScope", function($rootScope){
-    return {
-        restrict : "EA",
-        template : "<span id='user_info'><span>",
-        link : function(scope){
-            str = $rootScope.dataUser.name + " " + $rootScope.dataUser.lastname;
-            info = document.querySelector("#user_info");
-            info.innerHTML = str;
-        },
-        scope:{
-        
-        }
-        
-        
-    }
-}]);
 app.directive("certifications",["courses",function(courses){
     return {
         restrict : "EA",

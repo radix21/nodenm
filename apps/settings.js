@@ -11,8 +11,6 @@ module.exports = {
         app.use(bodyParser.urlencoded({ extended: false}));
         app.use(cookieParser());
         app.use(session({resave:true, saveUninitialized :true, secret: "asad#$%^&yhsd123"}));
-        app.use(express.static(__dirname + '/public'));
-
     }
 }
 

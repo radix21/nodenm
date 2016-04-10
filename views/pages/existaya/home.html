@@ -1,66 +1,10 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> 
-<html class="no-js" ng-app="App"> 
-<!--<![endif]-->
-    <head>
-    
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Marketing University: Entrenate, Certifica tus conocimientos en Marketing Digital</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0">
-        <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,300,200,500,600,700,800' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="libs/Bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
-        <link rel="stylesheet" href="libs/Bootstrap-validation/css/formValidation.min.css">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-        <script src="angular/angular/angular.min.js"></script>
-        <script src="angular/angular-route/angular-route.min.js"></script>
-
-        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-
-        <script>window.jQuery || document.write('<script src="libs/jQuery/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="js/loader.js"></script>
-
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        
-        <script src="libs/Moments/min/moment.min.js"></script>
-        <script src="libs/Moments/locale/es.js"></script>
-        <script src="libs/Bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-        
-        <script src="libs/Bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
-        
-        <script src="libs/Bootstrap-validation/js/formValidation.min.js"></script>
-        <script src="libs/Bootstrap-validation/js/framework/bootstrap.min.js"></script>
-        <script src="libs/Bootstrap-validation/js/language/es_ES.js"></script>
-        <script src="js/config.json"></script>
-        <script src="js/main.js"></script>
-        <script src="js/directives.js"></script>
-        <script src="js/services.js"></script>
-        <script src="controllers/navbarController.js"></script>
-        <!-- media-queries.js (fallback) -->
-        <!--[if lt IE 9]>
-            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>           
-        <![endif]-->
-        <!--[if lt IE 9]>
-            <script src="dist/html5shiv.js"></script>
-        <![endif]-->
-
-    </head>
-    <body>
-        <navbar></navbar>
+<% include head.html %>
+<navbar></navbar>
         <section class="col-xs-12 sidebar-blueGrandient sidebar-add__montain">
 
             <div class="sidebar-parallax visible-lg">
-                <img src="images/nubes-left.png" alt="" id="nubes_left1" class="sidebar-parallax__nubes1" />
-                <img src="images/nubes-right.png" alt="" id="nubes_left2" class="sidebar-parallax__nubes2" />
+                <img src="existaya/images/nubes-left.png" alt="" id="nubes_left1" class="sidebar-parallax__nubes1" />
+                <img src="existaya/images/nubes-right.png" alt="" id="nubes_left2" class="sidebar-parallax__nubes2" />
             </div>
 
             <div class="container">
@@ -71,7 +15,7 @@
                     adquiere nuevas habilidades y<br>accede a excelentes oportunidades 
                 </p>
                 <p class="text-center margin--t2">
-                    <a href="cursos.html" class="btn btn--academy2 btn-rojo btn--right btn-xlg">EMPIEZA AHORA</a>
+                    <a href="cursos" class="btn btn--academy2 btn-rojo btn--right btn-xlg">EMPIEZA AHORA</a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -83,7 +27,7 @@
                                 Entrénate
                             </h1>
                             <div class="row">
-                                <a href="cursos.html"><img src="images/services1.png" alt="" class="img-responsive center-block"></a>
+                                <a href="cursos"><img src="existaya/images/services1.png" alt="" class="img-responsive center-block"></a>
                             </div>
                             <h2 class="text text--blanco text--md text--bold">
                                 Cursos y Capacitación
@@ -93,7 +37,7 @@
                                 ayudarte a desarrollar habilidades 
                                 especificas en muy corto tiempo.
                             </p>
-                            <a href="cursos.html" class="btn btn-gosh btn-lg margin--t1">
+                            <a href="cursos" class="btn btn-gosh btn-lg margin--t1">
                                 Buscar Cursos
                             </a>
                         </div>
@@ -102,7 +46,7 @@
                                 Certifícate
                             </h1>
                             <div class="row">
-                                <a href="cursos.html"><img src="images/services2.png" alt="" class="img-responsive center-block"></a>
+                                <a href="cursos"><img src="existaya/images/services2.png" alt="" class="img-responsive center-block"></a>
                             </div>
                             <h2 class="text text--blanco text--md text--bold">
                                 Certifica tus Habilidades
@@ -112,7 +56,7 @@
                                 del marketing digital con mayor 
                                 demanda laboral en Latino América
                             </p>
-                            <a href="certificaciones.html" class="btn btn-gosh btn-lg margin--t1">
+                            <a href="certificaciones" class="btn btn-gosh btn-lg margin--t1">
                                 Ver Certificados Disponibles
                             </a>
                         </div>
@@ -121,7 +65,7 @@
                                 Empléate
                             </h1>
                             <div class="row">
-                                <a href="cursos.html"><img src="images/services3.png" alt="" class="img-responsive center-block"></a>
+                                <a href="cursos"><img src="existaya/images/services3.png" alt="" class="img-responsive center-block"></a>
                             </div>
                             <h2 class="text text--blanco text--md text--bold">
                                 Bolsa de Empleo
@@ -131,7 +75,7 @@
                                 de empleo de más de 100 Agencias de 
                                 Publicidad y Comunicación Digital
                             </p>
-                            <a href="#" class="btn btn-gosh btn-lg margin--t1">
+                            <a href="jobs" class="btn btn-gosh btn-lg margin--t1">
                                 Ver Ofertas de Empleo
                             </a>
                         </div>
@@ -156,9 +100,9 @@
                         <div class="col-lg-3 col-xs-6 margin--t1">
                             <div class="col-xs-12 sidebar-bloqs2">
                                 <div class="row sidebar-imageCurso">
-                                    <a href="introduccion-al-marketing-digital.html"><img src="images/Marketing-Digital-101.png" alt="" class="img-responsive center-block"></a>
+                                    <a href="introduccion-al-marketing-digital.html"><img src="existaya/images/Marketing-Digital-101.png" alt="" class="img-responsive center-block"></a>
                                     <div class="col-xs-12 sidebar-imageCurso__nombre">
-                                        <img src="images/profesor-nathalia-plaza.jpg" alt="" class="img-circle sidebar-imageCurso__image">
+                                        <img src="existaya/images/profesor-nathalia-plaza.jpg" alt="" class="img-circle sidebar-imageCurso__image">
                                         <span class="text text--blanco">
                                             Nathalia Plaza
                                         </span>
@@ -188,9 +132,9 @@
                         <div class="col-lg-3 col-xs-6 margin--t1">
                             <div class="col-xs-12 sidebar-bloqs2">
                                 <div class="row sidebar-imageCurso">
-                                    <a href="detalle-curso.html"><img src="images/Estrategia-Marketing-Digital.png" alt="" class="img-responsive center-block"></a>
+                                    <a href="detalle-curso.html"><img src="existaya/images/Estrategia-Marketing-Digital.png" alt="" class="img-responsive center-block"></a>
                                     <div class="col-xs-12 sidebar-imageCurso__nombre">
-                                        <img src="images/profesor-alex-londono.jpg" alt="" class="img-circle sidebar-imageCurso__image">
+                                        <img src="existaya/images/profesor-alex-londono.jpg" alt="" class="img-circle sidebar-imageCurso__image">
                                         <span class="text text--blanco">
                                             Alexander Londoño
                                         </span>
@@ -220,9 +164,9 @@
                         <div class="col-lg-3 col-xs-6 margin--t1">
                             <div class="col-xs-12 sidebar-bloqs2">
                                 <div class="row sidebar-imageCurso">
-                                    <a href="marketing-en-facebook-para-empresas.html"><img src="images/Facebook-Marketing.png" alt="" class="img-responsive center-block"></a>
+                                    <a href="marketing-en-facebook-para-empresas.html"><img src="existaya/images/Facebook-Marketing.png" alt="" class="img-responsive center-block"></a>
                                     <div class="col-xs-12 sidebar-imageCurso__nombre">
-                                        <img src="images/profesor-juan-diaz.jpg" alt="" class="img-circle sidebar-imageCurso__image">
+                                        <img src="existaya/images/profesor-juan-diaz.jpg" alt="" class="img-circle sidebar-imageCurso__image">
                                         <span class="text text--blanco">
                                             Guillermo Enciso
                                         </span>
@@ -252,9 +196,9 @@
                         <div class="col-lg-3 col-xs-6 margin--t1">
                             <div class="col-xs-12 sidebar-bloqs2">
                                 <div class="row sidebar-imageCurso">
-                                    <a href="marketing-en-motores-de-búsqueda-con-google-adwords.html"><img src="images/Google-Adwords.png" alt="" class="img-responsive center-block"></a>
+                                    <a href="marketing-en-motores-de-búsqueda-con-google-adwords.html"><img src="existaya/images/Google-Adwords.png" alt="" class="img-responsive center-block"></a>
                                     <div class="col-xs-12 sidebar-imageCurso__nombre">
-                                        <img src="images/avatar.jpg" alt="" class="img-circle sidebar-imageCurso__image">
+                                        <img src="existaya/images/avatar.jpg" alt="" class="img-circle sidebar-imageCurso__image">
                                         <span class="text text--blanco">
                                             Andrés Escobar
                                         </span>
@@ -311,7 +255,7 @@
                             <div class="col-xs-12">
                                 <div class="row">
                                     <div class="col-xs-3 vertical-middle">
-                                        <img src="images/avatar.jpg" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
+                                        <img src="existaya/images/avatar.jpg" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
                                     </div>
                                     <div class="col-xs-9 vertical-middle">
                                         <p class="text text--azul margin--t1">
@@ -334,7 +278,7 @@
                             <div class="col-xs-12">
                                 <div class="row">
                                     <div class="col-xs-3 vertical-middle">
-                                        <img src="images/profesor-vanessa-galvis.jpg" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
+                                        <img src="existaya/images/profesor-vanessa-galvis.jpg" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
                                     </div>
                                     <div class="col-xs-9 vertical-middle">
                                         <p class="text text--azul margin--t1">
@@ -357,7 +301,7 @@
                             <div class="col-xs-12">
                                 <div class="row">
                                     <div class="col-xs-3 vertical-middle">
-                                        <img src="images/profesor-manuel-bolanos.jpg" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
+                                        <img src="existaya/images/profesor-manuel-bolanos.jpg" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
                                     </div>
                                     <div class="col-xs-9 vertical-middle">
                                         <p class="text text--azul margin--t1">
@@ -383,12 +327,12 @@
         
         <section class="col-xs-12 sidebar-blueGrandient sidebar-blueGrandient--cero1 sidebar-add__montainR">
             <div class="sidebar-parallax visible-lg">
-                <img src="images/nubes-left.png" alt="" id="nubes_left1" class="sidebar-parallax__nubes1" />
-                <img src="images/nubes-right.png" alt="" id="nubes_left2" class="sidebar-parallax__nubes2" />
+                <img src="existaya/images/nubes-left.png" alt="" id="nubes_left1" class="sidebar-parallax__nubes1" />
+                <img src="existaya/images/nubes-right.png" alt="" id="nubes_left2" class="sidebar-parallax__nubes2" />
             </div>
             <div class="container">
                 <div class="col-xs-5">
-                    <img src="images/image1.png" alt="" class="img-responsive pull-left margin--t5">
+                    <img src="existaya/images/image1.png" alt="" class="img-responsive pull-left margin--t5">
                 </div>
                 <div class="col-xs-6">
                     <h1 class="text text--xxlg text-left text--azul_mid text--upper">
@@ -400,19 +344,19 @@
 
                     <div class="row">
                         <div class="col-xs-4 margin--t2 margin--b4">
-                            <img src="images/bullet1.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/bullet1.png" alt="" class="img-responsive center-block">
                             <p class="text text--xbold text--md text-center text--gris text--upper">
                                 Aprende a tu ritmo y necesidad
                             </p>
                         </div>
                         <div class="col-xs-4 margin--t2 margin--b4">
-                            <img src="images/bullet2.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/bullet2.png" alt="" class="img-responsive center-block">
                             <p class="text text--xbold text--md text-center text--gris text--upper">
                                 Certifica tus conocimientos
                             </p>
                         </div>
                         <div class="col-xs-4 margin--t2 margin--b4">
-                            <img src="images/bullet3.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/bullet3.png" alt="" class="img-responsive center-block">
                             <p class="text text--xbold text--md text-center text--gris text--upper">
                                 Profesores con 
                                 más de 10 años de 
@@ -437,39 +381,39 @@
                 <div class="row">
                     <div class="col-xs-10 col-xs-offset-1 margin--t2">
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                         <div class="col-xs-15 margin--t05 margin--b05">
-                            <img src="images/logo-icesi.png" alt="" class="img-responsive center-block">
+                            <img src="existaya/images/logo-icesi.png" alt="" class="img-responsive center-block">
                         </div>
                     </div>
                     <div class="col-xs-12 margin--t3 margin--b3 text-center">
-                        <a href="#" class="btn btn--academy2 btn-verde btn--right btn-xlg">
+                        <a href="jobs/curriculum" class="btn btn--academy2 btn-verde btn--right btn-xlg">
                             <span class="text--upper">REGISTRA TU HOJA DE VIDA AHORA MISMO</span>
                         </a>
                     </div>
@@ -512,7 +456,7 @@
                 <div class="col-xs-12 sidebar-footer__bottom">
                     <div class="container">
                         <div class="col-xs-2 col-xs-offset-1">
-                            <img src="images/logo1.png" alt="" class="img-responsive pull-left margin--t1">
+                            <img src="existaya/images/logo1.png" alt="" class="img-responsive pull-left margin--t1">
                         </div>
                         <div class="col-xs-2">
                             <ul class="list-simple list-xs">
@@ -565,7 +509,7 @@
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <img src="images/logo2.png" alt="" class="img-responsive center-block">
+                        <img src="existaya/images/logo2.png" alt="" class="img-responsive center-block">
                     </div>
                     <div class="modal-body">
                         <div role="tabpanel">

@@ -1,6 +1,69 @@
 define({ "api": [
   {
     "type": "post",
+    "url": "/api/xapi/statements",
+    "title": "InsertStatement",
+    "name": "InsertStatement",
+    "description": "<p>Insert statement as xapi</p>",
+    "group": "XAPI",
+    "version": "0.1.0",
+    "success": {
+      "examples": [
+        {
+          "title": "success-response",
+          "content": "HTTP/1.1 200 OK\n{\n     status : \"ok\",\n     message : {String},\n     bookmark_success : {Object[]},\n     bookmark_failed : {Object[]}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "StatementMissing",
+          "content": "HTTP/1.1 400 ERROR\n{\n    \"status\" : \"failed\",\n    \"message\" : {String},\n    \"error\" : {String}\n}",
+          "type": "json"
+        },
+        {
+          "title": "ServerError",
+          "content": "HTTP/1.1 500 ERROR\n{\n    \"status\" : \"error\",\n    \"message\" : {String}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./apps/xapi.js",
+    "groupTitle": "XAPI"
+  },
+  {
+    "type": "get",
+    "url": "/api/xapi/statements/",
+    "title": "get_statements",
+    "name": "getStatements",
+    "description": "<p>Get statements saved by user</p>",
+    "group": "XAPI",
+    "version": "0.1.0",
+    "success": {
+      "examples": [
+        {
+          "title": "200 Get statements by user",
+          "content": "{\n     status : \"ok\",\n     statements : {Object[]} \n}",
+          "type": "Object[]"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "400 AuthenticationFailed",
+          "content": "{\n     \"status\": \"failed\",\n     \"message\": \"User is not authenticated\"\n }",
+          "type": "JSON"
+        }
+      ]
+    },
+    "filename": "./apps/xapi.js",
+    "groupTitle": "XAPI"
+  },
+  {
+    "type": "post",
     "url": "/api/account/register",
     "title": "Register",
     "name": "Register",
@@ -94,7 +157,12 @@ define({ "api": [
       "examples": [
         {
           "title": "AuthenticationFailed:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"status\" : \"failed\",\n    \"message\" : \"username and/or passowrd are incorrect\"\n\n}",
+          "content": "HTTP/1.1 400 ERROR\n{\n    \"status\" : \"failed\",\n    \"message\" : \"username and/or passowrd are incorrect\"\n\n}",
+          "type": "Object"
+        },
+        {
+          "title": "ServerError",
+          "content": "HTTP/1.1 500 ERROR\n{\n    \"status\" : \"error\",\n    \"message\" : \"Server Error - check endpoint server\"\n}",
           "type": "Object"
         }
       ]
@@ -145,29 +213,5 @@ define({ "api": [
     },
     "filename": "./apps/account.js",
     "groupTitle": "account"
-  },
-  {
-    "type": "get",
-    "url": "/api/xapi/statements/",
-    "title": "get_statements",
-    "name": "getStatements",
-    "description": "<p>Get statements saved by user</p>",
-    "group": "xapi",
-    "version": "0.1.0",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Object[]",
-            "optional": false,
-            "field": "200",
-            "description": "<p>Get statements by user { statements : {Object[]} }</p>"
-          }
-        ]
-      }
-    },
-    "filename": "./apps/xapi.js",
-    "groupTitle": "xapi"
   }
 ] });

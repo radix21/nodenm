@@ -1,6 +1,12 @@
 app.factory("auth", ["$rootScope","$location",function($rootScope, $location){
     return {
         kme: function ($http, $scope,username,name,email,register,access_token,provider) {
+            $http.post('/account/login')
+                .success(function(response){
+                    console.log(response);
+                
+                })
+            /**
             var uri=config.SERVICE_SERVER+'/api/login_kmeadmin/?callback=JSON_CALLBACK&username='+email+'&name='+ name +'&password='+username;
             $http.jsonp(encodeURI(uri)).success(function(response){
                 if(response.status == "logged"){
@@ -38,10 +44,19 @@ app.factory("auth", ["$rootScope","$location",function($rootScope, $location){
                     }	
                 }
             });
+            **/
         },
 
 
         ajax : function($http, $scope, username, userpassword, email){
+            $http.post('/api/account/login',{username : username, password:userpassword})
+                .success(function(response){
+                    status  = response.status;
+                    if(status == "ok"){
+                        location.href = "/profile";
+                    }
+                });
+            /**
             if(!email){
                 url = config.SERVICE_SERVER + "/api/json/json_login_dare/?callback=JSON_CALLBACK&username="+username+"&password="+userpassword;
                 register=false;
@@ -74,9 +89,7 @@ app.factory("auth", ["$rootScope","$location",function($rootScope, $location){
                         $scope.alertData = true;	
                     }	
                 }
-            });
-
-
+                **/
         }
     }
 }]);
@@ -112,7 +125,7 @@ app.factory('courses', ['$http',function($http) {
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?available=true&callback=JSON_CALLBACK");
         },
         myCourses : function(){
-            return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?in_progress=True&callback=JSON_CALLBACK");
+            return $http.jsonp("/api/courses/?in_progress=True&callback=JSON_CALLBACK");
         },
         certifications : function(params){
             return $http.jsonp(config.SERVICE_SERVER+"/api/certifications/"+params+"&callback=JSON_CALLBACK");

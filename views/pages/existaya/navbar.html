@@ -1,10 +1,10 @@
 <div ng-controller="navbarController">
-    <% if (session.logged == true){ %>
+    <% if (params.user.logged){ %>
     <nav class="col-xs-12 nav-topper nav-topper--perfil">
         <div class="container">
             <div class="col-xs-2">
-                <a href="#/" style="padding-left:0">
-                    <img src="images/logo-ico.png" alt="Marketing University" class="img-responsive pull-left logo">
+                <a href="/" style="padding-left:0">
+                    <img src="existaya/images/logo-ico.png" alt="Marketing University" class="img-responsive pull-left logo">
                 </a>
             </div>
             <div class="col-xs-6">
@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-xs-5 col-xs-offset-5">
                         <p class="text text--blanco text--xbold text-right margin--t1">
-                        <user-info></user-info>
+                        <%= params.user.info.username %>
                         </p>
                     </div>
                     <div class="col-xs-2 padding--r0 padding--l0 nav-topper__avatarUser">
@@ -41,13 +41,13 @@
             </div>
         </div>
     </nav>
-    <% }else{%>
+    <% }else{ %>
     <nav class="col-xs-12 nav-topper">
         <div class="container" ng-init="algo()">
             <div class="row-same-height row-xs-full-height">
                 <div class="col-xs-2 col-xs-height col-xs-full-height col-middle">
                     <a ng-href="#/"> 
-                        <img src="images/logo1.png" id="logoOri" alt="Marketing University" class="img-responsive pull-left logowidth" >
+                        <img src="existaya/images/logo1.png" id="logoOri" alt="Marketing University" class="img-responsive pull-left logowidth" >
                     </a>
                     <div ng-show="{{authenticated_navbar}}" class="top-main-menu">
                         <ul class="nav nav-complete navbar-nav navbar-right">
@@ -103,8 +103,7 @@
             </div>
         </div>
     </nav>
-    <%}%>
-
+    <% } %>
 </div>
 <div ng-controller="loginController">
 
@@ -112,7 +111,7 @@
         <div class="modal-dialog modal-sm" id="modal_login">
             <div class="modal-content">
                 <div class="modal-header">
-                    <img src="images/logo2.png" alt="" class="img-responsive center-block">
+                    <img src="existaya/images/logo2.png" alt="" class="img-responsive center-block">
                 </div>
                 <div class="modal-body">
                     <div role="tabpanel">

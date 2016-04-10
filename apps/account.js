@@ -39,37 +39,52 @@ loginView = function(req, res){
  *      "status" : ok
  *  }
  * @apiErrorExample {Object} AuthenticationFailed:
- *  HTTP/1.1 200 OK
+ *  HTTP/1.1 400 ERROR
  *  {
  *      "status" : "failed",
  *      "message" : "username and/or passowrd are incorrect"
  *
  *  }
  *
+ *  @apiErrorExample {Object} ServerError
+ *  HTTP/1.1 500 ERROR
+ *  {
+ *      "status" : "error",
+ *      "message" : "Server Error - check endpoint server"
+ *  }
+ *
  * */
 login = function(req, res){
     username = req.body.username;
     password = req.body.password;
-    console.log(KME_API.login);
     data = http.get(KME_API.login+"/?username="+username+"&password="+password, function(response){
         str = "";
         response.on("data", function(data){
             str += data;
         })
         response.on("error", function(err){
-            console.log(err)
+            res.status(400).send({
+                "status" : "error",
+                "message" : err
+
+            })
         })
         response.on("end", function(){
             try{
-                console.log(str);
                 response = JSON.parse(str);
-                req.session.user = response.user;
-                req.session.token = response.token;
+                console.log(str);
                 if(response.status == "ok"){
-                    response = {
+                    data = {
                         status : "ok"
                     }
-                    res.send(response)
+
+                    req.session.user = {
+                        logged : true,
+                        info : response.user,
+                        token : response.token
+                    }
+                    console.log(req.session.user);
+                    res.send(data)
                 }else{
                     response = {
                         status : "failed",
@@ -78,15 +93,14 @@ login = function(req, res){
                     res.status(400).send(response);
                 }
             }catch(err){
-                console.log(err)
                 response = {
                     "status" : "error",
-                    "message" : err
+                    "message" : "Server Error - check endpoint server"
                 }
-                res.send(response);
+                res.status(500).send(response);
             }
         })
-    });;
+    });
 }
 /**
  *
@@ -222,7 +236,8 @@ register = function(req, res){
  *
  * */
 isAuthenticated = function(req, res){
-    logged = req.session.user != undefined ? rq.session.logged : false;
+    logged = req.session.user != undefined ? req.session.user.logged : false;
+    console.log(logged);
     response = {
         "logged" : logged
     }

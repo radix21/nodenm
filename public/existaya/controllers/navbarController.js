@@ -23,7 +23,6 @@ app.controller("navbarController", ['$scope','$http','$rootScope', "$location", 
     $rootScope.$on("$locationChangeSuccess", function(_new, old){
         console.log(_new);
         scrollTo(0,0); 
-        Pace.restart();
         path = $location.path();
         if(path == "/profile"){
             $scope.showMenu = false;
