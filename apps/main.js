@@ -11,8 +11,8 @@ CLIENTS = {
     "marketinguniversity.co" : 'existaya'
 }
 client_folder = function(hostname){
-    folder = (CLIENTS[hostname] != undefined ? CLIENTS[hostname] : '');
-    return "pages/"+folder+'/';
+    folder = (CLIENTS[hostname] != undefined ? (CLIENTS[hostname]+"/") : '');
+    return "pages/"+folder;
 
 }
 SECRET_KEY = '1+l=j$!!n+&lwhc3)ni5kl%-h7mozdecclnv5s_se-u4a+ar9n';
