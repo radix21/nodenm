@@ -1,5 +1,5 @@
 express = require("express");
-SERVER = "http://marketing.kmelx.com:5000"
+SERVER = "http://marketing.kmelx.com"
 KME_API = {
     login : SERVER + "/api/login_token",
     logout : SERVER + "/api/json_logout",
