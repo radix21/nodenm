@@ -1,0 +1,31 @@
+var config = {}
+
+Object.defineProperty(config, "SERVICE_SERVER", {
+	enumerable : false,
+	configurable : false,
+	writable : false,
+	value : "http://marketing.kmelx.com"
+})
+Object.defineProperty(config, "NOREPLAYMAIL", {
+	enumerable : false,
+	configurable : false,
+	writable : false,
+	value : "noreplay@marketinguniversity.co"
+})
+
+
+Object.defineProperty(config, "TEMPLATES", {
+    enumerable : false,
+    configurable : false,
+    writable : false,
+    value : {
+        registerTemplate : {
+            subject : "[MARKETING UNIVERSITY] - nuevo registro",
+            body : "",
+            template : "account/register.txt",
+            from : config.NOREPLAYMAIL,
+        }, 
+    }
+})
+
+

@@ -1,0 +1,15 @@
+{
+  "name": "kmelx",
+  "version": "0.1.0",
+  "description": "Communication interface between KME Engine and Web Applications",
+  "title": "KME Engine Interface",
+  "url" : "",
+  "order": [
+    "GetUser",
+    "PostUser"
+  ],
+  "template": {
+  	"withCompare": true,
+  	"withGenerator": true
+  }
+}

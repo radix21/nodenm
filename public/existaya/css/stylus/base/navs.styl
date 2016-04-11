@@ -1,0 +1,141 @@
+.nav
+	&-topper
+		background white
+		border-bottom 2px solid #d6d6d6
+		padding-top 1em
+		padding-bottom 1em
+		&__iconMenu
+			background azul_cla
+			border-radius 50%
+			color white
+			font-size 2.8em
+			display block
+			height 1.8em
+			padding .25em .45em
+			text-align center
+			width 1.8em
+			margin-top .25em
+			&:hover,&:active,&:focus
+				text-decoration none
+				color white
+		&__avatarUser
+			& > img
+				margin-top .5em
+				height auto
+				width 3.5em
+		&__previewReturn
+			padding-left 5em
+		&__btnReturn
+			position absolute
+			top 50%
+			left 0
+			margin-top -1.2em
+			
+	&-interno
+		text-align center
+		margin-top 1.5em
+		& > li
+			background none
+			& > a
+				background none
+				color gris
+				font-size .8em
+				font-weight 600
+				padding .25em .5em
+				text-transform uppercase
+				&:hover,&:active,&:focus
+					background none
+					color gris
+			&.active
+				& > a
+					background #3874b8
+					&:hover,&:active,&:focus
+						background #3874b8
+	&-perfil
+		background #e9e9e9
+		border none
+		& > li
+			background none
+			border none
+			& > a
+				background none
+				border none
+				color gris
+				outline none
+				&:hover,&:active,&:focus
+					background none
+					border none
+			&.active
+				& > a
+					background none
+					border none
+					border-bottom 3px solid #6e8e2d
+					color azul_osc
+					font-weight 700
+					outline none
+					&:hover,&:active,&:focus
+						background none
+						border none
+						border-bottom 3px solid #6e8e2d
+						color azul_osc
+	&-ingreso
+		& > li
+			background none
+			border 0
+			border-radius 0
+			& > a
+				background #a8a9aa
+				border 0
+				border-radius 0 !important
+				color white
+				font-weight 900
+				text-align center
+				outline none
+				&:hover,&:focus,&:active
+					background #a8a9aa					
+					outline none
+					color white
+			&.active
+				& > a
+					background white
+					color azul
+					&:hover,&:focus,&:active
+						background white
+						outline none
+						color azul
+						
+	&-complete
+		& > li
+			padding 0
+			font-size .9em
+			& > a
+				padding .5em 1em
+				border 1px solid transparent
+				border-radius 1.2em
+			&.active
+				& > a
+					border 1px solid verde
+					&:hover,&:focus,&:active
+						background none
+						border 1px solid verde
+						
+.modal 
+	&--ingreso
+		background rgba(53,148,202,.8)
+		.modal-content
+			background none
+			border-radius 0
+			box-shadow none
+			border none
+		.modal-header
+			background none
+			border-bottom none
+		.modal-body
+			background white
+			border-radius 6px
+			overflow hidden
+			padding 0
+		.tab-content
+			padding 1em
+						
+						

@@ -1,0 +1,143 @@
+//IMPORTACION DE LAS FUENTES ARCHIVOS
+
+// @font-face
+//     font-family 'anton'
+//     src url('fonts/anton-webfont.eot')
+//     src url('fonts/anton-webfont.eot?#iefix') format('embedded-opentype'),url('fonts/anton-webfont.woff') format('woff'),url('fonts/anton-webfont.ttf') format('truetype'),url('fonts/anton-webfont.svg#antonregular') format('svg')
+//     font-weight normal
+//     font-style normal
+
+//Roboto:400,300,300italic,400italic,500italic,500,700,900,700italic,900italic
+
+font = 'Raleway', sans-serif
+font_title = 'Source Sans Pro', sans-serif
+nunito = 'Nunito', sans-serif
+
+.text
+    color black
+    font-size 1em
+    font-weight 400
+    font-family font
+    line-height 1.2em
+    margin .5em 0
+    &--xs
+        font-size .8em
+    &--sm
+        font-size .9em
+    &--md
+        font-size 1.2em
+    &--lg
+        font-size 1.4em
+    &--xlg
+        font-size 1.8em
+    &--xxlg
+        font-size 2em
+    &--xxxlg
+        font-size 2.5em
+    &--xxxxlg
+        font-size 3em
+    &--lite
+        font-weight 200
+    &--bold
+        font-weight 600
+    &--xbold
+        font-weight 800
+    &--blanco
+        color white
+    &--azul
+        color #3874b8
+    &--azul_mid
+        color #647e9e
+    &--azul_cla
+        color azul_cla
+    &--azul_osc
+        color azul_osc
+    &--gris
+        color gris
+    &--gris_cla
+        color gris_cla
+    &--gris_osc
+        color gris_osc
+    &--verde
+        color verde
+    &--space1
+        letter-space -1px
+    &--nunito
+        font-family nunito
+    &--upper
+        text-transform uppercase
+    &--italic
+        font-style italic
+
+.link
+    background none
+    font-weight 400
+    outline none
+    line-height 1.2em
+    margin .5em 0
+    &--none
+        text-decoration none
+        &:hover, &:active, &:focus
+            text-decoration none
+
+.error
+    color rojo
+    font-family fontTextL
+    font-size .8em
+    font-weight 300
+
+.list
+    &-simple
+        padding-left 0px
+        & > li
+            display block
+            padding-left 0px
+            & > a
+                color gris
+                &:hover,&:active,&:focus,&.active
+                    color azul_osc
+    &-xs
+        font-size .8em
+    &-normal
+        padding-left 1.3em
+        & > li
+            margin .5em 0
+    &-items
+        list-style none
+        padding-left 0
+        & > li
+            display block
+            list-style none
+            margin 1em 0
+    &-lite
+        list-style none
+        padding-left 0
+        & > li
+            display block
+    &--verde
+        color verde
+        & > li
+            color verde
+            & > span
+                color gris_osc
+            
+.sep
+    &--gris
+        border-color #bbbbbb
+    &--lg
+        margin 2em 0
+    &--xs
+        margin .25em 0
+
+.label
+    &-verde
+        background #6e8e2d
+    &-naranja
+        background #c59d16
+    &-rojo
+        background #b40109
+    &-azul
+        background #235b9b
+        
+
+

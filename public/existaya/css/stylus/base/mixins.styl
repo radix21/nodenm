@@ -1,0 +1,114 @@
+transition()
+	-webkit-transition arguments
+	-moz-transition arguments
+	-ms-transition arguments
+	-o-transition arguments
+	transition arguments
+
+column-count()
+	-webkit-column-gap arguments
+	-moz-column-gap arguments
+	-ms-column-gap arguments
+	-o-column-gap arguments
+	column-gap arguments
+
+column-count()
+	-webkit-column-count arguments
+	-moz-column-count arguments
+	-ms-column-count arguments
+	-o-column-count arguments
+	column-count arguments
+
+border-radius()
+	-webkit-border-radius arguments
+	-moz-border-radius arguments
+	border-radius arguments
+
+box-shadow()
+	-webkit-box-shadow arguments
+	-moz-box-shadow arguments
+	box-shadow arguments
+
+text-shadow()
+	-webkit-text-shadow arguments
+	-moz-text-shadow arguments
+	text-shadow arguments
+
+border-box()
+    -moz-box-sizing arguments
+    -webkit-box-sizing arguments
+    box-sizing arguments
+    
+transform()
+    -webkit-transform arguments
+    transform arguments
+    
+animation-fill-mode()
+    -webkit-animation-fill-mode arguments
+    animation-fill-mode arguments
+    
+backface-visibility()
+    -webkit-backface-visibility arguments
+    backface-visibility arguments
+    
+transition-timing-function()
+    -webkit-transition-timing-function arguments
+    transition-timing-function arguments
+    
+transition-duration()
+    -webkit-transition-duration arguments
+    transition-duration arguments
+    
+transition-property()
+    -webkit-transition-property arguments
+    transition-property arguments
+    
+transform-origin()
+    -webkit-transform-origin arguments
+    transform-origin arguments
+
+animation()
+	-webkit-animation arguments
+	-moz-animation arguments
+	-ms-animation arguments
+	-o-animation arguments
+	animation arguments
+	
+background-linear-gradient(startPoint, startColor, startInterval, endColor, endInterval, deprecatedWebkitStartPoint = false, deprecatedWebkitEndPoint = false)
+	background startColor
+	if deprecatedWebkitStartPoint && deprecatedWebkitEndPoint
+		background -webkit-gradient(linear, deprecatedWebkitStartPoint, deprecatedWebkitEndPoint, color-stop(startInterval, startColor), color-stop(endInterval, endColor))
+	background -webkit-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background -moz-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background -ms-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background -o-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	
+background-radial-gradient(startColor, endColor)
+	background startColor
+	background -webkit-radial-gradient(startColor, endColor)
+	background -moz-radial-gradient(startColor, endColor)
+	background -ms-radial-gradient(startColor, endColor)
+	background -o-radial-gradient(startColor, endColor)
+	background radial-gradient(startColor, endColor)
+	
+support-for-ie ?= true
+
+opacity(n)
+	opacity n
+	if support-for-ie
+		filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')')
+
+// background-linear-gradient top, #1a8bba, 0%, #51c9e3, 100%
+// background-radial-gradient(#1a8bba, #51c9e3)
+
+// Colores
+azul = #3874b8
+azul_cla = #accce6
+azul_mid = #5998c8
+azul_osc = #002b62
+gris = #7e7e7e
+gris1 = #dadada
+gris_cla = #989fab
+gris_osc = #454546
+verde = #6e8e2d
