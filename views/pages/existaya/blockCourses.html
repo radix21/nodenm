@@ -3,41 +3,41 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2 class="text text--xlg text--gris_osc text--xbold">
-                    {{ item.course.name }}
+                    {{ item.name }}
                 </h2>
             </div>
             <div class="col-xs-4 white--background" >
-                <img src="{{ item.course.image }}" alt="" class="img-responsive pull-left courseImageCatalog ">
+                <img src="{{ item.image }}" alt="" class="img-responsive pull-left courseImageCatalog ">
             </div>
             <div class="col-xs-6">
                 <p class="text text--lite text--gris">
-                    {{ item.course.description  | limitTo:90}}...
+                    {{ item.description  | limitTo:90}}...
                 </p>
                 <div class="row">
                     <div class="col-xs-6">
                         <p class="text text--xbold text--gris_osc text--md">
-                        Duración del curso: <br> <total-duration seconds="{{item.course.duration}}"></total-duration>
+                        Duración del curso: <br> <total-duration seconds="{{item.session.total_seconds}}"></total-duration>
                         </p>
                     </div>
                     <div class="col-xs-6">
                         <p class="text text--azul_osc text--md text-right">
-                        <span class="fa fa-star" ng-if="item.course.score > 0"></span>
-                        <span class="fa fa-star" ng-if="item.course.score > 1"></span>
-                            <span class="fa fa-star" ng-if="item.course.score > 2" ></span>
-                            <span class="fa fa-star" ng-if="item.course.score > 3"></span>
-                            <span class="fa fa-star" ng-if="item.course.score == 5" ></span>
+                        <span class="fa fa-star" ng-if="item.score > 0"></span>
+                        <span class="fa fa-star" ng-if="item.score > 1"></span>
+                            <span class="fa fa-star" ng-if="item.score > 2" ></span>
+                            <span class="fa fa-star" ng-if="item.score > 3"></span>
+                            <span class="fa fa-star" ng-if="item.score == 5" ></span>
 
                         </p>
                     </div>
                 </div>
                 <hr>
-                <a href="#/course/{{item.course.slug}}" class="btn btn-verde btn-lg btn-regular">
+                <a href="#/course/{{item.slug}}" class="btn btn-verde btn-lg btn-regular">
                     comenzar clase
                 </a>
             </div>
             <div class="col-xs-2 text-center">
-                <div class="c100 center p{{ item.user_percentage}} center-block">
-                    <span>{{item.user_percentage }} %</span>
+                <div class="c100 center p{{ item.percentage}} center-block">
+                    <span>{{item.percentage }} %</span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -46,8 +46,8 @@
                 <div class="clearfix"></div>
                 <p class="text text--lite text--gris margin--b0 margin--t2">
                 Horas de estudio:<br>
-                <span class="text--xbold" ng-if="item.course.hours != null">
-                    {{item.course.hours}} Horas
+                <span class="text--xbold" ng-if="item.duration != null">
+                    {{item.duration}} Horas
                 </span>
                 </p>
             </div>

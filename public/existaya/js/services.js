@@ -125,7 +125,7 @@ app.factory('courses', ['$http',function($http) {
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?available=true&callback=JSON_CALLBACK");
         },
         myCourses : function(){
-            return $http.jsonp("/api/courses/?in_progress=True&callback=JSON_CALLBACK");
+            return $http.post("/api/my_courses/");
         },
         certifications : function(params){
             return $http.jsonp(config.SERVICE_SERVER+"/api/certifications/"+params+"&callback=JSON_CALLBACK");

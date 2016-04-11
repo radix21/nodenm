@@ -19,7 +19,10 @@
  * }
  **/
 loginView = function(req, res){
-    res.render("pages/login");
+    params = {
+    
+    }
+    res.render(client_folder(req.hostname)+"login", params);
 }
 
 /**

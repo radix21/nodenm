@@ -14,11 +14,13 @@ settings.use(app);
 // START KMELX APPS
 
 kmelx = require('./urls/kmelx');
-account = require("./urls/account")
-xapi = require("./urls/xapi")
+account = require("./urls/account");
+xapi = require("./urls/xapi");
+courses = require("./urls/courses");
 
 account.set(app, public_html, http);
 xapi.set(app);
 kmelx.set(app);
+courses.set(app);
 // END KMELX APPS
 

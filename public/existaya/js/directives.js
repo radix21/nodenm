@@ -530,10 +530,10 @@ app.directive("navbar", [function(){
 
 }]);
 
-app.directive("coursesList", ["courses","$http", "$rootScope","$routeParams", function(courses, $http, $rootScope, $routeParams){
+app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, $http, $rootScope){
     return {
         restrict : "EA",
-        templateUrl : 'views/courses_list.html',
+        templateUrl : 'template/courses_list.html',
         link : function(scope){
             switch(scope.filter){
                 case "public":
@@ -604,9 +604,10 @@ app.directive("coursesCatalog", ["$rootScope", "courses",  function($rootScope, 
         switch(scope.type){
             case "me":
                 courses.myCourses().success(function(response){
-                    scope.dataMyCourses = response;
-                    $rootScope.dataMyCourses = response;
+                    scope.dataMyCourses = response.courses;
+                    $rootScope.dataMyCourses = response.courses;
                 }).error(function(a,b,c,d){
+                    console.log(d);
                     console.log("[DEBUG] - error: "+b+" track:"+d );
                 })
                 break;
