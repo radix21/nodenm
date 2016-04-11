@@ -1,0 +1,199 @@
+<% include ../head.html %>
+<navbar></navbar>
+<div>
+<section class="col-xs-12 sidebar-yellowGrandient sidebar-yellowGrandient--cursos sidebar-add__montain">
+    <div class="container sidebar-section">
+        <div class="col-xs-7">
+            <span class="text text--azul_osc text--lg text--xbold text-space1 margin--t1">
+                <%= course.type %>
+            </span></br>
+            <h1 class="courseDetailTitle text text--azul_mid text--xxxxlg text--xbold margin--b0 text-space1 text--upper">
+               {{dataDetails.name}}
+               <%= course.name %>
+            </h1>
+            <p class=" courseDetailDescription text text--md text--gris text-space1 margin--t1">
+                <% description = course.description.substring(0,200) %>
+                <%= description %>
+            </p>
+            <!--<button-course sessions="{{ dataDetails.sessions }}" uuid="{{ slug }}" username="{{dataUser.username}}" ng-if="authenticated"></button-course>-->
+        </div>
+        <div class="col-xs-5">
+            <img ng-src="{{dataDetails.image}}" alt="" class="img-responsive">
+        </div>
+    </div>
+</section>
+
+<section class="col-xs-12 sidebar-section3 sidebar-blanco">
+    <div class="container">
+        <div class="col-xs-8">
+            <h2 class="text text--azul_mid text--xxxlg text--xbold margin--b05 text-space1">
+                Acerca del Curso
+            </h2>
+
+            <c-details about="{{dataDetails.about}}"></c-details>
+            <h3 class="text text--lg text--xbold margin--b1 text-space1 margin--t1">
+                Competencias a desarrollar:
+            </h3>
+            <p class="text text--gris text--xbold">
+                Al finalizar este curso usted estará en capacidad de:
+            </p>
+            <!--<competencies-list data="{{dataDetails.competencies}}"></competencies-list>-->
+            
+            <h2 class="text text--azul_mid text--xxxlg text--xbold margin--b05 margin--t1 text-space1">
+                Temario
+            </h2>
+            <p class="text text--gris text--xbold" >
+                Este curso se divide en {{dataDetails.modules.length}}
+                <span ng-if="dataDetails.modules.length > 1">módulos semanales así</span>
+                <span ng-if="dataDetails.modules.length == 1">módulo</span>:
+            </p>
+            <ul class="list-items margin--t1 text text--gris">
+                <li ng-repeat="module in dataDetails.modules">
+                    <span class="text--bold">{{module.name}}:</span> {{module.description}}
+                </li>
+            </ul>
+            <h3 class="text text--lg text--xbold margin--b1 text-space1 margin--t1">
+                Preguntas que podrá resolver después de completar el curso:
+            </h3>
+                <c-goals goals="{{dataDetails.goals}}"></c-goals>
+
+            <hr class="sep sep--gris sep--lg">
+
+            <h3 class="text text--md text--xbold margin--b1 text-space1 margin--t1">
+                Profesores:
+            </h3>
+            <div class="row" ng-repeat="tutorData in dataDetails.tutors">
+                <div class="col-xs-2 vertical-middle">
+                    <img ng-src="{{tutorData.avatar}}" alt="" class="img-circle sidebar-imageCurso__image img-responsive avatar--tutor">
+                </div>
+                <div class="col-xs-10 vertical-middle">
+                    <p class="text text--azul text--xbold text--md margin--t05 margin--b0">
+                        {{tutorData.first_name}} {{tutorData.last_name}}
+                    </p>
+                    <p class="text text--gris text--sm margin--t0"> {{tutorData.jobtitle}}</p>
+                </div>
+                <div class="col-xs-12">
+                    <p class="text text--gris text--lite">{{tutorData.about}} </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4 sidebar-leftBlock">
+            <h3 class="text text--azul_osc text--lg text--xbold text-space1">
+                Sesiones
+            </h3>
+            <div class="form-group">
+                <!-- <sessions-list data="{{dataSessionDates}}"></sessions-list>-->
+            </div>
+
+            <div class="clearfix"></div><hr class="sep sep--gris sep--xs">
+
+            <div class="col-xs-6">
+                <p class="text text--gris text--lite text--xs">
+                    Duración:
+                </p>
+            </div>
+            <c-duration data="{{dataSessionDates[0]}}" details="1" class="text--gris text--xs text text--lite"></c-duration>
+            
+            <div class="clearfix"></div><hr class="sep sep--gris sep--xs">
+
+            <div class="col-xs-6">
+                <p class="text text--gris text--lite text--xs">
+                    Horas semanales:
+                </p>
+            </div>
+            <div class="col-xs-6">
+                <p class="text text--gris text--lite text--xs" id="time-on-week">
+                    6 -8 Horas
+                </p>
+            </div>
+
+            <div class="clearfix"></div><hr class="sep sep--gris sep--xs">
+
+            <h3 class="text text--azul_osc text--lg text--xbold text-space1 margin--t1">
+                ¿Quienes deben tomar este curso?
+            </h3>
+            <p class="text text--gris text--lite">
+                Empresarios, profesionales en comuncación y mercadeo (Asistentes, Gerentes, Asociados en areas de Mercadeo y Comunicación) que estén interesados en implementar estrategias de mercadeo y comunicación en medios digitales.
+            </p>
+
+            <h3 class="text text--azul_osc text--lg text--xbold text-space1 margin--t1">
+                Requisitos previos
+            </h3>
+            <p class="text text--gris text--lite">
+                Ninguno
+            </p>
+
+            <a href="" class="btn btn-verde btn-xlg margin--t1"  ng-if="showRegisterButton" ng-click="inscribeUserOnCOurse()">
+                 Inscríbete
+            </a>
+            <a href="{{ url }}" class="btn btn-verde btn-xlg margin--t1"  ng-if="showGetInButton">
+                 Ingresar
+            </a>
+            <a class="btn btn--academy btn-verde btn--right btn-lg btn--ingresar ng-scope" data-toggle="modal" data-target="#js-ingreso" ng-if="!authenticated">INGRESAR</a>
+
+            <h3 class="text text--azul_osc text--lg text--xbold text-space1 margin--t1">
+                Lo que dice la gente
+            </h3>
+            <!--<div ng-controller="comments">
+                <comments-on-course data="{{commentsForCourse}}"></comments-on-course>
+            </div>-->
+        </div>
+        <div class="clearfix"></div><hr class="sep sep--gris sep--lg">
+        <div class="col-xs-12">
+            <h2 class="text text--gris text--lg text--xbold margin--b1 text-space1 margin--t1">
+                Otros cursos de interes
+            </h2>
+            <div class="clearfix"></div>
+            <courses-list limit="1" filter="related" slug="slug"></courses-list>
+            <div class="col-xs-12 text-center margin--t3">
+                <a href="#/allCourses" class="btn btn--academy2 btn-verde btn-xlg text--upper">
+                    Ver todos los cursos
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="col-xs-12 sidebar-blueGrandient sidebar-blueGrandient--cero1 sidebar-add__montainR">
+    <div class="sidebar-parallax visible-lg">
+        <img src="/existaya/images/nubes-left.png" alt="" id="nubes_left1" class="sidebar-parallax__nubes1" />
+        <img src="/existaya/images/nubes-right.png" alt="" id="nubes_left2" class="sidebar-parallax__nubes2" />
+    </div>
+    <div class="container">
+        <div class="col-xs-5">
+            <img src="/existaya/images/image1.png" alt="" class="img-responsive pull-left margin--t5">
+        </div>
+        <div class="col-xs-6">
+            <h1 class="text text--xxlg text-left text--azul_mid text--upper">
+                <span class="text--xbold">Clases 100% en español,</span><br>APRENDIZAJE PRÁCTICO REAL
+            </h1>
+            <p class="text text--md text--gris">
+                Clases paso a paso, no necesitas experiencia.<br>Aprenderás cada detalle necesario para lograr tu objetivo
+            </p>
+
+            <div class="row">
+                <div class="col-xs-4 margin--t2 margin--b4">
+                    <img src="/existaya/images/bullet1.png" alt="" class="img-responsive center-block">
+                    <p class="text text--xbold text--md text-center text--gris text--upper">
+                        Aprende a tu ritmo y necesidad
+                    </p>
+                </div>
+                <div class="col-xs-4 margin--t2 margin--b4">
+                    <img src="/existaya/images/bullet2.png" alt="" class="img-responsive center-block">
+                    <p class="text text--xbold text--md text-center text--gris text--upper">
+                        Certifica tus conocimientos
+                    </p>
+                </div>
+                <div class="col-xs-4 margin--t2 margin--b4">
+                    <img src="/existaya/images/bullet3.png" alt="" class="img-responsive center-block">
+                    <p class="text text--xbold text--md text-center text--gris text--upper">
+                        Profesores con 
+                        más de 10 años de 
+                        experiencia
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>

@@ -1,4 +1,4 @@
-app.directive("buttonCourse", ['sessionsFactory','$rootScope','$routeParams', function(sessionsFactory, $rootScope, $routeParams){
+app.directive("buttonCourse", ['sessionsFactory','$rootScope', function(sessionsFactory, $rootScope){
     return {
         restrict : "EA",
         template : '<a href="{{url}}" class="btn btn--academy2 btn-xlg text--upper margin--t1 margin--b1" ng-class="{btnRojo:registerCourse, btnSuccess: showCourseButton}" id="buttonCourse" ng-if="showCourseButton"><span ng-if="getInCourse">Ingresar</span><span ng-if="registerCourse">Registrate</span></a>',
@@ -520,7 +520,7 @@ app.directive('bookmarklet',["$rootScope", function ($rootScope) {
 app.directive("navbar", [function(){
     return {
         restrict : "EA",
-        templateUrl : "template/navbar.html",
+        templateUrl : "/template/navbar.html",
         link : function(){
         }, 
         scope : {
@@ -533,12 +533,12 @@ app.directive("navbar", [function(){
 app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, $http, $rootScope){
     return {
         restrict : "EA",
-        templateUrl : 'template/courses_list.html',
+        templateUrl : '/template/courses_list.html',
         link : function(scope){
             switch(scope.filter){
                 case "public":
                     courses.public(scope.limit).success(function(response){
-                        scope.listCourses = response;
+                        scope.listCourses = response.courses;
                     });
                     break;
                 case "completed":
@@ -563,8 +563,7 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
                     });
                     break;
                 case "related":
-                    scope.slug = $routeParams.slug;                    
-                    courses.related(scope.slug).success(function(response){
+                    courses.related().success(function(response){
                         scope.listCourses = split_array_for_slides(response, 4);
                     })
                     break;
@@ -583,6 +582,9 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
                         });
                     });
                     break;
+                case "input":
+                    scope.listCourses = split_array_for_slides(data, 4);
+                    break;
                 default:
                     console.log("[DEBUG] - error with filter :"+scope.filter);
                     break;
@@ -592,6 +594,7 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
             filter : "@",
             limit : "=",
             slug : "@",
+            input : "="
         }
     } 
 }]);
