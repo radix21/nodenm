@@ -12,7 +12,7 @@ CLIENTS = {
     "marketinguniversity.co" : 'existaya'
 }
 client_folder = function(hostname){
-    folder = (CLIENTS[hostname] != undefined ? (CLIENTS[hostname]+"/") : '');
+    folder = (CLIENTS[hostname] != undefined ? (CLIENTS[hostname]+"/") : 'default/');
     return "pages/"+folder;
 
 }
