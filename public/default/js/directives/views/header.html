@@ -1,0 +1,40 @@
+<div layout="row" class="banner" ng-style="{background:bg_logo}" hide-xs>
+  <div flex-xs="100" flex="20" class="block-center margin-auto">
+  	<div>
+  		<img ng-src="{{logo}}" class="md-card-image avatarCompany" alt="image caption">
+  	</div>
+  	<div ng-switch="bg_logo" ng-show="nameLogoShow">
+  		<span ng-switch-when="#FFFFFF"  class="md-title textDark">{{name}}</span> 
+  		<span ng-switch-when="#FFEB3B"  class="md-title textDark">{{name}}</span> 
+  		<span ng-switch-when="!#FFFFFF" class="md-title textLight">{{name}}</span> 
+  		<span ng-switch-default class="md-title textDark">{{name}}</span> 
+  	</div>
+  </div>
+  <div flex style="overflow: hidden;"> 
+  	<div ng-if="banner != ''" style="background:url({{banner}}); height: 230px;background-size: cover" class="md-text-center"> 
+      <div class="md-title nameBanner" ng-show="nameCoverShow" ng-style="{color: colorTextName }">{{name}}</div>
+  	</div>
+    <div ng-if="banner == ''" ng-style="{background: banner_color, height: '230px'}" class="md-text-center"> 
+    	<div> 
+    		<span class="md-title nameBanner" ng-show="nameCoverShow" ng-style="{color: colorTextName }">{{name}}</span>
+    	</div>
+    </div>
+  </div>
+</div>
+
+<!-- Small -->
+
+<div layout="row" class="banner" style="background:url({{banner}});background-color:{{banner_color == '#EEEEEE' ? bg_logo : banner_color}}" show-xs hide-sm hide-md hide-lg>
+  <div flex-xs="100" flex="20" class="block-center margin-auto">
+  	<div>
+  		<img ng-src="{{logo}}" style="background-color: {{bg_logo}}" class="md-card-image avatarCompany avatarBackSmall" alt="image caption">
+  	</div>
+  	<div ng-switch="banner_color">
+  		<span ng-switch-when="#EEEEEE" class="md-title textDark">{{name}}</span> 
+  		<span ng-switch-when="#FFFFFF" class="md-title textDark">{{name}}</span> 
+  		<span ng-switch-when="#FFEB3B" class="md-title textDark">{{name}}</span> 
+  		<span ng-switch-when="!#FFFFFF" class="md-title textLight">{{name}}</span> 
+  		<span ng-switch-default class="md-title textLight">{{name}}</span> 
+  	</div>
+  </div>
+</div>

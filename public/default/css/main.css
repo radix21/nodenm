@@ -1,0 +1,66 @@
+/* ------------------- General -------------------- */
+
+.margin-auto{ margin: auto;}
+.block-center{ text-align: center;}
+.bg-box-muted {background:#FFF; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border: 1px solid #CCC; }
+
+/* ------------------ Login ----------------------- */
+
+.btnLogin { position: relative; top: -60px;}
+
+/* ----------------- Tabs ------------------------ */
+
+.header-taps { background-color: #EEE;}
+
+/* utilities tabs Angular-Material */
+#login .md-tab { font-size: 0.8em; -webkit-transition: 0.5s linear all; transition: 0.5s linear all;}
+#login .md-tab.md-active { font-size: 1.3em; background: #009688; color: #FFF !important;}
+
+
+/* ----------------- Footer ----------------------- */
+
+#footer{
+	background-color: #212121;
+	color:#FFF;
+	height: 48px;
+}
+
+/*  Sidebar  */
+
+.sidebar {outline-style: solid; outline: 1px solid #EEE;}
+
+/* ----------------- Banner --------------------- */
+
+header { position: relative;}
+.banner { height: 230px; background-size: cover !important; border: 1px solid #E0E0E0;}
+.avatarCompany {max-width: 50%}
+.avatarBackSmall {padding: 10px 24px; background-color: transparent; border-radius: 8px;}
+
+.textDark {color: #000;}
+.textLight {color: #FFF;}
+
+@media screen and (max-width: 599px) {
+	.avatarCompany {max-width: 35%}
+}
+
+.bannerPreview {background: rgba(0, 0, 0, 0.43); position: fixed; min-height: 100%; width: 100%; z-index: 21;}
+.headerPreview {z-index: 999;}
+.btn-close-preview {position: absolute; top:8px; right: 8px;}
+.nameBanner { position: relative; top: 86px; font-size: 3em;color: #ccc;}
+.activeName .switcName {display:inline-block;}
+.opacityName {opacity: 0.1;}
+
+/* ----------------- Make Organization  --------------- */
+
+.step { border-radius: 50%; padding: 5px 10px;}
+.btn-noneStyled {border: none; background: rgba(0, 0, 0, 0);}
+
+@media screen and (max-width: 599px) {
+	.title-instruction {margin: 0 24px; font-size: 1.0em; padding:15px 0;}
+	.stepInfo {padding: 24px 0; text-align: center;}
+	.btnAddAcademy {display:block; width:100%; margin: 0px; margin-bottom: 24px;}
+}
+
+/* ----------------- Menu Admin Organization  --------------- */
+
+.btn-menu-admin { padding-left: 16px;}

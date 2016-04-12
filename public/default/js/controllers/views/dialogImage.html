@@ -1,0 +1,50 @@
+<md-dialog aria-label="Sube una imagen para tu organizacion"  ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Añade una imagen para tu organizacion</h2>
+        <span flex></span>
+        <md-button ng-click="closeDialog()" class="md-accent md-fab md-mini"> 
+          <md-icon><i class="material-icons">clear</i></md-icon> 
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content"> 
+     
+      <md-whiteframe layout="column" class="bg-box-muted md-padding-10">
+          <div class="md-alert md-alert-info md-caption"> 
+            REQUISITOS PARA SUBIR ARCHIVOS Tipo de archivo: JPG, GIF o PNG; dimensiones máximas del archivo: 1024x260 píxeles; tamaño máximo del archivo: 5 MB Al subir su logotipo o portada, certifica que posee los derechos para distribuir esta imagen y que cumple con nuestras Condiciones de uso. 
+          </div>
+          <lf-ng-md-file-input style="padding-bottom: 15px;" name="imageCover" lf-required lf-files="fileBanner" lf-placeholder="Seleccionar Imagen" lf-caption="Banner" lf-browse-label="Buscar" lf-remove-label="Remover"></lf-ng-md-file-input>
+      </md-whiteframe>
+        <div class="md-text-center"> 
+          <br>  
+          <span>ó</span>
+        </div>
+        <p>Selecciona una image</p>
+        <md-whiteframe layout="column" layout-padding class="bg-box-muted md-padding-10">
+            <div layout="row">
+              <div flex="33" ng-repeat="x in range(1,3)">
+                <button class="btn-noneStyled" ng-click="Imagepreload(x)"> 
+                  <img src="/img/bank_images/image{{x}}.jpg" alt="" style="width: 100%">
+                </button>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="33" ng-repeat="x in range(4,6)">
+                <button class="btn-noneStyled" ng-click="Imagepreload(x)"> 
+                  <img src="/img/bank_images/image{{x}}.jpg" alt="" style="width: 100%">
+                </button>
+              </div>
+            </div>
+            <div layout="row">
+              <div flex="33" ng-repeat="x in range(7,9)">
+                <button class="btn-noneStyled" ng-click="Imagepreload(x)"> 
+                  <img src="/img/bank_images/image{{x}}.jpg" alt="" style="width: 100%">
+                </button>
+              </div>
+            </div>
+        </md-whiteframe>
+      </div>
+    </md-dialog-content>
+</md-dialog>

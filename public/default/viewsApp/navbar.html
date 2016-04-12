@@ -1,0 +1,28 @@
+<!-- barra principal principal -->
+  <div ng-controller="ctrlNav">
+    
+      <md-sidenav class="md-sidenav-left" md-component-id="left"  md-disable-backdrop md-whiteframe="4">
+          <md-toolbar>
+            <div ng-controller="LeftCtrl">
+                <md-button ng-click="close()" class="md-icon-button md-accent">
+                   <md-icon><i class="material-icons">keyboard_backspace</i></md-icon>
+                </md-button>
+            </div>
+          </md-toolbar>
+      </md-sidenav> 
+
+      <nav>
+      <md-toolbar class="md-bg-light"> 
+        <div class="md-toolbar-tools">
+
+          <md-button ng-click="toggleLeft()" class="md-icon-button md-accent" aria-label="Open sample menu">
+              <md-icon><i class="material-icons">menu</i></md-icon>
+          </md-button> 
+
+          <h2>
+            <span>KMELX</span>
+          </h2>
+        </div>
+      </md-toolbar>
+      </nav>
+  </div>

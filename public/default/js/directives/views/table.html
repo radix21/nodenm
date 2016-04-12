@@ -1,0 +1,34 @@
+<div hide-sm hide-md hide-lg hide-xl>
+	<h3 class="md-text-center">Caracteristicas</h3>
+<md-card ng-repeat="itemColumn in tcolumn">
+	<div class="md-bg-default md-text-center">
+		<h4>{{itemColumn[0]}}</h4>
+	</div>
+ <md-card-content >
+	 <table style="width:100%">
+	 	<tr>
+	 		<td ng-hide="$first" ng-repeat="xitem in thead" class="md-text-center">
+	 			<h4>{{xitem}}</h4>
+	 		</td>
+	 	</tr>
+	 	<tr>
+	 		<td ng-hide="$first" ng-repeat="xitem in itemColumn track by $index" class="md-text-center" style="padding:5px;"><md-icon><i class="material-icons" ng-class="xitem == 'done' ? 'md-text-success' : 'md-text-danger'"><strong>{{xitem}}</strong></i></md-icon></td> 
+	 	</tr> 
+	 </table>
+ </md-card-content>
+</md-card>
+</div>
+
+<table style="width:100%" hide-xs>
+	<tr>
+		<td ng-repeat="item in thead" class="md-text-center md-bg-default">
+			<h4 class="paddingTableHead">{{item}}</h4>
+		</td>
+	</tr>
+	<tr ng-repeat="itemColumn in tcolumn">
+		<td ng-class="{'md-text-center': !$first}" ng-repeat="itemx in tcolumn[$index] track by $index" ng-if="$first" style="padding:8px;">{{itemx}}</td>
+		<td ng-class="{'md-text-center': !$first}" ng-repeat="itemx in tcolumn[$index] track by $index" ng-if="!$first"> 
+			<md-icon><i class="material-icons" ng-class="itemx == 'done' ? 'md-text-success' : 'md-text-danger'"><strong>{{itemx}}</strong></i></md-icon>	
+		</td> 
+	</tr> 
+</table>

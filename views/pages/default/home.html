@@ -1,10 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title> 
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="default/css/angular-material.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="default/css/custome_material.css"> 
+  <link rel="stylesheet" href="default/librerias/lf-ng-md-file-input.min.css"> 
+  <link rel="stylesheet" href="default/librerias/animate.css"> 
+  <link rel="stylesheet" href="default/css/main.css">
 </head>
-<body>
-    DEFAULT HOME
+
+<body ng-app="kmelx" ng-cloak>
+
+  <!-- Navbar -->
+  <div ng-include src="'default/viewsApp/navbar.html'"></div>
+
+  <!-- Content    --> 
+
+  <div layout="row" layout-padding>
+    <div flex class="content" layout-margin>
+          <box-login log-in field-username></box-login>
+    </div>
+  </div>
+
+
+  
+
+
+
+    <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <!-- Angular -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+ 
+  <!-- App -->
+
+  <script src="default/js/app.js"></script>
+  <script src="default/js/controllers/sideNav.js"></script>
+  <script src="default/js/directives/boxLogin.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="default/js/angular-material.js"></script>
+  <script src="default/librerias/lf-ng-md-file-input.js"></script>
+  
 </body>
 </html>
+
