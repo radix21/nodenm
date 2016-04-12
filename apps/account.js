@@ -19,10 +19,9 @@
  * }
  **/
 loginView = function(req, res){
-    params = {
-    
-    }
-    res.render(client_folder(req.hostname)+"login", params);
+    res.render(client_folder(req.hostname)+"login", {
+        user : client_session(req)
+    });
 }
 
 /**
@@ -80,13 +79,11 @@ login = function(req, res){
                     data = {
                         status : "ok"
                     }
-
-                    req.session.user = {
+                    set_client_session(req, {
                         logged : true,
                         info : response.user,
                         token : response.token
-                    }
-                    console.log(req.session.user);
+                    })
                     res.send(data)
                 }else{
                     response = {
@@ -196,11 +193,18 @@ register = function(req, res){
                     response = {
                         status : "ok"
                     }
-                    req.session.user = {
+                    set_client_session(req, {
                         logged : true,
-                        username : response.username
-                    }
+                        info : {
+                            username : response.username,
+                            first_name : response.first_name,
+                            last_name : response.last_name,
+                            avatar : response.avatar,
+                            email : response.email,
 
+                        },
+                        token : response.token
+                    })
                     res.send(response);
 
 
@@ -240,7 +244,6 @@ register = function(req, res){
  * */
 isAuthenticated = function(req, res){
     logged = req.session.user != undefined ? req.session.user.logged : false;
-    console.log(logged);
     response = {
         "logged" : logged
     }

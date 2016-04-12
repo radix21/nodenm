@@ -113,13 +113,13 @@ app.factory('courses', ['$http',function($http) {
             return response;    
         },
         public : function(limit){
-            return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?public=True&limit="+limit+"&callback=JSON_CALLBACK");
+            return $http.post("/api/public_courses");
         },
         get : function(uuid, slug){
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?uuid="+uuid+"&slug="+slug); 
         },
         completed : function(){
-            return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?completed=true&callback=JSON_CALLBACK");
+            return $http.post(config.SERVICE_SERVER+"/api/courses/?completed=true&callback=JSON_CALLBACK");
         },
         available : function(){
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?available=true&callback=JSON_CALLBACK");
@@ -134,7 +134,7 @@ app.factory('courses', ['$http',function($http) {
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?related="+related+"&callback=JSON_CALLBACK");
         },
         absolute : function(){
-            return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?absolute=true&callback=JSON_CALLBACK");
+            return $http.post("/api/all_courses");
         },
         inscribe : function(slug){
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/inscribeUser/?course="+slug+"&callback=JSON_CALLBACK");
