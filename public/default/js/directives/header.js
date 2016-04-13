@@ -9,9 +9,10 @@ app.directive('mdHeader', [function(){
 			bg_logo: '@bgLogo',
 			name_logo:'=nameLogo',
 			name_cover: '=nameCover',
-			color_text: '=colorText' 
+			text_cover: '=textCover',
+			text_logo: '=textLogo' 
 		},
-		templateUrl: '/js/directives/views/header.html',
+		templateUrl: '/default/js/directives/views/header.html',
 		link: function (scope, element, attrs) {
 			scope.$watch('name_logo',function(){
 				scope.nameLogoShow = scope.name_logo;
@@ -19,8 +20,11 @@ app.directive('mdHeader', [function(){
 			scope.$watch('name_cover',function(){
 				scope.nameCoverShow = scope.name_cover;
 			});
-			scope.$watch('color_text', function(){
-				scope.colorTextName = scope.color_text;
+			scope.$watch('text_cover', function(){
+				scope.colorTextCover = scope.text_cover;
+			});
+			scope.$watch('text_logo', function(){
+				scope.colorTexLogo = scope.text_logo;
 			});
 		}
 	};

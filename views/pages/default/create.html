@@ -1,51 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Crea tu Academia</title> 
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="/css/angular-material.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/css/custome_material.css"> 
-  <link rel="stylesheet" href="/librerias/lf-ng-md-file-input.min.css"> 
-  <link rel="stylesheet" href="/librerias/animate.css"> 
-  <link rel="stylesheet" href="/css/main.css">
-
-</head>
-<body ng-app="kmelx" ng-cloak ng-controller="ctrlNav">
-
-  <!-- barra principal principal -->
-
-  <md-sidenav class="md-sidenav-left" md-component-id="left"  md-disable-backdrop md-whiteframe="4">
-      <md-toolbar>
-        <div ng-controller="LeftCtrl">
-            <md-button ng-click="close()" class="md-icon-button md-accent">
-               <md-icon><i class="material-icons">keyboard_backspace</i></md-icon>
-            </md-button>
-        </div>
-      </md-toolbar>
-  </md-sidenav> 
-
-  <!-- barra principal principal -->
-
-  <nav>
-  <md-toolbar class="md-bg-light"> 
-    <div class="md-toolbar-tools">
-
-      <md-button ng-click="toggleLeft()" class="md-icon-button md-accent" aria-label="Open sample menu">
-          <md-icon><i class="material-icons">menu</i></md-icon>
-      </md-button> 
-
-      <h2>
-        <span>KMELX</span>
-      </h2>
-    </div>
-  </md-toolbar>
-  </nav>
+<% include head.html %>
+<% include navbar.html %>
+  
   
   <header ng-controller="header">
-    <md-header banner-color="{{bannerColor}}" logo="{{logoUrl}}" banner="{{bannerUrl}}" bg-logo="{{backLogo}}" name="{{nameAcademy}}" name-logo="nameLogo" name-cover="nameCover" color-text="nameColor"></md-header> 
+    <md-header banner-color="{{bannerColor}}" logo="{{logoUrl}}" banner="{{bannerUrl}}" bg-logo="{{backLogo}}" name="{{nameAcademy}}" name-logo="nameLogo" name-cover="nameCover" text-cover="nameTextCover" text-logo="nameTextLogo"></md-header> 
     <div class="btn-close-preview" ng-show="btnClose"> 
       <md-button ng-click="closePreview()" class="md-accent md-fab md-mini"> 
         <md-icon><i class="material-icons">clear</i></md-icon> 
@@ -69,13 +27,14 @@
           <h1 class="title-instruction">Crea tu Organización fácilmente</h1>
             <md-content layout-padding>
             <form name="makeOrganization">
+
+            <!-- name & domain --> 
             <div class="stepInfo"> 
               <md-icon class="animated bounceIn" ng-show="makeOrganization.nameOrganization.$valid && makeOrganization.domineOrganization.$valid"><i class="material-icons md-text-success">done</i></md-icon> <span class="step"  ng-class="{'md-bg-primary' : !makeOrganization.nameOrganization.$valid || !makeOrganization.domineOrganization.$valid, 'md-bg-default' : makeOrganization.nameOrganization.$valid && makeOrganization.domineOrganization.$valid}">1</span> 
               <p class="md-text-dark md-inline-block">Escoje un dominio y un nombre para tu organización:</p>
             </div> 
 
                 <div layout="row" layout-xs="column">
-                  
                   <md-whiteframe  class="bg-box-muted md-padding-10" flex layout-margin>
                     <div layout="column" layout-padding> 
                       <div flex>
@@ -115,12 +74,46 @@
                       </div>
                     </div>    
                   </md-whiteframe>
-
                 </div>
 
+            <!-- Logo -->
             <div ng-class="{'md-disable-block' : !makeOrganization.nameOrganization.$dirty || !makeOrganization.domineOrganization.$dirty }">
+                <div class="stepInfo"> 
+                  <md-icon class="animated bounceIn" ng-show="makeOrganization.imageLogo.$valid"><i class="material-icons md-text-success">done</i></md-icon> <span class="step" ng-class="{'md-bg-primary' : !makeOrganization.imageLogo.$valid, 'md-bg-default' : makeOrganization.imageLogo.$valid}">2</span> 
+                  <p class="md-text-dark md-inline-block">Agrega el logo de tu organización, puedes incorporar un color de fondo que te ayude a destacarlo:</p>
+                </div>
+                <div layout="row">   
+                  <md-whiteframe flex layout-margin class="bg-box-muted md-padding-10 img_logo" style="padding-top: 15px;">
+                      <lf-ng-md-file-input name="imageLogo" lf-files="fileLogo" lf-required lf-placeholder="Seleccionar Imagen" lf-caption="Logo" lf-browse-label="Buscar" no-remove></lf-ng-md-file-input>
+                      <div class="md-text-center"> 
+                        <md-button ng-click="previewAll('img_logo')" ng-disabled="!makeOrganization.imageLogo.$valid" class="md-accent md-fab md-mini">
+                          <md-icon><i class="material-icons">search</i></md-icon> 
+                        </md-button>
+                        <p class="md-caption">vista previa</p>
+                      </div> 
+                  </md-whiteframe>
+                  <md-whiteframe flex layout-margin class="bg-box-muted md-padding-10 color_logo" style="padding-top: 15px;">
+                      <md-input-container class="md-block"> 
+                        <label>Color del fondo del logo (opcional)</label> 
+                        <md-select name="colorLogo" ng-model="bgLogo" ng-change="changeBgLogo(bgLogo)"> 
+                          <md-option ng-repeat="state in optionColor" value="{{state.hex}}"> 
+                            <i class="material-icons" ng-style="{color: state.hex}">lens</i> {{state.color}}
+                          </md-option> 
+                        </md-select> 
+                      </md-input-container>
+                      <div class="md-text-center"> 
+                        <md-button ng-click="previewAll('color_logo')" ng-disabled="!makeOrganization.colorLogo.$dirty" class="md-accent md-fab md-mini">
+                          <md-icon><i class="material-icons">search</i></md-icon> 
+                        </md-button>
+                        <p class="md-caption">vista previa</p>
+                      </div> 
+                  </md-whiteframe>
+                </div>   
+            </div>
+
+            <div ng-class="{'md-disable-block' : makeOrganization.imageLogo.$valid ? false : true}">
               <div class="stepInfo"> 
-                <md-icon class="animated bounceIn" ng-show="imageCover || removeColorBg"><i class="material-icons md-text-success">done</i></md-icon> <span class="step" ng-class="{'md-bg-primary' : !imageCover || !removeColorBg, 'md-bg-default' : imageCover || removeColorBg}">2</span> 
+                <md-icon class="animated bounceIn" ng-show="imageCover || removeColorBg"><i class="material-icons md-text-success">done</i></md-icon> <span class="step" ng-class="{'md-bg-primary' : !imageCover || !removeColorBg, 'md-bg-default' : imageCover || removeColorBg}">3</span> 
                 <p class="md-text-dark md-inline-block">Elige una imagen o un color de la paleta para personalizar la portada de tu organización:</p>
               </div> 
               <div layout="row">   
@@ -189,17 +182,27 @@
             
             <div ng-class="{'md-disable-block' : !imageCoverFirst && !makeOrganization.colorCover.$dirty }">
               <div class="stepInfo"> 
-                    <md-icon class="animated bounceIn" ng-show="makeOrganization.name_cover.$dirty || makeOrganization.name_logo.$dirty"><i class="material-icons md-text-success">done</i></md-icon> <span class="step" ng-class="{'md-bg-primary' : !makeOrganization.name_cover.$dirty || !makeOrganization.name_logo.$dirty, 'md-bg-default' : makeOrganization.name_cover.$dirty || makeOrganization.name_logo.$dirty}">3</span> 
+                    <md-icon class="animated bounceIn" ng-show="makeOrganization.name_cover.$dirty || makeOrganization.name_logo.$dirty"><i class="material-icons md-text-success">done</i></md-icon> <span class="step" ng-class="{'md-bg-primary' : !makeOrganization.name_cover.$dirty || !makeOrganization.name_logo.$dirty, 'md-bg-default' : makeOrganization.name_cover.$dirty || makeOrganization.name_logo.$dirty}">4</span> 
                     <p class="md-text-dark md-inline-block">¿Donde deseas que se visualice el nombre de tu organización?</p>
               </div>
               <md-whiteframe  layout="column" class="bg-box-muted name_logo_cover">
                   <div layout="row" layout-padding class="md-text-center activeName">
-                    <div flex="30" style="background: #616161;">
+                    <div flex="30" style="background: #EEE; border-right: 10px solid #FFF;">
                       <div style="padding-top: 24px;"> 
-                        <img src="/img/logoDefault.png" class="md-card-image avatarCompany" alt="image caption"> 
+                        <img src="/default/img/logoDefault.png" class="md-card-image avatarCompany" alt="image caption"> 
                       </div>
-                      <h3 class="md-text-light" ng-class="{ opacityName : !nameLogo}">Nombre de tu <br> Organización</h3>
+                      <h3 class="md-text-dark" ng-class="{ opacityName : !nameLogo}" ng-style="{color: colorTextLogo}">Nombre de tu <br> Organización</h3>
                       <md-switch name="name_logo" class="switcName" ng-model="nameLogoDisable" ng-change="changeLogoName(nameLogoDisable)" aria-label="Switch NameLogo"></md-switch>
+                      <div flex> 
+                          <md-input-container> 
+                            <label>Color del Texto</label> 
+                            <md-select ng-model="colorTextLogo" name="color_text_logo" ng-change="changeColorTextLogo(colorTextLogo)"> 
+                              <md-option ng-repeat="state in optionColor" value="{{state.hex}}"> 
+                                <i class="material-icons" ng-style="{color: state.hex}">lens</i> {{state.color}} 
+                              </md-option> 
+                            </md-select> 
+                          </md-input-container> 
+                      </div>
                     </div>
                     <div flex style="background: #EEE;">
                       <div class="md-text-center md-pull-right"> 
@@ -209,7 +212,7 @@
                         <p class="md-caption">vista previa</p>
                       </div>
                       <div class="md-clear"></div> 
-                      <h3 ng-class="{ opacityName : !nameCover}" ng-style="{color: nameColor}">Nombre de tu <br> Organización</h3>
+                      <h3 ng-class="{ opacityName : !nameCover}" ng-style="{color: colorTextCover}">Nombre de tu <br> Organización</h3>
                       <div layout="column">
                         <div flex> 
                           <md-switch name="name_cover" class="switcName" ng-model="nameCoverDisable" ng-change="changeCoverName(nameCoverDisable)" aria-label="Switch NameCover"></md-switch>
@@ -217,7 +220,7 @@
                         <div flex> 
                           <md-input-container> 
                             <label>Color del Texto</label> 
-                            <md-select ng-model="colorText" name="color_text" ng-change="changeColorText(colorText)"> 
+                            <md-select ng-model="colorTextCover" name="color_text_cover" ng-change="changeColorTextCover(colorTextCover)"> 
                               <md-option ng-repeat="state in optionColor" value="{{state.hex}}"> 
                                 <i class="material-icons" ng-style="{color: state.hex}">lens</i> {{state.color}} 
                               </md-option> 
@@ -229,48 +232,11 @@
                   </div>
               </md-whiteframe> 
             </div>   
-            
-                
-            
-
-            <div ng-class="{'md-disable-block' : !makeOrganization.name_cover.$dirty && !makeOrganization.name_logo.$dirty }">
-                <div class="stepInfo"> 
-                  <md-icon class="animated bounceIn" ng-show="makeOrganization.imageLogo.$valid"><i class="material-icons md-text-success">done</i></md-icon> <span class="step" ng-class="{'md-bg-primary' : !makeOrganization.imageLogo.$valid, 'md-bg-default' : makeOrganization.imageLogo.$valid}">4</span> 
-                  <p class="md-text-dark md-inline-block">Agrega el logo de tu organización, puedes incorporar un color de fondo que te ayude a destacarlo:</p>
-                </div>
-              <div layout="row">   
-                <md-whiteframe flex layout-margin class="bg-box-muted md-padding-10 img_logo" style="padding-top: 15px;">
-                    <lf-ng-md-file-input name="imageLogo" lf-files="fileLogo" lf-required lf-placeholder="Seleccionar Imagen" lf-caption="Logo" lf-browse-label="Buscar" lf-remove-label="Remover"></lf-ng-md-file-input>
-                    <div class="md-text-center"> 
-                      <md-button ng-click="previewAll('img_logo')" ng-disabled="!makeOrganization.imageLogo.$valid" class="md-accent md-fab md-mini">
-                        <md-icon><i class="material-icons">search</i></md-icon> 
-                      </md-button>
-                      <p class="md-caption">vista previa</p>
-                    </div> 
-                </md-whiteframe>
-                <md-whiteframe flex layout-margin class="bg-box-muted md-padding-10 color_logo" style="padding-top: 15px;">
-                    <md-input-container class="md-block"> 
-                      <label>Color del fondo del logo (opcional)</label> 
-                      <md-select name="colorLogo" ng-model="bgLogo" ng-change="changeBgLogo(bgLogo)"> 
-                        <md-option ng-repeat="state in optionColor" value="{{state.hex}}"> 
-                          <i class="material-icons" ng-style="{color: state.hex}">lens</i> {{state.color}}
-                        </md-option> 
-                      </md-select> 
-                    </md-input-container>
-                    <div class="md-text-center"> 
-                      <md-button ng-click="previewAll('color_logo')" ng-disabled="!makeOrganization.colorLogo.$dirty" class="md-accent md-fab md-mini">
-                        <md-icon><i class="material-icons">search</i></md-icon> 
-                      </md-button>
-                      <p class="md-caption">vista previa</p>
-                    </div> 
-                </md-whiteframe>
-              </div>   
-            </div>   
 
             <br>
             <br>
 
-              <md-button class="md-raised md-accent md-pull-right btnAddAcademy" ng-click="save(academyName,bgBanner,bgLogo);openToast('parentToasd')" ng-disabled="makeOrganization.nameOrganization.$valid && makeOrganization.imageLogo.$valid ? false : true">{{textOrganization}}</md-button>
+              <md-button class="md-raised md-accent md-pull-right btnAddAcademy" ng-click="save();openToast('parentToasd')" ng-disabled="makeOrganization.nameOrganization.$valid && makeOrganization.imageLogo.$valid ? false : true">{{textOrganization}}</md-button>
 
             </form> 
             </md-content>
@@ -278,81 +244,9 @@
       </div>
     </md-content> 
   </section>
-
-
-  <!-- Devices -->
-
-  <section hide-md hide-lg>
-    <md-content> 
-         <div layout="column">
-                  
-                  <md-whiteframe  class="bg-box-muted md-padding-10" flex layout-margin>
-                    <div layout="column" layout-padding> 
-                      <div flex>
-                        <div layout="row">
-                          <div style="padding-top: 27px;"> 
-                            <span>Kmelx.com/</span>
-                          </div>
-                          <div flex> 
-                            <md-input-container class="md-block"> 
-                              <input name="domineOrganization" placeholder="Ingresa el dominio para tu organización" type="text" ng-model="academyDomine" required md-maxlength="20" autocomplete="off"> 
-                              <div ng-messages="makeOrganization.domineOrganization.$error"> 
-                                <div ng-message="required">Este campo es requerido</div> 
-                              </div>
-                            </md-input-container>
-                          </div>
-                        </div>
-                      </div>
-                    </div>   
-                  </md-whiteframe>
-
-                  <md-whiteframe  class="bg-box-muted md-padding-10 name_Organization" flex layout-margin>
-                    <div layout="row" layout-xs="column" layout-padding> 
-                      <div flex>
-                        <md-input-container class="md-block">
-                          <label>Ingresa un nombre para tu organización</label>
-                          <input name="nameOrganization" type="text" ng-model="academyName" ng-change="changeName(academyName)" required md-maxlength="25" autocomplete="off">
-                          <div ng-messages="makeOrganization.nameOrganization.$error"> 
-                            <div ng-message="required">Este campo es requerido</div> 
-                          </div>
-                        </md-input-container>
-                        <div class="md-text-center"> 
-                          <md-button ng-click="previewAll('name_Organization')" ng-disabled="!makeOrganization.nameOrganization.$valid" class="md-accent md-fab md-mini">
-                            <md-icon><i class="material-icons">search</i></md-icon> 
-                          </md-button>
-                          <p class="md-caption">vista previa</p>
-                        </div>
-                      </div>
-                    </div>    
-                  </md-whiteframe>
-
-                </div>
-    </md-content>
-  </section>
-
   </div>
-
-
-
-  <!-- Jquery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-  <!-- Angular -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script> 
-
-
-  <!-- App -->
-
-  <script src="/js/app.js"></script>
-  <script src="/js/controllers/sideNav.js"></script>
-  <script src="/js/directives/header.js"></script>
-  <script src="/js/controllers/headerCtrl.js"></script>
-
-  <!-- Angular Material Library -->
-  <script src="/js/angular-material.js"></script>
-  <script src="/librerias/lf-ng-md-file-input.js"></script>
+  <script src="/default/js/directives/header.js"></script>
+  <script src="/default/js/controllers/headerCtrl.js"></script>
   
 </body>
 </html>

@@ -206,7 +206,7 @@
                                         '{{strCaption}}',
                                     '</div>',
                                 '</div>',
-                                '<md-button ng-disabled="isDisabled" ng-click="removeAllFiles()" ng-hide="isFilesNull" class="md-raised lf-ng-md-file-input-button lf-ng-md-file-input-button-remove" >',
+                                '<md-button ng-if="disabledRemove" ng-disabled="isDisabled" ng-click="removeAllFiles()" ng-hide="isFilesNull" class="md-raised lf-ng-md-file-input-button lf-ng-md-file-input-button-remove" >',
                                     '<md-icon class="lf-icon" ng-class="strRemoveIconCls"></md-icon> ',
                                     '{{strCaptionRemove}}',
                                 '</md-button>',
@@ -242,6 +242,7 @@
                 scope.isPreview = false;
                 scope.isDrag = false;
                 scope.isMutiple = false;
+                scope.disabledRemove = 'noRemove' in attrs ? false : true;
 
                 if('preview' in attrs){
                     scope.isPreview = true;
@@ -417,6 +418,7 @@
 				});
 
 				scope.openDialog = function(event, el) {
+                    scope.strCaptionBrowse = 'Cambiar';
 					if (navigator.userAgent.indexOf('Firefox') != -1) {
 						if(event){
 							$timeout(function() {

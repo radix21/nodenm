@@ -1,12 +1,32 @@
-/* Helpers */
-function $jq(elem){
-	return angular.element(elem); 
-}
-/* Controllers */
-app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', '$mdDialog',function ($scope, $rootScope,$mdToast,$document,$mdDialog){	
-	$scope.textOrganization = 'Crear Organización';
+'use strict';
+
+app.run(['$rootScope',function($rootScope) {
 	$rootScope.btnClose = false;
-	$scope.colorText = '#A0A4A5';
+	$rootScope.bannerColor  = '#EEEEEE';
+	$rootScope.logoUrl = '/default/img/logoDefault.png';
+	$rootScope.backLogo = '#E9E9E9';
+	$rootScope.bannerUrl = '';
+	$rootScope.nameAcademy = 'Nombre de su Organización';
+	$rootScope.nameLogo = true;
+	$rootScope.nameCover = true;
+}]);
+
+app.factory('apiOrganization', [ '$http',function ($http) {
+	
+	return {
+
+		createOrg: function(data){
+			return $http.post( location.protocol + '//' + location.host + '/', data); 
+		}
+
+	};
+}]);
+/* Controllers */
+app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', '$mdDialog', '$http', 'apiOrganization', function ($scope, $rootScope,$mdToast,$document,$mdDialog, $http, apiOrganization){	
+	$scope.academyDomine = null;
+	$scope.textOrganization = 'Crear Organización';
+	$scope.colorTextCover = '#A0A4A5';
+	$scope.colorTextLogo = '#A0A4A5';
 	$scope.optionColor = [
 							{
 								color:'Rojo',
@@ -96,8 +116,16 @@ app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', 
 		$rootScope.nameAcademy = name;
 	}
 
-	$scope.changeColorText = function(color){
-		$rootScope.nameColor = color;
+	var colorCoverAndLogo = [$scope.colorTextLogo,$scope.colorTextCover]; 
+
+	$scope.changeColorTextCover = function(color){
+		colorCoverAndLogo[1] = color;
+		$rootScope.nameTextCover = color;
+	}
+
+	$scope.changeColorTextLogo = function(color){
+		colorCoverAndLogo[0] = color;
+		$rootScope.nameTextLogo = color;
 	}
 
 	
@@ -108,20 +136,34 @@ app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', 
 
 		}
 	});
-	
 
-	$scope.save = function(text,cbanner,clogo){
 
-		$scope.textOrganization = 'Editar Organización';
+	$scope.save = function(){
 
-		$rootScope.nameAcademy = text; 
-		$rootScope.bannerColor = cbanner;
+		var bannerPath = $scope.fileBanner.length == 0 ? $rootScope.bannerUrl : $scope.fileBanner[0].lfFile;
 
-		if(clogo == undefined){
-			$rootScope.backLogo = '#FFFFFF';
-		}else{
-			$rootScope.backLogo = clogo;
+		// datas
+
+		var dataSave = {
+			name: $rootScope.nameAcademy, 
+			url: $scope.academyDomine, 
+			logoUpload: $scope.fileLogo[0].lfFile,
+			bannerUpload: bannerPath, 
+			bannerColor: $rootScope.bannerColor, 
+			enabled_name: nameCoverAndLogo.toString(),
+			textColor: colorCoverAndLogo.toString()
 		}
+
+		// ajax
+
+		var sendDataCreate = apiOrganization.createOrg(dataSave);
+
+		sendDataCreate.then(function(response){
+			console.log(response);
+		}, function(response){
+			console.log(response);
+		});	
+
 	}
 
 	$scope.resetName = function(text){
@@ -150,8 +192,8 @@ app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', 
 	}
 
 	function preview(){
-		var body = $jq('body');
-		var header = $jq('header');
+		var body = angular.element('body');
+		var header = angular.element('header');
 		body.animate({ scrollTop: 0 }, 600);
 		body.prepend('<div class="bannerPreview">');
 		header.addClass('headerPreview');
@@ -168,7 +210,7 @@ app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', 
           clickOutsideToClose: true,
           scope: $scope,        
           preserveScope: true,           
-          templateUrl: '/js/controllers/views/dialogImage.html',
+          templateUrl: '/default/js/controllers/views/dialogImage.html',
           controller: function DialogController($scope, $mdDialog) {
 
           	$scope.$watch('fileBanner.length',function(newVal,oldVal){
@@ -183,7 +225,7 @@ app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', 
           	});
 
           	$scope.Imagepreload = function(x){ 
-          		$rootScope.bannerUrl = '/img/bank_images/image' + x + '.jpg';
+          		$rootScope.bannerUrl = '/default/img/bank_images/image' + x + '.jpg';
           		$rootScope.imageCover = true;
           		$rootScope.imageCoverFirst = true;
           		$mdDialog.hide();
@@ -191,7 +233,7 @@ app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', 
 
           	$scope.range = function(min, max){
           		var input = []; 
-          		for(i = min; i <= max; i++){
+          		for(var i = min; i <= max; i++){
           			input.push(i);
           		}
           		return input; 
@@ -204,13 +246,19 @@ app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', 
        });
     };
 
+
     $scope.nameLogoDisable = true;
     $scope.nameCoverDisable = true;
+
+    var nameCoverAndLogo = [$scope.nameLogoDisable,$scope.nameCoverDisable]; 
+
 	$scope.changeLogoName = function(data){
+		nameCoverAndLogo[0] = data;
 		$rootScope.nameLogo = data;
 	}
 
 	$scope.changeCoverName = function(data){
+		nameCoverAndLogo[1] = data;
 		$rootScope.nameCover = data;
 	}
 
@@ -229,18 +277,11 @@ app.controller('confiHeader', ['$scope', '$rootScope', '$mdToast', '$document', 
 }]);
 
 app.controller('header', ['$scope', '$rootScope', '$document', function ($scope, $rootScope,$document) {
-	$rootScope.bannerColor  = '#EEEEEE';
-	$rootScope.logoUrl = '/img/logoDefault.png';
-	$rootScope.backLogo = '#E9E9E9';
-	$rootScope.bannerUrl = '';
-	$rootScope.nameAcademy = 'Nombre de su Organización';
-	$rootScope.nameLogo = true;
-	$rootScope.nameCover = true;
 
 	$scope.closePreview = function(){
 		$rootScope.btnClose = false;
-		var preview = $jq('.bannerPreview');
-		var elementAnchor = $jq('.' + $rootScope.anchor);
+		var preview = angular.element('.bannerPreview');
+		var elementAnchor = angular.element('.' + $rootScope.anchor);
 		preview.remove();
 		$document.scrollTop( elementAnchor.offset().top );  
 	}

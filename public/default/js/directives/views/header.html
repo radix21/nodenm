@@ -3,20 +3,15 @@
   	<div>
   		<img ng-src="{{logo}}" class="md-card-image avatarCompany" alt="image caption">
   	</div>
-  	<div ng-switch="bg_logo" ng-show="nameLogoShow">
-  		<span ng-switch-when="#FFFFFF"  class="md-title textDark">{{name}}</span> 
-  		<span ng-switch-when="#FFEB3B"  class="md-title textDark">{{name}}</span> 
-  		<span ng-switch-when="!#FFFFFF" class="md-title textLight">{{name}}</span> 
-  		<span ng-switch-default class="md-title textDark">{{name}}</span> 
-  	</div>
+  		<span class="md-title textDark" ng-style="{color: colorTexLogo }" ng-show="nameLogoShow">{{name}}</span> 
   </div>
   <div flex style="overflow: hidden;"> 
   	<div ng-if="banner != ''" style="background:url({{banner}}); height: 230px;background-size: cover" class="md-text-center"> 
-      <div class="md-title nameBanner" ng-show="nameCoverShow" ng-style="{color: colorTextName }">{{name}}</div>
+      <div class="md-title nameBanner" ng-show="nameCoverShow" ng-style="{color: colorTextCover }">{{name}}</div>
   	</div>
     <div ng-if="banner == ''" ng-style="{background: banner_color, height: '230px'}" class="md-text-center"> 
     	<div> 
-    		<span class="md-title nameBanner" ng-show="nameCoverShow" ng-style="{color: colorTextName }">{{name}}</span>
+    		<span class="md-title nameBanner" ng-show="nameCoverShow" ng-style="{color: colorTextCover }">{{name}}</span>
     	</div>
     </div>
   </div>

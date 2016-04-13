@@ -1,9 +1,5 @@
 app.controller('ctrlNav', function ($scope, $timeout, $mdSidenav, $log) {
     $scope.toggleLeft = buildDelayedToggler('left');
-    $scope.toggleRight = buildToggler('right');
-    $scope.isOpenRight = function(){
-      return $mdSidenav('right').isOpen();
-    };
 
     function debounce(func, wait, context) {
       var timer;
@@ -23,19 +19,11 @@ app.controller('ctrlNav', function ($scope, $timeout, $mdSidenav, $log) {
         $mdSidenav(navID)
           .toggle()
           .then(function () {
-            $log.debug("toggle " + navID + " is done");
+            angular.element("body").css('overflow','hidden');
+            angular.element("body").prepend('<div class="md-backdrop">');
+            angular.element(".md-backdrop").hide().fadeIn("slow");
           });
       }, 200);
-    }
-
-    function buildToggler(navID) {
-      return function() {
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }
     }
 });
 
@@ -43,7 +31,11 @@ app.controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
     $scope.close = function () {
       $mdSidenav('left').close()
         .then(function () {
-          $log.debug("close LEFT is done");
+          angular.element("body").css('overflow','auto');
+          angular.element(".md-backdrop").fadeOut('slow');
+          $timeout(function(){
+            angular.element(".md-backdrop").remove();
+          },2000);
         });
     };
 });

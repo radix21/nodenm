@@ -33,7 +33,7 @@
 
 header { position: relative;}
 .banner { height: 230px; background-size: cover !important; border: 1px solid #E0E0E0;}
-.avatarCompany {max-width: 50%}
+.avatarCompany {max-width: 100%}
 .avatarBackSmall {padding: 10px 24px; background-color: transparent; border-radius: 8px;}
 
 .textDark {color: #000;}
@@ -44,7 +44,7 @@ header { position: relative;}
 }
 
 .bannerPreview {background: rgba(0, 0, 0, 0.43); position: fixed; min-height: 100%; width: 100%; z-index: 21;}
-.headerPreview {z-index: 999;}
+.headerPreview {z-index: 59;}
 .btn-close-preview {position: absolute; top:8px; right: 8px;}
 .nameBanner { position: relative; top: 86px; font-size: 3em;color: #ccc;}
 .activeName .switcName {display:inline-block;}
