@@ -512,18 +512,16 @@ app.controller("tutors",['$scope','$routeParams','courses',function ($scope,$rou
 }]);
 
 
-app.controller("courseDetails", ["$http", "$scope", "$routeParams", "scrolltop", "$location", "$rootScope","courses",function($http, $scope, $routeParams, scrolltop, $location, $rootScope, courses){
+app.controller("courseDetails", ["$http", "$scope","$location", "$rootScope","courses",function($http, $scope, $location, $rootScope, courses){
+    //TODO: incribeUser
     $scope.inscribeUserOnCOurse = function(){
-        console.log(123);
         courses.inscribe($routeParams.slug).success(function(response){
             if(response.status == "ok"){
                 $location.path("#/course/"+$routeParams.slug);
             }
         });
     }
-
-	scrolltop();
-    $scope.slug=  $routeParams.slug;
+    $scope.slug=  slug;
     $rootScope.detailGetInCourse = false;
     $rootScope.detailRegisterCourse = false;
     $scope.url = "#/course/"+$routeParams.slug;

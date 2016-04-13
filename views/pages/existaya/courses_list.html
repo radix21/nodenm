@@ -3,19 +3,19 @@
         No hay cursos que mostrar.
     </div>
     <div class="allPublic">
-        <div class="container" ng-repeat="row in listCourses">
+        <div class="container" ng-repeat="row in listCourses | limitTo:limit">
             <div class="col-lg-3 col-xs-6 margin--t1" ng-repeat="coursePublic in row">
                 <div class="col-xs-12 sidebar-bloqs2">
                     <div class="row sidebar-imageCurso">
                         <a ng-href="">
-                            <img ng-src="{{coursePublic.image}}" class="img-course img-responsive" align="middle" ng-if="coursePublic.image != ''">
+                            <img src="{{coursePublic.image}}" class="img-course img-responsive" align="middle" ng-if="coursePublic.image != null">
 
-                            <img ng-src="existaya/images/defaultCourseCover.png" class="img-course img-responsive" align="middle" ng-if="coursePublic.image == ''">
+                            <img src="/existaya/images/defaultCourseCover.png" class="img-course img-responsive" align="middle" ng-if="coursePublic.image == null">
                         </a>
                         <div class="sidebar-imageCurso__nombre">
                             <div class="col-md-4">
                                 <img ng-if="coursePublic.tutors[0].avatar != null" ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
-                                <img ng-if="coursePublic.tutors[0].avatar == null" src="existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
+                                <img ng-if="coursePublic.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
                             </div>
                             <div class="col-md-8">
                                 <div ng-if="coursePublic.tutors[0].first_name != '' && coursePublic.tutors[0].last_name != ''" class="text text--blanco bg-nameTutor">
@@ -49,7 +49,7 @@
                     <span class="fa fa-clock-o"></span><span ng-if="coursePublic.duration != null"> {{coursePublic.duration}} Horas</span>
                     <span ng-if="coursePubloic.duration == null"> No hay un tiempo de duración asignado al curso.</span>
                     </p>
-                    <a  ng-href="course/{{coursePublic.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
+                    <a  ng-href="/course/{{coursePublic.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
                 </div>
 
             </div>
@@ -72,7 +72,7 @@
                         <div class="sidebar-imageCurso__nombre">
                             <div class="col-md-4">
                                 <img ng-if="coursePublic.tutors[0].avatar != null" ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
-                                <img ng-if="coursePublic.tutors[0].avatar == null" src="existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
+                                <img ng-if="coursePublic.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
                             </div>
                             <div class="col-md-8">
                                 <div ng-if="coursePublic.tutors[0].name != '' && coursePublic.tutors[0].lastname != ''" class="text text--blanco bg-nameTutor">
@@ -108,7 +108,7 @@
                     <span class="fa fa-clock-o"></span><span ng-if="course.duration != null"> {{course.duration}} Horas</span>
                     <span ng-if="course.duration == null"> No hay un tiempo de duración asignado al curso.</span>
                     </p>
-                    <a  ng-href="course/{{course.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
+                    <a  ng-href="/course/{{course.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
                 </div>
 
             </div>
@@ -128,7 +128,7 @@
                 <div class="sidebar-imageCurso__nombre">
                     <div class="col-md-4">
                         <img ng-if="course.tutors[0].avatar != null" ng-src="{{course.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
-                        <img ng-if="course.tutors[0].avatar == null" src="existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
+                        <img ng-if="course.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
                     </div>
                     <div class="col-md-8">
                         <div ng-if="course.tutors[0].name != '' && course.tutors[0].lastname != ''" class="text text--blanco bg-nameTutor">
@@ -163,7 +163,7 @@
             <span class="fa fa-clock-o"></span><span ng-if="course.duration != null"> {{course.duration}} Horas</span>
             <span ng-if="course.duration == null"> No hay un tiempo de duración asignado al curso.</span>
             </p>
-            <a  ng-href="course/{{course.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
+            <a  ng-href="/course/{{course.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
         </div>
     </div>
 </div>
@@ -173,12 +173,12 @@
             <div class="row sidebar-imageCurso">
                 <a ng-href="">
                     <img ng-src="{{course.image}}" class="img-course" ng-if="course.image != null">
-                        <img src="existaya/images/defaultCourseCover.png" alt="" ng-if="course.image == null" class="img-course img-responsive">
+                        <img src="/existaya/images/defaultCourseCover.png" alt="" ng-if="course.image == null" class="img-course img-responsive">
                 </a>
                 <div class="sidebar-imageCurso__nombre">
                     <div class="col-md-4">
                         <img ng-if="coursePublic.tutors[0].avatar != null" ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image"> 
-                        <img ng-if="coursePublic.tutors[0].avatar == null" src="existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
+                        <img ng-if="coursePublic.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
                     </div>
                     <div class="col-md-8">
                         <div ng-if="coursePublic.tutors[0].name != '' && coursePublic.tutors[0].lastname != ''" class="text text--blanco bg-nameTutor">
@@ -213,7 +213,7 @@
             <span class="fa fa-clock-o"></span><span ng-if="course.duration != null"> {{course.duration}} Horas</span>
             <span ng-if="course.duration == null"> No hay un tiempo de duración asignado al curso.</span>
             </p>
-            <a  ng-href="course/{{course.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
+            <a  ng-href="/course/{{course.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
         </div>
     </div>
 </div>

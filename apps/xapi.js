@@ -20,7 +20,7 @@ getStatements = function(req, res){
     str = "";
     data = req.session;
     if(data.user != undefined){
-        url = KME_API.get_statements+"?token="+data.token+"&user="+data.user.username;
+        url = KME_API.get_statements(req.hostname)+"?token="+data.token+"&user="+data.user.username;
         data = http.get(url, function(response){
             response.on("data", function(data){
                 str += data;
@@ -88,7 +88,7 @@ getStatements = function(req, res){
  *
  **/
 insertStatement = function(req, res){
-    url = KME_API.insert_statement;
+    url = KME_API.insert_statement(req.hostname);
     str = "";
     data = http.get(url, function(response){
         response.on("error", function(err){

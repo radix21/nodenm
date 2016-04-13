@@ -357,6 +357,19 @@ app.directive('commentsOnCourse', ['$http','$routeParams',function($http, $route
     }
 }    
 }])
+app.directive("skillsList", [function(){
+    response ={
+        restrict : "EA",
+        templateUrl : "/template/courses/skills.html",
+        link : function(scope){
+            scope.skills = scope.data;
+        },
+        scope : {
+            data : "="
+        }
+    }
+    return response;
+}])
 app.directive('competenciesList', [function(){
     return {
         restrict : 'EA',
@@ -389,25 +402,24 @@ app.directive('competenciesList', [function(){
 app.directive('cDetails', [function () {
     return {
         restrict: 'EA',
-template :  '<p class="text text--gris" id="courseAbout">{{about}}</p>',
-link: function (scope, element, attrs) {
-    scope.$watch("data", function(){
+        template :  '<p class="text text--gris" id="courseAbout"></p>',
+        link: function (scope, element, attrs) {
+            scope.$watch("data", function(){
 
-        document.querySelector("#courseAbout").innerHTML = scope.data;
-        classList = "list-normal text text--gris margin--t1";
-        classList = classList.split(" ");
-
-        list = document.querySelector("#courseAbout>ul");
-        for(var i=0; i< classList.length; i++){
-            if(list != null){
-                list.classList.add(classList[i]);
-            }
+                document.querySelector("#courseAbout").innerHTML = scope.data;
+                classList = "list-normal text text--gris margin--t1";
+                classList = classList.split(" ");
+                list = document.querySelector("#courseAbout>ul");
+                for(var i=0; i< classList.length; i++){
+                    if(list != null){
+                        list.classList.add(classList[i]);
+                    }
+                }
+            });
+        },
+        scope:{
+            data: '@about',
         }
-    });
-},
-scope:{
-    data: '@about',
-}
 
 };
 }]);
@@ -415,23 +427,26 @@ scope:{
 app.directive('cGoals', [function () {
     return {
         restrict: 'EA',
-    template :  '<p id="dataGoals">{{about}}</p>',
-    link: function (scope, element, attrs) {
-        scope.$watch("goals", function(){
-            document.querySelector("#dataGoals").innerHTML = scope.goals;
-            cgoals = document.querySelector("#dataGoals>ol");
-            classList = "list-normal text text--gris margin--t1";
-            classList = classList.split(" ");
-            for(var i=0; i<classList.length; i++){
-                if(cgoals != null){
-                    cgoals.classList.add(classList[i]);
+        template :  '<p id="dataGoals">{{about}}</p>',
+        link: function (scope, element, attrs) {
+            scope.$watch("goals", function(){
+                document.querySelector("#dataGoals").innerHTML = scope.goals;
+                cgoals = document.querySelector("#dataGoals>ol");
+                if(cgoals == null){
+                    cgoals = document.querySelector("#dataGoals>ul");
                 }
-            }
-        });
-    },
-    scope:{
-        goals : "@goals",
-    }
+                classList = "list-normal text text--gris margin--t1";
+                classList = classList.split(" ");
+                for(var i=0; i<classList.length; i++){
+                    if(cgoals != null){
+                        cgoals.classList.add(classList[i]);
+                    }
+                }
+            });
+        },
+        scope:{
+            goals : "@goals",
+        }
 
     };
 }]);
@@ -461,6 +476,7 @@ app.directive('cDuration', [function(){
         if(!scope.details){
             collection = [scope.initial, scope.final, scope.hours];
             scope.$watchCollection('collection', function(newValue, oldValue){
+                document.querySelector("#courseDuration").innerHTML = scope.
                 changeTimeValues({
                     "initial_date" : scope.initial, 
                     "final_date" : scope.final, 
@@ -543,7 +559,8 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
                     break;
                 case "completed":
                     courses.completed().success(function(response){
-                        scope.listCourses = response;
+                        scope.listCourses = response.courses;
+                        
                         $rootScope.completed_courses = scope.listCourses;
                     });
                     break;
@@ -564,7 +581,9 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
                     break;
                 case "related":
                     courses.related().success(function(response){
-                        scope.listCourses = split_array_for_slides(response, 4);
+                        
+                        response.courses = shuffle(response.courses);
+                        scope.listCourses = split_array_for_slides(response.courses, 4);
                     })
                     break;
                 case "absolute":
@@ -630,7 +649,7 @@ app.directive("coursesCatalog", ["$rootScope", "courses",  function($rootScope, 
 app.directive("certifications",["courses",function(courses){
     return {
         restrict : "EA",
-        templateUrl : "views/certificates/catalogCertificate.html",
+        templateUrl : "/template/certificates/catalogCertificate.html",
         link : function(scope){
         
             courses.certifications("?"+(scope.type != undefined ? scope.type : "available")+"=true").success(function(response){
@@ -667,11 +686,23 @@ app.directive("getTutors", function(tutors){
     }
 })
 
-app.directive("sessionsList", [function(){
+app.directive("sessionsList", ["$rootScope", function($rootScope){
     return {
         restrict : "EA",
-        templateUrl : "views/sessions_list.html",
+        templateUrl : "/template/courses/sessions_list.html",
         link : function(scope){
+
+            scope.data = data.sessions;
+
+            scope.session_index = scope.data[0];
+            $rootScope.weeks = Math.round(parseInt(data.sessions[0].total_seconds) / 604800);
+            $rootScope.hours = Math.round(parseInt(data.duration) / $rootScope.weeks);
+            scope.checkWeeks = function(session_index){
+                        
+                    session = session_index;
+                    $rootScope.weeks = Math.round( parseInt(session.total_seconds) / 604800);
+                    $rootScope.hours = Math.round(parseInt(data.duration) / $rootScope.weeks);
+            }
             scope.$watch("data", function(){
                 if(!Array.isArray(scope.data)){
                     try{
@@ -688,13 +719,45 @@ app.directive("sessionsList", [function(){
 
                         }
                     }catch(err){
-                    
+                        console.log(err); 
                     }
                 }
             })  
         },
         scope : {
-            data : "@"
+        }
+    }
+}]);
+app.directive("publicTarget", [function(){
+    return {
+        restrict :  "EA",
+        template : "<p id='target'></p>",
+        link : function(scope){
+            document.querySelector("#target").innerHTML = scope.target;
+        },
+        scope : {
+            target : "="
+        }
+    }
+}]);
+
+app.directive("prerequisitesList",[function(){
+    return {
+        restrict : "EA",
+        template : "<ul id='list_prerequisites'></ul>",
+        link : function(scope){
+            for(element of scope.data){
+                console.log(element);
+                    if(element.slug != ""){
+                    li = document.createElement("li");
+                    li.innerHTML = "<a href='/course/"+element.slug+"/details'>"+element.name+"</a>";
+                    document.querySelector("#list_prerequisites").appendChild(li);
+                }
+
+            }
+        },
+        scope :  {
+            data : "="
         }
     }
 }]);

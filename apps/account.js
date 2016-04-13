@@ -59,7 +59,7 @@ loginView = function(req, res){
 login = function(req, res){
     username = req.body.username;
     password = req.body.password;
-    data = http.get(KME_API.login+"/?username="+username+"&password="+password, function(response){
+    data = http.get(KME_API.login(req.hostname)+"/?username="+username+"&password="+password, function(response){
         str = "";
         response.on("data", function(data){
             str += data;
@@ -100,6 +100,8 @@ login = function(req, res){
                 res.status(500).send(response);
             }
         })
+    }).on("error", function(err){
+        res.status(500).send(err);
     });
 }
 /**
@@ -118,8 +120,8 @@ login = function(req, res){
  *
  * */
 
-logout = function(){
-    data = http.get(KME_API.logout, function(response){
+logout = function(req, res){
+    data = http.get(KME_API.logout(req.hostname), function(response){
         str = "";
         response.on("data", function(data){
             str += data;
@@ -147,6 +149,8 @@ logout = function(){
                 res.status(400).send(response);
             }
         })
+    }).on("error", function(err){
+        console.log(err);
     });;
 }
 
@@ -181,7 +185,7 @@ logout = function(){
  * */
 
 register = function(req, res){
-    data = http.get(KME_API.register, function(response){
+    data = http.get(KME_API.register(req.hostname), function(response){
         str = "";
         response.on("data", function(data){
             str += data;
