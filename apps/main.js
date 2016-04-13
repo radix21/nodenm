@@ -1,25 +1,57 @@
 express = require("express");
-SERVER = "http://marketing.kmelx.com"
-KME_API = {
-    login : SERVER + "/api/login_token",
-    logout : SERVER + "/api/json_logout",
-    register : SERVER + "/api/register",
-    get_statements :  SERVER + "/api/share/getUserStatements",
-    insert_statement : SERVER + "/api/share/insertStatement",
-    my_courses : SERVER + "/api/courses/my_courses",
-    public_courses : SERVER + "/api/courses/public_courses",
-    all_courses : SERVER + "/api/courses/all_courses",
-    course_details : SERVER + "/api/courses/course_detail",
+DEFAULT_SERVER = "http://marketing.kmelx.com:5000";
+SERVER = function(hostname){
+
+    return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
 }
+KME_API = {
+    login : function(hostname){
+        return SERVER(hostname) + "/api/login_token";
+    },
+    logout : function(hostname){
+        return SERVER(hostname) + "/api/json_logout";
+    },
+    register : function(hostname){
+        return SERVER(hostname) + "/api/register";
+    },
+    get_statements : function(hostname){
+        return SERVER(hostname) + "/api/share/getUserStatements";
+    },
+    insert_statement : function(hostname){
+        return SERVER(hostname) + "/api/share/insertStatement";
+    },
+    my_courses : function(hostname){
+        return SERVER(hostname) + "/api/courses/my_courses";
+    },
+    public_courses : function(hostname){
+        console.log(SERVER(hostname));
+        return SERVER(hostname) + "/api/courses/public_courses";
+    },
+    all_courses : function(hostname){
+        return SERVER(hostname) + "/api/courses/all_courses";
+    },
+    course_details : function(hostname){
+        return SERVER(hostname) + "/api/courses/course_detail";
+    },
+    related_courses : function(hostname){
+        return SERVER(hostname) + "/api/courses/related_courses";
+    },
+    completed_courses : function(hostname){
+        return SERVER(hostname) + "/api/courses/completed_courses";
+    }
+}
+    
 CLIENTS = {
-    "marketinguniversity.co" : 'existaya'
+    "marketinguniversity.co" : {
+        folder : "existaya",
+        server : "http://marketing.kmelx.com:5000"
+    }
 }
 client_folder = function(hostname){
-    folder = (CLIENTS[hostname] != undefined ? (CLIENTS[hostname]+"/") : 'default/');
+    folder = (CLIENTS[hostname] != undefined ? (CLIENTS[hostname]["folder"]+"/") : 'default/');
     return "pages/"+folder;
 
 }
-
 set_client_session = function(request, data){
     request.session.user = data;
 }

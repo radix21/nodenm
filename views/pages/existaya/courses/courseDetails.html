@@ -1,6 +1,94 @@
 <% include ../head.html %>
 <navbar></navbar>
-<div>
+<script>
+    user = {}
+    user.logged = <%= user.logged %>;
+    user.username = "<%= user.info != undefined ? user.info.username : '' %>";
+    user.first_name = "<%= user.info != undefined ? user.info.first_name : '' %>";
+    user.last_name = "<%= user.info != undefined ? user.info.last_name : '' %>";
+    slug = "<%= slug %>";
+    data = {};
+    data.name = "<%= course.name %>";
+    data.description = "<%= course.description %>";
+    data.category = "<%= course.category %>";
+    data.type = "<%= course.type %>";
+    data.about = "<%- course.about %>";
+    data.duration = "<%- course.duration %>";
+    data.target = "<%- course.target %>";
+    data.sessions = [];
+    data.skills = [];
+    <% for(i in course.skills){%>
+        <% skill = course.skills[i];%>
+        data.skills.push({
+            pk : <%= skill.pk %>,
+            name : "<%= skill.name %>",
+            description : "<%= skill.description %>"
+        })
+    <%}%>
+    //TODO fill skills array
+    data.image = "<%= course.image %>";
+    <% for(i in course.sessions){ %>
+        <% session = course.sessions[i]; %>
+        initial = "<%= session.initial_date %>";
+        initial = new Date(initial);
+        initial = spanishDate(initial);
+        final = "<%= session.final_date %>";
+        final = new Date(final);
+        final = spanishDate(final);
+            data.sessions.push({
+                pk : "<%= session.pk %>",
+                initial_date : "<%= session.initial_date %>",
+                final_date : "<%= session.final_date %>",
+                total_seconds : "<%= session.total_seconds %>",
+                initial : initial,
+                final : final
+
+            })
+    <%}%>
+    data.modules = [];
+    <% for(i in course.modules){%>
+        <% module = course.modules[i];%>
+        data.modules.push({
+            pk : <%= module.pk %>,
+            name : "<%= module.name %>",
+            description : "<%= module.description %>"
+        })
+    <%}%>
+    data.goals = "<%- course.goals %>";
+    data.tutors = [];
+    <% for(i in course.tutors){%>
+        <% tutor = course.tutors[i]; %>
+        data.tutors.push({
+            username : "<%- tutor.username %>",
+            pk : <%- tutor.pk %>,
+            first_name : "<%= tutor.first_name %>",
+            last_name : "<%= tutor.last_name %>",
+            avatar : "<%= tutor.avatar %>",
+            about : "<%= tutor.about %>",
+            jobtitle : "<%= tutor.jobtitle %>"
+                   
+        })
+
+    <%}%>   
+    data.prerequisites = [];
+    <% for(i in course.prerequisites){%>
+    <% prerequisite = course.prerequisites[i]; %>
+        data.prerequisites.push({
+            "pk" : "<%- prerequisite.pk %>",
+            "name" : "<%- prerequisite.name  %>",
+            "description" : "<%- prerequisite.description %>",
+            "uuid" : "<%- prerequisite.uuid %>",
+            "slug" : "<%- prerequisite.slug %>"
+
+        })
+    <%}%>
+
+
+
+
+</script>
+<script src="/existaya/controllers/courseDetails.js"></script>
+<div ng-controller="courseDetails" ng-cloak>
 <section class="col-xs-12 sidebar-yellowGrandient sidebar-yellowGrandient--cursos sidebar-add__montain">
     <div class="container sidebar-section">
         <div class="col-xs-7">
@@ -9,13 +97,14 @@
             </span></br>
             <h1 class="courseDetailTitle text text--azul_mid text--xxxxlg text--xbold margin--b0 text-space1 text--upper">
                {{dataDetails.name}}
-               <%= course.name %>
             </h1>
             <p class=" courseDetailDescription text text--md text--gris text-space1 margin--t1">
                 <% description = course.description.substring(0,200) %>
                 <%= description %>
             </p>
-            <!--<button-course sessions="{{ dataDetails.sessions }}" uuid="{{ slug }}" username="{{dataUser.username}}" ng-if="authenticated"></button-course>-->
+            <% if(user.logged){%>
+            <<button-course sessions="{{ dataDetails.sessions }}" uuid="{{ slug }}" username="{{dataUser.username}}" ng-if="authenticated"></button-course>
+            <%}%>
         </div>
         <div class="col-xs-5">
             <img ng-src="{{dataDetails.image}}" alt="" class="img-responsive">
@@ -29,7 +118,6 @@
             <h2 class="text text--azul_mid text--xxxlg text--xbold margin--b05 text-space1">
                 Acerca del Curso
             </h2>
-
             <c-details about="{{dataDetails.about}}"></c-details>
             <h3 class="text text--lg text--xbold margin--b1 text-space1 margin--t1">
                 Competencias a desarrollar:
@@ -38,6 +126,7 @@
                 Al finalizar este curso usted estará en capacidad de:
             </p>
             <!--<competencies-list data="{{dataDetails.competencies}}"></competencies-list>-->
+            <skills-list data="dataDetails.skills"></skills-list>
             
             <h2 class="text text--azul_mid text--xxxlg text--xbold margin--b05 margin--t1 text-space1">
                 Temario
@@ -82,7 +171,7 @@
                 Sesiones
             </h3>
             <div class="form-group">
-                <!-- <sessions-list data="{{dataSessionDates}}"></sessions-list>-->
+                <sessions-list data="{{dataDetails.sessions}}"></sessions-list>
             </div>
 
             <div class="clearfix"></div><hr class="sep sep--gris sep--xs">
@@ -92,8 +181,7 @@
                     Duración:
                 </p>
             </div>
-            <c-duration data="{{dataSessionDates[0]}}" details="1" class="text--gris text--xs text text--lite"></c-duration>
-            
+            <p class="text text--gris text--lite text--xs">{{ weeks }} Semanas</p>
             <div class="clearfix"></div><hr class="sep sep--gris sep--xs">
 
             <div class="col-xs-6">
@@ -103,7 +191,7 @@
             </div>
             <div class="col-xs-6">
                 <p class="text text--gris text--lite text--xs" id="time-on-week">
-                    6 -8 Horas
+                 {{ hours }} Horas
                 </p>
             </div>
 
@@ -113,14 +201,14 @@
                 ¿Quienes deben tomar este curso?
             </h3>
             <p class="text text--gris text--lite">
-                Empresarios, profesionales en comuncación y mercadeo (Asistentes, Gerentes, Asociados en areas de Mercadeo y Comunicación) que estén interesados en implementar estrategias de mercadeo y comunicación en medios digitales.
+                <public-target target="dataDetails.target"></public-target>
             </p>
 
             <h3 class="text text--azul_osc text--lg text--xbold text-space1 margin--t1">
                 Requisitos previos
             </h3>
             <p class="text text--gris text--lite">
-                Ninguno
+               <prerequisites-list data="dataDetails.prerequisites"></prerequisites-list>
             </p>
 
             <a href="" class="btn btn-verde btn-xlg margin--t1"  ng-if="showRegisterButton" ng-click="inscribeUserOnCOurse()">

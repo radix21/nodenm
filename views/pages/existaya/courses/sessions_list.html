@@ -1,0 +1,7 @@
+<select class="form-control hidden">
+    <option value="" ng-repeat="date in data" ng-model="session_index" ng-change="checkWeeks(session_index)">
+    {{date.initial}} - {{date.final}}
+    </option>
+</select>
+
+<select class="form-control" ng-options="date.initial + ' - ' + date.final for date in data" ng-model="session_index" ng-init="session_index = data[0]" ng-change="checkWeeks(session_index)"></select

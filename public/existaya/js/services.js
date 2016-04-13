@@ -113,28 +113,28 @@ app.factory('courses', ['$http',function($http) {
             return response;    
         },
         public : function(limit){
-            return $http.post("/api/public_courses");
+            return $http.get("/api/courses/public_courses");
         },
         get : function(uuid, slug){
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?uuid="+uuid+"&slug="+slug); 
         },
         completed : function(){
-            return $http.post(config.SERVICE_SERVER+"/api/courses/?completed=true&callback=JSON_CALLBACK");
+            return $http.get("/api/courses/completed_courses/");
         },
         available : function(){
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?available=true&callback=JSON_CALLBACK");
         },
         myCourses : function(){
-            return $http.post("/api/my_courses/");
+            return $http.get("/api/courses/my_courses/");
         },
         certifications : function(params){
             return $http.jsonp(config.SERVICE_SERVER+"/api/certifications/"+params+"&callback=JSON_CALLBACK");
         },
         related : function(related){
-            return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?related="+related+"&callback=JSON_CALLBACK");
+            return $http.get("/api/courses/related_courses/"+slug);
         },
         absolute : function(){
-            return $http.post("/api/all_courses");
+            return $http.get("/api/courses/related_courses");
         },
         inscribe : function(slug){
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/inscribeUser/?course="+slug+"&callback=JSON_CALLBACK");
