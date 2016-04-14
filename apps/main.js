@@ -38,13 +38,23 @@ KME_API = {
     },
     completed_courses : function(hostname){
         return SERVER(hostname) + "/api/courses/completed_courses";
-    }
+    },
+    create_organization: function(hostname) {
+        return SERVER(hostname) + "/api/orgs/add/"
+    },
+    get_organization: function(hostname) {
+        return SERVER(hostname) + "/api/orgs/get/"
+    },
 }
     
 CLIENTS = {
     "marketinguniversity.co" : {
         folder : "existaya",
         server : "http://marketing.kmelx.com:5000"
+    },
+    "kmelx.com" : {
+        folder : "kmelx",
+        server : "http://kmelx.com:5000"
     }
 }
 client_folder = function(hostname){
