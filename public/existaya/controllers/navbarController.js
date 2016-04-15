@@ -19,22 +19,6 @@ app.controller("navbarController", ['$scope','$http','$rootScope', "$location", 
 
 
     }
-
-    $rootScope.$on("$locationChangeSuccess", function(_new, old){
-        console.log(_new);
-        scrollTo(0,0); 
-        path = $location.path();
-        if(path == "/profile"){
-            $scope.showMenu = false;
-            $rootScope.showMenu = false;
-        }else{
-            $scope.showMenu = true;
-            $rootScope.showMeny =true;
-        }
-    });
-
-
-
     $rootScope.$watch("dataUser", function(){
 
         if($rootScope.dataUser == null){

@@ -1,0 +1,744 @@
+<% include ../head.html %>
+<navbar></navbar>
+<script>
+interval_content = [];
+    var slug = "<%= slug %>";
+    var data = {};
+    <% course = dataStudent.course;%>
+    data.course = {
+    cost : "<%= course.cost %>",
+           video : "<%= course.video %>",
+           duration : "<%= course.duration %>",
+           category : "<%= course.category %>",
+           area : "<%= course.area %>",    
+           ubs : "<%= course.ubs %>",
+           version : "<%= course.version %>",
+           objective : "<%= course.objective %>",
+           pk : "<%= course.pk %>",
+           percentage : "<%= course.percentage %>",
+           type : "<%= course.type %>",
+        public : <%= course.public %>,
+    update : "<%= course.update %>",
+           description : "<%= course.description %>",
+           tags : "<%= course.tags %>",
+           type_pk : "<%= course.type_pk %>",
+           goals : "<%- course.goals %>",
+           active : <%= course.active %>,
+           area_pk : "<%= course.area_pk %>",
+           target_public : "<%= course.target_public %>",
+           name : "<%= course.name %>",
+           created : "<%= course.created %>",
+           category_pk : "<%= course.category_pk %>",
+           general_objective : "<%= course.general_objective %>"
+    }
+    data.modules = [];
+    <% for(m in dataStudent.modules ){%>
+        <% module = dataStudent.modules[m];%>
+            data.modules.push({
+            available : <%= module.available %>,
+            tasks: [],
+            submodules: [],
+            module_pk: <%= module.module_pk %>,
+            module_description: "<%= module.module_description %>",
+            objects: [],
+            module_name: "<%= module.module_name %>",
+            contents: [], 
+            module_image: "<%= module.module_image %>",
+            position: <%= module.position %>,
+            percentage_done: <%= module.percentage_done  %>,
+
+            })
+           <% for( val in module.objects){ %>
+               <% object = module.objects[val]; %>
+                data.modules[<%= m %>].objects.push({
+                    "object_name": "<%- object.object_name %>",
+                    "module_pk": <%- object.module_pk %>, 
+                    "quantity_participation": "<%- object.quantity_participation %>",
+                    "url": "<%- object.url %>",
+                    "object_description": "<%= object.object_description %>", 
+                    "type": "<%- object.type %>", 
+                    "object_id": "<%= object.object_id %>",
+                    "is_unavailable": <%= object.is_unavailable %>
+                })
+            <%}%>
+            <% for(val in module.tasks){%>
+                <% task = module.tasks[val];%>
+                data.modules[<%= m %>].tasks.push({
+                    "task_name": "<%- task.task_name %>", 
+                    "task_description": "<%- task.task_description %>", 
+                    "task_percentage": "<%- task.task_percentage %>",
+                    "task_initial_date": "<%- task.task_initial_date %>", 
+                    "task_final_date": "<%- task.task_final_date %>", 
+                    "task_show_initial_date": "<%- task.task_show_final_date %>",
+                    "task_show_final_date": "<%- task.task_show_final_date%>",
+                    "task_data": "<%- task.task_data %>", 
+                    "task_position": "<%- task.task_position %>", 
+                    "task_id": "<%- task.taskl_id %>"
+                })
+            <%}%>
+
+            <% for(val in module.submodules){%>
+                <% submodule = module.submodules[val];%>
+                data.modules[<%= m %>].submodules.push({
+                    available : <%= submodule.available %>,
+                    tasks: [],
+                    module_pk: <%= submodule.module_pk %>,
+                    module_description: "<%= submodule.module_description %>",
+                    objects: [],
+                    module_name: "<%= submodule.module_name %>",
+                    contents: [], 
+                    module_image: "<%= submodule.module_image %>",
+                    position: <%= submodule.position %>,
+                    percentage_done: <%= submodule.percentage_done  %>,
+                            
+                })
+                <% for(value in submodule.tasks){%>
+                    <% task = submodule.tasks[value];%>
+                    data.modules[<%= m %>].submodules[<%- val %>].tasks.push({
+                        "task_name": "<%- task.task_name %>", 
+                        "task_description": "<%- task.task_description %>", 
+                        "task_percentage": "<%- task.task_percentage %>",
+                        "task_initial_date": "<%- task.task_initial_date %>", 
+                        "task_final_date": "<%- task.task_final_date %>", 
+                        "task_show_initial_date": "<%- task.task_show_final_date %>",
+                        "task_show_final_date": "<%- task.task_show_final_date%>",
+                        "task_data": "<%- task.task_data %>", 
+                        "task_position": "<%- task.task_position %>", 
+                        "task_id": "<%- task.taskl_id %>"
+                    })
+                <%}%>
+
+
+                <% for( value in submodule.objects){ %>
+                   <% object = submodule.objects[value]; %>
+                   data.modules[<%= m %>].submodules[<%= val %>].objects.push({
+                        "object_name": "<%- object.object_name %>",
+                        "module_pk": <%- object.module_pk %>, 
+                        "quantity_participation": "<%- object.quantity_participation %>",
+                        "url": "<%- object.url %>",
+                        "object_description": "<%= object.object_description %>", 
+                        "type": "<%- object.type %>", 
+                        "object_id": "<%= object.object_id %>",
+                        "is_unavailable": <%= object.is_unavailable %>
+                    })
+
+                <%}%>
+
+
+                <% for(value in submodule.contents){%>
+                    <% content = submodule.contents[value];%>
+                    data.modules[<%- m %>].submodules[<%= val %>].contents.push({
+                        "content_name" : "<%= content.content_name %>", 
+                        "content_description": "<%= content.content_description%>", 
+                        "content_button_info": {
+                        "show_message_effectivity": <%= content.content_button_info.show_message_effectivity %>, 
+                        "exam_score": "<%= content.content_button_info.exam_score %>", 
+                        "num_attempts": "<%= content.content_button_info.num_attempts %>", 
+                        "passed": "<%= content.content_button_info.passed %>", 
+                        "available":  <%= content.content_button_info.available %>, 
+                        "show_button":  <%= content.content_button_info.show_button %>,
+                        "show_report":  <%= content.content_button_info.show_report %>, 
+                        "download": " <%= content.content_button_info.download %>",
+                        "show_corrections":  <%= content.content_button_info.show_corrections %>,
+                        "self_grade": " <%= content.content_button_info.self_grade %>",
+                        "show_score":  <%= content.content_button_info.show_score %>,
+                        "attempts_left":  "<%= content.content_button_info.attempts_left %>",
+                        "show_exam":  <%= content.content_button_info.show_exam %>,
+                        "initial_date": "<%= content.content_button_info.initial_date %>",
+                        "final_date": "<%= content.content_button_info.final_date %>",
+                        },
+                        "content_position": "<%= content.content_position %>", 
+                        "content_pk": "<%= content.content_pk%>", 
+                        'template': "<%= content.template %>", 
+                        "can_open" : <%= content.can_open %>,
+                        "content_initial_date": "<%= content.content_initial_date%>", 
+                        "content_final_date": "<%= content.content_final_date %>", 
+                        "show_initial_date": "<%= content.show_initial_date %>", 
+                        "show_final_date":"<%= content.show_final_date %>", 
+                        "content_aprobation": "<%= content.content_aprobation %>",
+                        "content__display_mode": "<%= content.content__display_mode %>", 
+                        "content_training": "<%= content.content_training %>", 
+                        'content_opportunities': "<%= content.content_opportunities %>", 
+                        "cim_pk": "<%= content.cim_pk %>", 
+                        "file_url" : ("<%= content.file %>").split(",")[0], 
+                        "bonus" : "<%= content.bonus %>", 
+                        "cim" : "<%= content.cim %>",
+                        "text" : `<%- content.text %>` 
+                    })
+                    a = <%= content.file_url %>
+            <%}%>
+
+
+            <%}%>
+            <% for(val in module.contents){%>
+                <% content = module.contents[val];%>
+                data.modules[<%- m %>].contents.push({
+                    "content_name" : "<%= content.content_name %>", 
+                    "content_description": "<%= content.content_description%>", 
+                    "content_button_info": {
+                    "show_message_effectivity": <%= content.content_button_info.show_message_effectivity %>, 
+                    "exam_score": "<%= content.content_button_info.exam_score %>", 
+                    "num_attempts": "<%= content.content_button_info.num_attempts %>", 
+                    "passed": "<%= content.content_button_info.passed %>", 
+                    "available":  <%= content.content_button_info.available %>, 
+                    "show_button":  <%= content.content_button_info.show_button %>,
+                    "show_report":  <%= content.content_button_info.show_report %>, 
+                    "download": " <%= content.content_button_info.download %>",
+                    "show_corrections":  <%= content.content_button_info.show_corrections %>,
+                    "self_grade": " <%= content.content_button_info.self_grade %>",
+                    "show_score":  <%= content.content_button_info.show_score %>,
+                    "attempts_left":  "<%= content.content_button_info.attempts_left %>",
+                    "show_exam":  <%= content.content_button_info.show_exam %>,
+                    "initial_date": "<%= content.content_button_info.initial_date %>",
+                    "final_date": "<%= content.content_button_info.final_date %>",
+                    },
+
+                    "content_position": "<%= content.content_position %>", 
+                    "content_pk": "<%= content.content_pk%>", 
+                    'template': "<%= content.template %>", 
+                    "can_open" : <%= content.can_open %>,
+                    "content_initial_date": "<%= content.content_initial_date%>", 
+                    "content_final_date": "<%= content.content_final_date %>", 
+                    "show_initial_date": "<%= content.show_initial_date %>", 
+                    "show_final_date":"<%= content.show_final_date %>", 
+                    "content_aprobation": "<%= content.content_aprobation %>",
+                    "content__display_mode": "<%= content.content__display_mode %>", 
+                    "content_training": "<%= content.content_training %>", 
+                    'content_opportunities': "<%= content.content_opportunities %>", 
+                    "cim_pk": "<%= content.cim_pk %>", 
+                    "file_url" : ("<%= content.file %>").split(",")[0], 
+                    "bonus" : "<%= content.bonus %>", 
+                    "cim" : "<%= content.cim %>",
+                    "text" : `<%- content.text %>`
+                })
+        <%}%>
+
+    <%}%>
+
+
+</script>
+<script src="/existaya/controllers/courseContentController.js"></script>
+<div ng-controller="courseContentController">
+    <section class="col-xs-12 sidebar-detalleContenidoCurso" ng-cloak>
+        <div class="row">
+            <div class="container">
+                <div class="col-xs-6">
+                    <p class="text text--azul_osc text--m text--xbold text-space1 margin--t0 margin--b0 text--upper">
+                    {{ dataSimpleCourse.course.type }}
+                    </p>
+                    <h1 class="text text--gris text--xlg margin--t0 margin--b0">
+                        {{ dataSimpleCourse.course.name }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="col-xs-12">
+        <div class="row">
+            <div class="container">
+                <div class="col-xs-2 sidebar-contenidoCurso sidebar-add__montainR margin--b5">
+                    <div class="">
+                        <div class="panel-group panel-group--detalleCurso" id="accordContenidos" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <a href="#salon" aria-controls="salon" role="tab" data-toggle="tab" class="active">
+                                        <span class="icon-icon-2"></span> Salón de Clase
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <a href="#descripcionCurso" aria-controls="descripcionCurso" role="tab" data-toggle="tab">
+                                        <span class="icon-icon"></span> Sobre el Curso
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <a href="#recursos" aria-controls="recursos" role="tab" data-toggle="tab">
+                                        <span class="icon-icon-3"></span> Recursos
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <a href="#foros" aria-controls="foros" role="tab" data-toggle="tab">
+                                        <span class="icon-icon-4"></span> Foros
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <a href="#evaluaciones" aria-controls="evaluaciones" role="tab" data-toggle="tab">
+                                        <span class="icon-icon-5"></span> Evaluaciones
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <a href="#profesores" aria-controls="profesores" role="tab" data-toggle="tab">
+                                        <span class="icon-icon-6"></span> Profesores
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-10">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="salon">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div id="tabsLecciones" class="carousel slide carousel--tabsDetalle" data-ride="carousel" data-interval="false" data-wrap="false">
+                                        <div class="carousel-inner" role="listbox">
+                                            <div class="item" ng-repeat="pack in modulesPack" ng-class="{ active:$first}">
+
+                                                <ul class="nav nav-tabs nav-justified nav-tabs--detalleClase" role="tablist">
+                                                    <li role="presentation" class="" ng-repeat="module in pack" ng-class="{active:$first}">
+                                                       <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill">
+                                                            {{ module.module_name }}
+                                                            <br>
+                                                        <span><%- slug %></span>
+
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <a class="left carousel-control" href="#tabsLecciones" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    </a>
+                                    <a class="right carousel-control" href="#tabsLecciones" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                                <div class="tab-content">
+
+                                    <div role="tabpanel" class="tab-pane" ng-repeat="module in dataSimpleCourse.modules" id="module{{module.module_pk}}" ng-class="{active:$first}">
+                                        <div class="col-xs-12 list-simple">
+                                            <ul class="nav nav-pills nav-pills--setps nav-justified" style="margin-top: 5px; margin-bottom: 5px;">
+                                                <li class="" ng-repeat="submodule in module.submodules" ng-class="{active:$first}">
+                                                    <a href="#module{{module.module_pk}}submodule{{submodule.module_pk}}" aria-controls="module{{module.module_pk}}-submodule{{submodule.module_pk}}" role="tab" data-toggle="tab"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-9 list-simple">
+                                            <div class="tab-content">
+                                                <div ng-repeat="submodule in module.submodules" role="tabpanel" class="tab-pane" id="module{{module.module_pk}}submodule{{module.submodules[$index].module_pk}}" ng-class="{active:$first}"> 
+                                                    <div class="embed-responsive embed-responsive-16by9">
+                                                        <iframe-embed data="submodule.contents[0].text" pk="submodule.contents[0].content_pk"></iframe-embed>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <table class="table table--recursos margin--t2">
+                                                        <tbody><tr>
+                                                            <th>
+                                                                Recursos: Lecturas Recomendadas
+                                                            </th>
+                                                            <th>
+                                                                Autor
+                                                            </th>
+                                                            <th>
+                                                                Acción
+                                                            </th>
+                                                        </tr>
+                                                        <tr ng-repeat="resource in submodule.contents" ng-if="$index > 0">
+                                                            <td>
+                                                                {{ resource.content_name }}
+                                                            </td>
+                                                            <td>
+                                                                <strong>Google</strong>
+                                                            </td>
+                                                            <td>
+                                                                <a href="{{ resource.file_url }}" class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper" download>
+                                                                    Descargar
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 text-right margin--t1">
+                                                <a href="#" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05">
+                                                    Anterior
+                                                </a>
+                                                <a href="#" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05">
+                                                    Siguiente
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3 sidebar-right text-center">
+                                            <p class="text text--lite text--gris margin--b1 margin--t05 text--xbold">
+                                            Progreso Módulo 1
+                                            </p>
+                                            <div class="c100 center p50 center-block">
+                                                <span>50%</span>
+                                                <div class="slice">
+                                                    <div class="bar"></div>
+                                                    <div class="fill"></div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <p class="text text--lite text--gris text--upper margin--b0 margin--t2">
+                                            Puntos de marketing ninja:
+                                            </p>
+                                            <p class="text text--xbold text--xxlg text--gris text--upper margin--b0 margin--t0">
+                                            80
+                                            </p>
+                                            <div class="clearfix"></div>
+                                            <a class="btn btn-verde btn-lg margin--t1 typeform-share" href="https://andresescobar.typeform.com/to/emTKCV" data-mode="1" target="_blank">
+                                                Realizar Evaluación
+                                            </a>
+                                            <script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'share.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}id=id+'_';if(!gi.call(d,id)){qs=ce.call(d,'link');qs.rel='stylesheet';qs.id=id;qs.href=b+'share-button.css';s=gt.call(d,'head')[0];s.appendChild(qs,s)}})()</script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="descripcionCurso">
+                        <h1 class="text text--lite text--xlg margin--t1 text--gris_osc text--xbold">
+                            Descripción del curso
+                        </h1>
+                        <p class="text text--gris_osc">
+                        En un mundo cada vez más digital, los profesionales en mercadeo, comunicaciones y empresarios tienen el gran reto de integrar
+                        los medios digitales a su estrategia global de negocio y para lograrlo deben tener clara la ruta que deben seguir para realmente
+                        aportar al cumplimiento general de los objetivos estratégicos de sus compañías.<br><br>
+                        El objetivo principal de este curso es brindarle el conocimiento y herramientas necesarias para que usted pueda construir una ruta
+                        digital para su marca, negocio o empresa que incluya adecuadamente las estrategias, tácticas y medios digitales que le ayudarán
+                        en el cumplimiento de sus objetivos estratégicos de mercadeo y comunicación.
+                        </p>
+                        <div class="col-xs-12 bg bg-gris">
+                            <h2 class="text text--xbold text--verde">
+                                Competencias a desarrollar
+                            </h2>
+                        </div>
+                        <h3 class="text text--bold margin--t2">
+                            Al finalizar este curso usted estará en capacidad de:
+                        </h3>
+                        <ul class="list-normal list--verde">
+                            <li>
+                            <span>
+                                Conocer e identificar las diferentes estrategias, medios y tácticas digitales que son adecuadas para su negocio y le aporten al cumplimiento de sus objetivos de mercadeo y comunicación.
+                            </span>
+                            </li>
+                            <li>
+                            <span>
+                                Conocer y entender como desarrollar una ruta digital para su negocio o empresa de acuerdo a la naturaleza del mismo (Consumo Masivo, Retail, B2B, B2C, etc).
+                            </span>
+                            </li>
+                            <li>
+                            <span>
+                                Identificar e interpretar los principales KPIs (Key Performance Indicators) que le ayudarán a medir el desempeño de las estrategias digitales ejecutadas.
+                            </span>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12 bg bg-gris">
+                            <h2 class="text text--xbold text--verde">
+                                Temas a desarrollar cada semana
+                            </h2>
+                        </div>
+                        <dl>
+                            <dt class="text--azul_osc">
+                            Semana 1: Estrategia Digital
+                            </dt>
+                            <dd>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="text--azul_osc">
+                            Semana 2: TI y CIO en el mundo digital
+                            </dt>
+                            <dd>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="text--azul_osc">
+                            Semana 3: Dirigir el Balance
+                            </dt>
+                            <dd>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="text--azul_osc">
+                            Semana 4: Comercialización y venta de productos
+                            </dt>
+                            <dd>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="text--azul_osc">
+                            Semana 5: Run the factories
+                            </dt>
+                            <dd>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+                            </dd>
+                        </dl>
+                        <h3 class="text text--bold margin--t2">
+                            Preguntas que podrá resolver después de completar el curso:
+                        </h3>
+                        <ul class="list-normal list--verde">
+                            <li>
+                            <span>¿Cómo empezar en Marketing Digital?</span>
+                            </li>
+                            <li>
+                            <span>¿Por qué necesito integrar una estrategia digital en mi negocio?</span>
+                            </li>
+                            <li>
+                            <span>¿Cuáles son las estrategias y medios digitales adecuados para mi negocio de acuerdo a mis objetivos?</span>
+                            </li>
+                            <li>
+                            <span>¿Cuáles son los indicadores o KPIs relevantes a los cuales les debe hacer seguimiento?</span>
+                            </li>
+                        </ul>
+                        <h3 class="text text--bold margin--t2">
+                            ¿Quienes deben tomar este curso? (Perfil del aspirante)
+                        </h3>
+                        <p class="text text--gris_osc">
+                        Empresarios, Profesionales en comunicación y mercadeo (Asistentes, Gerentes, Asociados en áreas de Mercadeo y Comunicación) que esten interesados en implementar estrategias de mercadeo y comunicación en medios digitales.
+                        </p>
+                        <p class="text text--gris_osc">
+                        <span class="text--xbold">Requisitos Previos:</span> Introducción al Marketing Digital <a href="" class="text--azul">(Ver información )</a>
+                        </p>
+                        <a href="#" class="btn btn-verde btn-lg margin--t2">
+                            iniciar clase
+                        </a>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade in" id="recursos">
+                        <h1 class="text text--lite text--xlg margin--t1 text--gris_osc text--xbold">
+                            Recursos del curso
+                        </h1>
+                        <table class="table table--recursos margin--t2">
+                            <tbody><tr>
+                                <th>
+                                    Recursos: Lecturas Recomendadas
+                                </th>
+                                <th>
+                                    Autor
+                                </th>
+                                <th>
+                                    Acción
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    ZMOT: Momento Zero de la verdad
+                                </td>
+                                <td>
+                                    <strong>Google</strong>
+                                </td>
+                                <td>
+                                    <a href="visual-recursos.html" class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper">
+                                        Descargar
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Comportamiento del consumidor en medios digitales 2015
+                                </td>
+                                <td>
+                                    <strong>IAB Colombia</strong>
+                                </td>
+                                <td>
+                                    <a href="visual-recursos.html" class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper">
+                                        Descargar
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Comportamiento del consumidor en medios digitales 2015
+                                </td>
+                                <td>
+                                    <strong>Facebook</strong>
+                                </td>
+                                <td>
+                                    <a href="visual-recursos.html" class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper">
+                                        Descargar
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Comportamiento del consumidor en medios digitales 2015
+                                </td>
+                                <td>
+                                    <strong>Comscore</strong>
+                                </td>
+                                <td>
+                                    <a href="visual-recursos.html" class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper">
+                                        Descargar
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Comportamiento del consumidor en medios digitales 2015
+                                </td>
+                                <td>
+                                    <strong>Google</strong>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Comportamiento del consumidor en medios digitales 2015
+                                </td>
+                                <td>
+                                    <strong>Google</strong>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Comportamiento del consumidor en medios digitales 2015
+                                </td>
+                                <td>
+                                    <strong>Google</strong>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                        <div class="clearfix"></div><hr class="sep sep--gris">
+                        <div class="col-xs-12 text-center">
+                            <a class="btn btn-gosh btn-gosh--verde btn-lg1 typeform-share" href="https://andresescobar.typeform.com/to/emTKCV" data-mode="1" target="_blank">
+                                Realizar Evaluación
+                            </a>
+                            <script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'share.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}id=id+'_';if(!gi.call(d,id)){qs=ce.call(d,'link');qs.rel='stylesheet';qs.id=id;qs.href=b+'share-button.css';s=gt.call(d,'head')[0];s.appendChild(qs,s)}})()</script>
+                            <span class="text text--sm text--gris_osc pull-right">
+                                Ver lección 2
+                                <a href="#" class="btn btn-sm btn-default margin--l1">
+                                    <span class="glyphicon glyphicon-triangle-right"></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="foros">
+                        <h1 class="text text--lite text--xlg margin--t1 text--gris_osc text--xbold">
+                            Foros
+                        </h1>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="evaluaciones">
+                        <h1 class="text text--lite text--xlg margin--t1 text--gris_osc text--xbold">
+                            Evaluaciones del curso
+                        </h1>
+                        <table class="table table--recursos margin--t2">
+                            <tbody><tr>
+                                <th>
+                                    Evaluación
+                                </th>
+                                <th>
+                                    Oportunidades
+                                </th>
+                                <th class="text-center">
+                                    Resultado
+                                    </th>
+                                    <th class="text-center">
+                                        Acción
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Evaluación 1: Introducción al Marketing Digital
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>1/3</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>78% (Bien)</strong>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper typeform-share" href="https://andresescobar.typeform.com/to/emTKCV" data-mode="1" target="_blank">
+                                            Hacer Evaluación
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Evaluación 2: Consumidor Digital y ZMOT
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>2/3</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>58% (Regular)</strong>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper typeform-share" href="https://andresescobar.typeform.com/to/emTKCV" data-mode="1" target="_blank">
+                                            Hacer Evaluación
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Evaluación 3: KPIs del Marketing Digital
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>3/3</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>Pendiente</strong>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper typeform-share" href="https://andresescobar.typeform.com/to/emTKCV" data-mode="1" target="_blank">
+                                            Hacer Evaluación
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Evaluación 4: Estrategia Digital en Negocios B2B
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>3/3</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong>Pendiente</strong>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="profesores">
+                            <h3 class="text text--lite text--xlg margin--t1 text--gris_osc text--xbold">
+                                Profesores:
+                            </h3>
+                            <div class="row">
+                                <div class="col-xs-2 vertical-middle">
+                                    <img src="data:image/webp;base64,UklGRt4DAABXRUJQVlA4INIDAAAwFQCdASpSAFIAPm0wk0YkIyGhLVZqqIANiWkAEgd6sjEKoeA+X4wv1BTSpqGf3tijoFrpNgB+E43rVNrMzFNDh0xz/N0t0AxCS5LmJOHiAc+GnPUM9nPWzYMn0fyjyQ5bQlnFYM0CKxa6bEe/cV6Bg3wThs4YZIDa0X16wMUeM2L+C/azl9OiHYAAG8s211J7hBH8VRB9tYvm3fTauEpGcXTYaYQicTePt4GsAaLaLT0AAP789In2TJsw2xDbouRaPd5WXaOMt7HAtx7ixtjmx9chKtM0X7zOi4Mbh9k8GLLz+DK+O2BzMnDJTiZlyIx5+E2PiquZr1O8nP6PaoGjCa647PE8QKlLILfxgMqbzyBP0ydmQ3LQ9bl3HMoK8U1x9moXGcIt3y5OMmKw6eDJk09y8zWzO8QWQSUYqa+rq/PaNry1cFmtc1G9h4WM5Jgw0a6dhL/u84VK9w6JmYojsP8un8X9JymBuLNNutEHzUBgBnCOXyMKnAGOPdfS21uKxNU5HkNHSa4L0PJyjWGbUX0a77zSjDKowhq7ZxeFuiNYGWKmDP5nGiEhtsO73QTJNhQJNdGQpj84XjkW34RNQ/a75lVBkF68b06xfTWTHi5gPK2mX1IpMonglPmDJnRv9iwar9nLzN8KBm+TVjUU68lmZA+Wz/Dpw6MuN3yuysoIFgj17zc0GxafM+i0X4HJqQ1+NQR70eBCu5CkEc3YGGB8avZpUBt+GjuHsq4WcJrHi8iE28i0nAgG8XHwu1LjHWOwM+mMgF+PHUMyomjWZ8zatGj8OUAg+0G6EugZaMXXUo+jwF76mRImrJuE2vMof6tDUoQAhPuxWI+5NtMPWZWBVM7TWdZM0BTJBQgj09AcSqNwNCpqC101NnvDuRJpEkR0AGk6P6+LO7kOKRoDHOf+b4KcR+R6hNHhIZiGXCViAupinW9Qc29WoLhvfSDJdva1krGvbmHq9GEQrQ6FERFXMdBIbK33opxs4zmi+4KYB5WHxD3SFoT2NqSSUrmn72zUfgN1cyeeul/VMHaX4Jqx2DCDYf2W2L1wFpvNvHIOyMBi3GRx9DiXVV0mvmhnrdu62IMtocNN/aqf0i+a9ERU5XCqqAt6LhYC+Wwck2ukJ6rI2+1dz2/K3gJI4hv2skQ7ZnyYWrUMNxctRCHTvkHtybdmJNgz7GJwfBxgBF9w6+j8g+IyFFvJT14cRb6CR/0XYRH53pCMKVcokffAP6EjSozIL6vTQiFeawIqJ6Jjq6JVYRHSX2D1SVMI6eJ+I6TKl9D7oJjy0UYVGBlgAAA=" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
+                                </div>
+                                <div class="col-xs-10 vertical-middle">
+                                    <p class="text text--azul text--xbold text--md margin--t05 margin--b0">
+                                    Andrés Escobar
+                                    </p>
+                                    <p class="text text--gris text--sm margin--t0">
+                                    CEO Existaya.com Agencia Digital, Empresario y Profesor Universitario.
+                                    </p>
+                                </div>
+                                <div class="col-xs-12">
+                                    <p class="text text--gris text--lite">
+                                    Ingeniero de Sistemas con énfasis en administración e informática, Director General de Existaya.com Agencia Digital, Google Advertising Professional (GAP). Google Analytics Individual Qualification (IQ). Docente en Marketing Online y Programación Web en la Universidad ICESI. Conferencista y Consultor con más de 8 años de experiencia en Marketing Online, Miembro de IAB Colombia (Internet Advertising Bureau).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <user-test></user-test>
+</div>
+<% include ../footer.html%>

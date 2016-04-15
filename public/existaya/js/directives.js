@@ -79,7 +79,7 @@ app.directive('tabsCustomVertical', ["$rootScope",function ($rootScope) {
 
     link: function (scope, element, attrs) {
 
-        var urlTemplate = 'views/simpleCourse/';
+        var urlTemplate = '/template/simpleCourse/';
         scope.template = $rootScope.template;
 
         scope.tabs = [
@@ -87,7 +87,7 @@ app.directive('tabsCustomVertical', ["$rootScope",function ($rootScope) {
             name: ' Salón de Clase', 
                 icon: 'fa fa-desktop fa-fw', 
                 active:true, 
-                template: 'views/courses/courseContents.html' 
+                template: '/template/courses/courseContents.html' 
         },
         {
             name: ' Sobre el Curso',
@@ -504,7 +504,7 @@ app.directive('cDuration', [function(){
 app.directive("userTest",["$rootScope",function($rootScope){
     return  {
         restrict: 'EA',
-        templateUrl : 'views/courses/user_test.html',
+        templateUrl : '/template/courses/user_test.html',
         link : function(scope, element, attrs ){
         },
         scope : {
@@ -560,13 +560,12 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
                 case "completed":
                     courses.completed().success(function(response){
                         scope.listCourses = response.courses;
-                        
                         $rootScope.completed_courses = scope.listCourses;
                     });
                     break;
                 case "available":
                     courses.available().success(function(response){
-                        scope.listCourses =response;
+                        scope.listCourses =response.courses;
                     });
                     break;
                 case "me":
@@ -588,7 +587,7 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
                     break;
                 case "absolute":
                     courses.absolute().success(function(response){
-                        scope.listCourses = split_array_for_slides(response, 4);
+                        scope.listCourses = split_array_for_slides(response.courses, 4);
                         if(response.length == 0){
                             courses.public().success(function(response){
                                 scope.listCourses = split_array_for_slides(response, 4);
@@ -597,12 +596,17 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
                         }
                     }).error(function(){
                         courses.public().success(function(response){
-                            scope.listcourses = response;
+                            scope.listcourses = response.courses;
                         });
                     });
                     break;
                 case "input":
                     scope.listCourses = split_array_for_slides(data, 4);
+                    break;
+                case "next":
+                    courses.next().success(function(response){
+                        scope.listCourses = response.courses;
+                    });
                     break;
                 default:
                     console.log("[DEBUG] - error with filter :"+scope.filter);
@@ -621,7 +625,7 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
 app.directive("coursesCatalog", ["$rootScope", "courses",  function($rootScope, courses){
     return {
         restrict :  "EA",
-        templateUrl : 'template/blockCourses.html',
+        templateUrl : '/template/blockCourses.html',
         link : function(scope){
         switch(scope.type){
             case "me":
@@ -761,3 +765,29 @@ app.directive("prerequisitesList",[function(){
         }
     }
 }]);
+app.directive("iframeEmbed", [function(){
+    return {
+        restrict : "EA",
+        template : "<p id='embed{{pk}}'></p>",
+        link : function(scope){
+            try{
+                interval_content[scope.pk] = setInterval(function(){
+                    console.log(scope.data);
+                    l = ("#embed"+scope.pk);
+                    l= document.querySelectorAll(l);
+                    if(l.length > 0){
+
+                        document.querySelector("#embed"+scope.pk).innerHTML = scope.data;
+                        clearInterval(interval_content[scope.pk]);
+                    }
+                }, 100);
+            }catch(err){
+                
+            }
+        },
+        scope : {
+            data :  "=",
+            pk : "="
+        }
+    }
+}])

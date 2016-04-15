@@ -18,9 +18,8 @@ home = function(req, res){
 
 }
 profile = function(req, res){
-    user = req.session.user == undefined ? { logged : false }: req.session.user;
+    if(req.session.user == undefined || !req.session.user.logged){
     
-    if(!user.logged){
         res.redirect("/");
     }else{
         res.render(client_folder(req.hostname)+"profile", {

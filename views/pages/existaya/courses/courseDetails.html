@@ -103,7 +103,7 @@
                 <%= description %>
             </p>
             <% if(user.logged){%>
-            <<button-course sessions="{{ dataDetails.sessions }}" uuid="{{ slug }}" username="{{dataUser.username}}" ng-if="authenticated"></button-course>
+            <button-course sessions="{{ dataDetails.sessions }}" uuid="{{ slug }}" username="{{dataUser.username}}" ng-if="authenticated"></button-course>
             <%}%>
         </div>
         <div class="col-xs-5">
@@ -234,7 +234,7 @@
             <div class="clearfix"></div>
             <courses-list limit="1" filter="related" slug="slug"></courses-list>
             <div class="col-xs-12 text-center margin--t3">
-                <a href="#/allCourses" class="btn btn--academy2 btn-verde btn-xlg text--upper">
+                <a href="/all_courses" class="btn btn--academy2 btn-verde btn-xlg text--upper">
                     Ver todos los cursos
                 </a>
             </div>
@@ -285,3 +285,31 @@
     </div>
 </section>
 </div>
+<div class="col-xs-12 sidebar-footer__top sidebar-footer__top--internas">
+    <div class="container">
+        <p class="text text--lite text--md text-center">
+        Mantente al día de nuestros nuevos cursos, suscribete a nuestro newsletter
+        </p>
+        <div class="clearfix"></div>
+        <div class="col-lg-10 col-lg-offset-1 col-xs-12 margin--t1">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" id="exampleInputEmail1" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input type="email" class="form-control input-lg" id="exampleInputEmail1" placeholder="Correo Electrónico">
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <a href="#" class="btn btn-azul btn-block btn-lg">
+                        <span class="text--upper">SUSCRIBIRME</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../footer.html %>
