@@ -8,18 +8,18 @@
                 </a>
             </div>
             <div class="col-xs-6">
-                <ul class="nav nav-pills nav-interno">
+                <ul class="nav nav-pills nav-interno hidden">
                     <li id="courseView" class="active">
-                    <a href="" ng-click="showCourses();" >Mis cursos</a>
+                    <a href="/profile/#my_courses"  aria-controls="cursosIniciados" role="tab" data-toggle="tab">Mis cursos</a>
                     </li>
                     <li id="certificationsView">
-                    <a href="" ng-click="showCertifications();">Certificaciones</a>
+                    <a href="/profile/#my_certifications"  aria-controls="cursosIniciados" role="tab" data-toggle="tab">Certificaciones</a>
                     </li>
                     <li id="toolsView">
-                    <a href="" ng-click="showTools()" aria-controls="recursos" role="tab" data-toggle="tab" ng-class="{active:display_menu==3}">Recursos Favoritos</a>
+                    <a href="/profile" ng-click="showTools()" aria-controls="recursos" role="tab" data-toggle="tab" ng-class="{active:display_menu==3}">Recursos Favoritos</a>
                     </li>
                     <li>
-                    <a href="" ng-click="" aria-controls="empleos" role="tab" data-toggle="tab">Empleos</a>
+                    <a href="/profile" ng-click="" aria-controls="empleos" role="tab" data-toggle="tab">Empleos</a>
                     </li>
                 </ul>
             </div>

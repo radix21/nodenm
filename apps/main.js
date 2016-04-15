@@ -45,6 +45,15 @@ KME_API = {
     get_organization: function(hostname) {
         return SERVER(hostname) + "/api/orgs/get/"
     },
+    available_courses : function(hostname){
+        return SERVER(hostname) + "/api/courses/available_courses";
+    },
+    next_courses : function(hostname){
+        return SERVER(hostname) + "/api/courses/next_courses";
+    },
+    get_course_data_student : function(hostname){
+        return SERVER(hostname) + "/api/courses/get_course_data_student";
+    }
 }
     
 CLIENTS = {
@@ -55,6 +64,9 @@ CLIENTS = {
     "kmelx.com" : {
         folder : "kmelx",
         server : "http://kmelx.com:5000"
+    "localhost" :{
+        folder : "existaya",
+        server : "http://marketing.kmelx.com:5000"
     }
 }
 client_folder = function(hostname){

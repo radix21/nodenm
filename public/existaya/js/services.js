@@ -102,14 +102,10 @@ app.factory("tutors", ["$http", function($http){
 }]);
 app.factory('courses', ['$http',function($http) {
     return {
-        dataStudent : function(uuid, slug){
-            if(slug != undefined){
+        dataStudent : function(slug){
                 
-                var url = config.SERVICE_SERVER + '/api/course/dataStudent/?slug='+slug+'&callback=JSON_CALLBACK&';
-            }else{
-                var url = config.SERVICE_SERVER + '/api/course/'+ uuid +'/dataStudent/?callback=JSON_CALLBACK&';
-            }
-            var response = $http.jsonp(encodeURI(url));
+            var url = '/api/course/'+slug;
+            var response = $http.get(url);
             return response;    
         },
         public : function(limit){
@@ -122,7 +118,7 @@ app.factory('courses', ['$http',function($http) {
             return $http.get("/api/courses/completed_courses/");
         },
         available : function(){
-            return $http.jsonp(config.SERVICE_SERVER+"/api/courses/?available=true&callback=JSON_CALLBACK");
+            return $http.get("/api/courses/available_courses/");
         },
         myCourses : function(){
             return $http.get("/api/courses/my_courses/");
@@ -138,6 +134,9 @@ app.factory('courses', ['$http',function($http) {
         },
         inscribe : function(slug){
             return $http.jsonp(config.SERVICE_SERVER+"/api/courses/inscribeUser/?course="+slug+"&callback=JSON_CALLBACK");
+        },
+        next : function(){
+            return $http.get("/api/courses/next_courses");
         }
 
     }
