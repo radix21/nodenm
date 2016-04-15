@@ -101,112 +101,141 @@
             <div class="col-xs-9">
 
                 <!-- Cursos -->
+                <div class="tab-content">
 
-                <div ng-show="display_menu == 1 || display_menu == undefined">
-
-                    <h1 class="text text--lite text--lg margin--t1 text--gris text--bold">
-                        Mis Cursos
-                    </h1>
-
-                    <div class="clearfix"></div>
-                    <tabset class="nav-tabs nav nav-tabs nav-perfil">
-                    <tab heading="Iniciados">
-                    <!--<div ng-include="'views/courses/blockMyCourses.html'"></div>-->
-                    <courses-catalog type="me"></courses-catalog>
-                    </tab>
-                    <tab heading="Finalizados">
-
-                    <courses-list filter="completed" limit="3"></courses-list>
-                    </tab>
-                    <tab heading="Recomendados">
-                    <h1 class="text text--xxlg text--azul_mid text--upper text--xbold margin--t1">
-                        encuentra el curso ideal para ti
-                    </h1> 
-                    <hr>  
-                    <courses-list filter="available" limit="3"></courses-list>
-                    </tab>
-                    <tab heading="Próximamente">
-                    <div class="well">
-                        <p>Próximamente</p>
-                    </div>
-                    </tab>
-                    </tabset>
-
-                </div>
-                <!-- Certificaciones -->
-
-                <div ng-show="display_menu == 2">
+                    <div role="tabpanel" class="tab-pane active" id="my_courses">
 
 
-                    <h1 class="text text--lite text--lg margin--t1 text--gris text--bold">
-                        Certificaciones
-                    </h1>
+                        <h1 class="text text--lite text--lg margin--t1 text--gris text--bold">
+                            Mis Cursos
+                        </h1>
+                        <div role="tabpanel">
+                            <ul class="nav nav-tabs nav-perfil" role="tablist">
+                                <li role="presentation" class="active">
+                                <a href="#cursosIniciados" aria-controls="cursosIniciados" role="tab" data-toggle="tab">Iniciados</a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#cursosRecomendados" aria-controls="cursosRecomendados" role="tab" data-toggle="tab">Recomendados</a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#cursosProximos" aria-controls="cursosProximos" role="tab" data-toggle="tab">Próximamente</a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#cursosFinalizados" aria-controls="cursosFinalizados" role="tab" data-toggle="tab">Finalizados</a>
+                                </li>
 
-                    <div class="clearfix"></div>
 
-                    <tabset class="nav-tabs nav nav-perfil">
-                    <tab heading="En Curso">
-                    <certifications type="in_progress"></certifications>
-                    </tab>
-                    <tab heading="Terminadas">
-                    <certifications type="completed"></certifications>
-                    </tab>
-                    <tab heading="Recomendados">
-                        <certifications type="available"></certifications>
-                    </tab>
-                    </tabset>
+                            </ul>
+                            <div class="tab-content">
 
-                </div>
+                                <div role="tabpanel" class="tab-pane active" id="cursosIniciados">
+                                    <courses-catalog type="me"></courses-catalog>
+                                </div>
 
-                <!-- Recursos Favoritos -->
-                <div>
-                
-                </div>
-                <div ng-show="display_menu == 3" ng-if="1>2">
+                                <div role="tabpanel" class="tab-pane" id="cursosFinalizados">
 
-                    <a href="#" bookmarklet>ENLACE PARA BOOKMARKLET</a>
-                    <h1 class="text text--lite text--lg margin--t1 text--bold text--gris">
-                        Recursos Favoritos
-                    </h1>
+                                    <courses-list filter="completed" limit="3"></courses-list>
+                                </div>
 
-                    <div class="clearfix"></div>
-                    <div id="bookmarletButton">
-                        <a href=""><img src="" alt=""></a>
+                                <div role="tabpanel" class="tab-pane" id="cursosRecomendados">
+                                    <courses-list filter="available" limit="3"></courses-list>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="cursosProximos">
+                                    <courses-list filter="next" limit="3"></courses-list>
+                                </div>
+
+
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="panel panel-default margin--t2">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <h2 class="text text--xlg text--gris_osc text--xbold">
-                                        Facebook Marketing
-                                    </h2>
+                    <div role="tabpanel" class="tab-pane" id="my_certifications">
+                        <h1 class="text text--lite text--lg margin--t1 text--gris text--bold">
+                            Certificaciones
+                        </h1>
+                        <div role="tabpanel">
+                            <ul class="nav nav-tabs nav-perfil" role="tablist">
+                                <li role="presentation" class="active">
+                                <a href="#certificionesEnCurso" aria-controls="certificionesEnCurso" role="tab" data-toggle="tab">En Cursos</a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#certificacionesTerminadas" aria-controls="certificacionesTerminadas" role="tab" data-toggle="tab">Terminadas</a>
+                                </li>
+
+
+                            </ul>
+                            <div class="tab-content">
+
+                                <div role="tabpanel" class="tab-pane active" id="certificacionesEnCurso">
+                                    <certifications type="in_progress"></certifications>
                                 </div>
-                                <div class="col-xs-4">
-                                    <img src="/images/xResources.jpg" height="413" width="720" alt="" class="img-responsive pull-left">
+
+                                <div role="tabpanel" class="tab-pane" id="certificacionesTerminadas">
+
+                                     <certifications type="completed"></certifications>
                                 </div>
-                                <div class="col-xs-8">
-                                    <p class="text text--lite text--gris">
-                                    Aprende a usar Facebook como herramienta para incrementar el alcance de tu estrategia digital impactando las ventas y retención de tus clientes.
-                                    </p>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <p class="text text--xbold text--gris_osc text--md">
-                                            Lectura
-                                            </p>
-                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Certificaciones -->
+
+            <div ng-show="display_menu == 2">
+
+
+            </div>
+
+            <!-- Recursos Favoritos -->
+            <div>
+
+            </div>
+            <div ng-show="display_menu == 3" ng-if="1>2">
+
+                <a href="#" bookmarklet>ENLACE PARA BOOKMARKLET</a>
+                <h1 class="text text--lite text--lg margin--t1 text--bold text--gris">
+                    Recursos Favoritos
+                </h1>
+
+                <div class="clearfix"></div>
+                <div id="bookmarletButton">
+                    <a href=""><img src="" alt=""></a>
+                </div>
+
+                <div class="panel panel-default margin--t2">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 class="text text--xlg text--gris_osc text--xbold">
+                                    Facebook Marketing
+                                </h2>
+                            </div>
+                            <div class="col-xs-4">
+                                <img src="/images/xResources.jpg" height="413" width="720" alt="" class="img-responsive pull-left">
+                            </div>
+                            <div class="col-xs-8">
+                                <p class="text text--lite text--gris">
+                                Aprende a usar Facebook como herramienta para incrementar el alcance de tu estrategia digital impactando las ventas y retención de tus clientes.
+                                </p>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p class="text text--xbold text--gris_osc text--md">
+                                        Lectura
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
             </div>
+
         </div>
-    </section>
-    <script>
+    </div>
+</section>
+
+<script>
 /**
   statement = {
   "actor": {
@@ -278,65 +307,65 @@
   bookmarkletContainer.style.width = "80%";
   bookmarkletContainer.style.height = "550px";
 
-    document.body.appendChild(bookmarkletContainer);
+document.body.appendChild(bookmarkletContainer);
 
-    img = document.querySelector("input[name='imageBookmarlet']");
-    typeB = document.querySelector("input[name='typeBookmarlet']");
-    s = document.createElement('link');
-    s.setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
-    s.setAttribute('rel', 'stylesheet');
-    s.setAttribute('type', 'text/css');
-    document.body.appendChild(s); 
-
-
-    a = document.createElement('link');
-    a.setAttribute('href', 'http://kmelx.com/static/css/tools.css');
-    a.setAttribute('rel', 'stylesheet');
-    a.setAttribute('type', 'text/css');
-    document.body.appendChild(a); 
-    b = document.createElement('link');
-    b.setAttribute('href', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
-    b.setAttribute('rel', 'stylesheet');
-    b.setAttribute('type', 'text/css');
-    document.body.appendChild(b); 
-
-    swal_css = document.createElement("link");
-    swal_css.setAttribute('href', 'http://kmelx.com/static/css/sweetalert.css');
-    swal_css.setAttribute('rel', 'stylesheet');
-    swal_css.setAttribute('type', 'text/css');
-    document.body.appendChild(swal_css); 
-
-    swal_js = document.createElement("script");
-    swal_js.setAttribute('src', 'http://kmelx.com/static/js/sweetalert.min.js');
-    document.body.appendChild(swal_js);
-
-    secondBookmarketContainer = document.querySelector("#containerBmlet");
-    secondBookmarketContainer.style.height = "500px";
-    secondBookmarketContainer.style.overflow = "auto";
-
-    starCounter = 0;
-    etiquetas = []; 
-    iconTag = "<i class='glyphicon glyphicon-tag'></i>";
+img = document.querySelector("input[name='imageBookmarlet']");
+typeB = document.querySelector("input[name='typeBookmarlet']");
+s = document.createElement('link');
+s.setAttribute('href', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+s.setAttribute('rel', 'stylesheet');
+s.setAttribute('type', 'text/css');
+document.body.appendChild(s); 
 
 
+a = document.createElement('link');
+a.setAttribute('href', 'http://kmelx.com/static/css/tools.css');
+a.setAttribute('rel', 'stylesheet');
+a.setAttribute('type', 'text/css');
+document.body.appendChild(a); 
+b = document.createElement('link');
+b.setAttribute('href', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+b.setAttribute('rel', 'stylesheet');
+b.setAttribute('type', 'text/css');
+document.body.appendChild(b); 
 
-    $(".tags").on("change",function(){
+swal_css = document.createElement("link");
+swal_css.setAttribute('href', 'http://kmelx.com/static/css/sweetalert.css');
+swal_css.setAttribute('rel', 'stylesheet');
+swal_css.setAttribute('type', 'text/css');
+document.body.appendChild(swal_css); 
 
-            myEtiqueta = $(this).val();
+swal_js = document.createElement("script");
+swal_js.setAttribute('src', 'http://kmelx.com/static/js/sweetalert.min.js');
+document.body.appendChild(swal_js);
 
-            value = etiquetas.indexOf(myEtiqueta);
+secondBookmarketContainer = document.querySelector("#containerBmlet");
+secondBookmarketContainer.style.height = "500px";
+secondBookmarketContainer.style.overflow = "auto";
 
-            if(value < 0){
+starCounter = 0;
+etiquetas = []; 
+iconTag = "<i class='glyphicon glyphicon-tag'></i>";
 
-            $(".misEtiquetas").append(iconTag + " " + myEtiqueta + " , ");
 
-            etiquetas.push(myEtiqueta);
 
-            }
+$(".tags").on("change",function(){
 
-            $(".tags").val("");    
+        myEtiqueta = $(this).val();
 
-            });
+        value = etiquetas.indexOf(myEtiqueta);
+
+        if(value < 0){
+
+        $(".misEtiquetas").append(iconTag + " " + myEtiqueta + " , ");
+
+        etiquetas.push(myEtiqueta);
+
+        }
+
+        $(".tags").val("");    
+
+        });
 
 closeIMG = '<i class="fa fa-times"></i>';
 closeButton = document.querySelector("a");
@@ -484,6 +513,6 @@ swal({
 
 };
 */
-    </script>
+</script>
 
-
+<% include footer.html %>

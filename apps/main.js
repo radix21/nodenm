@@ -38,11 +38,24 @@ KME_API = {
     },
     completed_courses : function(hostname){
         return SERVER(hostname) + "/api/courses/completed_courses";
+    },
+    available_courses : function(hostname){
+        return SERVER(hostname) + "/api/courses/available_courses";
+    },
+    next_courses : function(hostname){
+        return SERVER(hostname) + "/api/courses/next_courses";
+    },
+    get_course_data_student : function(hostname){
+        return SERVER(hostname) + "/api/courses/get_course_data_student";
     }
 }
     
 CLIENTS = {
     "marketinguniversity.co" : {
+        folder : "existaya",
+        server : "http://marketing.kmelx.com:5000"
+    },
+    "localhost" :{
         folder : "existaya",
         server : "http://marketing.kmelx.com:5000"
     }
