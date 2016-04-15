@@ -53,7 +53,23 @@ KME_API = {
     },
     get_course_data_student : function(hostname){
         return SERVER(hostname) + "/api/courses/get_course_data_student";
+    },
+    get_tribe : function(hostname){
+        return SERVER(hostname) + "/api/tribes/get/";
+    },
+    get_topic : function(hostname){
+        return SERVER(hostname) + "/api/tribes/topic/";
+    },
+    send_post : function(hostname){
+        return SERVER(hostname) + "/api/tribes/send_post/";
+    },
+    take_test : function(hostname){
+        return SERVER(hostname) + "/api/content/take_test/content/module";
+    },
+    all_certifications: function(hostname) {
+        return SERVER(hostname)+ "/api/course/get_courses_certification/"
     }
+
 }
     
 CLIENTS = {
@@ -64,9 +80,11 @@ CLIENTS = {
     "kmelx.com" : {
         folder : "kmelx",
         server : "http://kmelx.com:5000"
+
+    },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com:5000"
+        server : "http://entrenamiento.tecnoquimicas.com:5000"
     }
 }
 client_folder = function(hostname){

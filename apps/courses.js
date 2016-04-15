@@ -162,6 +162,7 @@ getAllCourses = function(req, res){
 
         response.on("end", function(){
             try{
+
                 res.send(JSON.parse(str));
             }catch(err){
                 response = {
@@ -207,6 +208,7 @@ allCoursesViews = function(req, res){
         response.on("end", function(){
             try{
                 courses =JSON.parse(str).courses;
+                console.log(courses);
                 res.render(client_folder(req.hostname)+"courses/allcourses", {
                     courses : courses,
                     user : client_session(req),

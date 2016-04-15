@@ -1,7 +1,24 @@
 app.controller("courseContentController",[ "$scope", function($scope){
     $scope.dataSimpleCourse = data;
     $scope.modulesPack = split_array_for_slides($scope.dataSimpleCourse.modules, 4);
-    console.log($scope.dataSimpleCourse);
+    $scope.resources = [];
+    for(module in data.modules){
+        for(submodule in data.modules[module].submodules){
+            for(content in data.modules[module].submodules[submodule].contents){
+                if(content > 0){
+                    $scope.resources.push(data.modules[module].submodules[submodule].contents[content]);
+                }
+            }
+        }
+    }
+    $scope.json_modules = {}
+    $scope.evaluations = [];
+    for(module in data.modules){
+        if(data.modules[module].contents.length > 0){
+            $scope.evaluations.push(data.modules[module].contents[0]);
+            $scope.json_modules[data.modules[module].contents[0].content_pk] =[ data.modules[module].module_pk, data.modules[module].contents[0].content_pk];
+        }
+    }
 
 }])
 
@@ -36,10 +53,10 @@ app.controller('courseContentController-ori', ['$http','$scope', 'courses','$sce
     $scope.$watch("modulePosition",function(_new,_old){
         $scope.submodulePosition = 0;
         $scope.markContentAsSeen = function(content, module){
-            $http.jsonp(config.SERVICE_SERVER+"/api/contents/take_test/?content="+content+"&module="+module+"&callback=JSON_CALLBACK")
+            $http.get("/api/contents/take_test/"+content+"/"+module)
         .success(function(response){
             exam = response.exam;
-            $http.jsonp(config.SERVICE_SERVER+"/api/contents/json_finish_exam/?content="+content+"&module="+module+"&exam="+exam+"&callback=JSON_CALLBACK")
+            $http.get("/api/contents/json_finish_exam/"+content+"/"+module+"/"+exam)
             .success(function(response){
                 console.log(response);
             })
@@ -329,18 +346,15 @@ app.controller('courseContentController-ori', ['$http','$scope', 'courses','$sce
 
 }]);
 
-app.controller('tribes',['$scope','courses','$routeParams','$http', '$rootScope','$sce','$timeout', function($scope,courses,$routeParams,$http, $rootScope,$sce,$timeout){
-    var response = courses.dataStudent(null,$routeParams.slug);
-
-    response.success(function(data){
+app.controller('tribes',['$scope','courses','$http', '$rootScope','$sce','$timeout', function($scope,courses,$http, $rootScope,$sce,$timeout){
         $scope.tribesModule = data.tribes;
         try{
             $scope.tribeId = data.tribes[0].id;
+
         }catch(err){
             $scope.tribeId = null;
         }
-
-        $http.jsonp( config.SERVICE_SERVER + '/api/tribes/get_tribe/?callback=JSON_CALLBACK&tribe_id=' + $scope.tribeId)
+        $http.get('/api/tribes/get_tribe/'+$scope.tribeId )
         .success(function(response){
             $scope.tribesDetails = response;
 
@@ -362,7 +376,7 @@ app.controller('tribes',['$scope','courses','$routeParams','$http', '$rootScope'
                 if(position != undefined){
                     $scope.showTopics = false;
                     var pos = position - 1; 
-                    $http.jsonp(config.SERVICE_SERVER + '/api/tribes/get_topic/?callback=JSON_CALLBACK&topic_id=' + position)
+                    $http.get('/api/tribes/get_topic/' + position)
                         .success(function(response){
                             $scope.comments = response.comments;
                             $scope.parseHtml =  function(html){
@@ -394,8 +408,9 @@ app.controller('tribes',['$scope','courses','$routeParams','$http', '$rootScope'
     if(data.tribes.length > 0){
         $scope.tribeId = data.tribes[0].id;
 
-        $http.jsonp( config.SERVICE_SERVER + '/api/tribes/get_tribe/?callback=JSON_CALLBACK&tribe_id=' + $scope.tribeId)
+        $http.get('/api/tribes/get_tribe/' + $scope.tribeId)
             .success(function(response){
+                console.log(response)
                 $scope.tribesDetails = response;
 
                 $scope.open = false;
@@ -415,7 +430,7 @@ app.controller('tribes',['$scope','courses','$routeParams','$http', '$rootScope'
                     if(position != undefined){
                         $scope.showTopics = false;
                         var pos = position - 1; 
-                        $http.jsonp(config.SERVICE_SERVER + '/api/tribes/get_topic/?callback=JSON_CALLBACK&topic_id=' + position)
+                        $http.get('/api/tribes/get_topic/' + position)
                             .success(function(response){
                                 $scope.comments = response.comments;
                                 $scope.parseHtml =  function(html){
@@ -452,10 +467,10 @@ app.controller('tribes',['$scope','courses','$routeParams','$http', '$rootScope'
     $scope.alert_post = false;
     $scope.addPost = function(post,id){
         if(post != ''){
-            $http.jsonp( config.SERVICE_SERVER + '/api/tribes/send_post/?callback=JSON_CALLBACK&topic=' + id + '&message=' + post)
+            $http.post('/api/tribes/send_post/' + id + '/' + post)
                 .success(function(response){
                     $scope.confirm_post = true;
-                    $http.jsonp(config.SERVICE_SERVER + '/api/tribes/get_topic/?callback=JSON_CALLBACK&topic_id=' + $scope.positionTopic)
+                    $http.get('/api/tribes/get_topic/' + id)
                     .success(function(response){
                         $scope.comments = response.comments;
                         $scope.parseHtml =  function(html){
@@ -475,11 +490,10 @@ app.controller('tribes',['$scope','courses','$routeParams','$http', '$rootScope'
         $scope.confirm_post = false;
         $scope.alert_post = false;
     }
-    });
 }]);
 
-app.controller("tutors",['$scope','$routeParams','courses',function ($scope,$routeParams,courses){
-    var response = courses.get(null,$routeParams.slug);
+app.controller("tutors",['$scope','courses',function ($scope, courses){
+    var response = courses.get(null,slug);
     response.success(function(data){
         $scope.tutorsData = data[0].tutors;   
     });
