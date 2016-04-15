@@ -791,3 +791,56 @@ app.directive("iframeEmbed", [function(){
         }
     }
 }])
+
+app.directive("skillsListGreen", [function(){
+    response ={
+        restrict : "EA",
+        templateUrl : "/template/courses/skills_green.html",
+        link : function(scope){
+            scope.skills = scope.data;
+        },
+        scope : {
+            data : "="
+        }
+    }
+    return response;
+}])
+app.directive('cGoalsGreen', [function () {
+    return {
+        restrict: 'EA',
+        template :  '<p id="dataGoals">{{about}}</p>',
+        link: function (scope, element, attrs) {
+            scope.$watch("goals", function(){
+                document.querySelector("#dataGoals").innerHTML = scope.goals;
+                cgoals = document.querySelector("#dataGoals>ol");
+                if(cgoals == null){
+                    cgoals = document.querySelector("#dataGoals>ul");
+                }
+                classList = "list-normal text--gris"
+                classList = classList.split(" ");
+                for(var i=0; i<classList.length; i++){
+                    if(cgoals != null){
+                        cgoals.classList.add(classList[i]);
+                    }
+                }
+            });
+        },
+        scope:{
+            goals : "@goals",
+        }
+
+    };
+}]);
+
+app.directive("targetPublic", [function(){
+    return {
+        restrict : "EA",
+        template : "<p id='target'></p>",
+        link: function(scope){
+            document.querySelector("#target").innerHTML = scope.target;
+        },
+        scope : {
+            target : "="
+        }
+    }
+}])

@@ -47,7 +47,20 @@ KME_API = {
     },
     get_course_data_student : function(hostname){
         return SERVER(hostname) + "/api/courses/get_course_data_student";
+    },
+    get_tribe : function(hostname){
+        return SERVER(hostname) + "/api/tribes/get/";
+    },
+    get_topic : function(hostname){
+        return SERVER(hostname) + "/api/tribes/topic/";
+    },
+    send_post : function(hostname){
+        return SERVER(hostname) + "/api/tribes/send_post/";
+    },
+    take_test : function(hostname){
+        return SERVER(hostname) + "/api/content/take_test/content/module";
     }
+
 }
     
 CLIENTS = {

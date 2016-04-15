@@ -10,7 +10,7 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
         sessionStorage.location_state = 1;
     }
     $rootScope.contents_url = [];
-    $rootScope.template ='views/courses/content_user_opt.html';
+    $rootScope.template ='/template/courses/content_user_opt.html';
     $rootScope.dataUser = null;
     $rootScope.random = function(){
             return 0.5 - Math.random();
@@ -100,7 +100,7 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
             }
         },
         success_slide : function(response, params){
-            $http.jsonp( config.SERVICE_SERVER + '/api/contents/json_fetch_exam/?callback=JSON_CALLBACK'+params)
+            $http.get('/api/contents/json_fetch_exam/?'+params)
                 .success(function(data){
                     choices={};
                     var slide = response[0];
@@ -130,7 +130,7 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
             params = ""
         }
         $rootScope.user_answers = null;
-        $http.jsonp(config.SERVICE_SERVER + '/api/contents/json_fetch_user_slide/?callback=JSON_CALLBACK&exam='+$rootScope.examData.pk+params)
+        $http.get('/api/contents/json_fetch_user_slide/?exam='+$rootScope.examData.pk+params)
             .success(function(response) {
                 options.success(response, params);
                 $rootScope.loader = false;
@@ -155,7 +155,7 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
         $rootScope.actual_position +=1;
         $rootScope.question_choices = {};
         params += "&exam="+$rootScope.examData.pk+"&contentId="+$rootScope.contentId;
-        $http.jsonp( config.SERVICE_SERVER + '/api/contents/json_fetch_exam/?callback=JSON_CALLBACK&'+params)
+        $http.get('/api/contents/json_fetch_exam/?'+params)
              .success(function(response){
                 console.log("12123123123");
                 $rootScope.user_answers = null;
@@ -181,9 +181,9 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
         params= "&position="+$rootScope.actual_position+"&actual_position="+prev_position+'&course_id='+$rootScope.courseId+"&content="+$rootScope.contentId;
 
         params += '&course='+$rootScope.courseId+"&ubs="+$rootScope.studentId+'&module='+$rootScope.moduleId+'&contentId='+$rootScope.contentId+"&exam="+$rootScope.examData.pk+"&choices="+JSON.stringify($rootScope.question_choices);
-         $http.jsonp( config.SERVICE_SERVER + '/api/contents/json_fetch_exam/?callback=JSON_CALLBACK'+params)
+         $http.get('/api/contents/json_fetch_exam/?'+params)
             .success(function(response){
-                $http.jsonp(config.SERVICE_SERVER + '/api/contents/json_finish_exam/?callback=JSON_CALLBACK&exam='+$rootScope.examData.pk+params)
+                $http.get('/api/contents/json_finish_exam/?exam='+$rootScope.examData.pk+params)
                     .success(function(response) {
                         $(".BlockTest").css({"background":"gray","pointer-events":"none"});
                         $rootScope.examData = undefined;
@@ -209,7 +209,7 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
         $rootScope.actual_position -=1;
         $rootScope.question_choices = {};
         params += "&exam="+$rootScope.examData.pk+"&contentId="+$rootScope.contentId;
-        $http.jsonp( config.SERVICE_SERVER + '/api/contents/json_fetch_exam/?callback=JSON_CALLBACK&'+params)
+        $http.get('/api/contents/json_fetch_exam/?'+params)
              .success(function(response){
                 console.log(response);
 
@@ -285,7 +285,7 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
         if($rootScope.examData!=undefined){
             params += '&exam='+$rootScope.examData.pk;
         }
-        $http.jsonp(config.SERVICE_SERVER + '/api/contents/take_test/?callback=JSON_CALLBACK&'+params)
+        $http.get('/api/contents/take_test/?'+params)
             .success(function(response){
                 if(response.status == 'ok'){
                    $rootScope.updateExam(response); 
@@ -295,9 +295,9 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
             
             });
     }
-    $rootScope.open_test = function(module, content, item){
-        $rootScope.moduleId = module;
-        $rootScope.contentId = content;
+    $rootScope.open_test = function(input){
+        $rootScope.moduleId = input[0];
+        $rootScope.contentId = input[1];
         $rootScope.modulePosition = 0;
         $rootScope.submodulePosition = 0;
         $rootScope.packItemPosition = 0;
@@ -325,7 +325,7 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
             }
 
         }
-        $http.jsonp( config.SERVICE_SERVER + '/api/contents/json_fetch_exam/?callback=JSON_CALLBACK'+params)
+        $http.get('/api/contents/json_fetch_exam/?'+params)
             .success(function(response){
                 options.success(response);
             })

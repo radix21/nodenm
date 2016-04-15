@@ -17,10 +17,13 @@ kmelx = require('./urls/kmelx');
 account = require("./urls/account");
 xapi = require("./urls/xapi");
 courses = require("./urls/courses");
-
+tribes = require("./urls/tribes");
+content = require("./urls/content");
+content.set(app);
 account.set(app, public_html, http);
 xapi.set(app);
 kmelx.set(app);
 courses.set(app);
+tribes.set(app);
 // END KMELX APPS
 
