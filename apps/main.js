@@ -1,7 +1,6 @@
 express = require("express");
 DEFAULT_SERVER = "http://marketing.kmelx.com";
 SERVER = function(hostname){
-
     return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
 }
 KME_API = {
@@ -100,7 +99,12 @@ CLIENTS = {
     "localhost" :{
         folder : "existaya",
         server : "http://marketing.kmelx.com:5000"
+    },
+    "safe-beyond-13324.herokuapp.com" : {
+        folder: "existaya",
+        server : "http://marketing.kmelx.com"
     }
+
 }
 client_folder = function(hostname){
     folder = (CLIENTS[hostname] != undefined ? (CLIENTS[hostname]["folder"]+"/") : 'default/');
