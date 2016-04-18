@@ -121,23 +121,15 @@ app.directive('tabsCustomVertical', ["$rootScope",function ($rootScope) {
         }
         ];   
         $rootScope.$watch("show_test", function(){
+            console.log("va a ejecurar ele examen");
             if($rootScope.show_test){
                 scope.tabs[0].active = true;
-            }
-        })
-        var loadBar = setInterval(function(){
-            var nav = document.querySelector("ul.nav-tabs");
-            try{
-                nav.remove();  
-            
-                if(nav.length == null){
-                clearInterval(loadBar);
-                }
-            }catch(err){
-                Pace.restart();
-            }
-        },100);       	
 
+            }
+        });
+        $rootScope.$watch("numberQuestion", function(){
+            console.log($rootScope.numberQuestion);
+        })
 
     }
     };
@@ -501,7 +493,7 @@ app.directive('cDuration', [function(){
     }    
 }]);
 
-app.directive("userTest",["$rootScope",function($rootScope){
+app.directive("userTest",[function(){
     return  {
         restrict: 'EA',
         templateUrl : '/template/courses/user_test.html',
@@ -660,13 +652,8 @@ app.directive("certifications",["courses",function(courses){
         restrict : "EA",
         templateUrl : "/template/certificates/catalogCertificate.html",
         link : function(scope){
-        
-            courses.certifications("?"+(scope.type != undefined ? scope.type : "available")+"=true").success(function(response){
-              scope.items = response;
-              console.log(scope.items);
-
-              scope.in_progress = (scope.type == "in_progress");
-              scope.remove == undefined ? scope.showPanel = true: scope.showPanel = false;
+            courses.certifications().success(function(response){
+                scope.certifications = response.certifications;
             }).error(function(a,b,c,d){
                 console.log(b,d);
             });

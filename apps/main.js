@@ -1,5 +1,5 @@
 express = require("express");
-DEFAULT_SERVER = "http://marketing.kmelx.com:5000";
+DEFAULT_SERVER = "http://marketing.kmelx.com";
 SERVER = function(hostname){
 
     return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
@@ -67,10 +67,22 @@ KME_API = {
         return SERVER(hostname) + "/api/content/take_test/content/module";
     },
     all_certifications: function(hostname) {
-        return SERVER(hostname)+ "/api/course/get_courses_certification/"
+        return SERVER(hostname)+ "/api/courses/get_courses_certification/"
     },
     info_certification: function(hostname) {
         return SERVER(hostname)+ "/api/course/get_info_course_certification/"
+    },
+    fetch_exam : function(hostname){
+        return SERVER(hostname) + "/api/contents/json_fetch_exam/"
+    },
+    fetch_user_slide : function(hostname){
+        return SERVER(hostname) + "/api/contents/json_fetch_user_slide/";
+    },
+    finish_exam : function(hostname){
+        return SERVER(hostname) + "/api/contents/json_finish_exam/";
+    },
+    my_certifications : function(hostname){
+        return SERVER(hostname) + "/api/courses/get_user_certifications/";
     }
 
 }
@@ -87,7 +99,7 @@ CLIENTS = {
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://entrenamiento.tecnoquimicas.com:5000"
+        server : "http://marketing.kmelx.com:5000"
     }
 }
 client_folder = function(hostname){

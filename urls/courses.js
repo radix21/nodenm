@@ -12,6 +12,7 @@ module.exports = {
         app.get("/course/:slug/details", courseDetails);
         app.get("/course/:slug", courseView);
         app.get("/api/course/:slug", course_data_student);
+        app.get("/api/certifications/my_certifications", my_certifications);
     }
 }
 

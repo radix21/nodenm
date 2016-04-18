@@ -16,10 +16,10 @@
                     <a href="/profile/#my_certifications"  aria-controls="cursosIniciados" role="tab" data-toggle="tab">Certificaciones</a>
                     </li>
                     <li id="toolsView">
-                    <a href="/profile" ng-click="showTools()" aria-controls="recursos" role="tab" data-toggle="tab" ng-class="{active:display_menu==3}">Recursos Favoritos</a>
+                    <a href="/profile/#recursos" aria-controls="recursos" role="tab" data-toggle="tab">Recursos Favoritos</a>
                     </li>
                     <li>
-                    <a href="/profile" ng-click="" aria-controls="empleos" role="tab" data-toggle="tab">Empleos</a>
+                    <a href="/profile/#empleos" aria-controls="empleos" role="tab" data-toggle="tab">Empleos</a>
                     </li>
                 </ul>
             </div>
@@ -36,7 +36,7 @@
                                 <img src="<%if(user.info.avatar != null){ %><%=user.info.avatar%><%}else{%>/existaya/images/avatarDefault.png<%}%>" alt="" class="img-responsive pull-right img-circle" >
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="profile"><%= user.info.username %></a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile"><%= user.info.username %></a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="hidden">is</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="" class="hidden">Neo</a></li>
                                 <li role="presentation" class="divider"></li>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="hidden col-xs-2 padding--r0 padding--l0 nav-topper__avatarUser">
                         <div class="row">
-                            <a href="profile">
+                            <a href="/profile">
                                 <img src="<%= user.info.avatar %>" alt="" class="img-responsive pull-right img-circle" >
                             </a>
                         </div>
@@ -65,9 +65,9 @@
                     </a>
                     <div ng-show="{{authenticated_navbar}}" class="top-main-menu">
                         <ul class="nav nav-complete navbar-nav navbar-right">
-                            <li class="active"><a ng-href="all_courses" ng-click="activeMenu($event)">CURSOS</a></li>
-                            <li><a ng-href="all_certificates" ng-click="activeMenu($event)">CERTIFICACIONES</a></li>
-                            <li><a ng-href="jobs" ng-click="activeMenu($event)">BOLSA DE EMPLEO</a></li>
+                            <li class="active"><a ng-href="/all_courses" ng-click="activeMenu($event)">CURSOS</a></li>
+                            <li><a ng-href="/all_certifications" ng-click="activeMenu($event)">CERTIFICACIONES</a></li>
+                            <li><a ng-href="/jobs" ng-click="activeMenu($event)">BOLSA DE EMPLEO</a></li>
                         </ul>
                     </div>
                     <ul controller="profile_api" ng-show="authenticated_navbar" class="nav nav-pills nav-interno pull-left" role="tablist">
@@ -89,7 +89,7 @@
 
                             <a class="btn btn--academy btn-verde btn--right btn-lg btn--ingresar" data-toggle="modal" data-target="#js-ingreso" ng-if="!authenticated_navbar">INGRESAR</a>
 
-                            <a class="btn btn--academy btn-verde btn--right btn-lg btn--ingresar" data-toggle="modal" href="profile" ng-if="authenticated">PERFIL</a>
+                            <a class="btn btn--academy btn-verde btn--right btn-lg btn--ingresar" data-toggle="modal" href="/profile" ng-if="authenticated">PERFIL</a>
                             <a class="btn btn--academy btn-danger btn--right btn-lg btn--ingresar" ng-show="authenticated" ng-click="logout()">SALIR</a>
 
                             <a class="btn btn--academy btn-azul btn--right btn-lg btn--ingresar" ng-click="toggleMenuNavbar()">
@@ -102,9 +102,9 @@
                     <div class="sidebar-contentMenu__menu_completo" ng-if="seeMenu" ng-click="toggleMenuNavbar()">
                         <div class="col-xs-10">
                             <ul class="nav nav-complete navbar-nav navbar-right" >
-                                <li class="active"><a href="#allCourses">CURSOS</a></li>
-                                <li><a href="all_certificates">CERTIFICACIONES</a></li>
-                                <li><a href="jobs">BOLSA DE EMPLEO</a></li>
+                                <li class="active"><a href="/all_courses">CURSOS</a></li>
+                                <li><a href="/all_certificates">CERTIFICACIONES</a></li>
+                                <li><a href="/jobs">BOLSA DE EMPLEO</a></li>
                                 <li><a href="/">BIBLIOTECA</a></li>
                                 <li><a href="/">PRECIOS</a></li>
                             </ul>

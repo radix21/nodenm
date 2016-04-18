@@ -4,17 +4,29 @@
     interval_content = [];
     var slug = "<%= slug %>";
     var data = {};
+    data.tutors = [];
+    <% for(t in dataStudent.tutors){%>
+        <% tutor = dataStudent.tutors[t];%>
+        data.tutors.push({
+            first_name : "<%- tutor.first_name%>",
+            last_name : "<%- tutor.last_name %>",
+            pk : "<%- tutor.pk %>",
+            avatar : "<%- tutor.avatar %>",
+            about : "<%- tutor.about %>",
+            jobtitle : "<%- tutor.jobtitle %>"
+        })
+    <%}%>
     data.tribes = [];
     <% for(t in dataStudent.tribes){%>
-        <% tribe = dataStudent.tribes[t];%>
-                data.tribes.push({
-                description : "<%- tribe.description %>",
-                name : "<%- tribe.name %>",
-                slug : "<%- tribe.slug %>",
-                participation : <%- tribe.participation %>,
-                id : <%- tribe.id %>,
-                topics : []
-            })
+    <% tribe = dataStudent.tribes[t];%>
+        data.tribes.push({
+            description : `<%- tribe.description %>`,
+            name : "<%- tribe.name %>",
+            slug : "<%- tribe.slug %>",
+            participation : <%- tribe.participation %>,
+            id : <%- tribe.id %>,
+            topics : []
+        })
         <% for(i in tribe.topics){%>
             <% topic = tribe.topics[i];%>
             data.tribes[<%- t %>].topics.push({
@@ -27,7 +39,7 @@
     <%}%>
     <% course = dataStudent.course;%>
     data.course = {
-    cost : "<%= course.cost %>",
+        cost : "<%= course.cost %>",
         video : "<%= course.video %>",
         duration : "<%= course.duration %>",
         category : "<%= course.category %>",
@@ -55,87 +67,54 @@
         prerequisites : [],
     }
     <% for(prerequisite in course.prerequisites){%>
-        <% prerequisite = course.prerequisites[prerequisite];%>
+    <% prerequisite = course.prerequisites[prerequisite];%>
         data.course.prerequisites.push({
             name : "<%- prerequisite.name %>",
             description : "<%- prerequisite.description %>",
-            slug : "<%- prerequisite.slug %>"
+            slug : "<%- prerequisite.slug %>"   
         })
     <%}%>
     <% for(skill in course.skills){%>
-        <% skill = course.skills[skill];%> 
+    <% skill = course.skills[skill];%> 
         data.course.skills.push({
-            name : "<%- skill.name %>",
-            description : "<%- skill.description %>",
-            pk : "<%- skill.pk %>"
-        })
-    <%}%>
-    data.modules = [];
-    <% for(m in dataStudent.modules ){%>
-        <% module = dataStudent.modules[m];%>
+name : "<%- skill.name %>",
+description : "<%- skill.description %>",
+pk : "<%- skill.pk %>"
+})
+<%}%>
+data.modules = [];
+<% for(m in dataStudent.modules ){%>
+    <% module = dataStudent.modules[m];%>
         data.modules.push({
-            available : <%= module.available %>,
-            tasks: [],
-            submodules: [],
-            module_pk: <%= module.module_pk %>,
-            module_description: "<%= module.module_description %>",
-            objects: [],
-            module_name: "<%= module.module_name %>",
-            contents: [], 
-            module_image: "<%= module.module_image %>", 
-            position: <%= module.position %>,
-            percentage_done: <%= module.percentage_done  %>,
-        
-        })
-    <% for( val in module.objects){ %>
-        <% object = module.objects[val]; %>
+available : <%= module.available %>,
+tasks: [],
+submodules: [],
+module_pk: <%= module.module_pk %>,
+module_description: "<%= module.module_description %>",
+objects: [],
+module_name: "<%= module.module_name %>",
+contents: [], 
+module_image: "<%= module.module_image %>", 
+position: <%= module.position %>,
+percentage_done: <%= module.percentage_done  %>,
+
+})
+<% for( val in module.objects){ %>
+    <% object = module.objects[val]; %>
         data.modules[<%= m %>].objects.push({
-            "object_name": "<%- object.object_name %>",
-            "module_pk": <%- object.module_pk %>, 
-            "quantity_participation": "<%- object.quantity_participation %>",
-            "url": "<%- object.url %>",
-            "object_description": "<%= object.object_description %>", 
-            "type": "<%- object.type %>", 
-            "object_id": "<%= object.object_id %>",
-            "is_unavailable": <%= object.is_unavailable %>
-            })
-        <%}%>
-        <% for(val in module.tasks){%>
-            <% task = module.tasks[val];%>
+                "object_name": "<%- object.object_name %>",
+                "module_pk": <%- object.module_pk %>, 
+                "quantity_participation": "<%- object.quantity_participation %>",
+                "url": "<%- object.url %>",
+                "object_description": "<%= object.object_description %>", 
+                "type": "<%- object.type %>", 
+                "object_id": "<%= object.object_id %>",
+                "is_unavailable": <%= object.is_unavailable %>
+                })
+    <%}%>
+    <% for(val in module.tasks){%>
+        <% task = module.tasks[val];%>
             data.modules[<%= m %>].tasks.push({
-                "task_name": "<%- task.task_name %>", 
-                "task_description": "<%- task.task_description %>", 
-                "task_percentage": "<%- task.task_percentage %>",
-                "task_initial_date": "<%- task.task_initial_date %>", 
-                "task_final_date": "<%- task.task_final_date %>", 
-                "task_show_initial_date": "<%- task.task_show_final_date %>",
-                "task_show_final_date": "<%- task.task_show_final_date%>",
-                "task_data": "<%- task.task_data %>", 
-                "task_position": "<%- task.task_position %>", 
-                "task_id": "<%- task.taskl_id %>"
-            })
-            
-        <%}%>
-        <% for(val in module.submodules){%>
-        
-            <% submodule = module.submodules[val];%>
-            
-            data.modules[<%= m %>].submodules.push({
-                available : <%= submodule.available %>,
-                tasks: [],
-                module_pk: <%= submodule.module_pk %>,
-                module_description: "<%= submodule.module_description %>",
-                objects: [],
-                module_name: "<%= submodule.module_name %>",
-                contents: [], 
-                module_image: "<%= submodule.module_image %>",
-                position: <%= submodule.position %>,
-                percentage_done: <%= submodule.percentage_done  %>,
-    
-             })
-            <% for(value in submodule.tasks){%>
-                <% task = submodule.tasks[value];%>
-                data.modules[<%= m %>].submodules[<%- val %>].tasks.push({
                     "task_name": "<%- task.task_name %>", 
                     "task_description": "<%- task.task_description %>", 
                     "task_percentage": "<%- task.task_percentage %>",
@@ -146,13 +125,46 @@
                     "task_data": "<%- task.task_data %>", 
                     "task_position": "<%- task.task_position %>", 
                     "task_id": "<%- task.taskl_id %>"
+                    })
+
+        <%}%>
+        <% for(val in module.submodules){%>
+
+            <% submodule = module.submodules[val];%>
+
+                data.modules[<%= m %>].submodules.push({
+available : <%= submodule.available %>,
+tasks: [],
+module_pk: <%= submodule.module_pk %>,
+module_description: "<%= submodule.module_description %>",
+objects: [],
+module_name: "<%= submodule.module_name %>",
+contents: [], 
+module_image: "<%= submodule.module_image %>",
+position: <%= submodule.position %>,
+percentage_done: <%= submodule.percentage_done  %>,
+
+})
+<% for(value in submodule.tasks){%>
+    <% task = submodule.tasks[value];%>
+        data.modules[<%= m %>].submodules[<%- val %>].tasks.push({
+                "task_name": "<%- task.task_name %>", 
+                "task_description": "<%- task.task_description %>", 
+                "task_percentage": "<%- task.task_percentage %>",
+                "task_initial_date": "<%- task.task_initial_date %>", 
+                "task_final_date": "<%- task.task_final_date %>", 
+                "task_show_initial_date": "<%- task.task_show_final_date %>",
+                "task_show_final_date": "<%- task.task_show_final_date%>",
+                "task_data": "<%- task.task_data %>", 
+                "task_position": "<%- task.task_position %>", 
+                "task_id": "<%- task.taskl_id %>"
                 })
-            <%}%>
+    <%}%>
 
 
-            <% for( value in submodule.objects){ %>
-                <% object = submodule.objects[value]; %>
-                data.modules[<%= m %>].submodules[<%= val %>].objects.push({
+    <% for( value in submodule.objects){ %>
+        <% object = submodule.objects[value]; %>
+            data.modules[<%= m %>].submodules[<%= val %>].objects.push({
                     "object_name": "<%- object.object_name %>",
                     "module_pk": <%- object.module_pk %>, 
                     "quantity_participation": "<%- object.quantity_participation %>",
@@ -161,20 +173,20 @@
                     "type": "<%- object.type %>", 
                     "object_id": "<%= object.object_id %>",
                     "is_unavailable": <%= object.is_unavailable %>
-                })
+                    })
 
-            <%}%>
+        <%}%>
 
 
-            <% for(value in submodule.contents){%>
-                <% content = submodule.contents[value];%>
+        <% for(value in submodule.contents){%>
+            <% content = submodule.contents[value];%>
                 data.modules[<%- m %>].submodules[<%= val %>].contents.push({
                         "content_name" : "<%= content.content_name %>", 
                         "content_description": "<%= content.content_description%>", 
                         "content_button_info": {
                         "show_message_effectivity": <%= content.content_button_info.show_message_effectivity %>, 
                         "exam_score": "<%= content.content_button_info.exam_score %>", 
-                        "num_attempts": "<%= content.content_button_info.num_attempts %>", 
+                        "num_attempts": parseInt("0"+"<%= content.content_button_info.num_attempts %>"), 
                         "passed": "<%= content.content_button_info.passed %>", 
                         "available":  <%= content.content_button_info.available %>, 
                         "show_button":  <%= content.content_button_info.show_button %>,
@@ -183,7 +195,7 @@
                         "show_corrections":  <%= content.content_button_info.show_corrections %>,
                         "self_grade": " <%= content.content_button_info.self_grade %>",
                         "show_score":  <%= content.content_button_info.show_score %>,
-                        "attempts_left":  "<%= content.content_button_info.attempts_left %>",
+                        "attempts_left":  parseInt("0"+"<%- content.content_button_info.attempts_left %>"),
                         "show_exam":  <%= content.content_button_info.show_exam %>,
                         "initial_date": "<%= content.content_button_info.initial_date %>",
                         "final_date": "<%= content.content_button_info.final_date %>",
@@ -208,52 +220,52 @@
                 })
             <%}%>
 
-        <%}%>
-       
-        <% for(val in module.contents){%>
-        
-            <% content = module.contents[val];%>
-            
-                data.modules[<%- m %>].contents.push({
-                    "content_name" : "<%= content.content_name %>", 
-                    "content_description": "<%= content.content_description%>", 
-                    "content_button_info": {
-                        "show_message_effectivity": <%= content.content_button_info.show_message_effectivity %>, 
-                        "exam_score": <%= content.content_button_info.exam_score %>, 
-                        "num_attempts": <%= content.content_button_info.num_attempts %>, 
-                        "passed": <%= content.content_button_info.passed %>, 
-                        "available":  <%= content.content_button_info.available %>, 
-                        "show_button":  <%= content.content_button_info.show_button %>,
-                        "show_report":  <%= content.content_button_info.show_report %>, 
-                        "download": " <%= content.content_button_info.download %>",
-                        "show_corrections":  <%= content.content_button_info.show_corrections %>,
-                        "self_grade": <%= content.content_button_info.self_grade %>,
-                        "show_score":  <%= content.content_button_info.show_score %>,
-                        "attempts_left":  <%= content.content_button_info.attempts_left %>,
-                        "show_exam":  <%= content.content_button_info.show_exam %>,
-                        "initial_date": "<%= content.content_button_info.initial_date %>",
-                        "final_date": "<%= content.content_button_info.final_date %>",
-                    },
-                    "content_position": "<%= content.content_position %>", 
-                    "content_pk": <%= content.content_pk%>, 
-                    'template': "<%= content.template %>", 
-                    "can_open" : <%= content.can_open %>,
-                    "content_initial_date": "<%= content.content_initial_date%>", 
-                    "content_final_date": "<%= content.content_final_date %>", 
-                    "show_initial_date": "<%= content.show_initial_date %>", 
-                    "show_final_date":"<%= content.show_final_date %>", 
-                    "content_aprobation": "<%= content.content_aprobation %>",
-                    "content__display_mode": "<%= content.content__display_mode %>", 
-                    "content_training": "<%= content.content_training %>", 
-                    'content_opportunities': "<%= content.content_opportunities %>", 
-                    "cim_pk": "<%= content.cim_pk %>", 
-                    "file_url" : ("<%= content.file %>").split(",")[0], 
-                    "bonus" : "<%= content.bonus %>", 
-                    "cim" : "<%= content.cim %>",
-                    "text" : `<%- content.text %>`
-                })
             <%}%>
-        <%}%>
+
+            <% for(val in module.contents){%>
+
+                <% content = module.contents[val];%>
+
+                    data.modules[<%- m %>].contents.push({
+                            "content_name" : "<%= content.content_name %>", 
+                            "content_description": "<%= content.content_description%>", 
+                            "content_button_info": {
+                            "show_message_effectivity": <%= content.content_button_info.show_message_effectivity %>, 
+                            "exam_score": <%= content.content_button_info.exam_score %>, 
+                            "num_attempts": parseInt("0"+"<%= content.content_button_info.num_attempts %>"), 
+                            "passed": <%= content.content_button_info.passed %>, 
+                            "available":  <%= content.content_button_info.available %>, 
+                            "show_button":  <%= content.content_button_info.show_button %>,
+                            "show_report":  <%= content.content_button_info.show_report %>, 
+                            "download": " <%= content.content_button_info.download %>",
+                            "show_corrections":  <%= content.content_button_info.show_corrections %>,
+                            "self_grade": <%= content.content_button_info.self_grade %>,
+                            "show_score":  <%= content.content_button_info.show_score %>,
+                            "attempts_left":  parseInt("0"+"<%- content.content_button_info.attempts_left %>"),
+                            "show_exam":  <%= content.content_button_info.show_exam %>,
+                            "initial_date": "<%= content.content_button_info.initial_date %>",
+                            "final_date": "<%= content.content_button_info.final_date %>",
+                            },
+                            "content_position": "<%= content.content_position %>", 
+                            "content_pk": <%= content.content_pk%>, 
+                            'template': "<%= content.template %>", 
+                            "can_open" : <%= content.can_open %>,
+                            "content_initial_date": "<%= content.content_initial_date%>", 
+                            "content_final_date": "<%= content.content_final_date %>", 
+                            "show_initial_date": "<%= content.show_initial_date %>", 
+                            "show_final_date":"<%= content.show_final_date %>", 
+                            "content_aprobation": "<%= content.content_aprobation %>",
+                            "content__display_mode": "<%= content.content__display_mode %>", 
+                            "content_training": "<%= content.content_training %>", 
+                            'content_opportunities': "<%= content.content_opportunities %>", 
+                            "cim_pk": "<%= content.cim_pk %>", 
+                            "file_url" : ("<%= content.file %>").split(",")[0], 
+                            "bonus" : "<%= content.bonus %>", 
+                            "cim" : "<%= content.cim %>",
+                            "text" : `<%- content.text %>`
+                    })
+                <%}%>
+                <%}%>
 </script>
 <script src="/existaya/controllers/courseContentController.js"></script>
 <div ng-controller="courseContentController">
@@ -396,38 +408,29 @@
                                                         </tbody></table>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 text-right margin--t1">
-                                                    <a href="#" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05">
-                                                        Anterior
-                                                    </a>
-                                                    <a href="#" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05">
-                                                        Siguiente
-                                                    </a>
-                                                </div>
                                             </div>
                                             <div class="col-xs-3 sidebar-right text-center">
                                                 <p class="text text--lite text--gris margin--b1 margin--t05 text--xbold">
                                                 Progreso Módulo 1
                                                 </p>
-                                                <div class="c100 center p50 center-block">
-                                                    <span>50%</span>
+                                                <div class="c100 center p{{module.contents[0].content_button_info.exam_score}} center-block">
+                                                    <span>{{ module.contents[0].content_button_info.exam_score }}%</span>
                                                     <div class="slice">
                                                         <div class="bar"></div>
                                                         <div class="fill"></div>
                                                     </div>
                                                 </div>
                                                 <div class="clearfix"></div>
-                                                <p class="text text--lite text--gris text--upper margin--b0 margin--t2">
+                                                <p class="text text--lite text--gris text--upper margin--b0 margin--t2 hidden">
                                                 Puntos de marketing ninja:
                                                 </p>
-                                                <p class="text text--xbold text--xxlg text--gris text--upper margin--b0 margin--t0">
+                                                <p class="text text--xbold text--xxlg text--gris text--upper margin--b0 margin--t0 hidden">
                                                 80
                                                 </p>
                                                 <div class="clearfix"></div>
-                                                <a class="btn btn-verde btn-lg margin--t1 typeform-share" href="https://andresescobar.typeform.com/to/emTKCV" data-mode="1" target="_blank">
+                                                <a class="btn btn-verde btn-lg margin--t1" ng-click="open_test(json_modules[module.contents[0].content_pk])" data-mode="1" target="_blank" ng-disabled="!module.contents[0].content_button_info.show_button">
                                                     Realizar Evaluación
                                                 </a>
-                                                <script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'share.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}id=id+'_';if(!gi.call(d,id)){qs=ce.call(d,'link');qs.rel='stylesheet';qs.id=id;qs.href=b+'share-button.css';s=gt.call(d,'head')[0];s.appendChild(qs,s)}})()</script>
                                             </div>
                                         </div>
                                     </div>
@@ -651,7 +654,7 @@
                                     </td>
                                     <td class="text-center">
                                         <strong>
-                                        {{evaluation.content_button_info.num_attempts}} / {{ evaluation.content_button_info.num_attempts + evaluation.content_button_info.attempts_left}}
+                                            {{evaluation.content_button_info.num_attempts}} / {{ evaluation.content_button_info.num_attempts + evaluation.content_button_info.attempts_left}}
                                         </strong>
                                     </td>
                                     <td class="text-center">
@@ -660,7 +663,7 @@
                                         </strong>
                                     </td>
                                     <td>
-                                        <a class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper" ng-click="open_test(json_modules[evaluation.content_pk])" data-mode="1" target="_blank">
+                                        <a class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper" ng-click="open_test(json_modules[evaluation.content_pk])" data-mode="1" target="_blank" ng-disabled="!evaluation.content_button_info.show_button">
                                             Hacer Evaluación
                                         </a>
 
@@ -673,31 +676,94 @@
                             <h3 class="text text--lite text--xlg margin--t1 text--gris_osc text--xbold">
                                 Profesores:
                             </h3>
-                            <div class="row">
+                            <div class="row" ng-repeat="tutor in dataSimpleCourse.tutors">
                                 <div class="col-xs-2 vertical-middle">
-                                    <img src="data:image/webp;base64,UklGRt4DAABXRUJQVlA4INIDAAAwFQCdASpSAFIAPm0wk0YkIyGhLVZqqIANiWkAEgd6sjEKoeA+X4wv1BTSpqGf3tijoFrpNgB+E43rVNrMzFNDh0xz/N0t0AxCS5LmJOHiAc+GnPUM9nPWzYMn0fyjyQ5bQlnFYM0CKxa6bEe/cV6Bg3wThs4YZIDa0X16wMUeM2L+C/azl9OiHYAAG8s211J7hBH8VRB9tYvm3fTauEpGcXTYaYQicTePt4GsAaLaLT0AAP789In2TJsw2xDbouRaPd5WXaOMt7HAtx7ixtjmx9chKtM0X7zOi4Mbh9k8GLLz+DK+O2BzMnDJTiZlyIx5+E2PiquZr1O8nP6PaoGjCa647PE8QKlLILfxgMqbzyBP0ydmQ3LQ9bl3HMoK8U1x9moXGcIt3y5OMmKw6eDJk09y8zWzO8QWQSUYqa+rq/PaNry1cFmtc1G9h4WM5Jgw0a6dhL/u84VK9w6JmYojsP8un8X9JymBuLNNutEHzUBgBnCOXyMKnAGOPdfS21uKxNU5HkNHSa4L0PJyjWGbUX0a77zSjDKowhq7ZxeFuiNYGWKmDP5nGiEhtsO73QTJNhQJNdGQpj84XjkW34RNQ/a75lVBkF68b06xfTWTHi5gPK2mX1IpMonglPmDJnRv9iwar9nLzN8KBm+TVjUU68lmZA+Wz/Dpw6MuN3yuysoIFgj17zc0GxafM+i0X4HJqQ1+NQR70eBCu5CkEc3YGGB8avZpUBt+GjuHsq4WcJrHi8iE28i0nAgG8XHwu1LjHWOwM+mMgF+PHUMyomjWZ8zatGj8OUAg+0G6EugZaMXXUo+jwF76mRImrJuE2vMof6tDUoQAhPuxWI+5NtMPWZWBVM7TWdZM0BTJBQgj09AcSqNwNCpqC101NnvDuRJpEkR0AGk6P6+LO7kOKRoDHOf+b4KcR+R6hNHhIZiGXCViAupinW9Qc29WoLhvfSDJdva1krGvbmHq9GEQrQ6FERFXMdBIbK33opxs4zmi+4KYB5WHxD3SFoT2NqSSUrmn72zUfgN1cyeeul/VMHaX4Jqx2DCDYf2W2L1wFpvNvHIOyMBi3GRx9DiXVV0mvmhnrdu62IMtocNN/aqf0i+a9ERU5XCqqAt6LhYC+Wwck2ukJ6rI2+1dz2/K3gJI4hv2skQ7ZnyYWrUMNxctRCHTvkHtybdmJNgz7GJwfBxgBF9w6+j8g+IyFFvJT14cRb6CR/0XYRH53pCMKVcokffAP6EjSozIL6vTQiFeawIqJ6Jjq6JVYRHSX2D1SVMI6eJ+I6TKl9D7oJjy0UYVGBlgAAA=" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
+                                    <img src="{{tutor.avatar}}" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
                                 </div>
                                 <div class="col-xs-10 vertical-middle">
                                     <p class="text text--azul text--xbold text--md margin--t05 margin--b0">
-                                    Andrés Escobar
+                                    {{ tutor.first_name}} {{ tutor.last_name }}
                                     </p>
                                     <p class="text text--gris text--sm margin--t0">
-                                    CEO Existaya.com Agencia Digital, Empresario y Profesor Universitario.
+                                    {{ tutor.jobtitle }}
                                     </p>
                                 </div>
                                 <div class="col-xs-12">
                                     <p class="text text--gris text--lite">
-                                    Ingeniero de Sistemas con énfasis en administración e informática, Director General de Existaya.com Agencia Digital, Google Advertising Professional (GAP). Google Analytics Individual Qualification (IQ). Docente en Marketing Online y Programación Web en la Universidad ICESI. Conferencista y Consultor con más de 8 años de experiencia en Marketing Online, Miembro de IAB Colombia (Internet Advertising Bureau).
+                                    {{ tutor.about }}
                                     </p>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <user-test></user-test>
+    <div id="background_gray" ng-show="show_test" ng-cloak>
+        <a class="pull-right">
+            <img src="https://s3-eu-west-1.amazonaws.com/share.typeform.com/close.gif"  ng-click="close_test()">
+        </a>
+        <div id="typeform-wrapper" class="popup show" style="">
+
+            <div class="frameTest"> 
+                <div class="confirm_finish" ng-show="confirmFinish">
+                    Evaluación Terminada - las respuestas se han guardado.
+                </div>  
+                <div class="statement container">
+                    <span class="col-md-1 text-center">
+                        <span class="numberQuestion">{{numberQuestion}}</span>
+                    </span>
+
+                    <span class="col-md-11">
+                        {{examSlide.fields.question.fields.statement}}
+                    </span>
+                </div>
+                <ul class="list-unstyled">
+                    <div class="container containerFilds">
+                        <div class="text-center" ng-show="loader"> 
+                            <img src="images/preloader.gif" alt="loader">
+                        </div>
+                        <div class="containerAnswers container">
+                            <div class="text-center" ng-if="examSlide.fields.question.extras.get_image_data != null"> 
+                                <img id="questionImage" class="img-responsive" alt="">
+                            </div>
+                            <div ng-repeat="option in user_answers track by $index">
+                                <div class="col-md-6">
+                                    <div class="optionBg row">
+                                        <span class="col-md-1 letter letterId-{{option.id}}" ng-class="{inactiveChoice:{{option.selected}}, block_cursor : {{disableChoices}} }" ng-click="saveAnswer(option.id)">{{ $index + 1}}</span>
+                                        <span id="{{option.id}}" class="col-md-11 labelField">{{option.option}} </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+                <div class="navQuestion"> 
+                    <div class="col-md-3">
+                        <div class="avanced">
+                            <span>{{examSlide.fields.position + 1}} de {{examData.extras.nr_slides}} Respondidas</span>
+                            <progressbar value="exam_percentage"></progressbar>
+                        </div>
+                    </div> 
+                    <div class="col-md-9"> 
+                        <div class="navButtons pull-right">
+                            <a href="" ng-click="finishExam()" class="btnFinish not-active-button">Terminar</i></a>
+                        <a href="" class="next_slide" ng-click="nextSlide()" ng-show="arrowRight">
+                            <i class="fa fa-chevron-right"></i>
+                        </a> 
+                        <a href="" class="prev_slide" ng-click="prevSlide()" ng-show="arrowLeft">
+                            <i class="fa fa-chevron-left"></i>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
 </div>
 
 <% include ../footer.html%>

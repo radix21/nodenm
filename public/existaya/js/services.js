@@ -124,7 +124,7 @@ app.factory('courses', ['$http',function($http) {
             return $http.get("/api/courses/my_courses/");
         },
         certifications : function(params){
-            return $http.jsonp(config.SERVICE_SERVER+"/api/certifications/"+params+"&callback=JSON_CALLBACK");
+            return $http.get("/api/certifications/my_certifications");
         },
         allCertificates : function(limit) {
             return $http.get('/certification/get/');

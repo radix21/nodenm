@@ -4,9 +4,9 @@ var querystring = require('querystring'),
 
 addOrganization = function(req, res) {
     res.render(client_folder(req.hostname)+"login", {
-        user : client_session(req)});
+        user : client_session(req)
+    });
 }
-
 /**
  * @api{post} api/organization/create_organization
  * @apiName createOrganization

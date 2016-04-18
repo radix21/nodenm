@@ -45,7 +45,7 @@ getMyCourses = function(req, res){
                 res.status(400).send(response);
             });
             response.on("data", function(data){
-                str += data;
+                str = data;
             });
             response.on("end", function(){
                 try{
@@ -250,7 +250,6 @@ courseDetails = function(req, res){
     course = "";
     data = http.get(KME_API.course_details(req.hostname)+"/"+req.params.slug, function(response){
         response.on("error", function(err){
-            console.log(err);
         })
         response.on("data", function(data){
             course += data;
@@ -266,7 +265,6 @@ courseDetails = function(req, res){
                 })
 
             }catch(err){
-                console.log(err)
             }
 
         });
@@ -540,7 +538,6 @@ course_data_student = function(req, res){
     url = KME_API.get_course_data_student(req.hostname) + "/"+req.params.slug+"?user="+req.session.user.info.username+"&token="+req.session.user.token;
     data = http.get(url, function(response){
         response.on("error", function(err){
-            console.log(err);
         })
         response.on("data", function(data){
             str += data;
@@ -585,7 +582,6 @@ courseView = function(req, res){
         url = KME_API.get_course_data_student(req.hostname) + "/"+req.params.slug+"?user="+req.session.user.info.username+"&token="+req.session.user.token;
         data = http.get(url, function(response){
             response.on("error", function(err){
-                console.log(err);
             })
             response.on("data", function(data){
                 str += data;
@@ -615,4 +611,26 @@ courseView = function(req, res){
         }).end();
 
     }
+}
+
+/**
+ * My certifications
+ **/
+my_certifications = function(req, res){
+    str = "";
+    url = KME_API.my_certifications(req.hostname) + "?user="+req.session.user.info.username+"&token="+req.session.user.token;
+    data= http.get(url, function(response){
+        response.on("error", function(err){
+            res.send(err);
+        });
+        response.on("data", function(data){
+            str = data;
+        });
+        response.on("end", function(){
+            res.send(str);
+        }); 
+    
+    }).on("error", function(err){
+        res.send(err);
+    })
 }

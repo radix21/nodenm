@@ -10,7 +10,7 @@ getAllCertification = function(req, res) {
 	var url = KME_API.all_certifications(req.hostname)
 	var str = ""
 
-	var data = http.get(url+"?token="+req.session.user.token+"&user="+req.session.user.info.username, function(response) {
+	var data = http.get(url, function(response) {
 		response.on('error', function(err) {
 			res.status(response.statusCode).send(err)
 		});
