@@ -1,0 +1,232 @@
+<% include ../head.html %>
+<navbar></navbar>
+<section class="col-xs-12 sidebar-image sidebar-image--xlg sidebar-add__montain" style="background-image:url('/existaya/images/banner-certificaciones.jpg')">
+	<div class="container text-left">
+		<div class="col-xs-10 col-xs-offset-1">
+			<h1 class="text text--blanco text--xxxxlg margin--b05 text-space1 text--upper">
+				<stron class="text--xbold"><%= response.name %></stron>
+			</h1>
+			<div class="clearfix"></div>
+				<div class="col-sm-6 col-xs-12 panel-verde">
+					<p class="text text--sm text--blanco text-space1 margin--t05">
+						<%= response.description %>
+					</p>
+				</div>
+			<div class="col-sm-6 col-xs-12 text-center">
+				<a href="#" class="btn btn-rojo btn-lg margin--t2">Regístrate!</a>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="col-xs-10 col-xs-offset-1 sidebar-section sidebar-section--content sidebar-blanco">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="row">
+					<nav class="navbar navbar-default navbar-certificacion">
+						<ul class="nav nav-pills nav-justified navbar-certificacion__menu">
+							<li>
+								<a href="#detalleEspecializacion" class="js-scrollTo">Sobre la especialización</a>
+							</li>
+							<li>
+								<a href="#temasEspecializacion" class="js-scrollTo">¿Qué temas veremos?</a>
+							</li>
+							<li>
+								<a href="#certificacioEspecializacion" class="js-scrollTo">Certificación</a>
+							</li>
+							<li>
+								<a href="#" class="js-scrollTo">Comienza Ya!</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="col-sm-3 col-xs-12 sidebar-right">
+		<img src="<%= response.image %>" alt="" class="img-responsive center-block">
+	</div>
+	<div class="col-sm-9 col-xs-12" id="detalleEspecializacion">
+		<h1 class="text text--xlg text--xbold text--azul_mid text--upper text-left">
+			¿Qué aprenderás con la especialización?
+		</h1>
+		<p class="text text--lite margin--t1">
+			<%= response.objective %>
+		</p>
+		<div class="clearfix"></div><hr>
+	</div>
+	<div class="col-xs-12" id="temasEspecializacion">
+		<h1 class="text text--xxlg text--xbold text--azul_mid text--upper margin--b2 margin--t2">
+			¿Qué temas veremos?
+		</h1>
+	</div>
+	<div class="col-sm-3 col-xs-12">
+		<div class="row">
+			<div class="panel-group panel-group--detalleCertificaciones" role="tablist" id="detalleModulos">
+			<% for (var i in response.courses) {%>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab">
+						<a href="#<%= response.courses[i].id %>" aria-controls="<%= response.courses[i].id %>" role="tab" data-toggle="tab" class="">
+							<span class="ico-number">1</span>
+							<%= response.courses[i].name %>
+						</a>
+					</div>
+				</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-9 col-xs-12">
+		<div class="tab-content">
+			<% for (var i in response.courses) { %>
+			<div role="tabpanel" class="tab-pane active" id="<%= response.courses[i].id %>">
+				<div class="row">
+					<div class="col-xs-8">
+						<h2 class="text text--xlg text--azul text--bold margin--t0">
+							<%= response.courses[i].name %>
+						</h2>
+						<p class="text text--gris text--md">
+							<%= response.courses[i].description %>
+						</p>
+						<p class="text text--gris text--bold text--sm">
+							Este curso se divide en <%= response.courses[i].modules.length %> módulos semanales así:
+						</p>
+						<% for (var j=1; j <= response.courses[i].modules.length; j++ ) { %>
+						<h3 class="text text--gris text--bold">
+							Semana <%= j %>: <%= response.courses[i].modules[j-1].name %>
+						</h3>
+						<p class="text text--gris">
+							<%= response.courses[i].modules[j-1].description %>
+						</p>
+						<% } %>
+					</div>
+					<% for (var k in response.courses[i].tutors) { %>
+					<div class="col-xs-4 sidebar-right text-center">
+						<img src="<%= response.courses[i].tutors[k].avatar %>" alt="" class="img-responsive center-block img-circle img-border1">
+						<p class="text text--azul text--xbold text--md margin--t1">
+							<%= response.courses[i].tutors[k].first_name %> <%= response.courses[i].tutors[k].last_name %>
+						</p>
+						<p class="text text--gris text--lite text--sm margin--b1">
+							<%= response.courses[i].tutors[k].jobtitle %><br><%= response.courses[i].tutors[k].company %>
+						</p>
+						<div class="clearfix"></div><hr class="sep--gris">
+						<p class="text text--gris text--xbold margin--t2 text-left">
+							Detalles del curso
+						</p>
+						<p class="text text--gris text--lite text--sm margin--b1 text-left">
+							<total-duration seconds="<%= response.courses[i].total_seconds %>"></total-duration><br>
+							<%= response.courses[i].duration %> Horas
+						</p>
+						<select class="form-control input-sm">
+							<option>1</option>
+						</select>
+					</div>
+					<% } %>
+				</div>
+			</div>
+			<% } %>
+		</div>
+	</div>
+</div>
+</div>
+</section>
+<section class="col-xs-12 text-center sidebar-table2" id="certificacioEspecializacion">
+	<div class="row">
+		<div class="col-xs-5">
+			<img src="/existaya/images/certificado.png" alt="" class="pull-left img-responsive">
+		</div>
+		<div class="col-xs-7">
+			<h2 class="text text--azul_mid text--xlg text--xbold text-center text--upper margin--t1">
+				Recibe tu certificado de especialización
+			</h2>
+			<p class="text text--md text--gris text-center text--lite">
+				Para obtener el Certificado de Especialización, completa el Signature Track for all 5 courses and the Capstone project.
+			</p>
+			<a href="#" class="btn btn--academy2 btn-rojo btn--right btn-xlg margin--t1 text--upper">
+				Comienza Ya
+			</a>
+		</div>
+	</div>
+</section>
+<section class="col-xs-12 sidebar-section">
+	<div class="container">
+		<div class="col-xs-12 margin--t1 margin--b0">
+			<div class="row">
+				<div class="col-xs-4 sidebar-section">
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-3 vertical-middle">
+								<img src="/existaya/images/avatar.jpg" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
+							</div>
+							<div class="col-xs-9 vertical-middle">
+								<p class="text text--azul margin--t1">
+									Carlos Aguirre<br>
+									<span class="text--gris">Asistente Mercadeo</span>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 margin--t1">
+						<p class="text text--lite text--sm">
+							Me gusta muchisimo, una muy buena
+							plataforma que ayuda en la enseñanza
+							del día a día, esperamos seguir aprendiendo
+							más.
+						</p>
+					</div>
+				</div>
+				<div class="col-xs-4 sidebar-section">
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-3 vertical-middle">
+								<img src="/existaya/images/profesor-vanessa-galvis.jpg" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
+							</div>
+							<div class="col-xs-9 vertical-middle">
+								<p class="text text--azul margin--t1">
+									Carlos Aguirre<br>
+									<span class="text--gris">Asistente Mercadeo</span>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 margin--t1">
+						<p class="text text--lite text--sm">
+							Me gusta muchisimo, una muy buena
+							plataforma que ayuda en la enseñanza
+							del día a día, esperamos seguir aprendiendo
+							más.
+						</p>
+					</div>
+				</div>
+				<div class="col-xs-4 sidebar-section">
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-3 vertical-middle">
+								<img src="/existaya/images/profesor-manuel-bolanos.jpg" alt="" class="img-circle sidebar-imageCurso__image img-responsive">
+							</div>
+							<div class="col-xs-9 vertical-middle">
+								<p class="text text--azul margin--t1">
+									Carlos Aguirre<br>
+									<span class="text--gris">Asistente Mercadeo</span>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 margin--t1">
+						<p class="text text--lite text--sm">
+							Me gusta muchisimo, una muy buena
+							plataforma que ayuda en la enseñanza
+							del día a día, esperamos seguir aprendiendo
+							más.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+	$('.panel-group.panel-group--detalleCertificaciones div.panel a:first').addClass('active');
+</script>
+<% include ../footer.html %>

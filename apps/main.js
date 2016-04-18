@@ -68,6 +68,9 @@ KME_API = {
     },
     all_certifications: function(hostname) {
         return SERVER(hostname)+ "/api/course/get_courses_certification/"
+    },
+    info_certification: function(hostname) {
+        return SERVER(hostname)+ "/api/course/get_info_course_certification/"
     }
 
 }
