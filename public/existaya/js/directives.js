@@ -121,23 +121,15 @@ app.directive('tabsCustomVertical', ["$rootScope",function ($rootScope) {
         }
         ];   
         $rootScope.$watch("show_test", function(){
+            console.log("va a ejecurar ele examen");
             if($rootScope.show_test){
                 scope.tabs[0].active = true;
-            }
-        })
-        var loadBar = setInterval(function(){
-            var nav = document.querySelector("ul.nav-tabs");
-            try{
-                nav.remove();  
-            
-                if(nav.length == null){
-                clearInterval(loadBar);
-                }
-            }catch(err){
-                Pace.restart();
-            }
-        },100);       	
 
+            }
+        });
+        $rootScope.$watch("numberQuestion", function(){
+            console.log($rootScope.numberQuestion);
+        })
 
     }
     };
@@ -501,7 +493,7 @@ app.directive('cDuration', [function(){
     }    
 }]);
 
-app.directive("userTest",["$rootScope",function($rootScope){
+app.directive("userTest",[function(){
     return  {
         restrict: 'EA',
         templateUrl : '/template/courses/user_test.html',
@@ -555,6 +547,11 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
                 case "public":
                     courses.public(scope.limit).success(function(response){
                         scope.listCourses = response.courses;
+                    });
+                    break;
+                case "certificates":
+                    courses.allCertificates().success(function(response) {
+                        scope.listCourses = split_array_for_slides(response.courses, 4);
                     });
                     break;
                 case "completed":
@@ -655,13 +652,8 @@ app.directive("certifications",["courses",function(courses){
         restrict : "EA",
         templateUrl : "/template/certificates/catalogCertificate.html",
         link : function(scope){
-        
-            courses.certifications("?"+(scope.type != undefined ? scope.type : "available")+"=true").success(function(response){
-              scope.items = response;
-              console.log(scope.items);
-
-              scope.in_progress = (scope.type == "in_progress");
-              scope.remove == undefined ? scope.showPanel = true: scope.showPanel = false;
+            courses.certifications().success(function(response){
+                scope.certifications = response.certifications;
             }).error(function(a,b,c,d){
                 console.log(b,d);
             });
@@ -788,6 +780,59 @@ app.directive("iframeEmbed", [function(){
         scope : {
             data :  "=",
             pk : "="
+        }
+    }
+}])
+
+app.directive("skillsListGreen", [function(){
+    response ={
+        restrict : "EA",
+        templateUrl : "/template/courses/skills_green.html",
+        link : function(scope){
+            scope.skills = scope.data;
+        },
+        scope : {
+            data : "="
+        }
+    }
+    return response;
+}])
+app.directive('cGoalsGreen', [function () {
+    return {
+        restrict: 'EA',
+        template :  '<p id="dataGoals">{{about}}</p>',
+        link: function (scope, element, attrs) {
+            scope.$watch("goals", function(){
+                document.querySelector("#dataGoals").innerHTML = scope.goals;
+                cgoals = document.querySelector("#dataGoals>ol");
+                if(cgoals == null){
+                    cgoals = document.querySelector("#dataGoals>ul");
+                }
+                classList = "list-normal text--gris"
+                classList = classList.split(" ");
+                for(var i=0; i<classList.length; i++){
+                    if(cgoals != null){
+                        cgoals.classList.add(classList[i]);
+                    }
+                }
+            });
+        },
+        scope:{
+            goals : "@goals",
+        }
+
+    };
+}]);
+
+app.directive("targetPublic", [function(){
+    return {
+        restrict : "EA",
+        template : "<p id='target'></p>",
+        link: function(scope){
+            document.querySelector("#target").innerHTML = scope.target;
+        },
+        scope : {
+            target : "="
         }
     }
 }])

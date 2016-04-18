@@ -1,5 +1,5 @@
 express = require("express");
-DEFAULT_SERVER = "http://marketing.kmelx.com:5000";
+DEFAULT_SERVER = "http://marketing.kmelx.com";
 SERVER = function(hostname){
 
     return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
@@ -39,6 +39,12 @@ KME_API = {
     completed_courses : function(hostname){
         return SERVER(hostname) + "/api/courses/completed_courses";
     },
+    create_organization: function(hostname) {
+        return SERVER(hostname) + "/api/orgs/add/"
+    },
+    get_organization: function(hostname) {
+        return SERVER(hostname) + "/api/orgs/get/"
+    },
     available_courses : function(hostname){
         return SERVER(hostname) + "/api/courses/available_courses";
     },
@@ -47,13 +53,49 @@ KME_API = {
     },
     get_course_data_student : function(hostname){
         return SERVER(hostname) + "/api/courses/get_course_data_student";
+    },
+    get_tribe : function(hostname){
+        return SERVER(hostname) + "/api/tribes/get/";
+    },
+    get_topic : function(hostname){
+        return SERVER(hostname) + "/api/tribes/topic/";
+    },
+    send_post : function(hostname){
+        return SERVER(hostname) + "/api/tribes/send_post/";
+    },
+    take_test : function(hostname){
+        return SERVER(hostname) + "/api/content/take_test/content/module";
+    },
+    all_certifications: function(hostname) {
+        return SERVER(hostname)+ "/api/courses/get_courses_certification/"
+    },
+    info_certification: function(hostname) {
+        return SERVER(hostname)+ "/api/course/get_info_course_certification/"
+    },
+    fetch_exam : function(hostname){
+        return SERVER(hostname) + "/api/contents/json_fetch_exam/"
+    },
+    fetch_user_slide : function(hostname){
+        return SERVER(hostname) + "/api/contents/json_fetch_user_slide/";
+    },
+    finish_exam : function(hostname){
+        return SERVER(hostname) + "/api/contents/json_finish_exam/";
+    },
+    my_certifications : function(hostname){
+        return SERVER(hostname) + "/api/courses/get_user_certifications/";
     }
+
 }
     
 CLIENTS = {
     "marketinguniversity.co" : {
         folder : "existaya",
         server : "http://marketing.kmelx.com:5000"
+    },
+    "kmelx.com" : {
+        folder : "kmelx",
+        server : "http://kmelx.com:5000"
+
     },
     "localhost" :{
         folder : "existaya",

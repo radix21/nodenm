@@ -19,10 +19,11 @@
             <div class="row">
                 <script>
                     data = [];
+                    console.log("<%- courses.length %>");
                     <% for(var i=0; i < courses.length; i++){%>
                         <% course = courses[i]%>
                         data.push({
-                            name : "<%= course.name %>",
+                            name : "<%= course.name.trim() %>",
                             description : "<%= course.description %>",
                             duration : "<% course.duration %>" == '' ? null : "<%= course.duration %>" ,
                             image : "<%= course.image %>",
