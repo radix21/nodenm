@@ -1,10 +1,12 @@
 // START SETTINGS
 ejs = require("ejs");
+fileExists = require("file-exists");
+fs = require("fs");
 main = require("./apps/main");
 app = main.server();
 app.set('view engine', 'html');
-app.set('port', 4000);
-//app.set('port', (process.env.PORT || 5000));
+//app.set('port', 4000);
+app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.engine('html', ejs.renderFile);
 settings = require("./apps/settings.js");
@@ -36,3 +38,21 @@ tribes.set(app);
 
 // END KMELX APPS
 
+/**
+ * DEFAULT_URL
+ **/
+app.get("*", function(req, res){
+    folder = CLIENTS[req.hostname].folder;
+
+    fs.exists('views/pages/'+folder+req.path+".html", function(exists){
+        if(exists){
+
+            res.render("pages/"+folder+req.path+".html");
+        }else{
+        
+        res.render("pages/"+folder+"/404.html");
+        }
+
+    })
+    
+})
