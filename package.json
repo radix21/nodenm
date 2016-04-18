@@ -20,9 +20,8 @@
     "mongoose": "~4.4.11",
     "multer": "1.1.0",
     "url": "~0.11.0",
-    "crypto": "0.0.3",
-    "url": "~0.11.0",
-    "file-exists": "~1.0.0"
+    "file-exists": "~1.0.0",
+    "then-request": "~2.2.0"
   },
   "engines": {
     "node": "0.12.7"

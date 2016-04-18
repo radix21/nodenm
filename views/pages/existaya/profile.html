@@ -1,18 +1,25 @@
 <% include head.html %>
 <navbar></navbar>
+<script>
+    data = {};
+    data.name = `<%- user.info.first_name %>`;
+    data.last_name = `<%- user.info.last_name %>`;
+    data.jobtitle = `<%- user.info.jobtitle %>`;
+    data.avatar = (`<%- user.info.avatar %>`).split("?")[0].replace("80","120");
+</script>
+<script src="/existaya/controllers/profile.js"></script>
 <section class="col-xs-12">
     <div class="row">
         <div class="">
-
             <div class="col-xs-3 sidebar-perfil sidebar-add__montainR margin--b5">
                 <div class="row">
-                    <div class="col-xs-12 sidebar-perfil__top text-center">
-                        <img ng-src="{{dataUser.photo.split('?')[0].replace('80', '120')}}" alt="" class="img-responsive center-block img-circle">
+                    <div class="col-xs-12 sidebar-perfil__top text-center" ng-controller="profile">
+                        <img src="{{dataUser.avatar.split('?')[0].replace('80', '120')}}" alt="" class="img-responsive center-block img-circle">
                         <div>
                             <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name != ''">{{dataUser.name}} {{dataUser.lastname}}</p>
                             <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name == ''">{{dataUser.username}}</p>
                         </div>
-                        <p class="text text--gris text--lite text--sm margin--b2">{{dataUser["job-title"]}}</p>
+                        <p class="text text--gris text--lite text--sm margin--b2">{{dataUser.jobtitle}}</p>
                         <div class="alert alert--progress alert--bigger" role="alert">
 
                             <p class="text text--gris text--lite text-left">

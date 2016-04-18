@@ -8,7 +8,7 @@
                 <div class="col-xs-12 sidebar-bloqs2">
                     <div class="row sidebar-imageCurso">
                         <a ng-href="">
-                            <img src="{{coursePublic.image}}" class="img-course img-responsive" align="middle" ng-if="coursePublic.image != null">
+                            <img src="{{coursePublic.image.split('?')[0]}}" class="img-course img-responsive" align="middle" ng-if="coursePublic.image != null">
 
                             <img src="/existaya/images/defaultCourseCover.png" class="img-course img-responsive" align="middle" ng-if="coursePublic.image == null">
                         </a>
@@ -67,7 +67,7 @@
                 <div class="col-xs-12 sidebar-bloqs2">
                     <div class="row sidebar-imageCurso">
                         <a ng-href="">
-                            <img ng-src="{{course.image}}" class="img-course img-responsive">
+                            <img ng-src="{{course.image.split('?')[0]}}" class="img-course img-responsive">
                         </a>
                         <div class="sidebar-imageCurso__nombre">
                             <div class="col-md-4">
@@ -125,7 +125,7 @@
                 <div class="col-xs-12 sidebar-bloqs2">
                     <div class="row sidebar-imageCurso">
                         <a ng-href="">
-                            <img ng-src="{{course.image}}" class="img-course img-responsive">
+                            <img ng-src="{{course.image.split('?')[0]}}" class="img-course img-responsive">
                         </a>
                         <div class="sidebar-imageCurso__nombre">
                             <div class="col-md-4">
@@ -181,7 +181,7 @@
         <div class="col-xs-12 sidebar-bloqs2">
             <div class="row sidebar-imageCurso">
                 <a ng-href="">
-                    <img ng-src="{{course.image}}" class="img-course img-responsive">
+                    <img ng-src="{{course.image.split('?')[0]}}" class="img-course img-responsive">
                 </a>
                 <div class="sidebar-imageCurso__nombre">
                     <div class="col-md-4">
@@ -230,7 +230,7 @@
         <div class="col-xs-12 sidebar-bloqs2">
             <div class="row sidebar-imageCurso">
                 <a ng-href="">
-                    <img ng-src="{{course.image}}" class="img-course" ng-if="course.image != null">
+                    <img ng-src="{{course.image.split('?')[0]}}" class="img-course" ng-if="course.image != null">
                         <img src="/existaya/images/defaultCourseCover.png" alt="" ng-if="course.image == null" class="img-course img-responsive">
                 </a>
                 <div class="sidebar-imageCurso__nombre">

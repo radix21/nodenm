@@ -1,6 +1,7 @@
 // START SETTINGS
 ejs = require("ejs");
 fileExists = require("file-exists");
+request = require('then-request');
 fs = require("fs");
 main = require("./apps/main");
 app = main.server();

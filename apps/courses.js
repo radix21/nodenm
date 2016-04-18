@@ -28,6 +28,7 @@
  *
  * */
 getMyCourses = function(req, res){
+    str = "";
     if(req.session.user == undefined || !req.session.user.logged){
         response = {
             "status" : "failed",
@@ -35,6 +36,7 @@ getMyCourses = function(req, res){
         }
         res.send(response);
     }else{
+        /**
         str = "";
         data = http.get(KME_API.my_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username, function(response){
             response.on("error", function(err){
@@ -45,28 +47,26 @@ getMyCourses = function(req, res){
                 res.status(400).send(response);
             });
             response.on("data", function(data){
-                str = data;
+                str += data;
             });
             response.on("end", function(){
                 try{
-                    response =  JSON.parse(str);
-                    if(response.status == "ok"){
-
-                        res.send(response);
-                    }else{
-                        res.status(400).send(response);
-                    }
+                    res.send(JSON.parse(str));
                 }catch(err){
                     response = {
                         "status" : "error",
-                "message" : "Server Error - check endpoint server"
+                        "message" : "Server Error - check endpoint server"
                     }
-                    res.status(500).send(response)
+                    res.send(str);
                 }
             })
         });
 
-        data.end();
+        data.end();*/
+        request('GET', KME_API.my_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username).done(function (response) {
+            res.send(JSON.parse(response.getBody()))
+        });
+
     }
 
 };
@@ -93,9 +93,9 @@ getMyCourses = function(req, res){
  * */
 
 getPublicCourses = function(req, res){
-    url = KME_API.public_courses(req.hostname);
+    url_public = KME_API.public_courses(req.hostname);
     str = "";
-    data = http.get(url, function(response){
+    data = http.get(url_public, function(response){
         response.on("error", function(err){
             res.status(500).send(err);
         });
@@ -150,9 +150,9 @@ getPublicCourses = function(req, res){
  * */
 
 getAllCourses = function(req, res){
-    url = KME_API.all_courses(req.hostname);
+    url_all = KME_API.all_courses(req.hostname);
     str = "";
-    data = http.get(url, function(response){
+    data = http.get(url_all, function(response){
         response.on("error", function(err){
             res.status(500).send(err);
         });
@@ -162,7 +162,7 @@ getAllCourses = function(req, res){
 
         response.on("end", function(){
             try{
-
+                console.log(str);
                 res.send(JSON.parse(str));
             }catch(err){
                 response = {
@@ -195,9 +195,9 @@ getAllCourses = function(req, res){
 
 allCoursesViews = function(req, res){
 
-    url = KME_API.all_courses(req.hostname);
+    url_allview = KME_API.all_courses(req.hostname);
     str = "";
-    data = http.get(url, function(response){
+    data = http.get(url_allview, function(response){
         response.on("error", function(err){
             res.status(500).send(err);
         });
@@ -257,6 +257,7 @@ courseDetails = function(req, res){
         response.on("end", function(){
             try{
                 course = JSON.parse(course);
+                console.log(course);
                 res.render(client_folder(req.hostname)+"courses/courseDetails",{
                     user : client_session(req),
                     course : course,
@@ -295,9 +296,9 @@ courseDetails = function(req, res){
  * */
 
 related_courses = function(req, res){
-    url = KME_API.related_courses(req.hostname) + "/" + req.params.slug;
+    url_related = KME_API.related_courses(req.hostname) + "/" + req.params.slug;
     str = "";
-    data = http.get(url, function(response){
+    data = http.get(url_related, function(response){
         response.on("error", function(err){
             res.status(500).send(err);
         });
@@ -345,6 +346,7 @@ related_courses = function(req, res){
  * */
 
 completed_courses = function(req, res){
+    /**
     if(req.session.user == undefined || !req.session.user.logged){
         response = {
             "status" : "failed",
@@ -352,40 +354,46 @@ completed_courses = function(req, res){
         }
         res.send(response);
     }else{
+
         str = "";
-        data = http.get(KME_API.completed_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username, function(response){
-            response.on("error", function(err){
+        url_completed = (KME_API.completed_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username);
+        console.log(url_completed);
+        http.get(url_completed, function(completed_response){
+            completed_response.on("error", function(err){
                 response = {
                     "status" : "failed",
-                "message" : err
+                    "message" : err
                 }
                 res.status(400).send(response);
             });
-            response.on("data", function(data){
-                str = data;
+            completed_response.on("data", function(data){
+                str += data;
             });
-            response.on("end", function(){
+            completed_response.on("end", function(){
                 try{
-                    response =  JSON.parse(str);
-
-                    if(response.status == "ok"){
-
-                        res.send(response);
-                    }else{
-                        res.status(400).send(response);
-                    }
+                    console.log(url_completed);
+                    console.log("completed");
+                    res.send(str);
                 }catch(err){
+                    console.log(err);
+                    console.log(url_completed);
                     response = {
                         "status" : "error",
                         "message" : "Server Error - check endpoint server"
                     }
-                    res.status(500).send(response)
+                    res.status(500).send(str)
                 }
             })
         });
 
         data.end();
-    }
+    }*/
+
+    url_completed = (KME_API.completed_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username);
+
+    request('GET', url_completed).done(function (response) {
+        res.send(response.getBody())
+    });
 
 };
 /**
@@ -535,8 +543,8 @@ course_data_student = function(req, res){
 //    res.send("TODO: load course data student data")
     if(req.session.user != undefined && req.session.user.logged == true){
     str = "";
-    url = KME_API.get_course_data_student(req.hostname) + "/"+req.params.slug+"?user="+req.session.user.info.username+"&token="+req.session.user.token;
-    data = http.get(url, function(response){
+    url_data_student = KME_API.get_course_data_student(req.hostname) + "/"+req.params.slug+"?user="+req.session.user.info.username+"&token="+req.session.user.token;
+    data = http.get(url_data_student, function(response){
         response.on("error", function(err){
         })
         response.on("data", function(data){
@@ -579,8 +587,8 @@ courseView = function(req, res){
         res.redirect("/");
     }else{
         str = "";
-        url = KME_API.get_course_data_student(req.hostname) + "/"+req.params.slug+"?user="+req.session.user.info.username+"&token="+req.session.user.token;
-        data = http.get(url, function(response){
+        url_course_view = KME_API.get_course_data_student(req.hostname) + "/"+req.params.slug+"?user="+req.session.user.info.username+"&token="+req.session.user.token;
+        data = http.get(url_course_view, function(response){
             response.on("error", function(err){
             })
             response.on("data", function(data){
@@ -618,13 +626,15 @@ courseView = function(req, res){
  **/
 my_certifications = function(req, res){
     str = "";
-    url = KME_API.my_certifications(req.hostname) + "?user="+req.session.user.info.username+"&token="+req.session.user.token;
-    data= http.get(url, function(response){
+
+    url_cert = KME_API.my_certifications(req.hostname) + "?user="+req.session.user.info.username+"&token="+req.session.user.token;
+    /**
+    data= http.get(url_cert, function(response){
         response.on("error", function(err){
             res.send(err);
         });
         response.on("data", function(data){
-            str = data;
+            str += data;
         });
         response.on("end", function(){
             res.send(str);
@@ -632,5 +642,8 @@ my_certifications = function(req, res){
     
     }).on("error", function(err){
         res.send(err);
-    })
+    })*/
+    request('GET', url_cert).done(function (response) {
+        res.send(JSON.parse(response.getBody()))
+    });
 }

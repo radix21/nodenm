@@ -6,15 +6,16 @@
     user.username = "<%= user.info != undefined ? user.info.username : '' %>";
     user.first_name = "<%= user.info != undefined ? user.info.first_name : '' %>";
     user.last_name = "<%= user.info != undefined ? user.info.last_name : '' %>";
+    console.log("<%- slug %>");
     slug = "<%= slug %>";
     data = {};
     data.name = "<%= course.name %>";
     data.description = "<%= course.description %>";
     data.category = "<%= course.category %>";
     data.type = "<%= course.type %>";
-    data.about = "<%- course.about %>";
-    data.duration = "<%- course.duration %>";
-    data.target = "<%- course.target %>";
+    data.about = `<%- course.about %>`;
+    data.duration = `<%- course.duration %>`;
+    data.target = `<%- course.target %>`;
     data.sessions = [];
     data.skills = [];
     <% for(i in course.skills){%>
@@ -54,7 +55,7 @@
             description : "<%= module.description %>"
         })
     <%}%>
-    data.goals = "<%- course.goals %>";
+    data.goals = `<%- course.goals %>`;
     data.tutors = [];
     <% for(i in course.tutors){%>
         <% tutor = course.tutors[i]; %>
@@ -63,8 +64,8 @@
             pk : <%- tutor.pk %>,
             first_name : "<%= tutor.first_name %>",
             last_name : "<%= tutor.last_name %>",
-            avatar : "<%= tutor.avatar %>",
-            about : "<%= tutor.about %>",
+            avatar : ("<%= tutor.avatar %>").split("?")[0],
+            about : `<%= tutor.about %>`,
             jobtitle : "<%= tutor.jobtitle %>"
                    
         })
@@ -107,7 +108,7 @@
             <%}%>
         </div>
         <div class="col-xs-5">
-            <img ng-src="{{dataDetails.image}}" alt="" class="img-responsive">
+            <img ng-src="{{dataDetails.image.split('?')[0]}}" alt="" class="img-responsive">
         </div>
     </div>
 </section>

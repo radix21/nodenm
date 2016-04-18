@@ -98,7 +98,7 @@ CLIENTS = {
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com:5000"
+        server : "http://marketing.kmelx.com"
     },
     "safe-beyond-13324.herokuapp.com" : {
         folder: "existaya",

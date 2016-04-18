@@ -29,7 +29,17 @@
                             image : "<%= course.image %>",
                             score : <%= course.score %>,
                             slug : "<%= course.slug %>",
+                            tutors : []
                         })
+                        <% for( t in course.tutors){%>
+                            <% tutor = course.tutors[t];%>
+                            data[<%- i %>].tutors.push({
+                                "first_name" : `<%- tutor.first_name %>`,
+                                "last_name" : `<%- tutor.last_name %>`,
+                                "avatar" : `<%- tutor.avatar %>` 
+                            })
+                        <%}%>
+
                     <%}%>
 
                 </script>
