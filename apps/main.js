@@ -1,5 +1,5 @@
 express = require("express");
-DEFAULT_SERVER = "http://marketing.kmelx.com:5000";
+DEFAULT_SERVER = "http://marketing.kmelx.com";
 SERVER = function(hostname){
 
     return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
