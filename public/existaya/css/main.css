@@ -1196,3 +1196,11 @@ a:focus {
 .nav-perfil > li > a:hover,.nav-perfil > li > a:active,.nav-perfil > li > a:focus{background:none;border:none}
 .nav-perfil > li.active > a{background:none;border:none;border-bottom:3px solid #6e8e2d;color:#002b62;font-weight:700;outline:none;}
 .nav-perfil > li.active > a:hover,.nav-perfil > li.active > a:active,.nav-perfil > li.active > a:focus{background:none !important;border:none;border-bottom:3px solid #6e8e2d !important;color:#002b62 !important}
+.certification{
+    padding: 0 !important;
+}
+.certification>a.active{
+
+        background: #3874b8;
+    color: white;
+}
