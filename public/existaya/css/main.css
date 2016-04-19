@@ -1205,3 +1205,6 @@ a:focus {
         background: #3874b8;
     color: white;
 }
+.avatar_navbar{
+    width: 3em;
+}
