@@ -1206,5 +1206,5 @@ a:focus {
     color: white;
 }
 .avatar_navbar{
-    width: 3em;
+    width: 3em !important;
 }
