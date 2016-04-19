@@ -2,47 +2,53 @@
     <div class="alert-info alert text-center"ng-if="listCourses.length ==0">
         No hay cursos que mostrar.
     </div>
-    <div class="allPublic">
-        <div class="container" ng-repeat="row in listCourses | limitTo:limit">
-            <div class="col-lg-3 col-xs-6 margin--t1" ng-repeat="coursePublic in row">
-                <div class="col-xs-12 sidebar-bloqs2">
-                    <div class="row sidebar-imageCurso">
-                        <a ng-href="">
-                            <img src="{{coursePublic.image.split('?')[0]}}" class="img-course img-responsive" align="middle" ng-if="coursePublic.image != null">
 
-                            <img src="/existaya/images/defaultCourseCover.png" class="img-course img-responsive" align="middle" ng-if="coursePublic.image == null">
-                        </a>
+    <div class="container" ng-repeat="row in listCourses | limitTo:limit">
+        <div class="col-lg-3 col-xs-6 margin--t1" ng-repeat="course in row">
+            <div class="col-xs-12 sidebar-bloqs2">
+                <div class="row sidebar-imageCurso">
+                    <a ng-href="">
+                        <img ng-src="{{course.image.split('?')[0]}}" class="img-course img-responsive">
+                    </a>
+                    <div class="col-xs-12 sidebar-imageCurso__nombre">
+                        <img ng-if="course.tutors[0].avatar != null" ng-src="{{course.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
+                        <img ng-if="course.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
 
-                        <div class="col-xs-12 sidebar-imageCurso__nombre">
-                            <img ng-if="coursePublic.tutors[0].avatar != null" ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
-                            <img ng-if="coursePublic.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
-                            <span class="text text--blanco">
-                                {{coursePublic.tutors[0].first_name}} {{coursePublic.tutors[0].last_name}}
-                            </span>
-                        </div>
+                        <span class="text text--blanco">
 
-                        <span class="fa fa-star-o" ng-if="coursePublic.score < 5"></span>
-                        <span class="fa fa-star-o" ng-if="coursePublic.score < 4"></span>
-                        <span class="fa fa-star-o" ng-if="coursePublic.score < 3"></span>
-                        <span class="fa fa-star-o" ng-if="coursePublic.score < 2"></span>
-                        <span class="fa fa-star-o" ng-if="coursePublic.score < 1 || coursePublic.score == 0"></span>
+                            {{course.tutors[0].first_name}} {{course.tutors[0].last_name}}
+                        </span>
+                    </div>
+
+                    <div class="col-xs-12 sidebar-imageCurso__qualy">
+                        <span class="fa fa-star" ng-if="course.score > 0"></span>
+                        <span class="fa fa-star" ng-if="course.score > 1"></span>
+                        <span class="fa fa-star" ng-if="course.score > 2"></span>
+                        <span class="fa fa-star" ng-if="course.score > 3"></span>
+                        <span class="fa fa-star" ng-if="course.score == 5"></span>
+                        <span class="fa fa-star-o" ng-if="course.score < 5"></span>
+                        <span class="fa fa-star-o" ng-if="course.score < 4"></span>
+                        <span class="fa fa-star-o" ng-if="course.score < 3"></span>
+                        <span class="fa fa-star-o" ng-if="course.score < 2"></span>
+                        <span class="fa fa-star-o" ng-if="course.score < 1 || course.score == 0"></span>
+
+
                     </div>
                 </div>
                 <h3 class="text text--gris titleCourse text--md text--bold margin--t2">
-                    {{coursePublic.name | limitTo:34}}
+                    {{course.name | limitTo:34}}
                 </h3>
                 <p class="text text--sm text--gris_cla margin--t1 textDescription">
 
-                {{ coursePublic.description | limitTo:127}}...
+                {{ course.description | limitTo:127}}...
 
                 </p>
                 <p class="text text--azul_cla timeSpace text--lite margin--t1">
-                <span class="fa fa-clock-o"></span><span ng-if="coursePublic.duration != null"> {{coursePublic.duration}} Horas</span>
-                <span ng-if="coursePubloic.duration == null"> No hay un tiempo de duración asignado al curso.</span>
+                <span class="fa fa-clock-o"></span><span ng-if="course.duration != null"> {{course.duration}} Horas</span>
+                <span ng-if="course.duration == null"> No hay un tiempo de duración asignado al curso.</span>
                 </p>
-                <a  ng-href="/course/{{coursePublic.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
+                <a  ng-href="/course/{{course.slug}}/details" class="btn btn-gosh btn-gosh--gris btn-lg margin--t05" ng-click="scrolltop()"> MÁS INFORMACIÓN </a>
             </div>
-
         </div>
     </div>
 </div>
