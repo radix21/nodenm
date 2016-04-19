@@ -93,9 +93,9 @@ KME_API = {
 }
     
 CLIENTS = {
-    "marketinguniversity.co" : {
+    "www.marketinguniversity.co" : {
         folder : "existaya",
-        server : "http://marketing.kmelx.com:5000"
+        server : "http://marketing.kmelx.com"
     },
     "kmelx.com" : {
         folder : "kmelx",
