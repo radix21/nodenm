@@ -74,7 +74,7 @@
             pk : <%- tutor.pk %>,
             first_name : "<%= tutor.first_name %>",
             last_name : "<%= tutor.last_name %>",
-            avatar : ("<%= tutor.avatar %>").split("?")[0],
+            avatar : `<%- tutor.avatar%>` == ""   ? null :  ("<%= tutor.avatar %>").split("?")[0],
             about : `<%= tutor.about %>`,
             jobtitle : "<%= tutor.jobtitle %>"
                    
@@ -178,7 +178,8 @@
             </h3>
             <div class="row" ng-repeat="tutorData in dataDetails.tutors">
                 <div class="col-xs-2 vertical-middle">
-                    <img ng-src="{{tutorData.avatar}}" alt="" class="img-circle sidebar-imageCurso__image img-responsive avatar--tutor">
+                    <img ng-src="{{tutorData.avatar}}" alt="" class="img-circle sidebar-imageCurso__image img-responsive avatar--tutor" ng-if="tutorData.avatar != null">
+                    <img src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image img-responsive avatar--tutor" ng-if="tutorData.avatar == null">
                 </div>
                 <div class="col-xs-10 vertical-middle">
                     <p class="text text--azul text--xbold text--md margin--t05 margin--b0">
