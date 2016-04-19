@@ -53,7 +53,11 @@ app.factory("auth", ["$rootScope","$location",function($rootScope, $location){
                 .success(function(response){
                     status  = response.status;
                     if(status == "ok"){
-                        location.href = "/profile";
+                        if(location.pathname == "/"){
+                            location.href = "/profile";
+                        }else{
+                            location.reload();
+                        }
                     }
                 });
             /**

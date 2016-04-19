@@ -121,6 +121,7 @@ login = function(req, res){
  * */
 
 logout = function(req, res){
+    /**
     data = http.get(KME_API.logout(req.hostname), function(response){
         str = "";
         response.on("data", function(data){
@@ -151,7 +152,11 @@ logout = function(req, res){
         })
     }).on("error", function(err){
         console.log(err);
-    });;
+    });;*/
+    req.session.destroy();
+    res.send({
+        "status" : "ok"
+    })
 }
 
 /**

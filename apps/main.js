@@ -86,6 +86,9 @@ KME_API = {
     inscribe_in_certification: function(hostname) {
         return SERVER(hostname)+ "/api/course/inscribe_in_certification/"
     },
+    inscribe_user : function(hostname){
+        return SERVER(hostname) + "/api/courses/inscribe/";
+    }
 
 }
     
@@ -101,7 +104,7 @@ CLIENTS = {
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com"
+        server : "http://marketing.kmelx.com:5000"
     },
     "safe-beyond-13324.herokuapp.com" : {
         folder: "existaya",

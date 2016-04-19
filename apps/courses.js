@@ -248,7 +248,12 @@ allCoursesViews = function(req, res){
  **/
 courseDetails = function(req, res){
     course = "";
-    data = http.get(KME_API.course_details(req.hostname)+"/"+req.params.slug, function(response){
+    if(req.session.user != undefined && req.session.user.token != undefined){
+        url = KME_API.course_details(req.hostname)+"/"+req.params.slug+"?username="+req.session.user.info.username;
+    }else{
+        url = KME_API.course_details(req.hostname)+"/"+req.params.slug;
+    }
+    data = http.get(url, function(response){
         response.on("error", function(err){
         })
         response.on("data", function(data){
@@ -645,5 +650,17 @@ my_certifications = function(req, res){
     })*/
     request('GET', url_cert).done(function (response) {
         res.send(JSON.parse(response.getBody()))
+    });
+}
+
+/**
+ *  Inscribe User
+ **/
+inscribe_on_course = function(req, res){
+
+    url = KME_API.inscribe_user(req.hostname)+req.params.user+"/?slug="+req.params.slug+"&token="+req.session.user.token;
+    console.log(url);
+    request("GET", url).done(function(response){
+        res.send(response.getBody());
     });
 }

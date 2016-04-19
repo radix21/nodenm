@@ -21,11 +21,18 @@
                     </div>
                     <div class="col-xs-6">
                         <p class="text text--azul_osc text--md text-right">
-                        <span class="fa fa-star" ng-if="item.score > 0"></span>
-                        <span class="fa fa-star" ng-if="item.score > 1"></span>
+                            <span class="fa fa-star" ng-if="item.score > 0"></span>
+                            <span class="fa fa-star" ng-if="item.score > 1"></span>
                             <span class="fa fa-star" ng-if="item.score > 2" ></span>
                             <span class="fa fa-star" ng-if="item.score > 3"></span>
                             <span class="fa fa-star" ng-if="item.score == 5" ></span>
+
+                            <span class="fa fa-star-o" ng-if="item.score < 1"></span>
+                            <span class="fa fa-star-o" ng-if="item.score < 2"></span>
+                            <span class="fa fa-star-o" ng-if="item.score < 3" ></span>
+                            <span class="fa fa-star-o" ng-if="item.score < 4"></span>
+                            <span class="fa fa-star-o" ng-if="item.score < 5" ></span>
+
 
                         </p>
                     </div>

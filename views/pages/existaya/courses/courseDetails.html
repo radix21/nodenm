@@ -6,7 +6,6 @@
     user.username = "<%= user.info != undefined ? user.info.username : '' %>";
     user.first_name = "<%= user.info != undefined ? user.info.first_name : '' %>";
     user.last_name = "<%= user.info != undefined ? user.info.last_name : '' %>";
-    console.log("<%- slug %>");
     slug = "<%= slug %>";
     data = {};
     data.name = "<%= course.name %>";
@@ -18,6 +17,17 @@
     data.target = `<%- course.target %>`;
     data.sessions = [];
     data.skills = [];
+    <% if( course.ubs != null ){%>
+        data.ubs = {
+            pk : <%- course.ubs.pk %>,
+            session : <%- course.ubs.session %>,
+            initial_date : `<%- course.ubs.initial_date %>`,
+            final_date : `<% course.ubs.final_date %>`
+        }
+
+    <%}else{%>
+        data.ubs = null;
+    <%}%>
     <% for(i in course.skills){%>
         <% skill = course.skills[i];%>
         data.skills.push({
@@ -94,17 +104,31 @@
     <div class="container sidebar-section">
         <div class="col-xs-7">
             <span class="text text--azul_osc text--lg text--xbold text-space1 margin--t1">
-                <%= course.type %>
+                {{ dataDetails.type }}
             </span></br>
             <h1 class="courseDetailTitle text text--azul_mid text--xxxxlg text--xbold margin--b0 text-space1 text--upper">
                {{dataDetails.name}}
             </h1>
             <p class=" courseDetailDescription text text--md text--gris text-space1 margin--t1">
-                <% description = course.description.substring(0,200) %>
-                <%= description %>
+                {{ dataDetails.description | limitTo:200}}
             </p>
-            <% if(user.logged){%>
-            <button-course sessions="{{ dataDetails.sessions }}" uuid="{{ slug }}" username="{{dataUser.username}}" ng-if="authenticated"></button-course>
+            <% if(user.token != undefined ){%>
+                <% if(course.ubs!= null){%>  
+                    <a href="/course/<%- slug%>" class="btn btn--academy2 btn-verde btn-xlg text--upper margin--t1 margin--b1">
+                            Ingresar
+                        </a>
+                    <%}else{%>
+                    <a href="#" class="btn btn--academy2 btn-rojo btn-xlg text--upper margin--t1 margin--b1 inscribeUser" slug="<%- slug%>" user="<%- user.info.username %>">
+                            Inscríbete
+                        </a>
+                    <%}%>
+
+            <%}else{%>
+
+                <%- user.token %>
+                <a href="#" class="btn btn--academy2 btn-rojo btn-xlg text--upper margin--t1 margin--b1" data-toggle="modal" data-target="#js-ingreso">
+                    Ingresar
+                </a>
             <%}%>
         </div>
         <div class="col-xs-5">
@@ -211,16 +235,27 @@
             <p class="text text--gris text--lite">
                <prerequisites-list data="dataDetails.prerequisites"></prerequisites-list>
             </p>
+            <% if(user.token != undefined ){%>
+                <% if(course.ubs!= null){%>  
+                    <a href="/course/<%- slug%>" class="btn btn--academy2 btn-verde  text--upper">
+                            Ingresar
+                        </a>
+                    <%}else{%>
 
-            <a href="" class="btn btn-verde btn-xlg margin--t1"  ng-if="showRegisterButton" ng-click="inscribeUserOnCOurse()">
-                 Inscríbete
-            </a>
-            <a href="{{ url }}" class="btn btn-verde btn-xlg margin--t1"  ng-if="showGetInButton">
-                 Ingresar
-            </a>
-            <a class="btn btn--academy btn-verde btn--right btn-lg btn--ingresar ng-scope" data-toggle="modal" data-target="#js-ingreso" ng-if="!authenticated">INGRESAR</a>
+                    <a href="#" class="btn btn--academy2 btn-rojo btn-xlg text--upper margin--t1 margin--b1 inscribeUser" slug="<%- slug%>" user="<%- user.info.username %>">
+                            Inscríbete
+                        </a>
+                    <%}%>
 
-            <h3 class="text text--azul_osc text--lg text--xbold text-space1 margin--t1">
+            <%}else{%>
+
+                <%- user.token %>
+                <a href="#" class="btn btn--academy2 btn-rojo text--upper" data-toggle="modal" data-target="#js-ingreso">
+                    Ingresar
+                </a>
+            <%}%>
+
+        <h3 class="text text--azul_osc text--lg text--xbold text-space1 margin--t1">
                 Lo que dice la gente
             </h3>
             <!--<div ng-controller="comments">
@@ -286,31 +321,29 @@
     </div>
 </section>
 </div>
-<div class="col-xs-12 sidebar-footer__top sidebar-footer__top--internas">
-    <div class="container">
-        <p class="text text--lite text--md text-center">
-        Mantente al día de nuestros nuevos cursos, suscribete a nuestro newsletter
-        </p>
-        <div class="clearfix"></div>
-        <div class="col-lg-10 col-lg-offset-1 col-xs-12 margin--t1">
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg" id="exampleInputEmail1" placeholder="Nombre">
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-group">
-                        <input type="email" class="form-control input-lg" id="exampleInputEmail1" placeholder="Correo Electrónico">
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <a href="#" class="btn btn-azul btn-block btn-lg">
-                        <span class="text--upper">SUSCRIBIRME</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+buttons =  document.querySelectorAll(".inscribeUser");
+for(b in buttons){
+    button = buttons[b];
+    button.onclick = function(event){
+        xhr = new XMLHttpRequest();
+        user = event.target.attributes.user.nodeValue;
+        slug = event.target.attributes.slug.nodeValue;
+        xhr.open("GET","/api/course/inscribe/"+user+"/"+slug);
+        xhr.onreadystatechange = function(){
+            response = xhr.response;
+            response = JSON.parse(response);
+            console.log(typeof(response));
+            if(response.status == "ok"){
+                location.reload();
+            }
+        }
+        xhr.send();
+    }
+}
+/**addEventListener("click", function( event ) {
+    // display the current click count inside the clicked div
+    event.target.innerHTML = "click count: " + event.detail;       
+}, false);*/
+</script>
 <% include ../footer.html %>

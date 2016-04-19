@@ -345,7 +345,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .nav-topper{background:#fff;border-bottom:2px solid #d6d6d6;padding-top:1em;padding-bottom:1em;}
 .nav-topper__iconMenu{background:#accce6;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;color:#fff;font-size:1.4em;display:block;height:1.7em;padding:.25em .45em;text-align:center;width:1.8em;}
 .nav-topper__iconMenu:hover,.nav-topper__iconMenu:active,.nav-topper__iconMenu:focus{text-decoration:none;color:#fff}
-.nav-topper__avatarUser img{margin-top:.5em;height:auto;width:3.5em}
+.nav-topper__avatarUser img{margin-top:.5em;height:auto;width:1.5em}
 .nav-topper__previewReturn{padding-left:5em}
 .nav-topper__btnReturn{position:absolute;top:50%;left:0;margin-top:-1.2em}
 
@@ -724,7 +724,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 
 .sidebar-footer__top{background:#accce6;padding-bottom:1em;padding-top:1em;}
 .sidebar-footer__top--internas{background:#fff}
-.sidebar-footer__bottom{background:#dadada;padding-bottom:1em;padding-top:1em; margin-top:3em;}
+.sidebar-footer__bottom{background:#dadada;padding-bottom:1em;padding-top:1em;}
 .sidebar-footer__bottom:after{background:url("../images/footer-left.png") 0 0;top:-106px;content:'';display:block;height:213px;position:absolute;left:2em;width:181px;z-index:1}
 .sidebar-footer__bottom:before{background:url("../images/footer-right.png") 0 0;top:-176px;content:'';display:block;height:213px;position:absolute;right:2em;width:181px;z-index:1}
 .sidebar-footer__bottom2{background:#dadada;padding-bottom:1em;padding-top:1em;margin-top:5em}

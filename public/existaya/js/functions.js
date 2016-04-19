@@ -1,5 +1,13 @@
+function logout(){
+    xhr = new XMLHttpRequest();
+    xhr.open("GET", "/api/account/logout/");
+    xhr.onreadystatechange = function(){
+        location.reload();
+    }
+    xhr.send();
+}
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length, yValue, randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
