@@ -82,7 +82,10 @@ KME_API = {
     },
     my_certifications : function(hostname){
         return SERVER(hostname) + "/api/courses/get_user_certifications/";
-    }
+    },
+    inscribe_in_certification: function(hostname) {
+        return SERVER(hostname)+ "/api/course/inscribe_in_certification/"
+    },
 
 }
     
