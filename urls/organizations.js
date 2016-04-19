@@ -4,9 +4,9 @@ var organizations = require('../apps/organizations'),
 
 module.exports = {
     set: function(app) {
-        app.get('/organization/add', addOrganization);
-        app.post('/api/organization/add', upload, createOrganization);
-        app.get('/api/organization/validate_name', validateName);
-        app.get('/api/organization/get/:url', getOrganization);
+        app.post('/api/orgs/add', upload, createOrganization);
+        app.get('/api/orgs/validate', validateName);
+        app.get('/api/orgs/get/:url', getOrganization);
+        app.post('/api/orgs/delete/:url', deleteOrganization);
     }
 }
