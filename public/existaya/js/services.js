@@ -51,6 +51,8 @@ app.factory("auth", ["$rootScope","$location",function($rootScope, $location){
         ajax : function($http, $scope, username, userpassword, email){
             $http.post('/api/account/login',{username : username, password:userpassword})
                 .success(function(response){
+
+                    $("#errorLogin").html("");
                     status  = response.status;
                     if(status == "ok"){
                         if(location.pathname == "/"){
@@ -58,6 +60,8 @@ app.factory("auth", ["$rootScope","$location",function($rootScope, $location){
                         }else{
                             location.reload();
                         }
+                    }else{
+                        $("#errorLogin").html("Nombre de usuario y/o contraseña incorrectos");
                     }
                 });
             /**

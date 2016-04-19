@@ -185,7 +185,7 @@ percentage_done: <%= submodule.percentage_done  %>,
                         "content_description": `<%= content.content_description%>`, 
                         "content_button_info": {
                         "show_message_effectivity": <%= content.content_button_info.show_message_effectivity %>, 
-                        "exam_score": `<%= content.content_button_info.exam_score %>`, 
+                        "exam_score": <%- content.content_button_info.exam_score %>, 
                         "num_attempts": parseInt("0"+`<%= content.content_button_info.num_attempts %>`), 
                         "passed": `<%= content.content_button_info.passed %>`, 
                         "available":  <%= content.content_button_info.available %>, 
@@ -223,9 +223,7 @@ percentage_done: <%= submodule.percentage_done  %>,
             <%}%>
 
             <% for(val in module.contents){%>
-
                 <% content = module.contents[val];%>
-
                     data.modules[<%- m %>].contents.push({
                             "content_name" : `<%= content.content_name %>`, 
                             "content_description": `<%= content.content_description%>`, 
