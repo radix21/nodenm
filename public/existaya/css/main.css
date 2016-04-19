@@ -704,7 +704,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .sidebar-section{padding-bottom:2em;padding-top:2em}
 .sidebar-section--content{display: block;z-index: 999;position: relative;min-height: 20em;}
 .sidebar-section2{padding-bottom:2em;padding-top:10em;}
-.sidebar-section2--cursos{padding-top:0}
+.sidebar-section2--cursos{padding-top:0;z-index:999 !important;}
 .sidebar-section3{padding-bottom:2em;padding-top:4em}
 .sidebar-section4{padding-bottom:2em;padding-top:5em}
 .sidebar-imageCurso{position:relative;}
