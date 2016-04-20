@@ -1210,5 +1210,6 @@ a:focus {
 }
 .moduleTab>a{
     height: 80px;
-    text-align: center;
+    padding-top: 10% !important;
+    text-align: center !important;
 }
