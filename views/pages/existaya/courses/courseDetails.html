@@ -114,7 +114,7 @@
             </p>
             <% if(user.token != undefined ){%>
                 <% if(course.ubs!= null){%>  
-                    <a href="/course/<%- slug%>" class="btn btn--academy2 btn-verde btn-xlg text--upper margin--t1 margin--b1">
+                    <a href="/course/<%- slug%>" class="btn btn--academy2 btn-verde btn-xlg text--upper margin--t1 margin--b1" ng-if="!hideButton">
                             Ingresar
                         </a>
                     <%}else{%>
@@ -238,7 +238,7 @@
             </p>
             <% if(user.token != undefined ){%>
                 <% if(course.ubs!= null){%>  
-                    <a href="/course/<%- slug%>" class="btn btn--academy2 btn-verde  text--upper">
+                    <a href="/course/<%- slug%>" class="btn btn--academy2 btn-verde  text--upper" ng-if="!hideButton">
                             Ingresar
                         </a>
                     <%}else{%>

@@ -23,6 +23,13 @@ app.controller("courseDetails", ["$http", "$scope", "$location", "$rootScope","c
 	var dataSessionInitial,
 		dataSessionFinal;
     $scope.dataDetails = data;
+    if(data.ubs != null){
+        date = new Date(data.ubs.initial_date);
+        now = new Date();
+        if(date > now){
+            $scope.hideButton = true;
+        }
+    }
     /**
 	var url = config.SERVICE_SERVER + '/api/courses/get/?callback=JSON_CALLBACK&slug=' +slug;
 		$http.jsonp(encodeURI(url)).success(function(response){
