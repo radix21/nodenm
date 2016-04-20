@@ -42,11 +42,17 @@ KME_API = {
     create_organization: function(hostname) {
         return SERVER(hostname) + "/api/orgs/add/"
     },
+    edit_organization: function(hostname) {
+        return SERVER(hostname) + "/api/orgs/edit/"
+    },
     get_organization: function(hostname) {
         return SERVER(hostname) + "/api/orgs/get/"
     },
     delete_organization: function(hostname) {
         return SERVER(hostname) + "/api/orgs/delete/"
+    },
+    set_status_organization: function(hostname) {
+        return SERVER(hostname) + "/api/orgs/state/"
     },
     available_courses : function(hostname){
         return SERVER(hostname) + "/api/courses/available_courses";

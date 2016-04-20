@@ -4,9 +4,11 @@ var organizations = require('../apps/organizations'),
 
 module.exports = {
     set: function(app) {
-        app.post('/api/orgs/add', upload, createOrganization);
-        app.get('/api/orgs/validate', validateName);
-        app.get('/api/orgs/get/:url', getOrganization);
-        app.post('/api/orgs/delete/:url', deleteOrganization);
+        app.post('/api/orgs/add', upload, organizations.createOrganization);
+        app.get('/api/orgs/validate', organizations.validateName);
+        app.get('/api/orgs/get/:url', organizations.getOrganization);
+        app.post('/api/orgs/edit/:url', upload, organizations.editOrganization);
+        app.post('/api/orgs/delete/:url', organizations.deleteOrganization);
+        app.post('/api/orgs/state/:url', organizations.changeStateOrganization);
     }
 }
