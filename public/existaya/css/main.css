@@ -1208,3 +1208,6 @@ a:focus {
 .avatar_navbar{
     width: 3em !important;
 }
+.moduleTab{
+    height: 132px;
+}
