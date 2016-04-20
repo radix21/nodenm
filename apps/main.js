@@ -88,6 +88,9 @@ KME_API = {
     },
     inscribe_user : function(hostname){
         return SERVER(hostname) + "/api/courses/inscribe/";
+    },
+    user_exists : function(hostname){
+        return SERVER(hostname) + "/api/exists/";
     }
 
 }
@@ -104,7 +107,7 @@ CLIENTS = {
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com"
+        server : "http://marketing.kmelx.com:5000"
     },
     "safe-beyond-13324.herokuapp.com" : {
         folder: "existaya",

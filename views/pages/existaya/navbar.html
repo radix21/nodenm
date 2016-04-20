@@ -154,8 +154,7 @@
                         </ul>
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="registro">
-
-
+                                <span class="alert alert-danger" ng-if="showError">{{ message }}</span>
                                 <a href="#" class="btn btn-facebook btn-block" ng-click="FBLogin(true)">
                                     <span class="icon-facebook margin--r2"></span> 
                                     Regístrate con facebook
@@ -165,9 +164,9 @@
                                 </p>
                                 <form>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control--form" placeholder="Nombre Completo" ng-model="userNameNew" required>
-                                        <input type="email" class="form-control form-control--form" placeholder="Correo Electrónico" ng-model="userEmail" required>
-                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="userPasswordNew" required>
+                                        <input type="text" class="form-control form-control--form" placeholder="Nombre Completo" ng-model="username" required>
+                                        <input type="email" class="form-control form-control--form" placeholder="Correo Electrónico" ng-model="email" required>
+                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="password" required>
                                     </div>
                                     <div class="alert alert-danger text-center" ng-show="alertError"><span id="errorLogin"></span></div>
                                     <div class="col-xs-12 bg-gris margin--b1">
@@ -177,7 +176,7 @@
                                     </div>
                                     <div class="col-xs-12 margin--b1">
                                         <div class="row">
-                                            <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="createAccount()" value="Crear una cuenta">
+                                            <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="singUp()" value="Crear una cuenta">
                                         </div>
                                     </div>
                                 </form>
