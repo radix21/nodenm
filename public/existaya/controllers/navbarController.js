@@ -142,6 +142,15 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
     if(sessionStorage.dataUser != undefined){
         $rootScope.dataUser = JSON.parse(sessionStorage.dataUser);
     }
+
+    $scope.signIn = function(){
+         if(!$scope._username || !$scope._password){
+            $scope.alertFields = true;
+        }else{
+            auth.ajax($http, $scope, $scope._username, $scope._password)
+        }
+ 
+    }
     $scope.singUp =  function(){
         if(!$scope.username || !$scope.password || !$scope.email){
             $scope.alertFields = true;

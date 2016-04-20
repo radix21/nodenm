@@ -59,6 +59,7 @@ loginView = function(req, res){
 login = function(req, res){
     username = req.body.username;
     password = req.body.password;
+    console.log(username, password);
     data = http.get(KME_API.login(req.hostname)+"/?username="+username+"&password="+password, function(response){
         str = "";
         response.on("data", function(data){

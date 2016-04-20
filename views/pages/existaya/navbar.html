@@ -193,12 +193,12 @@
                                 </p>
                                 <form>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control--form" placeholder="Nombre de usuario" ng-model="userName" required>
-                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="userPassword" required>
+                                        <input type="text" class="form-control form-control--form" placeholder="Nombre de usuario" ng-model="_username" required>
+                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="_password" required>
                                     </div>
                                     <div class="alert alert-danger text-center" ng-show="alertFields"><span>Todos los campos se deben diligenciar</span></div>
                                     <div class="alert alert-danger text-center" ng-show="alertData"><span>El nombre de usuario y/o la contraseña son incorrectos.</span></div>
-                                    <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="singUp()" value="iniciar sesión">
+                                    <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="signIn()" value="iniciar sesión">
                                     <!-- <a class="text text--azul text--sm text-center center-block margin-">Olvíde mi contraseña </a>-->
                                 </form>
                             </div>
