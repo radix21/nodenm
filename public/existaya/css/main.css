@@ -1141,10 +1141,10 @@ a:focus {
     height: 36px;
 }
 .courseDetailTitle{
-    height: 108px;
+    /*height: 108px;/
 }
 .courseDetailDescription{
-    height: 63px;
+    /*height: 63px;*/
 }
 .sidebar-imageCurso>a{
 
