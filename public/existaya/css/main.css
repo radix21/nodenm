@@ -1209,5 +1209,6 @@ a:focus {
     width: 3em !important;
 }
 .moduleTab>a{
-    height: 132px;
+    height: 80px;
+    text-align: center;
 }
