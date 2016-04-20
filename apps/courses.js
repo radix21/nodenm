@@ -661,6 +661,13 @@ inscribe_on_course = function(req, res){
     url = KME_API.inscribe_user(req.hostname)+req.params.user+"/?slug="+req.params.slug+"&token="+req.session.user.token;
     console.log(url);
     request("GET", url).done(function(response){
-        res.send(response.getBody());
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "failed",
+                error : response.statusCode
+            })
+        }else{
+            res.send(response.getBody());
+        }
     });
 }
