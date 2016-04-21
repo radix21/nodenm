@@ -200,10 +200,10 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                     email = response.email;
                     auth.exists($http, username).success(function(response){
                         if(response.status == "ok" && response.exists){
-                            password = response.email+username;
+                            password = email+username;
                             auth.ajax($http, $scope, username, password, email);
                         }else{
-                            password = response.email+username;
+                            password = email+username;
                             auth.register($http, username, password, email).success(function(response){
                                 if(response.status == "ok"){
                                     location.href = "/profile";    
@@ -224,13 +224,14 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                             username=response.email;
                             username=username.replace("@","");
                             username=username.replace(".","");
+                            email=response.email;
                             //auth.kme($http, $scope,username,response.name,response.email,register,access_token,"facebook");
                             auth.exists($http, username).success(function(response){
                                 if(response.status == "ok" && response.exists){
-                                    password = response.email+username;
+                                    password = email+username;
                                     auth.ajax($http, $scope, username, password, email);
                                 }else{
-                                    password = response.email+username;
+                                    password = email+username;
                                     auth.register($http, username, password, email).success(function(response){
                                         if(response.status == "ok"){
                                             location.href = "/profile";    
