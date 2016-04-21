@@ -15,6 +15,7 @@
     data.about = `<%- course.about %>`;
     data.duration = `<%- course.duration %>`;
     data.target = `<%- course.target %>`;
+    data.video = `<%- course.video %>`;
     data.sessions = [];
     data.skills = [];
     <% if( course.ubs != null ){%>
@@ -132,7 +133,9 @@
             <%}%>
         </div>
         <div class="col-xs-5">
-            <img ng-src="{{dataDetails.image.split('?')[0]}}" alt="" class="img-responsive">
+
+            <img ng-src="{{dataDetails.image.split('?')[0]}}" alt="" class="img-responsive" ng-if="dataDetails.video == ''">
+            <course-video video="dataDetails.video" ng-if="dataDetails.video != ''"></course-video>
         </div>
     </div>
 </section>

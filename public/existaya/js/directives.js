@@ -836,3 +836,16 @@ app.directive("targetPublic", [function(){
         }
     }
 }])
+
+app.directive("courseVideo", [function(){
+    return {
+        restrict : "EA",
+        template : "<p id='courseVideo' class='embed-responsive embed-responsive-16by9'></p>",
+        link : function(scope){
+            document.querySelector("#courseVideo").innerHTML = scope.video;
+        },
+        scope :  {
+            video : "="    
+        }
+    }
+}]);
