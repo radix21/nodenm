@@ -197,6 +197,7 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                     username=response.email;
                     username=username.replace("@","");
                     username=username.replace(".","");
+                    email = response.email:
                     auth.exists($http, username).success(function(response){
                         if(response.status == "ok" && response.exists){
                             password = response.email+username;
