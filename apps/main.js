@@ -63,7 +63,7 @@ KME_API = {
         return SERVER(hostname) + "/api/tribes/send_post/";
     },
     take_test : function(hostname){
-        return SERVER(hostname) + "/api/content/take_test/content/module";
+        return SERVER(hostname) + "/api/contents/take_test/";
     },
     all_certifications: function(hostname) {
         return SERVER(hostname)+ "/api/courses/get_courses_certification/"

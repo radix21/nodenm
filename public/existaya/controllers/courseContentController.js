@@ -20,6 +20,36 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         }
     }
     // Evaluation
+    $scope.markContentAsSeen = function(content, module){
+        if(content !=undefined  && module != undefined){
+        for(m in $scope.dataSimpleCourse.modules){
+            for(s in $scope.dataSimpleCourse.modules[m].submodules){
+                sub = $scope.dataSimpleCourse.modules[m].submodules[s];
+                console.log(module, $scope.dataSimpleCourse.modules[m].submodules[s]);
+                if(sub.module_pk == module){
+                    console.log(sub.module_pk, module);
+                    $scope.dataSimpleCourse.modules[m].submodules[s].completed = true;
+                }
+            }
+        }
+        $http.get("/api/content/take_test/?content="+content+"&module="+module)
+            .success(function(response){
+                console.log(response);
+                exam = response.exam;
+                $http.get("/api/content/json_finish_exam/?content="+content+"&module="+module+"&exam="+exam)
+                .success(function(response){
+                })
+                .error(function(a,b,c,d){
+                    console.log(b,d);
+                })
+            })
+            .error(function(a,b,c,d){
+                console.log(b,d);
+
+            })
+        }
+    }
+    $scope.markContentAsSeen(data.modules[0].submodules[0].contents[0].content_pk, data.modules[0].submodules[0].module_pk);
 
     $scope.courseId = null;
     $scope.studentId = null;
@@ -80,11 +110,13 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
             console.log(response);
             var slide = response[0];
             $scope.examSlide = slide;
+            console.log("pre1")
             $scope.user_answers = JSON.parse(slide.extras.json_user_answers);
+            console.log("post 1")
             $scope.disableChoices = false;
             for(choice in $scope.user_answers){
                 if($scope.user_answers[choice].selected){
-                   $scope.disableChoices = true;
+                    $scope.disableChoices = true;
                 }
             }
             try{
@@ -105,7 +137,9 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
                     choices={};
                     var slide = response[0];
                     $scope.examSlide = slide;
+                    console.log("pre2")
                     $scope.user_answers = JSON.parse(slide.extras.json_user_answers);
+                    console.log("post2")
                     for(val in $scope.user_answers){
                         $scope.question_choices[$scope.user_answers[val].id] = null;
                     }
@@ -133,18 +167,18 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
                 options.success(response, params);
                 $scope.loader = false;
             });
-        
+
     };
     $scope.nextSlide = function(){
         /**prev_position = $scope.actual_position;
-        $scope.options_exam["position"] = $scope.actual_position;
-        $scope.options_exam["actual_position"] = prev_position;
-        prev_position = $scope.actual_position;
-        params= "&position="+$scope.actual_position+"&actual_position="+prev_position+'&course_id='+$scope.courseId+"&content="+$scope.contentId;
-        params += '&course='+$scope.courseId+"&ubs="+$scope.studentId+'&module='+$scope.moduleId+'&contentId='+$scope.contentId+"&exam="+$scope.examData.pk+"&choices="+JSON.stringify($scope.question_choices);
-        $scope.actual_position +=1;
-        $scope.ajax_fetch_user_slide($scope.options, "&position="+$scope.actual_position+"&actual_position="+prev_position+'&course_id='+$scope.courseId);**/
-        
+          $scope.options_exam["position"] = $scope.actual_position;
+          $scope.options_exam["actual_position"] = prev_position;
+          prev_position = $scope.actual_position;
+          params= "&position="+$scope.actual_position+"&actual_position="+prev_position+'&course_id='+$scope.courseId+"&content="+$scope.contentId;
+          params += '&course='+$scope.courseId+"&ubs="+$scope.studentId+'&module='+$scope.moduleId+'&contentId='+$scope.contentId+"&exam="+$scope.examData.pk+"&choices="+JSON.stringify($scope.question_choices);
+          $scope.actual_position +=1;
+          $scope.ajax_fetch_user_slide($scope.options, "&position="+$scope.actual_position+"&actual_position="+prev_position+'&course_id='+$scope.courseId);**/
+
 
         prev_choices = $scope.question_choices;
         prev_position = $scope.actual_position;
@@ -154,7 +188,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         $scope.question_choices = {};
         params += "&exam="+$scope.examData.pk+"&contentId="+$scope.contentId;
         $http.get('/api/content/json_fetch_exam/?'+params)
-             .success(function(response){
+            .success(function(response){
                 $scope.user_answers = null;
                 $scope.ajax_fetch_user_slide($scope.options, "&position="+$scope.actual_position+"&actual_position="+prev_position+'&course_id='+$scope.courseId+"&choices="+JSON.stringify(prev_choices));
                 $scope.arrowLeft = true;
@@ -164,12 +198,12 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
                     $scope.arrowRight = false;
                     $scope.finish = true;
                 }
-             }).error(function(){
+            }).error(function(){
                 console.log("error: fetch exam");
-             })
+            })
         //TODO: create in options JSON success functions for nextSlide, prevSlide and finishExam 
-        
-     }
+
+    }
 
     $scope.finishExam = function(){
         $scope.confirmFinish = true;
@@ -178,28 +212,28 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         params= "&position="+$scope.actual_position+"&actual_position="+prev_position+'&course_id='+$scope.courseId+"&content="+$scope.contentId;
 
         params += '&course='+$scope.courseId+"&ubs="+$scope.studentId+'&module='+$scope.moduleId+'&contentId='+$scope.contentId+"&exam="+$scope.examData.pk+"&choices="+JSON.stringify($scope.question_choices);
-         $http.get('/api/content/json_fetch_exam/?'+params)
+        $http.get('/api/content/json_fetch_exam/?'+params)
             .success(function(response){
                 $http.get('/api/content/json_finish_exam/?exam='+$scope.examData.pk+params)
-                    .success(function(response) {
-                        $(".BlockTest").css({"background":"gray","pointer-events":"none"});
-                        $scope.examData = undefined;
-                        $scope.show_test = false;   
-                    })
-                    .error(function(err){
-                    })
+                .success(function(response) {
+                    $(".BlockTest").css({"background":"gray","pointer-events":"none"});
+                    $scope.examData = undefined;
+                    $scope.show_test = false;   
+                })
+            .error(function(err){
+            })
 
-        
- 
+
+
             })
     }
-            
+
     $scope.prevSlide = function(){
         //$scope.numberQuestion = 1 - $scope.actual_position;
         //prev_position = $scope.actual_position;
         //$scope.actual_position -=1;
         //$scope.ajax_fetch_user_slide($scope.options, "&position="+$scope.actual_position+"&actual_position="+prev_position+'&course_id='+$scope.courseId);
-        
+
         prev_choices = $scope.question_choices;
         prev_position = $scope.actual_position;
 
@@ -207,7 +241,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         $scope.question_choices = {};
         params += "&exam="+$scope.examData.pk+"&contentId="+$scope.contentId;
         $http.get('/api/content/json_fetch_exam/?'+params)
-             .success(function(response){
+            .success(function(response){
                 console.log(response);
 
                 $scope.ajax_fetch_user_slide($scope.options, "&position="+$scope.actual_position+"&actual_position="+prev_position+'&course_id='+$scope.courseId+"&choices="+JSON.stringify(prev_choices));
@@ -216,7 +250,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
                 if($scope.numberQuestion == 1){
                     $scope.arrowLeft = false;
                 }
-             })
+            })
     }
 
 
@@ -233,7 +267,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
     };
 
     $scope.updateExam = function(custom_opts){
-     	ajax_options = {
+        ajax_options = {
             error: function() {
                 $scope.EXAM_REFRESH_FAILURES = $scope.EXAM_REFRESH_FAILURES + 1;
             },
@@ -257,7 +291,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
                     if ($scope.examData.extras.seconds_left) {
                         $scope.examData.time_test_ends = new Date();
                         $scope.examData.time_test_ends.setTime($scope.examData.time_test_begins.getTime() + ($scope.examData.extras.seconds_left*1000));
-            
+
                         secondsTickerCallbacks["exam_counter"] = function(){
                             draw_countDown(countDownDiv, $scope.examData.time_test_ends, modalTimeOut)
                         };
@@ -268,12 +302,12 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
             }
 
         }
-        
-    	$.extend(ajax_options, custom_opts || {});
+
+        $.extend(ajax_options, custom_opts || {});
         $scope.options_exam = ajax_options;
-	    if($scope.examData && $scope.examData.fields.end_date&& $scope.isTutorReview) {
-		    return false;
-	    }
+        if($scope.examData && $scope.examData.fields.end_date&& $scope.isTutorReview) {
+            return false;
+        }
         $scope.ajax_fetch_exam(ajax_options);
 
 
@@ -286,11 +320,11 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         $http.get('/api/content/take_test/?'+params)
             .success(function(response){
                 if(response.status == 'ok'){
-                   $scope.updateExam(response); 
+                    $scope.updateExam(response); 
                 }
             }).error(function(a,b,c,d){
                 console.log(b,d);
-            
+
             });
     }
     $scope.open_test = function(input){
@@ -303,14 +337,14 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         $scope.start_exam();
         courseContent = $(".menuTab>li")[0];
         $(courseContent).addClass("active");
-        
+
     }
 
     $scope.close_test = function(){
-        
+
         $scope.show_test = false;    
     }
- 
+
     // This function update exam status
     $scope.ajax_fetch_exam = function(options) {
         var data = options.data;
@@ -364,75 +398,20 @@ app.controller('courseContentController-ori', ['$http','$scope', 'courses','$sce
 
     }
 
-    $scope.$watch("modulePosition",function(_new,_old){
-        $scope.submodulePosition = 0;
-        $scope.markContentAsSeen = function(content, module){
-            $http.get("/api/contents/take_test/"+content+"/"+module)
-        .success(function(response){
-            exam = response.exam;
-            $http.get("/api/contents/json_finish_exam/"+content+"/"+module+"/"+exam)
+    $scope.markContentAsSeen = function(content, module){
+        $http.get("/api/contents/take_test/"+content+"/"+module)
             .success(function(response){
-                console.log(response);
+                exam = response.exam;
+                $http.get("/api/contents/json_finish_exam/"+content+"/"+module+"/"+exam)
+                .success(function(response){
+                    console.log(response);
+                })
             })
+        .error(function(a,b,c,d){
+            console.log(b,d);
+
         })
-    .error(function(a,b,c,d){
-        console.log(b,d);
-
-    })
-
-        }
-
-        $scope.$watch("submodulePosition", function(newValue, oldValue){
-            /**try{
-              submodule_old = $scope.modules[$scope.modulePosition].submodules[$scope.submodulePosition].module_pk;
-              $scope.modules[$scope.modulePosition].submodules[$scope.submodulePosition].has_seen = true;
-              var url = config.SERVICE_SERVER +'/api/course/isModuleComplete/?callback=JSON_CALLBACK&module='+submodule_old+"&slug="+$routeParams.slug;
-              $http.jsonp(encodeURI(url)).success(function(response){
-              if(response.status == "success"){
-              console.log("submodule with pk : "+ $scope.modules[$scope.modulePosition].submodules[newValue].module_pk + " has marked as seen");
-              }else{
-              console.log("An error has ocurred - " + response.message);    
-              }
-              })
-              .error(function(data, status, headers, config){
-            //console.log(data, status, headers, config);
-            });    
-            }catch(err){
-
-            }*/
-            if(document.querySelectorAll("#embedVideo").length > 0 && $scope.dataSimpleCourse ){
-
-                embed = document.querySelector("#embedVideo");
-                embed.innerHTML = $scope.dataSimpleCourse.modules[$scope.modulePosition].submodules[$scope.submodulePosition].contents[0].text;
-                if($scope.modules[$scope.modulePosition].submodules[$scope.submodulePosition].contents[0].obligatory){
-                    $scope.markContentAsSeen(submodule.contents[0].content_pk, submodule.contents[0].module);
-
-                }else{
-
-                }
-                try{
-                    $scope.isModuleComplete(submodule.contents[0].module).success(function(response){
-                        if(response.is_complete){
-
-                            $scope.modules[$scope.modulePosition].submodules[$scope.submodulePosition].has_seen = true;
-                        }
-                    });
-                    console.log("success");
-                }catch(err){
-                    console.log(err);
-                }
-                //$scope.markContentAsSeen(submodule.contents[0].content_pk, submodule.contents[0].module);
-                //$scope.isModuleComplete(submodule.contents[0].module);
-
-                //$scope.modules[$scope.modulePosition].submodules[$scope.submodulePosition].has_seen = true;
-
-            }
-
-        });
-
-
-    });
-
+    }
     $scope.jumpSubmodulePosition = function(pos){
         $scope.submodulePosition = pos;   
         console.log("Module: "+ $scope.modulePosition);

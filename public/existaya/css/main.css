@@ -1208,8 +1208,3 @@ a:focus {
 .avatar_navbar{
     width: 3em !important;
 }
-.moduleTab>a{
-    height: 80px;
-    padding-top: 10% !important;
-    text-align: center !important;
-}

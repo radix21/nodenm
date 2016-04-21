@@ -86,19 +86,18 @@ data.modules = [];
 <% for(m in dataStudent.modules ){%>
     <% module = dataStudent.modules[m];%>
         data.modules.push({
-available : <%= module.available %>,
-tasks: [],
-submodules: [],
-module_pk: <%= module.module_pk %>,
-module_description: `<%= module.module_description %>`,
-objects: [],
-module_name: `<%= module.module_name %>`,
-contents: [], 
-module_image: `<%= module.module_image %>`, 
-position: <%= module.position %>,
-percentage_done: <%= module.percentage_done  %>,
-
-})
+            tasks: [],
+            submodules: [],
+            module_pk: <%= module.module_pk %>,
+            module_description: `<%= module.module_description %>`,
+            objects: [],
+            module_name: `<%= module.module_name %>`,
+            contents: [], 
+            module_image: `<%= module.module_image %>`, 
+            position: <%= module.position %>,
+            percentage_done: <%= module.percentage_done  %>,
+        
+        })
 <% for( val in module.objects){ %>
     <% object = module.objects[val]; %>
         data.modules[<%= m %>].objects.push({
@@ -132,34 +131,34 @@ percentage_done: <%= module.percentage_done  %>,
 
             <% submodule = module.submodules[val];%>
 
-                data.modules[<%= m %>].submodules.push({
-available : <%= submodule.available %>,
-tasks: [],
-module_pk: <%= submodule.module_pk %>,
-module_description: `<%= submodule.module_description %>`,
-objects: [],
-module_name: `<%= submodule.module_name %>`,
-contents: [], 
-module_image: `<%= submodule.module_image %>`,
-position: <%= submodule.position %>,
-percentage_done: <%= submodule.percentage_done  %>,
+            data.modules[<%= m %>].submodules.push({
+                completed : <%= submodule.completed %>,
+                tasks: [],
+                module_pk: <%= submodule.module_pk %>,
+                module_description: `<%= submodule.module_description %>`,
+                objects: [],
+                module_name: `<%= submodule.module_name %>`,
+                contents: [], 
+                module_image: `<%= submodule.module_image %>`,
+                position: <%= submodule.position %>,
+                percentage_done: <%= submodule.percentage_done  %>,
 
-})
-<% for(value in submodule.tasks){%>
-    <% task = submodule.tasks[value];%>
-        data.modules[<%= m %>].submodules[<%- val %>].tasks.push({
-                "task_name": `<%- task.task_name %>`, 
-                "task_description": `<%- task.task_description %>`, 
-                "task_percentage": `<%- task.task_percentage %>`,
-                "task_initial_date": `<%- task.task_initial_date %>`, 
-                "task_final_date": `<%- task.task_final_date %>`, 
-                "task_show_initial_date": `<%- task.task_show_final_date %>`,
-                "task_show_final_date": `<%- task.task_show_final_date%>`,
-                "task_data": `<%- task.task_data %>`, 
-                "task_position": `<%- task.task_position %>`, 
-                "task_id": `<%- task.taskl_id %>`
-                })
-    <%}%>
+            })
+            <% for(value in submodule.tasks){%>
+                <% task = submodule.tasks[value];%>
+                    data.modules[<%= m %>].submodules[<%- val %>].tasks.push({
+                            "task_name": `<%- task.task_name %>`, 
+                            "task_description": `<%- task.task_description %>`, 
+                            "task_percentage": `<%- task.task_percentage %>`,
+                            "task_initial_date": `<%- task.task_initial_date %>`, 
+                            "task_final_date": `<%- task.task_final_date %>`, 
+                            "task_show_initial_date": `<%- task.task_show_final_date %>`,
+                            "task_show_final_date": `<%- task.task_show_final_date%>`,
+                            "task_data": `<%- task.task_data %>`, 
+                            "task_position": `<%- task.task_position %>`, 
+                            "task_id": `<%- task.taskl_id %>`
+                            })
+                <%}%>
 
 
     <% for( value in submodule.objects){ %>
@@ -343,7 +342,7 @@ percentage_done: <%= submodule.percentage_done  %>,
 
                                                 <ul class="nav nav-tabs nav-justified nav-tabs--detalleClase" role="tablist">
                                                     <li role="presentation" class="moduleTab" ng-repeat="module in pack" ng-class="{active:$first}">
-                                                    <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill">
+                                                    <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill" ng-click="markContentAsSeen(module.submodules[0].contents[0].content_pk, module.submodules[0].module_pk)">
                                                         {{ module.module_name }}
 
                                                     </a>
@@ -364,8 +363,9 @@ percentage_done: <%= submodule.percentage_done  %>,
                                         <div role="tabpanel" class="tab-pane" ng-repeat="module in dataSimpleCourse.modules" id="module{{module.module_pk}}" ng-class="{active:$first}">
                                             <div class="col-xs-12 list-simple">
                                                 <ul class="nav nav-pills nav-pills--setps nav-justified" style="margin-top: 5px; margin-bottom: 5px;">
-                                                    <li class="" ng-repeat="submodule in module.submodules" ng-class="{active:$first}">
-                                                    <a href="#module{{module.module_pk}}submodule{{submodule.module_pk}}" aria-controls="module{{module.module_pk}}-submodule{{submodule.module_pk}}" role="tab" data-toggle="tab"></a>
+                                                    <li  ng-repeat="submodule in module.submodules" ng-class="{active:$first,visited:$first, visited:submodule.completed}"  ng-click="markContentAsSeen(submodule.contents[0].content_pk, submodule.module_pk)"> 
+                                                    {{ submodule.completed}}
+                                                    <a href="#module{{module.module_pk}}submodule{{submodule.module_pk}}" aria-controls="module{{module.module_pk}}-submodule{{submodule.module_pk}}" role="tab" data-toggle="tab"</a>
                                                     </li>
                                                 </ul>
                                             </div>

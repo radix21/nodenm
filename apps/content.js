@@ -161,7 +161,6 @@ finish_exam = function(req, res){
         }
         url = KME_API.finish_exam(req.hostname) + "?exam="+exam+"&token="+req.session.user.token+"&user="+req.session.user.info.username;
         console.log(req);
-        console.log(url);
         str = "";
         data = http.get(url, function(response){
             response.on("error", function(err){
