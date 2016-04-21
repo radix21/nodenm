@@ -432,38 +432,28 @@ available_courses = function(req, res){
         res.send(response);
     }else{
         str = "";
-        data = http.get(KME_API.available_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username, function(response){
-            response.on("error", function(err){
-                response = {
-                    "status" : "failed",
-                "message" : err
-                }
-                res.status(400).send(response);
-            });
-            response.on("data", function(data){
-                str = data;
-            });
-            response.on("end", function(){
+        url = KME_API.available_courses(req.hostname);
+        request("GET", url, {
+            qs : {
+                token : req.session.user.token,
+                user : req.session.user.info.username
+            }
+        }).done(function(response){
+            if(response.statusCode > 300){
+                res.status(response.statusCode).send(response);
+            }else{
                 try{
-                    response =  JSON.parse(str);
-
-                    if(response.status == "ok"){
-
-                        res.send(response);
-                    }else{
-                        res.status(400).send(response);
-                    }
+                    response = JSON.parse(response.body);
+                    res.send(response);
                 }catch(err){
-                    response = {
-                        "status" : "error",
-                        "message" : "Server Error - check endpoint server"
-                    }
-                    res.status(500).send(response)
+                    res.status(400).send({
+                        "status" : "failed",
+                        "response" : response.body,
+                        "error" : err
+                    })
                 }
-            })
-        });
-
-        data.end();
+            } 
+        })
     }
 
 };
