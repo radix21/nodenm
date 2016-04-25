@@ -11,12 +11,12 @@
                         <img ng-src="{{course.image.split('?')[0]}}" class="img-course img-responsive">
                     </a>
                     <div class="col-xs-12 sidebar-imageCurso__nombre">
-                        <img ng-if="course.tutors[0].avatar != null" ng-src="{{course.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
-                        <img ng-if="course.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
+                        <img ng-if="course.tutors[0].avatar != null && course.tutors[0].avatar != ''" ng-src="{{course.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
+                        <img ng-if="course.tutors[0].avatar == null || course.tutors[0].avatar == ''" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
 
                         <span class="text text--blanco">
 
-                            {{course.tutors[0].first_name}} {{course.tutors[0].last_name}}
+                            {{course.tutors[0].first_name.split(" ")[0] }} {{course.tutors[0].last_name.split(" ")[0]}}
                         </span>
                     </div>
 
@@ -67,10 +67,10 @@
                         <img ng-src="{{course.image.split('?')[0]}}" class="img-course img-responsive">
                     </a>
                     <div class="col-xs-12 sidebar-imageCurso__nombre">
-                        <img ng-if="coursePublic.tutors[0].avatar != null" ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
-                        <img ng-if="coursePublic.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
+                        <img ng-if="coursePublic.tutors[0].avatar != null && coursePublic.tutors[0].avatar != ''" ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
+                        <img ng-if="coursePublic.tutors[0].avatar == null || coursePublic.tutors[0].avatar == ''" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
                         <span class="text text--blanco">
-                            {{coursePublic.tutors[0].first_name}} {{coursePublic.tutors[0].last_name}}
+                            {{coursePublic.tutors[0].first_name.split(" ")[0]}} {{coursePublic.tutors[0].last_name.split(" ")[0]}}
                         </span>
                     </div>
 
@@ -122,10 +122,10 @@
                         <img ng-src="{{course.image.split('?')[0]}}" class="img-course img-responsive">
                     </a>
                     <div class="col-xs-12 sidebar-imageCurso__nombre">
-                        <img ng-if="coursePublic.tutors[0].avatar != null" ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
-                        <img ng-if="coursePublic.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
+                        <img ng-if="coursePublic.tutors[0].avatar != null && coursePublic.tutors[0].avatar != '' " ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
+                        <img ng-if="coursePublic.tutors[0].avatar == null || coursePublic.tutors[0].avatar == '' " src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
                         <span class="text text--blanco">
-                            {{coursePublic.tutors[0].first_name}} {{coursePublic.tutors[0].last_name}}
+                            {{coursePublic.tutors[0].first_name.split(" ")[0]}} {{coursePublic.tutors[0].last_name.split(" ")[0]}}
                         </span>
                     </div>
                     <div class="col-xs-12 sidebar-imageCurso__qualy">
@@ -174,12 +174,12 @@
                 <img ng-src="{{course.image.split('?')[0]}}" class="img-course img-responsive">
             </a>
             <div class="col-xs-12 sidebar-imageCurso__nombre">
-                <img ng-if="course.tutors[0].avatar != null" ng-src="{{course.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
-                <img ng-if="course.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
+                <img ng-if="course.tutors[0].avatar != null && course.tutors[0].avatar != ''" ng-src="{{course.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
+                <img ng-if="course.tutors[0].avatar == null || course.tutors[0].avatar == ''" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
 
                 <span class="text text--blanco">
 
-                    {{course.tutors[0].first_name}} {{course.tutors[0].last_name}}
+                    {{course.tutors[0].first_name.split(" ")[0]}} {{course.tutors[0].last_name.split(" ")[0]}}
                 </span>
             </div>
 
@@ -223,10 +223,10 @@
                 <img src="/existaya/images/defaultCourseCover.png" alt="" ng-if="course.image == null" class="img-course img-responsive">
             </a>
             <div class="col-xs-12 sidebar-imageCurso__nombre">
-                <img ng-if="coursePublic.tutors[0].avatar != null" ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
-                <img ng-if="coursePublic.tutors[0].avatar == null" src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
+                <img ng-if="coursePublic.tutors[0].avatar != null && course.tutors[0].avatar != '' " ng-src="{{coursePublic.tutors[0].avatar}}" alt="" class="img-circle sidebar-imageCurso__image" > 
+                <img ng-if="coursePublic.tutors[0].avatar == null ||course.tutors[0].avatar == '' " src="/existaya/images/avatarDefault.png" alt="" class="img-circle sidebar-imageCurso__image">
                 <span class="text text--blanco">
-                    {{coursePublic.tutors[0].first_name}} {{coursePublic.tutors[0].last_name}}
+                    {{coursePublic.tutors[0].first_name.split(" ")[0]}} {{coursePublic.tutors[0].last_name.split(" ")[0]}}
                 </span>
             </div>
             <div class="col-xs-12 sidebar-imageCurso__qualy">

@@ -586,7 +586,7 @@ data.modules = [];
                                         </ul>
                                         </li>
                                         <li class="list-group-item text-center" ng-show="loaderTribe">
-                                        <img src="images/preloader.gif" alt="loader">
+                                        <img src="/existaya/images/preloader.gif" alt="loader" class="img-responsive" width="30%">
                                         </li>
                                         <li class="list-group-item" ng-repeat="comments in comments" id="{{comments.id}}" ng-show="commentsVisible">
                                         <ul class="row list-unstyled">
@@ -718,7 +718,7 @@ data.modules = [];
                 <ul class="list-unstyled">
                     <div class="container containerFilds">
                         <div class="text-center" ng-show="loader"> 
-                            <img src="images/preloader.gif" alt="loader">
+                            <img src="/existaya/images/preloader.gif" alt="loader" class="img-responsive" width="30%" style="margin-left:35%">
                         </div>
                         <div class="containerAnswers container">
                             <div class="text-center" ng-if="examSlide.fields.question.extras.get_image_data != null"> 
@@ -733,26 +733,29 @@ data.modules = [];
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                    
                 </ul>
                 <div class="navQuestion"> 
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
                         <div class="avanced">
-                            <span>{{examSlide.fields.position + 1}} de {{examData.extras.nr_slides}} Respondidas</span>
+                            <span>{{examSlide.fields.position + 1}} de {{examData.extras.nr_slides}}</span>
                             <progressbar value="exam_percentage"></progressbar>
                         </div>
                     </div> 
-                    <div class="col-md-9"> 
+                    <div class="col-md-9 col-xs-9 col-sm-9 col-lg-9"> 
                         <div class="navButtons pull-right">
-                            <a href="" ng-click="finishExam()" class="btnFinish not-active-button">Terminar</i></a>
-                        <a href="" class="next_slide" ng-click="nextSlide()" ng-show="arrowRight">
+                            <a href="" ng-click="finish_exam(contentId, moduleId, examData.pk)" class="btnFinish not-active-button">Terminar</i></a>
+                        <a href="" class="next_slide" ng-click="next_slide()" ng-show="arrowRight">
                             <i class="fa fa-chevron-right"></i>
                         </a> 
-                        <a href="" class="prev_slide" ng-click="prevSlide()" ng-show="arrowLeft">
+                        <a href="" class="prev_slide" ng-click="prev_slide()" ng-show="arrowLeft">
                             <i class="fa fa-chevron-left"></i>
                         </a> 
                     </div>
                 </div>
+
             </div>
         </div>
 

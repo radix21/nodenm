@@ -1066,7 +1066,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .letter {background: #F8F8F8; padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px;}
 .letter:hover {background: #4fb0ae; color:#FFF; cursor:pointer;}
 .labelField {color: #4fb0ae ;}
-.navQuestion {background: #EEE; height: 60px; width: 90%; margin-top: 40px; position:fixed; bottom:6%; z-index: 2;}
+.navQuestion {background: #EEE; height: 60px; width: 100%; margin-top: 40px; position:absolute;z-index: 2;bottom:0}
 .navButtons a {background: #4fb0ae; padding: 10px 15px; border-radius: 7px; color:#FFF; float:right;margin: 10px 2px;}
 .navButtons a:hover {background: #9ACDCC;}
 .btnFinish {background:#7EC181 !important;}

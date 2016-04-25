@@ -14,8 +14,6 @@ take_test = function(req, res){
     }else{
         
         url = KME_API.take_test(req.hostname) + "?content="+req.query.content+"&module="+req.query.module+"&token="+req.session.user.token+"&user="+req.session.user.info.username;
-        console.log(req);
-        console.log(url);
         str = "";
         data = http.get(url, function(response){
             response.on("error", function(err){
@@ -59,10 +57,30 @@ fetch_exam = function(req, res){
             message : "User is not authenticated"
         })
     }else{
-        
+        url = KME_API.fetch_exam(req.hostname)+parseInt(req.query.course)+"/"+req.query.ubs+"/"+req.query.module+"/"+req.query.content+"/"+req.query.exam;
+        request("GET", url,{
+            qs : {
+                token : req.session.user.token,
+                user : req.session.user.info.username
+            }
+        }).done(function(response){
+            if(response.statusCode > 300){
+                res.status(response.statusCode).send({
+                    status : "error",
+                    error : response.statusCode
+                })
+            }else{
+                try{
+                    response = JSON.parse(response.getBody())
+                    res.send(response)
+                }catch(err){
+                    res.send(response.getBody())
+                }
+            }
+        })
+        //url = KME_API.fetch_exam(req.hostname) + 
+        /**
         url = KME_API.fetch_exam(req.hostname) + "?exam="+req.query.exam+"&contentId="+req.query.contentId+"&token="+req.session.user.token+"&user="+req.session.user.info.username;
-        console.log(req);
-        console.log(url);
         str = "";
         data = http.get(url, function(response){
             response.on("error", function(err){
@@ -89,6 +107,7 @@ fetch_exam = function(req, res){
                 "message" : err
             })
         }).end()
+        */
     }
 
 }
@@ -106,36 +125,23 @@ fetch_user_slide = function(req, res){
             message : "User is not authenticated"
         })
     }else{
-        
-        url = KME_API.fetch_user_slide(req.hostname) + "?exam="+req.query.exam+"&token="+req.session.user.token+"&user="+req.session.user.info.username;
-        console.log(req);
+        url = KME_API.fetch_user_slide(req.hostname) + req.query.course + "/" + req.query.ubs + "/"+ req.query.module + "/" + req.query.content + "/" + req.query.exam+"?token="+req.session.user.token+"&user="+req.session.user.info.username+"&choices="+req.query.choices+"&position="+req.query.position+"&actual_position="+req.query.actual_position;
         console.log(url);
-        str = "";
-        data = http.get(url, function(response){
-            response.on("error", function(err){
-                res.status(400).send({
-                    status: "failed",
-                    message : err
+        request("GET", url).done(function(response){
+            if(response.statusCode > 300){
+                res.status(response.statusCode).send({
+                    status : "error",
+                    error: response.statusCode
                 })
-            });
-            response.on("data", function(data){
-                str += data;
-            });
-
-            response.on("end", function(){
+            }else{
                 try{
-                    res.send(JSON.parse(str));
+                    response = JSON.parse(response.getBody())
+                    res.send(response);
                 }catch(err){
-                    res.send(str);
+                    res.send(response.getBody())
                 }
-            })
-        
-        }).on("error", function(err){
-            res.status(500).send({
-                "status" : "error",
-                "message" : err
-            })
-        }).end()
+            }
+        })
     }
 
 }
@@ -159,8 +165,7 @@ finish_exam = function(req, res){
         }else{
             exam = req.query.exam
         }
-        url = KME_API.finish_exam(req.hostname) + "?exam="+exam+"&token="+req.session.user.token+"&user="+req.session.user.info.username;
-        console.log(req);
+        url = KME_API.finish_exam(req.hostname) + "?exam="+exam+"&token="+req.session.user.token+"&user="+req.session.user.info.username+"&choices="+(req.query.choices == undefined ? "{}" : req.query.choices)+"&actual_position="+(req.query.actual_position == undefined ? 0 : req.query.actual_position);
         str = "";
         data = http.get(url, function(response){
             response.on("error", function(err){

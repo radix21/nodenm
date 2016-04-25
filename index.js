@@ -43,17 +43,25 @@ tribes.set(app);
  * DEFAULT_URL
  **/
 app.get("*", function(req, res){
-    folder = CLIENTS[req.hostname].folder;
+    folder = CLIENTS[req.hostname] != undefined ?  CLIENTS[req.hostname].folder : undefined;
+    if(folder == undefined){
+        res.status(403).send({
+            status : "error",
+            error : "403",
+            message : "Access Forbidden"
+        })
+    }else{
 
-    fs.exists('views/pages/'+folder+req.path+".html", function(exists){
-        if(exists){
+        fs.exists('views/pages/'+folder+req.path+".html", function(exists){
+            if(exists){
 
-            res.render("pages/"+folder+req.path+".html");
-        }else{
-        
-        res.render("pages/"+folder+"/404.html");
-        }
+                res.render("pages/"+folder+req.path+".html");
+            }else{
+            
+            res.render("pages/"+folder+"/404.html");
+            }
 
-    })
+        })
+    }
     
 })
