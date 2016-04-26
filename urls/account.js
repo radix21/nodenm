@@ -7,6 +7,5 @@ module.exports = {
         app.post("/api/account/register/", register);
         app.post("/api/account/is_authenticated", isAuthenticated);
         app.get("/api/account/exists/:username", user_exists);
-
     }
 }

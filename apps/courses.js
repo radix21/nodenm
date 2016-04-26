@@ -1,11 +1,10 @@
 /**
- * @api{get} /api/courses/my_courses Get my courses
+ * @api{get} /api/courses/my_courses getMyCourses
  * @apiName getMyCourses
  * @apiDescription Get user Courses
  * @apiGroup Courses
  * @apiVersion 0.1.0
- *
- * @apiSuccessExample success-response:
+ * @apiSuccessExample {json} success-response
  *  HTTP/1.1 200 OK
  *  {
  *      "status" : ok,
@@ -36,34 +35,7 @@ getMyCourses = function(req, res){
         }
         res.send(response);
     }else{
-        /**
-        str = "";
-        data = http.get(KME_API.my_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username, function(response){
-            response.on("error", function(err){
-                response = {
-                    "status" : "failed",
-                "message" : err
-                }
-                res.status(400).send(response);
-            });
-            response.on("data", function(data){
-                str += data;
-            });
-            response.on("end", function(){
-                try{
-                    res.send(JSON.parse(str));
-                }catch(err){
-                    response = {
-                        "status" : "error",
-                        "message" : "Server Error - check endpoint server"
-                    }
-                    res.send(str);
-                }
-            })
-        });
-
-        data.end();*/
-        request('GET', KME_API.my_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username).done(function (response) {
+         request('GET', KME_API.my_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username).done(function (response) {
             res.send(JSON.parse(response.getBody()))
         });
 
@@ -71,13 +43,12 @@ getMyCourses = function(req, res){
 
 };
 /**
- * @api{get} /api/courses/public_courses Get public courses
+ * @api{get} /api/courses/public_courses getPublicCourses
  * @apiName getPublicCourses
  * @apiDescription Get public courses list
  * @apiGroup Courses
  * @apiVersion 0.1.0
- *
- * @apiSuccessExample success-response:
+ * @apiSuccessExample {json} success-response
  *  HTTP/1.1 200 OK
  *  {
  *      "status" : ok,
@@ -128,13 +99,12 @@ getPublicCourses = function(req, res){
 }
 
 /**
- * @api{get} /api/courses/all_courses Get all courses
+ * @api{get} /api/courses/all_courses getAllCourses
  * @apiName getAllCourses
  * @apiDescription Get all courses list
  * @apiGroup Courses
  * @apiVersion 0.1.0
- *
- * @apiSuccessExample success-response:
+ * @apiSuccessExample {json} success-response
  *  HTTP/1.1 200 OK
  *  {
  *      "status" : ok,
@@ -179,14 +149,13 @@ getAllCourses = function(req, res){
 
 }
 /**
- * @api{get} /all_courses AllCourses
+ * @api{get} /all_courses allCourses
  * @apiName allCoursesViews
  * @apiDescription Load all courses template
  * @apiGroup    Courses
  * @apiVersion  0.1.0
- *
  * @apiSuccess {Object[]} 200 Params related with user
- * @apiSuccessExample 
+ * @apiSuccessExample {json} Success-response 
  * {
  *      status :  {String},
  *      courses : {JSON[]}
@@ -231,13 +200,13 @@ allCoursesViews = function(req, res){
 }
 
 /**
- * @api{get} /course/:slug/details Course Details
+ * @api{get} /course/:slug/details courseDetails
  * @apiName  courseDetails
  * @apiDescription Load course details and allows render course details params
  * @apiGroup Courses
  * @apiVersion  0.1.0
  * @apiSuccess {JSON[]} 200 params related with course information
- * @apiSuccessExample success-response
+ * @apiSuccessExample {json} success-response
  * HTTP/1.1 200 OK
  *  params = {
  *      course : {JSON},
@@ -279,13 +248,12 @@ courseDetails = function(req, res){
 
 }
 /**
- * @api{get} /api/courses/related_courses/:slug Get all related courses
+ * @api{get} /api/courses/related_courses/:slug getCoursesRelated
  * @apiName related_courses
  * @apiDescription Get all related courses list
  * @apiGroup Courses
  * @apiVersion 0.1.0
- *
- * @apiSuccessExample success-response:
+ * @apiSuccessExample {json} success-response
  *  HTTP/1.1 200 OK
  *  {
  *      "status" : ok,
@@ -329,13 +297,12 @@ related_courses = function(req, res){
 
 }
 /**
- * @api{get} /api/courses/completed_courses/ Get all completed courses
+ * @api{get} /api/courses/completed_courses/ getCompletedCourses
  * @apiName completed_courses
  * @apiDescription Get all completed courses list
  * @apiGroup Courses
  * @apiVersion 0.1.0
- *
- * @apiSuccessExample success-response:
+ * @apiSuccessExample {json} success-response
  *  HTTP/1.1 200 OK
  *  {
  *      "status" : ok,
@@ -351,49 +318,6 @@ related_courses = function(req, res){
  * */
 
 completed_courses = function(req, res){
-    /**
-    if(req.session.user == undefined || !req.session.user.logged){
-        response = {
-            "status" : "failed",
-            "message" : "User is not authenticated"
-        }
-        res.send(response);
-    }else{
-
-        str = "";
-        url_completed = (KME_API.completed_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username);
-        console.log(url_completed);
-        http.get(url_completed, function(completed_response){
-            completed_response.on("error", function(err){
-                response = {
-                    "status" : "failed",
-                    "message" : err
-                }
-                res.status(400).send(response);
-            });
-            completed_response.on("data", function(data){
-                str += data;
-            });
-            completed_response.on("end", function(){
-                try{
-                    console.log(url_completed);
-                    console.log("completed");
-                    res.send(str);
-                }catch(err){
-                    console.log(err);
-                    console.log(url_completed);
-                    response = {
-                        "status" : "error",
-                        "message" : "Server Error - check endpoint server"
-                    }
-                    res.status(500).send(str)
-                }
-            })
-        });
-
-        data.end();
-    }*/
-
     url_completed = (KME_API.completed_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username);
 
     request('GET', url_completed).done(function (response) {
@@ -402,13 +326,12 @@ completed_courses = function(req, res){
 
 };
 /**
- * @api{get} /api/courses/available_courses/ Returns list of courses where the user is not registered
+ * @api{get} /api/courses/available_courses/ availableCourses
  * @apiName available_courses
  * @apiDescription Returns list of courses where the user is not registered
  * @apiGroup Courses
  * @apiVersion 0.1.0
- *
- * @apiSuccessExample success-response:
+ * @apiSuccessExample {json} success-response
  *  HTTP/1.1 200 OK
  *  {
  *      "status" : ok,
@@ -458,13 +381,12 @@ available_courses = function(req, res){
 
 };
 /**
- * @api{get} /api/courses/next_courses/ Returns the list of courses that none of its sessions has started
+ * @api{get} /api/courses/next_courses/ nextCourses
  * @apiName next_courses
  * @apiDescription Returns the list of courses that none of its sessions has started
  * @apiGroup Courses
  * @apiVersion 0.1.0
- *
- * @apiSuccessExample success-response:
+ * @apiSuccessExample {json} success-response
  *  HTTP/1.1 200 OK
  *  {
  *      "status" : ok,
@@ -524,10 +446,12 @@ next_courses = function(req, res){
 };
 
 /**
- * @api {get} /api/courses/:slug Get Course Data Student
+ * @api {get} /api/courses/:slug getCourseDataStudent
  * @apiName course_data_student,
  * @apiDescription Load data student on course
- * @apiSuccessExample success-response
+ * @apiGroup Courses
+ * @apiVersion 0.1.0
+ * @apiSuccessExample {json} success-response
  * HTTP/1.1 200 OK
  * {
  *      status : {String},
@@ -535,7 +459,6 @@ next_courses = function(req, res){
  * }
  **/
 course_data_student = function(req, res){
-//    res.send("TODO: load course data student data")
     if(req.session.user != undefined && req.session.user.logged == true){
     str = "";
     url_data_student = KME_API.get_course_data_student(req.hostname) + "/"+req.params.slug+"?user="+req.session.user.info.username+"&token="+req.session.user.token;
@@ -572,8 +495,10 @@ course_data_student = function(req, res){
     }
 }
 /**
- * @api{get} /course/:slug Course View
+ * @api{get} /course/:slug courseVIews
  * @apiName courseView
+ * @apiGroup Courses
+ * @apiVesion 0.1.0
  * @apiDescription load course template
  **/
 
@@ -617,34 +542,56 @@ courseView = function(req, res){
 }
 
 /**
- * My certifications
+ * @api{get} /api/certifications/my_certifications getUserCertifications
+ * @apiName my_certifications
+ * @apiDescription Get list of user certifications
+ * @apiVersion 0.1.0
+ * @apiGroup Courses
+ * @apiSuccessExample {json} Success-response
+ * HTTP/1.1 200 OK
+ * {
+ *      status : {String},
+ *      certifications : {JSON[]}
+ * }
  **/
 my_certifications = function(req, res){
     str = "";
-
     url_cert = KME_API.my_certifications(req.hostname) + "?user="+req.session.user.info.username+"&token="+req.session.user.token;
-    /**
-    data= http.get(url_cert, function(response){
-        response.on("error", function(err){
-            res.send(err);
-        });
-        response.on("data", function(data){
-            str += data;
-        });
-        response.on("end", function(){
-            res.send(str);
-        }); 
-    
-    }).on("error", function(err){
-        res.send(err);
-    })*/
     request('GET', url_cert).done(function (response) {
-        res.send(JSON.parse(response.getBody()))
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "error",
+                error : response.statusCode
+            })
+        }else{
+            try{
+                response = JSON.parse(response.getBody());
+                res.send(response);
+            }catch(err){
+                res.send(response.getBody());
+            }
+        }
     });
 }
 
 /**
- *  Inscribe User
+ * @api{get} /api/course/inscribe/:user/:slug inscribeUser
+ * @apiName inscribe_on_course
+ * @apiDescription Inscribe user on course
+ * @apiVersion 0.1.0
+ * @apiGroup Courses
+ * @apiSuccessExample {json} Success-response
+ * HTTP/1.1 200 OK
+ * {
+ *      status : {String}
+ *
+ * }
+ *
+ * @apiErrorExample {json} ErrorResponse
+ * {
+ *      status : "failed",
+ *      message : {String}
+ * }
  **/
 inscribe_on_course = function(req, res){
 

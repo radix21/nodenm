@@ -3,7 +3,12 @@
  * @apiName take_test
  * @apiDescription Start user exam
  * @apiVersion 0.1.0
- *
+ * @apiGroup Contents
+ * @apiSuccessExample {json} SuccessResponse
+ * HTTP/1.1 200 OK
+ * {
+ *      {JSON}
+ * }
  ***/
 take_test = function(req, res){
     if(req.session.user == undefined || req.session.user.token == undefined){
@@ -48,7 +53,13 @@ take_test = function(req, res){
  * @apiName fetch_exam
  * @apiDescription Get exam status
  * @apiVersion 0.1.0
- *
+ * @apiGroup Contents
+ * @apiSuccessExample {json} SuccessResponse
+ * HTTP/1.1 200 OK
+ * {
+ *      {JSON}
+ * }
+*
  ***/
 fetch_exam = function(req, res){
     if(req.session.user == undefined || req.session.user.token == undefined){
@@ -116,7 +127,13 @@ fetch_exam = function(req, res){
  * @apiName fetch_user_slide
  * @apiDescription Get slide status
  * @apiVersion 0.1.0
- *
+ * @apiGroup Contents
+ * @apiSuccessExample {json} SuccessResponse
+ * HTTP/1.1 200 OK
+ * {
+ *      {JSON}
+ * }
+*
  ***/
 fetch_user_slide = function(req, res){
     if(req.session.user == undefined || req.session.user.token == undefined){
@@ -151,7 +168,13 @@ fetch_user_slide = function(req, res){
  * @apiName finish_exam
  * @apiDescription Finish exam
  * @apiVersion 0.1.0
- *
+ * @apiGroup Contents
+ * @apiSuccessExample {json} SuccessResponse
+ * HTTP/1.1 200 OK
+ * {
+ *      {JSON}
+ * }
+
  ***/
 finish_exam = function(req, res){
     if(req.session.user == undefined || req.session.user.token == undefined){

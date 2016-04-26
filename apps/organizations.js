@@ -8,7 +8,7 @@ addOrganization = function(req, res) {
     });
 }
 /**
- * @api{post} api/organization/create_organization
+ * @api{post} api/organization/create_organization createOrganization
  * @apiName createOrganization
  * @apiDescription create a organization in the plataform
  * @apiGroup Organizations
@@ -61,8 +61,6 @@ createOrganization = function(req, res) {
             knownLength: image.size
         });
     }
-
-    console.log(3);
     data = formdata.submit(KME_API.create_organization("kmelx.com"), function(err, response) {
         response.on('error', function(err) {
             response = {
@@ -96,48 +94,12 @@ createOrganization = function(req, res) {
         })
     });
 
-    /*
-    var options = {
-        hostname: 'kmelx.com',
-        port: 5000,
-        path: "/api/orgs/add/",
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': postData.length
-        }
-    };
-    str= "";
-    data = http.request(options, function(response) {
-        response.on('error', function(err) {
-            res.status(500).send(err);
-        });
-
-        response.on('data', function(data) {
-            str+=data;
-        });
-
-        response.on('end', function() {
-            try{
-                res.send(JSON.parse(str));
-            }catch(err){
-                response = {
-                    status: "error",
-                    message: "ServerError - check endPoint server"
-                }
-
-                res.status(500).send(response)
-            }
-        });
-    });
-    data.write(postData);
-    data.end();*/
 }
 
 validateName = function(req, res) {}
 
 /**
- * @api{get} /api/organization/get/:url
+ * @api{get} /api/organization/get/:url getOrganization
  * @apiName getOrganization
  * @apiDescription get information of the organization
  * @apiGroup Organizations

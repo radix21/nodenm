@@ -3,8 +3,6 @@
  * @apiName loginView
  * @apiDescription Load login template with params
  * @apiGroup    account
- * @apiVersion  0.1.0
- *
  * @apiSuccess {Object[]} 200 Params related with user
  * {
  *      user : {
@@ -33,8 +31,6 @@ loginView = function(req, res){
  * @apiGroup account
  * @apiParam {String} username Name of the user
  * @apiParam {String} password Password of the user
- * @apiVersion 0.1.0
- *
  * @apiSuccessExample success-response:
  *  HTTP/1.1 200 OK
  *  {
@@ -59,7 +55,6 @@ loginView = function(req, res){
 login = function(req, res){
     username = req.body.username;
     password = req.body.password;
-    console.log(username, password);
     data = http.get(KME_API.login(req.hostname)+"/?username="+username+"&password="+password, function(response){
         str = "";
         response.on("data", function(data){
@@ -75,7 +70,6 @@ login = function(req, res){
         response.on("end", function(){
             try{
                 response = JSON.parse(str);
-                console.log(str);
                 if(response.status == "ok"){
                     data = {
                         status : "ok"
@@ -111,8 +105,6 @@ login = function(req, res){
  * @apiName logout
  * @apiDescription Close session
  * @apiGroup account
- * @apiVersion 0.1.0
- *
  * @apiSuccessExample success-response:
  *  HTTP/1.1 200 OK
  *  {
@@ -122,38 +114,7 @@ login = function(req, res){
  * */
 
 logout = function(req, res){
-    /**
-    data = http.get(KME_API.logout(req.hostname), function(response){
-        str = "";
-        response.on("data", function(data){
-            str += data;
-        })
-        response.on("end", function(){
-            try{
-                response = JSON.parse(str);
-                if(response.status == "ok"){
-                    response = {
-                        status : "ok"
-                    }
-                    req.session.destroy();
-                }else{
-                    response = {
-                        status : "failed",
-                        message : "username and/or password are incorrect"
-                    }
-                }
-                res.send(response);
-            }catch(err){
-                response = {
-                    "status" : "error",
-                    "message" : "Bad Request"
-                }
-                res.status(400).send(response);
-            }
-        })
-    }).on("error", function(err){
-        console.log(err);
-    });;*/
+
     req.session.destroy();
     res.send({
         "status" : "ok"
@@ -166,8 +127,6 @@ logout = function(req, res){
  * @apiName Register
  * @apiDescription Allows register a user on platform
  * @apiGroup account
- * @apiVersion 0.1.0
- *
  * @apiSuccessExample success-response:
  *  HTTP/1.1 200 OK
  *  {
@@ -191,7 +150,6 @@ logout = function(req, res){
  * */
 
 register = function(req, res){
-    console.log(req.body);
     url = KME_API.register(req.hostname);
     request("POST", url,{ 
         qs: {
@@ -256,7 +214,13 @@ isAuthenticated = function(req, res){
  * @apiName user_exists
  * @apiDescription Function that return is a username is already taken
  * @apiGroup account
- **/
+ * @apiSuccessExample Success-response
+ * HTTP/1.1 200 OK
+ * {
+ *      status : {String},
+ *      exists : {Boolean}
+ * }
+ ***/
 user_exists = function(req, res){
     url = KME_API.user_exists(req.hostname)+req.params.username;
     request("GET", url).done(function(response){
@@ -275,3 +239,4 @@ user_exists = function(req, res){
         }
     })
 }
+

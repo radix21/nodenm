@@ -98,20 +98,24 @@ KME_API = {
 CLIENTS = {
     "www.marketinguniversity.co" : {
         folder : "existaya",
-        server : "http://marketing.kmelx.com"
+        server : "http://marketing.kmelx.com",
+        token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "kmelx.com" : {
         folder : "kmelx",
-        server : "http://kmelx.com:5000"
+        server : "http://kmelx.com:5000",
+        token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
 
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com:5000"
+        server : "http://marketing.kmelx.com:5000",
+        token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "safe-beyond-13324.herokuapp.com" : {
         folder: "existaya",
-        server : "http://marketing.kmelx.com"
+        server : "http://marketing.kmelx.com",
+        token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     }
 
 }

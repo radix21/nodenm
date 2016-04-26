@@ -2,7 +2,9 @@
  * @api{get} /api/tribes/get_tribe/:id Get Tribe data
  * @apiName get_tribe
  * @apiDescription Get Tribe data
- * @apiVersion  0.1.0
+ * @apiGroup Tribes
+ * @apiVersion 0.1.0
+ * @apiParam {Number} id Tribe unique ID
  *
  ***/
 get_tribe = function(req, res){
@@ -41,7 +43,9 @@ get_tribe = function(req, res){
  * @api{get} /api/tribes/get_topic/:id Get Topic data
  * @apiName get_topic
  * @apiDescription Get Topic data
- * @apiVersion  0.1.0
+ * @apiGroup Tribes
+ * @apiVersion 0.1.0
+ * @apiParam {Number} id Topic unique ID
  *
  ***/
 get_topic = function(req, res){
@@ -81,8 +85,11 @@ get_topic = function(req, res){
  * @api{post} /api/tribes/send_post/:id Send new comment on topic
  * @apiName send_post
  * @apiDescription Send new comment to topic
- * @apiVersion  0.1.0
- *
+ * @apiGroup Tribes
+ * @apiVersion 0.1.0
+ * @apiParam {Number} id Topic unique ID
+ * @apiParam {String} comment Comment on topic
+ ** 
  ***/
 send_post = function(req, res){
     if(req.session.user == undefined && req.session.user.token == undefined){
