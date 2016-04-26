@@ -116,6 +116,11 @@ CLIENTS = {
         folder: "existaya",
         server : "http://marketing.kmelx.com",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
+    },
+    "127.0.0.1" : {
+        folder: "existaya",
+        server :  "http://marketing.kmelx.com",
+        token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     }
 
 }
