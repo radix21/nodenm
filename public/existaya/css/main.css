@@ -345,7 +345,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .nav-topper{background:#fff;border-bottom:2px solid #d6d6d6;padding-top:1em;padding-bottom:1em;}
 .nav-topper__iconMenu{background:#accce6;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;color:#fff;font-size:1.4em;display:block;height:1.7em;padding:.25em .45em;text-align:center;width:1.8em;}
 .nav-topper__iconMenu:hover,.nav-topper__iconMenu:active,.nav-topper__iconMenu:focus{text-decoration:none;color:#fff}
-.nav-topper__avatarUser img{margin-top:.5em;height:auto;width:3.5em}
+.nav-topper__avatarUser img{margin-top:.5em;height:auto;width:1.5em}
 .nav-topper__previewReturn{padding-left:5em}
 .nav-topper__btnReturn{position:absolute;top:50%;left:0;margin-top:-1.2em}
 
@@ -704,7 +704,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .sidebar-section{padding-bottom:2em;padding-top:2em}
 .sidebar-section--content{display: block;z-index: 999;position: relative;min-height: 20em;}
 .sidebar-section2{padding-bottom:2em;padding-top:10em;}
-.sidebar-section2--cursos{padding-top:0}
+.sidebar-section2--cursos{padding-top:0;z-index:999 !important;}
 .sidebar-section3{padding-bottom:2em;padding-top:4em}
 .sidebar-section4{padding-bottom:2em;padding-top:5em}
 .sidebar-imageCurso{position:relative;}
@@ -1066,7 +1066,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .letter {background: #F8F8F8; padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px;}
 .letter:hover {background: #4fb0ae; color:#FFF; cursor:pointer;}
 .labelField {color: #4fb0ae ;}
-.navQuestion {background: #EEE; height: 60px; width: 90%; margin-top: 40px; position:fixed; bottom:6%; z-index: 2;}
+.navQuestion {background: #EEE; height: 60px; width: 100%; margin-top: 40px; position:absolute;z-index: 2;bottom:0}
 .navButtons a {background: #4fb0ae; padding: 10px 15px; border-radius: 7px; color:#FFF; float:right;margin: 10px 2px;}
 .navButtons a:hover {background: #9ACDCC;}
 .btnFinish {background:#7EC181 !important;}
@@ -1110,8 +1110,9 @@ a:focus {
     max-width: 201px;
 }
 .bg-nameTutor {
-    background : #3c3c3c;
-    opacity: 0.8;
+    /**background : #3c3c3c;
+    opacity: 0.8;*/
+    text-shadow: 3px 3px 3px #000;
 }
 .sidebar-imageCurso>a>img{
     -webkit-filter:contrast(100%) brightness(70%);
@@ -1140,10 +1141,10 @@ a:focus {
     height: 36px;
 }
 .courseDetailTitle{
-    height: 108px;
+    /*height: 108px;/
 }
 .courseDetailDescription{
-    height: 63px;
+    /*height: 63px;*/
 }
 .sidebar-imageCurso>a{
 
@@ -1196,3 +1197,14 @@ a:focus {
 .nav-perfil > li > a:hover,.nav-perfil > li > a:active,.nav-perfil > li > a:focus{background:none;border:none}
 .nav-perfil > li.active > a{background:none;border:none;border-bottom:3px solid #6e8e2d;color:#002b62;font-weight:700;outline:none;}
 .nav-perfil > li.active > a:hover,.nav-perfil > li.active > a:active,.nav-perfil > li.active > a:focus{background:none !important;border:none;border-bottom:3px solid #6e8e2d !important;color:#002b62 !important}
+.certification{
+    padding: 0 !important;
+}
+.certification>a.active{
+
+        background: #3874b8;
+    color: white;
+}
+.avatar_navbar{
+    width: 3em !important;
+}

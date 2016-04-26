@@ -3,8 +3,6 @@
  * @apiName loginView
  * @apiDescription Load login template with params
  * @apiGroup    account
- * @apiVersion  0.1.0
- *
  * @apiSuccess {Object[]} 200 Params related with user
  * {
  *      user : {
@@ -33,8 +31,6 @@ loginView = function(req, res){
  * @apiGroup account
  * @apiParam {String} username Name of the user
  * @apiParam {String} password Password of the user
- * @apiVersion 0.1.0
- *
  * @apiSuccessExample success-response:
  *  HTTP/1.1 200 OK
  *  {
@@ -74,7 +70,6 @@ login = function(req, res){
         response.on("end", function(){
             try{
                 response = JSON.parse(str);
-                console.log(str);
                 if(response.status == "ok"){
                     data = {
                         status : "ok"
@@ -110,8 +105,6 @@ login = function(req, res){
  * @apiName logout
  * @apiDescription Close session
  * @apiGroup account
- * @apiVersion 0.1.0
- *
  * @apiSuccessExample success-response:
  *  HTTP/1.1 200 OK
  *  {
@@ -121,37 +114,11 @@ login = function(req, res){
  * */
 
 logout = function(req, res){
-    data = http.get(KME_API.logout(req.hostname), function(response){
-        str = "";
-        response.on("data", function(data){
-            str += data;
-        })
-        response.on("end", function(){
-            try{
-                response = JSON.parse(str);
-                if(response.status == "ok"){
-                    response = {
-                        status : "ok"
-                    }
-                    req.session.destroy();
-                }else{
-                    response = {
-                        status : "failed",
-                        message : "username and/or password are incorrect"
-                    }
-                }
-                res.send(response);
-            }catch(err){
-                response = {
-                    "status" : "error",
-                    "message" : "Bad Request"
-                }
-                res.status(400).send(response);
-            }
-        })
-    }).on("error", function(err){
-        console.log(err);
-    });;
+
+    req.session.destroy();
+    res.send({
+        "status" : "ok"
+    })
 }
 
 /**
@@ -160,8 +127,6 @@ logout = function(req, res){
  * @apiName Register
  * @apiDescription Allows register a user on platform
  * @apiGroup account
- * @apiVersion 0.1.0
- *
  * @apiSuccessExample success-response:
  *  HTTP/1.1 200 OK
  *  {
@@ -185,53 +150,43 @@ logout = function(req, res){
  * */
 
 register = function(req, res){
-    data = http.get(KME_API.register(req.hostname), function(response){
-        str = "";
-        response.on("data", function(data){
-            str += data;
-        })
-        response.on("end", function(){
+    url = KME_API.register(req.hostname);
+    request("POST", url,{ 
+        qs: {
+            username: req.body.username,
+            password: req.body.password,
+            email : req.body.email
+        },
+    }).done(function(response){
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "failed",
+                error : response.statusCode
+            });
+        }else{
             try{
-                response = JSON.parse(str);
+                response = JSON.parse(response.getBody());
                 if(response.status == "ok"){
-                    response = {
+                    req.session.user = {};
+                    req.session.user.info = response.user;
+                    req.session.user.token = response.token;
+                    req.session.user.logged = true;
+                    res.send({
                         status : "ok"
-                    }
-                    set_client_session(req, {
-                        logged : true,
-                        info : {
-                            username : response.username,
-                            first_name : response.first_name,
-                            last_name : response.last_name,
-                            avatar : response.avatar,
-                            email : response.email,
-
-                        },
-                        token : response.token
                     })
-                    res.send(response);
-
 
                 }else{
-                    response = {
+                    res.send({
                         status : "failed",
-                        message : response.error
-                    }
-
-                    res.status(400).send(response);
+                        message : response.message
+                    })
                 }
-
             }catch(err){
-                response = {
-                    "status" : "failed",
-                    "message" : "Bad Request"
-                }
-
-                res.status(400).send(response);
+                res.send(response.getBody());
+            
             }
-
-        })
-    });;
+        }
+    })
 }
 
 /**
@@ -253,3 +208,35 @@ isAuthenticated = function(req, res){
     }
     res.send(response);
 }
+
+/**
+ * @api{get} /api/account/exists/:username User exists?
+ * @apiName user_exists
+ * @apiDescription Function that return is a username is already taken
+ * @apiGroup account
+ * @apiSuccessExample Success-response
+ * HTTP/1.1 200 OK
+ * {
+ *      status : {String},
+ *      exists : {Boolean}
+ * }
+ ***/
+user_exists = function(req, res){
+    url = KME_API.user_exists(req.hostname)+req.params.username;
+    request("GET", url).done(function(response){
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "failed",
+                error : response.statusCode
+            })
+        }else{
+            try{
+                response = JSON.parse(response.getBody())
+                res.send(response);
+            }catch(err){
+                res.send(500).send(response.getBody())
+            }
+        }
+    })
+}
+

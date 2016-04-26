@@ -1,13 +1,13 @@
 <div ng-controller="navbarController">
     <% if (user.logged){ %>
-    <nav class="col-xs-12 nav-topper nav-topper--perfil">
+    <nav class="col-xs-12 nav-topper nav-topper--perfil" style="z-index:9999;">
         <div class="container">
-            <div class="col-xs-2">
+            <div class="col-xs-1">
                 <a href="/" style="padding-left:0">
                     <img src="/existaya/images/logo-ico.png" alt="Marketing University" class="img-responsive pull-left logo">
                 </a>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-7">
                 <ul class="nav nav-pills nav-interno hidden">
                     <li id="courseView" class="active">
                     <a href="/profile/#my_courses"  aria-controls="cursosIniciados" role="tab" data-toggle="tab">Mis cursos</a>
@@ -27,20 +27,36 @@
                 <div class="row">
                     <div class="col-xs-5 col-xs-offset-5">
                         <p class="text text--blanco text--xbold text-right margin--t1">
-                        <%= user.info.username %>
+                        <%= user.info.first_name %> <%= user.info.last_name %>
                         </p>
                     </div>
-                    <div class="col-xs-2 padding--r0 padding--l0 nav-topper__avatarUser">
+                    <div class="col-xs-2 padding--r0 padding--l0 nav-topper__avatarUser" style="">
                         <div class="row">
                             <a  id="menu1" data-toggle="dropdown">
-                                <img src="<%if(user.info.avatar != null){ %><%=user.info.avatar%><%}else{%>/existaya/images/avatarDefault.png<%}%>" alt="" class="img-responsive pull-right img-circle" >
+                                <img src="<%if(user.info.avatar != null){ %><%=user.info.avatar%><%}else{%>/existaya/images/avatarDefault.png<%}%>" alt="" class="img-responsive pull-right img-circle avatar_navbar">
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile"><%= user.info.username %></a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="hidden">is</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="" class="hidden">Neo</a></li>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1" style="">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="/profile" class="col-xs-12">
+                                        <img src="/existaya/images/persona.svg" alt=""class="">
+                                        <span class="">Mi Perfil</span>
+                                    </a>
+                                </li>
                                 <li role="presentation" class="divider"></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Logout</a></li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#" class="">
+
+                                        <img src="/existaya/images/tuercas.svg" alt=""class="">
+                                            <span>Configuraciones</span>
+                                    </a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#" id="logout" onclick="logout()">
+                                        <img src="/existaya/images/cerrar.svg" alt="">
+                                        <span>Cerrar sesion</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -103,10 +119,8 @@
                         <div class="col-xs-10">
                             <ul class="nav nav-complete navbar-nav navbar-right" >
                                 <li class="active"><a href="/all_courses">CURSOS</a></li>
-                                <li><a href="/all_certificates">CERTIFICACIONES</a></li>
+                                <li><a href="/all_certifications">CERTIFICACIONES</a></li>
                                 <li><a href="/jobs">BOLSA DE EMPLEO</a></li>
-                                <li><a href="/">BIBLIOTECA</a></li>
-                                <li><a href="/">PRECIOS</a></li>
                             </ul>
                         </div>
                         <a class="btn btn--academy btn-azul btn--right btn-lg btn--ingresar pull-right" >
@@ -140,8 +154,7 @@
                         </ul>
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="registro">
-
-
+                                <span class="alert alert-danger" ng-if="showError">{{ message }}</span>
                                 <a href="#" class="btn btn-facebook btn-block" ng-click="FBLogin(true)">
                                     <span class="icon-facebook margin--r2"></span> 
                                     Regístrate con facebook
@@ -151,9 +164,9 @@
                                 </p>
                                 <form>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control--form" placeholder="Nombre Completo" ng-model="userNameNew" required>
-                                        <input type="email" class="form-control form-control--form" placeholder="Correo Electrónico" ng-model="userEmail" required>
-                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="userPasswordNew" required>
+                                        <input type="text" class="form-control form-control--form" placeholder="Nombre Completo" ng-model="username" required>
+                                        <input type="email" class="form-control form-control--form" placeholder="Correo Electrónico" ng-model="email" required>
+                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="password" required>
                                     </div>
                                     <div class="alert alert-danger text-center" ng-show="alertError"><span id="errorLogin"></span></div>
                                     <div class="col-xs-12 bg-gris margin--b1">
@@ -163,7 +176,7 @@
                                     </div>
                                     <div class="col-xs-12 margin--b1">
                                         <div class="row">
-                                            <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="createAccount()" value="Crear una cuenta">
+                                            <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="singUp()" value="Crear una cuenta">
                                         </div>
                                     </div>
                                 </form>
@@ -180,12 +193,12 @@
                                 </p>
                                 <form>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control--form" placeholder="Nombre de usuario" ng-model="userName" required>
-                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="userPassword" required>
+                                        <input type="text" class="form-control form-control--form" placeholder="Nombre de usuario" ng-model="_username" required>
+                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="_password" required>
                                     </div>
                                     <div class="alert alert-danger text-center" ng-show="alertFields"><span>Todos los campos se deben diligenciar</span></div>
                                     <div class="alert alert-danger text-center" ng-show="alertData"><span>El nombre de usuario y/o la contraseña son incorrectos.</span></div>
-                                    <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="singUp()" value="iniciar sesión">
+                                    <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="signIn()" value="iniciar sesión">
                                     <!-- <a class="text text--azul text--sm text-center center-block margin-">Olvíde mi contraseña </a>-->
                                 </form>
                             </div>
@@ -196,3 +209,4 @@
         </div>
     </div>
 </div>
+

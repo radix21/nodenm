@@ -13,7 +13,9 @@
 					</p>
 				</div>
 			<div class="col-sm-6 col-xs-12 text-center">
-				<a href="#" class="btn btn-rojo btn-lg margin--t2">Regístrate!</a>
+				<% if (user.logged){ %>
+				<a href="/certification/inscribe/<%= slug %>" class="btn btn-rojo btn-lg margin--t2">Regístrate!</a>
+				<% } %>
 			</div>
 		</div>
 	</div>
@@ -64,23 +66,25 @@
 	<div class="col-sm-3 col-xs-12">
 		<div class="row">
 			<div class="panel-group panel-group--detalleCertificaciones" role="tablist" id="detalleModulos">
-			<% for (var i in response.courses) {%>
+			<% for(c in response.courses){%>
+				<% course = response.courses[c];%>
 				<div class="panel panel-default">
-					<div class="panel-heading" role="tab">
-						<a href="#<%= response.courses[i].id %>" aria-controls="<%= response.courses[i].id %>" role="tab" data-toggle="tab" class="">
-							<span class="ico-number">1</span>
-							<%= response.courses[i].name %>
+					<div class="panel-heading certification" role="tab">
+						<a href="#<%- course.id %>" aria-controls="<%- course.id %>" role="tab" data-toggle="tab" class="<% if(c ==0){%>active<%}%>">
+							<span class="ico-number"><%- parseInt(c) +1 %></span>
+							<%- course.name.toLowerCase().substring(0,30) %><% if (course.name.length > 30) { %>...<% } %>
 						</a>
 					</div>
 				</div>
-				<% } %>
+			<%}%>
+
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-9 col-xs-12">
 		<div class="tab-content">
 			<% for (var i in response.courses) { %>
-			<div role="tabpanel" class="tab-pane active" id="<%= response.courses[i].id %>">
+			<div role="tabpanel" class="tab-pane <% if(i==0){%>active<%}%>" id="<%= response.courses[i].id %>">
 				<div class="row">
 					<div class="col-xs-8">
 						<h2 class="text text--xlg text--azul text--bold margin--t0">
@@ -227,6 +231,10 @@
 	</div>
 </section>
 <script type="text/javascript">
-	$('.panel-group.panel-group--detalleCertificaciones div.panel a:first').addClass('active');
+	$('.panel-group.panel-group--detalleCertificaciones div.panel a').click(function(event) {
+		event.preventDefault();
+		$('.panel-group.panel-group--detalleCertificaciones div.panel a').removeClass('active');
+		$(this).addClass('active');
+	});
 </script>
 <% include ../footer.html %>

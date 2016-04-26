@@ -1,18 +1,28 @@
 <% include head.html %>
 <navbar></navbar>
+<script>
+data = {};
+data.name = `<%- user.info.first_name %>`;
+data.username = `<%- user.info.username %>`;
+data.last_name = `<%- user.info.last_name %>`;
+data.jobtitle = `<%- user.info.jobtitle %>`;
+data.avatar = (`<%- user.info.avatar %>`).split("?")[0].replace("80","120");
+</script>
+<script src="/existaya/controllers/profile.js"></script>
 <section class="col-xs-12">
     <div class="row">
         <div class="">
-
             <div class="col-xs-3 sidebar-perfil sidebar-add__montainR margin--b5">
                 <div class="row">
-                    <div class="col-xs-12 sidebar-perfil__top text-center">
-                        <img ng-src="{{dataUser.photo.split('?')[0].replace('80', '120')}}" alt="" class="img-responsive center-block img-circle">
+                    <div class="col-xs-12 sidebar-perfil__top text-center" ng-controller="profile">
+                        <img src="{{dataUser.avatar.split('?')[0].replace('80', '120')}}" alt="" class="img-responsive center-block img-circle" ng-if="dataUser.avatar != ''">
+                        <img src="/existaya/images/avatarDefault.png" alt="" class="img-responsive center-block img-circle" ng-if="dataUser.avatar == ''">
+
                         <div>
                             <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name != ''">{{dataUser.name}} {{dataUser.lastname}}</p>
                             <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name == ''">{{dataUser.username}}</p>
                         </div>
-                        <p class="text text--gris text--lite text--sm margin--b2">{{dataUser["job-title"]}}</p>
+                        <p class="text text--gris text--lite text--sm margin--b2">{{dataUser.jobtitle}}</p>
                         <div class="alert alert--progress alert--bigger" role="alert">
 
                             <p class="text text--gris text--lite text-left">
@@ -36,7 +46,10 @@
                         <table class="table table-hover table--detallePerfil">
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tag text--gris text--md"></span>
+
+                                    <img src="/existaya/images/01.svg" alt="">
+                                    <span class="text--gris text--md">
+                                    </span>
                                 </td>
                                 <td>
                                     <p class="text text--xbold text--gris_osc margin--t0">
@@ -51,7 +64,9 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tag text--gris text--md"></span>
+
+                                    <img src="/existaya/images/02.svg" alt="">
+                                    <span class="text--gris text--md"></span>
                                 </td>
                                 <td>
                                     <p class="text text--xbold text--gris_osc margin--t0">
@@ -66,9 +81,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tag text--gris text--md"></span>
+
+                                    <img src="/existaya/images/03.svg" alt="">
+                                    <span class="text--gris text--md"></span>
                                 </td>
                                 <td>
+
                                     <p class="text text--xbold text--gris_osc margin--t0">
                                     Certificaciones obtenidas
                                     </p>
@@ -81,7 +99,9 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-tag text--gris text--md"></span>
+
+                                    <img src="/existaya/images/04.svg" alt="" class="text--gris_osc">
+                                    <span class="text--gris text--md"></span>
                                 </td>
                                 <td>
                                     <p class="text text--xbold text--gris_osc margin--t0">
@@ -567,65 +587,65 @@
                                 </li>
                             </ul>
                             <certifications type="in_progress"></certifications>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Certificaciones -->
+        </div>
+        <!-- Certificaciones -->
 
-            <div ng-show="display_menu == 2">
+        <div ng-show="display_menu == 2">
 
 
+        </div>
+
+        <!-- Recursos Favoritos -->
+        <div>
+
+        </div>
+        <div ng-show="display_menu == 3" ng-if="1>2">
+
+            <a href="#" bookmarklet>ENLACE PARA BOOKMARKLET</a>
+            <h1 class="text text--lite text--lg margin--t1 text--bold text--gris">
+                Recursos Favoritos
+            </h1>
+
+            <div class="clearfix"></div>
+            <div id="bookmarletButton">
+                <a href=""><img src="" alt=""></a>
             </div>
 
-            <!-- Recursos Favoritos -->
-            <div>
-
-            </div>
-            <div ng-show="display_menu == 3" ng-if="1>2">
-
-                <a href="#" bookmarklet>ENLACE PARA BOOKMARKLET</a>
-                <h1 class="text text--lite text--lg margin--t1 text--bold text--gris">
-                    Recursos Favoritos
-                </h1>
-
-                <div class="clearfix"></div>
-                <div id="bookmarletButton">
-                    <a href=""><img src="" alt=""></a>
-                </div>
-
-                <div class="panel panel-default margin--t2">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h2 class="text text--xlg text--gris_osc text--xbold">
-                                    Facebook Marketing
-                                </h2>
-                            </div>
-                            <div class="col-xs-4">
-                                <img src="/images/xResources.jpg" height="413" width="720" alt="" class="img-responsive pull-left">
-                            </div>
-                            <div class="col-xs-8">
-                                <p class="text text--lite text--gris">
-                                Aprende a usar Facebook como herramienta para incrementar el alcance de tu estrategia digital impactando las ventas y retención de tus clientes.
-                                </p>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <p class="text text--xbold text--gris_osc text--md">
-                                        Lectura
-                                        </p>
-                                    </div>
+            <div class="panel panel-default margin--t2">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2 class="text text--xlg text--gris_osc text--xbold">
+                                Facebook Marketing
+                            </h2>
+                        </div>
+                        <div class="col-xs-4">
+                            <img src="/images/xResources.jpg" height="413" width="720" alt="" class="img-responsive pull-left">
+                        </div>
+                        <div class="col-xs-8">
+                            <p class="text text--lite text--gris">
+                            Aprende a usar Facebook como herramienta para incrementar el alcance de tu estrategia digital impactando las ventas y retención de tus clientes.
+                            </p>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p class="text text--xbold text--gris_osc text--md">
+                                    Lectura
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
+
     </div>
+</div>
 </section>
 
 <script>

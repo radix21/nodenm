@@ -121,14 +121,12 @@ app.directive('tabsCustomVertical', ["$rootScope",function ($rootScope) {
         }
         ];   
         $rootScope.$watch("show_test", function(){
-            console.log("va a ejecurar ele examen");
             if($rootScope.show_test){
                 scope.tabs[0].active = true;
 
             }
         });
         $rootScope.$watch("numberQuestion", function(){
-            console.log($rootScope.numberQuestion);
         })
 
     }
@@ -630,7 +628,6 @@ app.directive("coursesCatalog", ["$rootScope", "courses",  function($rootScope, 
                     scope.dataMyCourses = response.courses;
                     $rootScope.dataMyCourses = response.courses;
                 }).error(function(a,b,c,d){
-                    console.log(d);
                     console.log("[DEBUG] - error: "+b+" track:"+d );
                 })
                 break;
@@ -743,7 +740,6 @@ app.directive("prerequisitesList",[function(){
         template : "<ul id='list_prerequisites'></ul>",
         link : function(scope){
             for(element of scope.data){
-                console.log(element);
                     if(element.slug != ""){
                     li = document.createElement("li");
                     li.innerHTML = "<a href='/course/"+element.slug+"/details'>"+element.name+"</a>";
@@ -764,7 +760,6 @@ app.directive("iframeEmbed", [function(){
         link : function(scope){
             try{
                 interval_content[scope.pk] = setInterval(function(){
-                    console.log(scope.data);
                     l = ("#embed"+scope.pk);
                     l= document.querySelectorAll(l);
                     if(l.length > 0){
@@ -836,3 +831,16 @@ app.directive("targetPublic", [function(){
         }
     }
 }])
+
+app.directive("courseVideo", [function(){
+    return {
+        restrict : "EA",
+        template : "<p id='courseVideo' class='embed-responsive embed-responsive-16by9'></p>",
+        link : function(scope){
+            document.querySelector("#courseVideo").innerHTML = scope.video;
+        },
+        scope :  {
+            video : "="    
+        }
+    }
+}]);

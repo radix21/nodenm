@@ -1,7 +1,6 @@
 express = require("express");
 DEFAULT_SERVER = "http://marketing.kmelx.com";
 SERVER = function(hostname){
-
     return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
 }
 KME_API = {
@@ -64,7 +63,7 @@ KME_API = {
         return SERVER(hostname) + "/api/tribes/send_post/";
     },
     take_test : function(hostname){
-        return SERVER(hostname) + "/api/content/take_test/content/module";
+        return SERVER(hostname) + "/api/contents/take_test/";
     },
     all_certifications: function(hostname) {
         return SERVER(hostname)+ "/api/courses/get_courses_certification/"
@@ -83,24 +82,42 @@ KME_API = {
     },
     my_certifications : function(hostname){
         return SERVER(hostname) + "/api/courses/get_user_certifications/";
+    },
+    inscribe_in_certification: function(hostname) {
+        return SERVER(hostname)+ "/api/course/inscribe_in_certification/"
+    },
+    inscribe_user : function(hostname){
+        return SERVER(hostname) + "/api/courses/inscribe/";
+    },
+    user_exists : function(hostname){
+        return SERVER(hostname) + "/api/exists/";
     }
 
 }
     
 CLIENTS = {
-    "marketinguniversity.co" : {
+    "www.marketinguniversity.co" : {
         folder : "existaya",
-        server : "http://marketing.kmelx.com:5000"
+        server : "http://marketing.kmelx.com",
+        token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "kmelx.com" : {
         folder : "kmelx",
-        server : "http://kmelx.com:5000"
+        server : "http://kmelx.com:5000",
+        token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
 
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com:5000"
+        server : "http://marketing.kmelx.com:5000",
+        token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
+    },
+    "safe-beyond-13324.herokuapp.com" : {
+        folder: "existaya",
+        server : "http://marketing.kmelx.com",
+        token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     }
+
 }
 client_folder = function(hostname){
     folder = (CLIENTS[hostname] != undefined ? (CLIENTS[hostname]["folder"]+"/") : 'default/');

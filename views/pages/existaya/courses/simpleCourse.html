@@ -2,18 +2,18 @@
 <navbar></navbar>
 <script>
     interval_content = [];
-    var slug = "<%= slug %>";
+    var slug = `<%= slug %>`;
     var data = {};
     data.tutors = [];
     <% for(t in dataStudent.tutors){%>
         <% tutor = dataStudent.tutors[t];%>
         data.tutors.push({
-            first_name : "<%- tutor.first_name%>",
-            last_name : "<%- tutor.last_name %>",
-            pk : "<%- tutor.pk %>",
-            avatar : "<%- tutor.avatar %>",
-            about : "<%- tutor.about %>",
-            jobtitle : "<%- tutor.jobtitle %>"
+            first_name : `<%- tutor.first_name%>`,
+            last_name : `<%- tutor.last_name %>`,
+            pk : `<%- tutor.pk %>`,
+            avatar : `<%- tutor.avatar %>`,
+            about : `<%- tutor.about %>`,
+            jobtitle : `<%- tutor.jobtitle %>`
         })
     <%}%>
     data.tribes = [];
@@ -21,8 +21,8 @@
     <% tribe = dataStudent.tribes[t];%>
         data.tribes.push({
             description : `<%- tribe.description %>`,
-            name : "<%- tribe.name %>",
-            slug : "<%- tribe.slug %>",
+            name : `<%- tribe.name %>`,
+            slug : `<%- tribe.slug %>`,
             participation : <%- tribe.participation %>,
             id : <%- tribe.id %>,
             topics : []
@@ -30,101 +30,100 @@
         <% for(i in tribe.topics){%>
             <% topic = tribe.topics[i];%>
             data.tribes[<%- t %>].topics.push({
-                description : "<%- topic.description %>",
+                description : `<%- topic.description %>`,
                 id : <%- topic.id %>,
                 participation :<%- topic.participation %>,
-                name : "<%- topic.name %>"
+                name : `<%- topic.name %>`
             })
         <%}%>
     <%}%>
     <% course = dataStudent.course;%>
     data.course = {
-        cost : "<%= course.cost %>",
-        video : "<%= course.video %>",
-        duration : "<%= course.duration %>",
-        category : "<%= course.category %>",
-        area : "<%= course.area %>",    
-        ubs : "<%= course.ubs %>",
-        version : "<%= course.version %>",
-        objective : "<%= course.objective %>",
-        pk : "<%= course.pk %>",
-        percentage : "<%= course.percentage %>",
-        type : "<%= course.type %>",
+        cost : `<%= course.cost %>`,
+        video : `<%= course.video %>`,
+        duration : `<%= course.duration %>`,
+        category : `<%= course.category %>`,
+        area : `<%= course.area %>`,    
+        ubs : `<%= course.ubs %>`,
+        version : `<%= course.version %>`,
+        objective : `<%= course.objective %>`,
+        pk : `<%= course.pk %>`,
+        percentage : `<%= course.percentage %>`,
+        type : `<%= course.type %>`,
         public : <%= course.public %>,
-        update : "<%= course.update %>",
-        description : "<%= course.description %>",
-        tags : "<%= course.tags %>",
-        type_pk : "<%= course.type_pk %>",
-        goals : "<%- course.goals %>",
+        update : `<%= course.update %>`,
+        description : `<%= course.description %>`,
+        tags : `<%= course.tags %>`,
+        type_pk : `<%= course.type_pk %>`,
+        goals : `<%- course.goals %>`,
         active : <%= course.active %>,
-        area_pk : "<%= course.area_pk %>",
+        area_pk : `<%= course.area_pk %>`,
         target_public : `<%- course.target_public %>`,
-        name : "<%= course.name %>",
-        created : "<%= course.created %>",
-        category_pk : "<%= course.category_pk %>",
-        general_objective : "<%= course.general_objective %>",
+        name : `<%= course.name %>`,
+        created : `<%= course.created %>`,
+        category_pk : `<%= course.category_pk %>`,
+        general_objective : `<%= course.general_objective %>`,
         skills : [],
         prerequisites : [],
     }
     <% for(prerequisite in course.prerequisites){%>
     <% prerequisite = course.prerequisites[prerequisite];%>
         data.course.prerequisites.push({
-            name : "<%- prerequisite.name %>",
-            description : "<%- prerequisite.description %>",
-            slug : "<%- prerequisite.slug %>"   
+            name : `<%- prerequisite.name %>`,
+            description : `<%- prerequisite.description %>`,
+            slug : `<%- prerequisite.slug %>`   
         })
     <%}%>
     <% for(skill in course.skills){%>
     <% skill = course.skills[skill];%> 
         data.course.skills.push({
-name : "<%- skill.name %>",
-description : "<%- skill.description %>",
-pk : "<%- skill.pk %>"
+name : `<%- skill.name %>`,
+description : `<%- skill.description %>`,
+pk : `<%- skill.pk %>`
 })
 <%}%>
 data.modules = [];
 <% for(m in dataStudent.modules ){%>
     <% module = dataStudent.modules[m];%>
         data.modules.push({
-available : <%= module.available %>,
-tasks: [],
-submodules: [],
-module_pk: <%= module.module_pk %>,
-module_description: "<%= module.module_description %>",
-objects: [],
-module_name: "<%= module.module_name %>",
-contents: [], 
-module_image: "<%= module.module_image %>", 
-position: <%= module.position %>,
-percentage_done: <%= module.percentage_done  %>,
-
-})
+            tasks: [],
+            submodules: [],
+            module_pk: <%= module.module_pk %>,
+            module_description: `<%= module.module_description %>`,
+            objects: [],
+            module_name: `<%= module.module_name %>`,
+            contents: [], 
+            module_image: `<%= module.module_image %>`, 
+            position: <%= module.position %>,
+            percentage_done: <%= module.percentage_done  %>,
+        
+        })
 <% for( val in module.objects){ %>
     <% object = module.objects[val]; %>
         data.modules[<%= m %>].objects.push({
-                "object_name": "<%- object.object_name %>",
+                "object_name": `<%- object.object_name %>`,
                 "module_pk": <%- object.module_pk %>, 
-                "quantity_participation": "<%- object.quantity_participation %>",
-                "url": "<%- object.url %>",
-                "object_description": "<%= object.object_description %>", 
-                "type": "<%- object.type %>", 
-                "object_id": "<%= object.object_id %>",
+                "quantity_participation": `<%- object.quantity_participation %>`,
+                "url": `<%- object.url %>`,
+                "object_description": `<%= object.object_description %>`, 
+                "type": `<%- object.type %>`, 
+                "object_id": `<%= object.object_id %>`,
                 "is_unavailable": <%= object.is_unavailable %>
                 })
     <%}%>
     <% for(val in module.tasks){%>
         <% task = module.tasks[val];%>
             data.modules[<%= m %>].tasks.push({
-                    "task_name": "<%- task.task_name %>", 
-                    "task_description": "<%- task.task_description %>", 
-                    "task_percentage": "<%- task.task_percentage %>",
-                    "task_initial_date": "<%- task.task_initial_date %>", 
-                    "task_final_date": "<%- task.task_final_date %>", 
-                    "task_show_initial_date": "<%- task.task_show_final_date %>",
-                    "task_show_final_date": "<%- task.task_show_final_date%>",
-                    "task_data": "<%- task.task_data %>", 
-                    "task_position": "<%- task.task_position %>", 
-                    "task_id": "<%- task.taskl_id %>"
+                    "task_name": `<%- task.task_name %>`, 
+                    "task_description": `<%- task.task_description %>`, 
+                    "task_percentage": `<%- task.task_percentage %>`,
+                    "task_initial_date": `<%- task.task_initial_date %>`, 
+                    "task_final_date": `<%- task.task_final_date %>`, 
+                    "task_show_initial_date": `<%- task.task_show_final_date %>`,
+                    "task_show_final_date": `<%- task.task_show_final_date%>`,
+                    "task_data": `<%- task.task_data %>`, 
+                    "task_position": `<%- task.task_position %>`, 
+                    "task_id": `<%- task.taskl_id %>`
                     })
 
         <%}%>
@@ -132,46 +131,46 @@ percentage_done: <%= module.percentage_done  %>,
 
             <% submodule = module.submodules[val];%>
 
-                data.modules[<%= m %>].submodules.push({
-available : <%= submodule.available %>,
-tasks: [],
-module_pk: <%= submodule.module_pk %>,
-module_description: "<%= submodule.module_description %>",
-objects: [],
-module_name: "<%= submodule.module_name %>",
-contents: [], 
-module_image: "<%= submodule.module_image %>",
-position: <%= submodule.position %>,
-percentage_done: <%= submodule.percentage_done  %>,
+            data.modules[<%= m %>].submodules.push({
+                completed : <%- submodule.completed %>,
+                tasks: [],
+                module_pk: <%= submodule.module_pk %>,
+                module_description: `<%= submodule.module_description %>`,
+                objects: [],
+                module_name: `<%= submodule.module_name %>`,
+                contents: [], 
+                module_image: `<%= submodule.module_image %>`,
+                position: <%= submodule.position %>,
+                percentage_done: <%= submodule.percentage_done  %>,
 
-})
-<% for(value in submodule.tasks){%>
-    <% task = submodule.tasks[value];%>
-        data.modules[<%= m %>].submodules[<%- val %>].tasks.push({
-                "task_name": "<%- task.task_name %>", 
-                "task_description": "<%- task.task_description %>", 
-                "task_percentage": "<%- task.task_percentage %>",
-                "task_initial_date": "<%- task.task_initial_date %>", 
-                "task_final_date": "<%- task.task_final_date %>", 
-                "task_show_initial_date": "<%- task.task_show_final_date %>",
-                "task_show_final_date": "<%- task.task_show_final_date%>",
-                "task_data": "<%- task.task_data %>", 
-                "task_position": "<%- task.task_position %>", 
-                "task_id": "<%- task.taskl_id %>"
-                })
-    <%}%>
+            })
+            <% for(value in submodule.tasks){%>
+                <% task = submodule.tasks[value];%>
+                    data.modules[<%= m %>].submodules[<%- val %>].tasks.push({
+                            "task_name": `<%- task.task_name %>`, 
+                            "task_description": `<%- task.task_description %>`, 
+                            "task_percentage": `<%- task.task_percentage %>`,
+                            "task_initial_date": `<%- task.task_initial_date %>`, 
+                            "task_final_date": `<%- task.task_final_date %>`, 
+                            "task_show_initial_date": `<%- task.task_show_final_date %>`,
+                            "task_show_final_date": `<%- task.task_show_final_date%>`,
+                            "task_data": `<%- task.task_data %>`, 
+                            "task_position": `<%- task.task_position %>`, 
+                            "task_id": `<%- task.taskl_id %>`
+                            })
+                <%}%>
 
 
     <% for( value in submodule.objects){ %>
         <% object = submodule.objects[value]; %>
             data.modules[<%= m %>].submodules[<%= val %>].objects.push({
-                    "object_name": "<%- object.object_name %>",
+                    "object_name": `<%- object.object_name %>`,
                     "module_pk": <%- object.module_pk %>, 
-                    "quantity_participation": "<%- object.quantity_participation %>",
-                    "url": "<%- object.url %>",
-                    "object_description": "<%= object.object_description %>", 
-                    "type": "<%- object.type %>", 
-                    "object_id": "<%= object.object_id %>",
+                    "quantity_participation": `<%- object.quantity_participation %>`,
+                    "url": `<%- object.url %>`,
+                    "object_description": `<%= object.object_description %>`, 
+                    "type": `<%- object.type %>`, 
+                    "object_id": `<%= object.object_id %>`,
                     "is_unavailable": <%= object.is_unavailable %>
                     })
 
@@ -181,41 +180,41 @@ percentage_done: <%= submodule.percentage_done  %>,
         <% for(value in submodule.contents){%>
             <% content = submodule.contents[value];%>
                 data.modules[<%- m %>].submodules[<%= val %>].contents.push({
-                        "content_name" : "<%= content.content_name %>", 
-                        "content_description": "<%= content.content_description%>", 
+                        "content_name" : `<%= content.content_name %>`, 
+                        "content_description": `<%= content.content_description%>`, 
                         "content_button_info": {
                         "show_message_effectivity": <%= content.content_button_info.show_message_effectivity %>, 
-                        "exam_score": "<%= content.content_button_info.exam_score %>", 
-                        "num_attempts": parseInt("0"+"<%= content.content_button_info.num_attempts %>"), 
-                        "passed": "<%= content.content_button_info.passed %>", 
+                        "exam_score": <%- content.content_button_info.exam_score %>, 
+                        "num_attempts": parseInt("0"+`<%= content.content_button_info.num_attempts %>`), 
+                        "passed": `<%= content.content_button_info.passed %>`, 
                         "available":  <%= content.content_button_info.available %>, 
                         "show_button":  <%= content.content_button_info.show_button %>,
                         "show_report":  <%= content.content_button_info.show_report %>, 
-                        "download": " <%= content.content_button_info.download %>",
+                        "download": ` <%= content.content_button_info.download %>`,
                         "show_corrections":  <%= content.content_button_info.show_corrections %>,
-                        "self_grade": " <%= content.content_button_info.self_grade %>",
+                        "self_grade": ` <%= content.content_button_info.self_grade %>`,
                         "show_score":  <%= content.content_button_info.show_score %>,
-                        "attempts_left":  parseInt("0"+"<%- content.content_button_info.attempts_left %>"),
+                        "attempts_left":  parseInt("0"+`<%- content.content_button_info.attempts_left %>`),
                         "show_exam":  <%= content.content_button_info.show_exam %>,
-                        "initial_date": "<%= content.content_button_info.initial_date %>",
-                        "final_date": "<%= content.content_button_info.final_date %>",
+                        "initial_date": `<%= content.content_button_info.initial_date %>`,
+                        "final_date": `<%= content.content_button_info.final_date %>`,
                         },
-                        "content_position": "<%= content.content_position %>", 
+                        "content_position": `<%= content.content_position %>`, 
                         "content_pk": <%= content.content_pk%>, 
                         'template': "<%= content.template %>", 
                         "can_open" : <%= content.can_open %>,
-                        "content_initial_date": "<%= content.content_initial_date%>", 
-                        "content_final_date": "<%= content.content_final_date %>", 
-                        "show_initial_date": "<%= content.show_initial_date %>", 
-                        "show_final_date":"<%= content.show_final_date %>", 
-                        "content_aprobation": "<%= content.content_aprobation %>",
-                        "content__display_mode": "<%= content.content__display_mode %>", 
-                        "content_training": "<%= content.content_training %>", 
+                        "content_initial_date": `<%= content.content_initial_date%>`, 
+                        "content_final_date": `<%= content.content_final_date %>`, 
+                        "show_initial_date": `<%= content.show_initial_date %>`, 
+                        "show_final_date":`<%= content.show_final_date %>`, 
+                        "content_aprobation": `<%= content.content_aprobation %>`,
+                        "content__display_mode": `<%= content.content__display_mode %>`, 
+                        "content_training": `<%= content.content_training %>`, 
                         'content_opportunities': "<%= content.content_opportunities %>", 
-                        "cim_pk": "<%= content.cim_pk %>", 
-                        "file_url" : ("<%= content.file %>").split(",")[0], 
-                        "bonus" : "<%= content.bonus %>", 
-                        "cim" : "<%= content.cim %>",
+                        "cim_pk": `<%= content.cim_pk %>`, 
+                        "file_url" : (`<%= content.file %>`).split(",")[0], 
+                        "bonus" : `<%= content.bonus %>`, 
+                        "cim" : `<%= content.cim %>`,
                         "text" : `<%- content.text %>` 
                 })
             <%}%>
@@ -223,45 +222,43 @@ percentage_done: <%= submodule.percentage_done  %>,
             <%}%>
 
             <% for(val in module.contents){%>
-
                 <% content = module.contents[val];%>
-
                     data.modules[<%- m %>].contents.push({
-                            "content_name" : "<%= content.content_name %>", 
-                            "content_description": "<%= content.content_description%>", 
+                            "content_name" : `<%= content.content_name %>`, 
+                            "content_description": `<%= content.content_description%>`, 
                             "content_button_info": {
                             "show_message_effectivity": <%= content.content_button_info.show_message_effectivity %>, 
                             "exam_score": <%= content.content_button_info.exam_score %>, 
-                            "num_attempts": parseInt("0"+"<%= content.content_button_info.num_attempts %>"), 
+                            "num_attempts": parseInt("0"+`<%= content.content_button_info.num_attempts %>`), 
                             "passed": <%= content.content_button_info.passed %>, 
                             "available":  <%= content.content_button_info.available %>, 
                             "show_button":  <%= content.content_button_info.show_button %>,
                             "show_report":  <%= content.content_button_info.show_report %>, 
-                            "download": " <%= content.content_button_info.download %>",
+                            "download": ` <%= content.content_button_info.download %>`,
                             "show_corrections":  <%= content.content_button_info.show_corrections %>,
                             "self_grade": <%= content.content_button_info.self_grade %>,
                             "show_score":  <%= content.content_button_info.show_score %>,
-                            "attempts_left":  parseInt("0"+"<%- content.content_button_info.attempts_left %>"),
+                            "attempts_left":  parseInt("0"+`<%- content.content_button_info.attempts_left %>`),
                             "show_exam":  <%= content.content_button_info.show_exam %>,
-                            "initial_date": "<%= content.content_button_info.initial_date %>",
-                            "final_date": "<%= content.content_button_info.final_date %>",
+                            "initial_date": `<%= content.content_button_info.initial_date %>`,
+                            "final_date": `<%= content.content_button_info.final_date %>`,
                             },
-                            "content_position": "<%= content.content_position %>", 
+                            "content_position": `<%= content.content_position %>`, 
                             "content_pk": <%= content.content_pk%>, 
                             'template': "<%= content.template %>", 
                             "can_open" : <%= content.can_open %>,
-                            "content_initial_date": "<%= content.content_initial_date%>", 
-                            "content_final_date": "<%= content.content_final_date %>", 
-                            "show_initial_date": "<%= content.show_initial_date %>", 
-                            "show_final_date":"<%= content.show_final_date %>", 
-                            "content_aprobation": "<%= content.content_aprobation %>",
-                            "content__display_mode": "<%= content.content__display_mode %>", 
-                            "content_training": "<%= content.content_training %>", 
+                            "content_initial_date": `<%= content.content_initial_date%>`, 
+                            "content_final_date": `<%= content.content_final_date %>`, 
+                            "show_initial_date": `<%= content.show_initial_date %>`, 
+                            "show_final_date":`<%= content.show_final_date %>`, 
+                            "content_aprobation": `<%= content.content_aprobation %>`,
+                            "content__display_mode": `<%= content.content__display_mode %>`, 
+                            "content_training": `<%= content.content_training %>`, 
                             'content_opportunities': "<%= content.content_opportunities %>", 
-                            "cim_pk": "<%= content.cim_pk %>", 
-                            "file_url" : ("<%= content.file %>").split(",")[0], 
-                            "bonus" : "<%= content.bonus %>", 
-                            "cim" : "<%= content.cim %>",
+                            "cim_pk": `<%= content.cim_pk %>`, 
+                            "file_url" : (`<%= content.file %>`).split(",")[0], 
+                            "bonus" : `<%= content.bonus %>`, 
+                            "cim" : `<%= content.cim %>`,
                             "text" : `<%- content.text %>`
                     })
                 <%}%>
@@ -344,11 +341,9 @@ percentage_done: <%= submodule.percentage_done  %>,
                                             <div class="item" ng-repeat="pack in modulesPack" ng-class="{ active:$first}">
 
                                                 <ul class="nav nav-tabs nav-justified nav-tabs--detalleClase" role="tablist">
-                                                    <li role="presentation" class="" ng-repeat="module in pack" ng-class="{active:$first}">
-                                                    <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill">
+                                                    <li role="presentation" class="moduleTab" ng-repeat="module in pack" ng-class="{active:$first}">
+                                                    <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill" ng-click="markContentAsSeen(module.submodules[0].contents[0].content_pk, module.submodules[0].module_pk)">
                                                         {{ module.module_name }}
-                                                        <br>
-                                                        <span><%- slug %></span>
 
                                                     </a>
                                                     </li>
@@ -368,8 +363,8 @@ percentage_done: <%= submodule.percentage_done  %>,
                                         <div role="tabpanel" class="tab-pane" ng-repeat="module in dataSimpleCourse.modules" id="module{{module.module_pk}}" ng-class="{active:$first}">
                                             <div class="col-xs-12 list-simple">
                                                 <ul class="nav nav-pills nav-pills--setps nav-justified" style="margin-top: 5px; margin-bottom: 5px;">
-                                                    <li class="" ng-repeat="submodule in module.submodules" ng-class="{active:$first}">
-                                                    <a href="#module{{module.module_pk}}submodule{{submodule.module_pk}}" aria-controls="module{{module.module_pk}}-submodule{{submodule.module_pk}}" role="tab" data-toggle="tab"></a>
+                                                    <li  ng-repeat="submodule in module.submodules" ng-class="{active:$first,visited:$first, visited:submodule.completed}"  ng-click="markContentAsSeen(submodule.contents[0].content_pk, submodule.module_pk)"> 
+                                                    <a href="#module{{module.module_pk}}submodule{{submodule.module_pk}}" aria-controls="module{{module.module_pk}}-submodule{{submodule.module_pk}}" role="tab" data-toggle="tab"</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -591,7 +586,7 @@ percentage_done: <%= submodule.percentage_done  %>,
                                         </ul>
                                         </li>
                                         <li class="list-group-item text-center" ng-show="loaderTribe">
-                                        <img src="images/preloader.gif" alt="loader">
+                                        <img src="/existaya/images/preloader.gif" alt="loader" class="img-responsive" width="30%">
                                         </li>
                                         <li class="list-group-item" ng-repeat="comments in comments" id="{{comments.id}}" ng-show="commentsVisible">
                                         <ul class="row list-unstyled">
@@ -723,7 +718,7 @@ percentage_done: <%= submodule.percentage_done  %>,
                 <ul class="list-unstyled">
                     <div class="container containerFilds">
                         <div class="text-center" ng-show="loader"> 
-                            <img src="images/preloader.gif" alt="loader">
+                            <img src="/existaya/images/preloader.gif" alt="loader" class="img-responsive" width="30%" style="margin-left:35%">
                         </div>
                         <div class="containerAnswers container">
                             <div class="text-center" ng-if="examSlide.fields.question.extras.get_image_data != null"> 
@@ -738,26 +733,29 @@ percentage_done: <%= submodule.percentage_done  %>,
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                    
                 </ul>
                 <div class="navQuestion"> 
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
                         <div class="avanced">
-                            <span>{{examSlide.fields.position + 1}} de {{examData.extras.nr_slides}} Respondidas</span>
+                            <span>{{examSlide.fields.position + 1}} de {{examData.extras.nr_slides}}</span>
                             <progressbar value="exam_percentage"></progressbar>
                         </div>
                     </div> 
-                    <div class="col-md-9"> 
+                    <div class="col-md-9 col-xs-9 col-sm-9 col-lg-9"> 
                         <div class="navButtons pull-right">
-                            <a href="" ng-click="finishExam()" class="btnFinish not-active-button">Terminar</i></a>
-                        <a href="" class="next_slide" ng-click="nextSlide()" ng-show="arrowRight">
+                            <a href="" ng-click="finish_exam(contentId, moduleId, examData.pk)" class="btnFinish not-active-button">Terminar</i></a>
+                        <a href="" class="next_slide" ng-click="next_slide()" ng-show="arrowRight">
                             <i class="fa fa-chevron-right"></i>
                         </a> 
-                        <a href="" class="prev_slide" ng-click="prevSlide()" ng-show="arrowLeft">
+                        <a href="" class="prev_slide" ng-click="prev_slide()" ng-show="arrowLeft">
                             <i class="fa fa-chevron-left"></i>
                         </a> 
                     </div>
                 </div>
+
             </div>
         </div>
 

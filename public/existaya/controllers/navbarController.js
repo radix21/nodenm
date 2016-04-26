@@ -143,8 +143,35 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
         $rootScope.dataUser = JSON.parse(sessionStorage.dataUser);
     }
 
+    $scope.signIn = function(){
+         if(!$scope._username || !$scope._password){
+            $scope.alertFields = true;
+        }else{
+            auth.ajax($http, $scope, $scope._username, $scope._password)
+        }
+ 
+    }
+    $scope.singUp =  function(){
+        if(!$scope.username || !$scope.password || !$scope.email){
+            $scope.alertFields = true;
+        }else{
+            auth.register($http, $scope.username, $scope.password, $scope.email).success(function(response){
+                if(response.status == 'ok'){
+                    console.log(true); 
+                    location.href = "profile"; 
+                }else{
+                    $scope.showError = true;
+                    $scope.message =  response.message;
+
+                }
+            })
+        }
+        
+    }
+
     // URL Constant
     jsonData = config;
+    /**
     $scope.singUp = function(){
         // Fields
         var userName = $scope.userName,
@@ -159,29 +186,61 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
         }else{
 
             // ajax for authentication	
-            auth.ajax($http, $scope,userName, userPassword);
+            auth.register($http, $scope,userName, userPassword, );
         }
-    }
+    }*/
     $scope.FBLogin = function (register) {
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
                 var access_token =   FB.getAuthResponse()['accessToken'];
-                FB.api('/me?fields=name,email', function (response) {
+                FB.api('/me?fields=name,email,picture', function (response) {
                     username=response.email;
                     username=username.replace("@","");
                     username=username.replace(".","");
-                    auth.kme($http, $scope,username,response.name,response.email,register,access_token,"facebook");
+                    email = response.email;
+                    auth.exists($http, username).success(function(response){
+                        if(response.status == "ok" && response.exists){
+                            password = email+username;
+                            auth.ajax($http, $scope, username, password, email);
+                        }else{
+                            password = email+username;
+                            auth.register($http, username, password, email).success(function(response){
+                                if(response.status == "ok"){
+                                    location.href = "/profile";    
+                                }
+                            })
+                        }
+                    })
+
+                    //auth.kme($http, $scope,username,response.name,response.email,register,access_token,"facebook");
+                      
                 });
             }
             else {
                 FB.login(function (response) {
                     if (response.authResponse) {
                         var access_token =   FB.getAuthResponse()['accessToken'];
-                        FB.api('/me?fields=name,email', function (response) {
+                        FB.api('/me?fields=name,email, picture', function (response) {
                             username=response.email;
                             username=username.replace("@","");
                             username=username.replace(".","");
-                            auth.kme($http, $scope,username,response.name,response.email,register,access_token,"facebook");
+                            email=response.email;
+                            //auth.kme($http, $scope,username,response.name,response.email,register,access_token,"facebook");
+                            auth.exists($http, username).success(function(response){
+                                if(response.status == "ok" && response.exists){
+                                    password = email+username;
+                                    auth.ajax($http, $scope, username, password, email);
+                                }else{
+                                    password = email+username;
+                                    auth.register($http, username, password, email).success(function(response){
+                                        if(response.status == "ok"){
+                                            location.href = "/profile";    
+                                        } 
+                                    })
+                                }
+                            })
+
+
                         });
                     } else {
                         console.log('User cancelled login or did not fully authorize.');

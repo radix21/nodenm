@@ -1,5 +1,8 @@
 app.factory("auth", ["$rootScope","$location",function($rootScope, $location){
     return {
+        exists : function($http, username){
+            return $http.get("/api/account/exists/"+username);
+        },
         kme: function ($http, $scope,username,name,email,register,access_token,provider) {
             $http.post('/account/login')
                 .success(function(response){
@@ -46,14 +49,29 @@ app.factory("auth", ["$rootScope","$location",function($rootScope, $location){
             });
             **/
         },
+        register : function($http, username, password, email){
+            return $http.post("/api/account/register", {
+                username : username,
+                password : password,
+                email : email
+            })
 
+        },
 
         ajax : function($http, $scope, username, userpassword, email){
             $http.post('/api/account/login',{username : username, password:userpassword})
                 .success(function(response){
+                    console.log(response);
+                    $("#errorLogin").html("");
                     status  = response.status;
                     if(status == "ok"){
-                        location.href = "/profile";
+                        if(location.pathname == "/"){
+                            location.href = "/profile";
+                        }else{
+                            location.reload();
+                        }
+                    }else{
+                        $("#errorLogin").html("Nombre de usuario y/o contraseña incorrectos");
                     }
                 });
             /**
