@@ -75,7 +75,7 @@
             pk : <%- tutor.pk %>,
             first_name : "<%= tutor.first_name %>",
             last_name : "<%= tutor.last_name %>",
-            avatar : `<%- tutor.avatar%>` == ""   ? null :  ("<%= tutor.avatar %>").split("?")[0],
+            avatar : "<%- tutor.avatar%>".split("?")[0],
             about : `<%= tutor.about %>`,
             jobtitle : "<%= tutor.jobtitle %>"
                    
