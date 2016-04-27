@@ -89,7 +89,7 @@ data.modules = [];
             tasks: [],
             submodules: [],
             module_pk: <%= module.module_pk %>,
-            module_description: `<%= module.module_description %>`,
+            module_description: `<%- module.module_description %>`,
             objects: [],
             module_name: `<%= module.module_name %>`,
             contents: [], 
@@ -132,7 +132,7 @@ data.modules = [];
             <% submodule = module.submodules[val];%>
 
             data.modules[<%= m %>].submodules.push({
-                completed : <%- submodule.completed %>,
+                completed : "<%- submodule.completed %>" == "true",
                 tasks: [],
                 module_pk: <%= submodule.module_pk %>,
                 module_description: `<%= submodule.module_description %>`,
