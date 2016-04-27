@@ -589,17 +589,18 @@ data.modules = [];
                                         <li class="list-group-item text-center" ng-show="loaderTribe">
                                         <img src="/existaya/images/preloader.gif" alt="loader" class="img-responsive" width="30%">
                                         </li>
-                                        <li class="list-group-item" ng-repeat="comments in comments" id="{{comments.id}}" ng-show="commentsVisible">
+                                        <li class="list-group-item" ng-repeat="comment in comments" id="{{comment.id}}" ng-show="commentsVisible">
                                         <ul class="row list-unstyled">
                                             <li class="col-md-3 text-center profileAutor">
-                                            <p>{{comments.user.name}} {{comments.user.lastname}}</p>
-                                            <img ng-if="comments.user.avatar != ''" ng-src="{{comments.user.avatar}}" class="img-responsive img-circle col-md-6 col-md-offset-3" alt="avatar">
-                                            <img ng-if="comments.user.avatar == ''" src="images/avatarDefault.png" class="img-responsive img-circle col-md-6 col-md-offset-3" alt="avatar">
+                                            <p ng-if="comment.user.name != ''">{{comment.user.name}} {{comment.user.lastname}}</p>
+					    <p ng-if="comment.user.name == ''">{{ comment.user.username }}</p>
+                                            <img ng-if="comment.user.avatar != '' && comment.user.avatar != undefined" ng-src="{{comments.user.avatar}}" class="img-responsive img-circle col-md-6 col-md-offset-3" alt="avatar">
+                                            <img ng-if="comment.user.avatar == '' || comment.user.avatar == undefined" src="/existaya/images/avatarDefault.png" class="img-responsive img-circle col-md-6 col-md-offset-3" alt="avatar">
                                             </li>
                                             <li class="col-md-9 profileComment"> 
-                                            <div class="dateComment"><i class="fa fa-clock-o"></i> <span>{{comments.date_modified}}</span></div>
+                                            <div class="dateComment"><i class="fa fa-clock-o"></i> <span>{{comment.date_modified}}</span></div>
                                             <hr>
-                                            <p ng-bind-html="parseHtml(comments.comment)"></p>
+                                            <p ng-bind-html="parseHtml(comment.comment)"></p>
                                             </li>
                                         </ul>
                                         </li>

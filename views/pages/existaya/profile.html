@@ -6,7 +6,7 @@ data.name = `<%- user.info.first_name %>`;
 data.username = `<%- user.info.username %>`;
 data.last_name = `<%- user.info.last_name %>`;
 data.jobtitle = `<%- user.info.jobtitle %>`;
-data.avatar = '<%= user.info.avatar.split("?")[0].replace("80", "120") %>'
+data.avatar = <% if(user.info.avatar != null){%>'<%= user.info.avatar.split("?")[0].replace("80", "120") %>'<%}else{%>null<%}%>;
 </script>
 <script src="/existaya/controllers/profile.js"></script>
 <section class="col-xs-12">
