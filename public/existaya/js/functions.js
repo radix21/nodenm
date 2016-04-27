@@ -1,4 +1,8 @@
+function downloadFile(id){
+    document.querySelector("#content"+id).click();
+}
 function logout(){
+    sessionStorage.clear();
     xhr = new XMLHttpRequest();
     xhr.open("GET", "/api/account/logout/");
     xhr.onreadystatechange = function(){

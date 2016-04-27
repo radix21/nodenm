@@ -1,11 +1,13 @@
 app.controller("courseDetails", ["$http", "$scope", "$location", "$rootScope","courses", "$sce",function($http, $scope, $location, $rootScope, courses, $sce){
     //TODO: incribeUser
+    console.log(213);
     $scope.inscribeUserOnCOurse = function(){
-        courses.inscribe($routeParams.slug).success(function(response){
+        document.querySelector(".loaderGIF").style.display="auto";
+        /**courses.inscribe($routeParams.slug).success(function(response){
             if(response.status == "ok"){
                 $location.path("#/course/"+$routeParams.slug);
             }
-        });
+        });*/
     }
     $scope.slug=  slug;
     $rootScope.detailGetInCourse = false;
@@ -17,8 +19,6 @@ app.controller("courseDetails", ["$http", "$scope", "$location", "$rootScope","c
     });
     $rootScope.$watch("detailRegisterCourse", function(){
         $scope.showRegisterButton = $rootScope.detailRegisterCourse;
-
-        console.log("registrar", $scope.showRegisterButton);
     })
 	var dataSessionInitial,
 		dataSessionFinal;

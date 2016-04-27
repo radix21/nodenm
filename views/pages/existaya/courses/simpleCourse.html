@@ -11,7 +11,7 @@
             first_name : `<%- tutor.first_name%>`,
             last_name : `<%- tutor.last_name %>`,
             pk : `<%- tutor.pk %>`,
-            avatar : `<%- tutor.avatar %>`,
+            avatar : `<%- tutor.avatar.split("?")[0] %>`,
             about : `<%- tutor.about %>`,
             jobtitle : `<%- tutor.jobtitle %>`
         })
@@ -89,7 +89,7 @@ data.modules = [];
             tasks: [],
             submodules: [],
             module_pk: <%= module.module_pk %>,
-            module_description: `<%= module.module_description %>`,
+            module_description: `<%- module.module_description %>`,
             objects: [],
             module_name: `<%= module.module_name %>`,
             contents: [], 
@@ -132,7 +132,7 @@ data.modules = [];
             <% submodule = module.submodules[val];%>
 
             data.modules[<%= m %>].submodules.push({
-                completed : <%- submodule.completed %>,
+                completed : "<%- submodule.completed %>" == "true",
                 tasks: [],
                 module_pk: <%= submodule.module_pk %>,
                 module_description: `<%= submodule.module_description %>`,
@@ -212,7 +212,7 @@ data.modules = [];
                         "content_training": `<%= content.content_training %>`, 
                         'content_opportunities': "<%= content.content_opportunities %>", 
                         "cim_pk": `<%= content.cim_pk %>`, 
-                        "file_url" : (`<%= content.file %>`).split(",")[0], 
+                        "file_url" : (`<%= content.file %>`).split(",")[0].split("?")[0], 
                         "bonus" : `<%= content.bonus %>`, 
                         "cim" : `<%= content.cim %>`,
                         "text" : `<%- content.text %>` 
@@ -370,11 +370,13 @@ data.modules = [];
                                             </div>
                                             <div class="col-xs-9 list-simple">
                                                 <div class="tab-content">
+
                                                     <div ng-repeat="submodule in module.submodules" role="tabpanel" class="tab-pane" id="module{{module.module_pk}}submodule{{module.submodules[$index].module_pk}}" ng-class="{active:$first}"> 
                                                         <div class="embed-responsive embed-responsive-16by9">
                                                             <iframe-embed data="submodule.contents[0].text" pk="submodule.contents[0].content_pk"></iframe-embed>
                                                         </div>
                                                         <div class="clearfix"></div>
+
                                                         <table class="table table--recursos margin--t2">
                                                             <tbody><tr>
                                                                 <th>
@@ -395,9 +397,8 @@ data.modules = [];
                                                                     <strong>Google</strong>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="{{ resource.file_url }}" class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper" download>
-                                                                        Descargar
-                                                                    </a>
+                                                                    <button class="btn btn-ghosh btn-xsm btn-gosh--verde pull-right text--upper" ng-click="downloadFile(resource.content_pk)">Descargar</button>
+
                                                                 </td>
                                                             </tr>
                                                         </tbody></table>
@@ -512,7 +513,7 @@ data.modules = [];
                                         <strong>Google</strong>
                                     </td>
                                     <td>
-                                        <a href="{{ resource.file_url }}" class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper" download>
+                                        <a href="{{ resource.file_url }}" class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper" download id="content{{ resource.content_pk}}">
                                             Descargar
                                         </a>
                                     </td>

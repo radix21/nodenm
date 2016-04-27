@@ -19,6 +19,8 @@ app.controller("navbarController", ['$scope','$http','$rootScope', "$location", 
 
 
     }
+    $scope.sessionName = sessionStorage.name;
+    $scope.sessionAvatar = sessionStorage.avatar;
     $rootScope.$watch("dataUser", function(){
 
         if($rootScope.dataUser == null){
@@ -128,7 +130,6 @@ app.controller("navbarController", ['$scope','$http','$rootScope', "$location", 
 }]);
 app.controller("loginController", ["auth","$scope","$http","$rootScope", "$location", function(auth, $scope, $http, $rootScope, $location){
     $rootScope.$watch("dataUser", function(){
-
         if($rootScope.dataUser == null){
             $rootScope.authenticated = false;
             $scope.authenticated = false;
@@ -171,29 +172,15 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
 
     // URL Constant
     jsonData = config;
-    /**
-    $scope.singUp = function(){
-        // Fields
-        var userName = $scope.userName,
-        userPassword = $scope.userPassword;
 
-        // validation fields	
-        $scope.alertFields = false;	
-
-        if(userName == undefined || userPassword == undefined || userName == "" || userPassword == ""){
-            $scope.alertFields = true;	
-            $scope.alertData = false;
-        }else{
-
-            // ajax for authentication	
-            auth.register($http, $scope,userName, userPassword, );
-        }
-    }*/
     $scope.FBLogin = function (register) {
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
                 var access_token =   FB.getAuthResponse()['accessToken'];
                 FB.api('/me?fields=name,email,picture', function (response) {
+                    sessionStorage.name = response.name;
+                    sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture";
+                    console.log(sessionStorage)
                     username=response.email;
                     username=username.replace("@","");
                     username=username.replace(".","");
@@ -212,7 +199,6 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                         }
                     })
 
-                    //auth.kme($http, $scope,username,response.name,response.email,register,access_token,"facebook");
                       
                 });
             }
@@ -221,11 +207,14 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                     if (response.authResponse) {
                         var access_token =   FB.getAuthResponse()['accessToken'];
                         FB.api('/me?fields=name,email, picture', function (response) {
+                            sessionStorage.name = response.name;
+
+                            sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture";;
+                            console.log(sessionStorage)
                             username=response.email;
                             username=username.replace("@","");
                             username=username.replace(".","");
                             email=response.email;
-                            //auth.kme($http, $scope,username,response.name,response.email,register,access_token,"facebook");
                             auth.exists($http, username).success(function(response){
                                 if(response.status == "ok" && response.exists){
                                     password = email+username;

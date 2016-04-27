@@ -75,7 +75,7 @@
             pk : <%- tutor.pk %>,
             first_name : "<%= tutor.first_name %>",
             last_name : "<%= tutor.last_name %>",
-            avatar : `<%- tutor.avatar%>` == ""   ? null :  ("<%= tutor.avatar %>").split("?")[0],
+            avatar : "<%- tutor.avatar%>".split("?")[0],
             about : `<%= tutor.about %>`,
             jobtitle : "<%= tutor.jobtitle %>"
                    
@@ -330,6 +330,7 @@ buttons =  document.querySelectorAll(".inscribeUser");
 for(b in buttons){
     button = buttons[b];
     button.onclick = function(event){
+        document.querySelector(".loaderGIF").style.display="block";
         xhr = new XMLHttpRequest();
         user = event.target.attributes.user.nodeValue;
         slug = event.target.attributes.slug.nodeValue;
@@ -338,6 +339,8 @@ for(b in buttons){
             response = xhr.response;
             response = JSON.parse(response);
             console.log(typeof(response));
+
+            document.querySelector(".loaderGIF").style.display="none";
             if(response.status == "ok"){
                 location.reload();
             }
