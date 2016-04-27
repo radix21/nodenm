@@ -11,6 +11,9 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
             }
         }
     }
+    $scope.downloadFile = function(id){
+        document.querySelector("#content"+id).click();
+    }
     $scope.json_modules = {}
     $scope.evaluations = [];
     for(module in data.modules){
@@ -258,8 +261,6 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
     $scope.fetch_user_slide = function(course, ubs, module, content, exam, choices, callback){
         $scope.arrowLeft = $scope.position > 0;
         $scope.arrowRight = $scope.position < $scope.examData.extras.nr_slides - 1;
-        console.log($scope.arrowLeft);
-        console.log($scope.arrowRight);
         $scope.loader = true;
         $scope.question_choices = {};
         if(callback != undefined){
@@ -428,7 +429,8 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
 
     $scope.close_test = function(){
 
-        $scope.show_test = false;    
+        $scope.show_test = false;   
+        location.reload();
     }
 
     // This function update exam status
@@ -789,6 +791,8 @@ app.controller('tribes',['$scope','courses','$http', '$rootScope','$sce','$timeo
 
 
                 $scope.openTopic = function(position){
+                    $scope.confirm_post = false;
+                    document.querySelector("#message-box").value="";
                     $timeout(function(){
                         $scope.loaderTribe = false;
                         $scope.commentsVisible = true;
@@ -836,6 +840,7 @@ app.controller('tribes',['$scope','courses','$http', '$rootScope','$sce','$timeo
             $http.post('/api/tribes/send_post/' + id + '/' + post)
                 .success(function(response){
                     $scope.confirm_post = true;
+                    document.querySelector("#message-box").innerHTML = "";
                     $http.get('/api/tribes/get_topic/' + id)
                     .success(function(response){
                         $scope.comments = response.comments;
@@ -870,11 +875,12 @@ app.controller("tutors",['$scope','courses',function ($scope, courses){
 app.controller("courseDetails", ["$http", "$scope","$location", "$rootScope","courses",function($http, $scope, $location, $rootScope, courses){
     //TODO: incribeUser
     $scope.inscribeUserOnCOurse = function(){
-        courses.inscribe($routeParams.slug).success(function(response){
+        document.querySelector(".loader").style.display="auto";
+        /**courses.inscribe($routeParams.slug).success(function(response){
             if(response.status == "ok"){
                 $location.path("#/course/"+$routeParams.slug);
             }
-        });
+        });*/
     }
     $scope.slug=  slug;
     $rootScope.detailGetInCourse = false;

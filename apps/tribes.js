@@ -14,27 +14,49 @@ get_tribe = function(req, res){
             "message" : "User is not authenticated" 
         })
     }else{
-    url = KME_API.get_tribe(req.hostname) + req.params.id + "?token="+req.session.user.token;
-    str = "";
-    data = http.get(url, function(response){
-        response.on("error", function(err){
-            console.log(err);
-        })
-        response.on("data", function(data){
-            str+=data;
-        });
-        response.on("end", function(){
-            try{
-                str = JSON.parse(str);
-                res.send(str);
-            }catch(err){
-                res.status(500).send(err) ;
+        url = KME_API.get_tribe(req.hostname) + req.params.id;
+        str = "";
+        request("GET", url, {
+            qs : {
+                token : req.session.user.token
             }
+        }).done(function(response){
+            if(response.statusCode > 300){
+                res.status(response.statusCode).send({
+                    status : "error",
+                    error : response.statusCode
+                })
+            
+            }else{
+                try{
+                    response = JSON.parse(response.getBody());
+                    res.send(response);
+                }catch(err){
+                    res.send(response.getBody());
+                }
+            } 
         })
-    
-    }).on("error", function(err){
-        console.log(err);
-    }).end()
+        /**
+        data = http.get(url, function(response){
+            response.on("error", function(err){
+                console.log(err);
+            })
+            response.on("data", function(data){
+                str+=data;
+            });
+            response.on("end", function(){
+                try{
+                    str = JSON.parse(str);
+                    res.send(str);
+                }catch(err){
+                    res.status(500).send(err) ;
+                }
+            })
+        
+        }).on("error", function(err){
+            console.log(err);
+        }).end()
+        */
     }
 
 }
