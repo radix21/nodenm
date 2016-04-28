@@ -62,8 +62,8 @@
         <% module = course.modules[i];%>
         data.modules.push({
             pk : <%= module.pk %>,
-            name : "<%= module.name %>",
-            description : "<%= module.description %>"
+            name : "<%- module.name %>",
+            description : `<%- module.description %>`
         })
     <%}%>
     data.goals = `<%- course.goals %>`;
