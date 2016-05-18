@@ -1,3 +1,4 @@
+var crypto = require("crypto");
 /**
  * @api{get} /account/login
  * @apiName loginView
@@ -186,7 +187,7 @@ register = function(req, res){
             
             }
         }
-    })
+    });
 }
 
 /**
@@ -238,5 +239,92 @@ user_exists = function(req, res){
             }
         }
     })
+}
+
+/**
+ * @api{get} /api/account/exists/:username User exists?
+ * @apiName register_user_CRM
+ * @apiDescription Function that return is a username is already taken
+ * @apiGroup account
+ * @apiSuccessExample Success-response
+ * HTTP/1.1 200 OK
+ * {
+ *      status : {String},
+ *      exists : {Boolean}
+ * }
+ ***/
+register_user_CRM = function(req, res) {
+    var url = req.parmas.url
+    request("POST", url, {
+        qs: {
+            method: "loginCRM",
+            input_type: "JSON",
+            response_type: "JSON",
+            rest_data: {
+                user_auth: {
+                    username: "KME",
+                    password: crypto.createHash('md5').update("nuevosmedios123").digest("hex"),
+                }
+            }
+        }
+    }).done(function(response) {
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "failed",
+                error : response.statusCode
+            });
+        }else{
+            try{
+                response = JSON.parse(response.getBody());
+                if (!response.error) {
+                    console.log(response);
+                }else{
+                    res.status(response.statusCode).send({
+                        status : "failed",
+                        error : response.message
+                    });
+                }
+            }catch(err){
+                res.send(response.getBody());
+            
+            }
+        }
+    });
+}
+
+/**
+ * @api{get} /api/account/getmutoken/
+ * @apiName getMUToken
+ * @apiDescription Function that return token encrypt in md5(Date now, userid, token)
+ * @apiGroup account
+ * @apiSuccessExample Success-response
+ * HTTP/1.1 200 OK
+ * {
+ *      status : {String},
+ *      mutoken : {String}
+ * }
+ * @apiErrorExample user is not session
+ *  HTTP/1.1 500 ERROR
+ *  {
+ *      "status" : "failed",
+ *      "message" : "not user found!"
+ *  }
+ ***/
+getMUToken = function(req, res) {
+    if (req.session.user != undefined){
+        var datetime = new Date().toISOString().substring(0,10),
+            userid = req.session.user.info.id,
+            token = req.session.user.token;
+
+        res.status(200).send({
+            status : "success",
+            mutoken : crypto.createHash('md5').update(datetime+"~"+userid+"~"+token).digest("hex")
+        });
+    }else{
+        res.status(500).send({
+            status : "failed",
+            error : "not user found!"
+        });
+    }
 }
 
