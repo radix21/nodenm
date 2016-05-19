@@ -177,7 +177,7 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
                 var access_token =   FB.getAuthResponse()['accessToken'];
-                FB.api('/me?fields=name,email,picture.width(800).height(800)', function (response) {
+                FB.api('/me?fields=name,email,picture', function (response) {
                     sessionStorage.name = response.name;
                     sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture?width=9999";
                     console.log(sessionStorage)
@@ -206,7 +206,7 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                 FB.login(function (response) {
                     if (response.authResponse) {
                         var access_token =   FB.getAuthResponse()['accessToken'];
-                        FB.api('/me?fields=name,email, picture.width(800).height(800)', function (response) {
+                        FB.api('/me?fields=name,email, picture', function (response) {
                             sessionStorage.name = response.name;
 
                             sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture?width=9999";;
