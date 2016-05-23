@@ -172,6 +172,11 @@ register = function(req, res){
                     req.session.user.info = response.user;
                     req.session.user.token = response.token;
                     req.session.user.logged = true;
+
+                    userCRM = registerUserCRM("http://crm.marketinguniversity.co/custom/service/v4_1_custom/rest.php", req.session.user);
+                    if (!userCRM) {
+                        console.log("error register user in CRM");
+                    }
                     res.send({
                         status : "ok"
                     })
@@ -253,41 +258,39 @@ user_exists = function(req, res){
  *      exists : {Boolean}
  * }
  ***/
-register_user_CRM = function(req, res) {
-    var url = req.parmas.url
+registerUserCRM = function(url, user) {
+    var id = user.info.id,
+        username = user.info.username,
+        first_name = user.info.first_name,
+        last_name = user.info.last_name,
+        email = user.info.email
     request("POST", url, {
         qs: {
             method: "loginCRM",
             input_type: "JSON",
             response_type: "JSON",
-            rest_data: {
-                user_auth: {
-                    username: "KME",
-                    password: crypto.createHash('md5').update("nuevosmedios123").digest("hex"),
-                }
-            }
+            rest_data: "{\"user_auth\":{\"user_name\":\"KME\",\"password\":\""+crypto.createHash('md5').update("Km3123").digest("hex")+"\"}}"
         }
     }).done(function(response) {
-        if(response.statusCode > 300){
-            res.status(response.statusCode).send({
-                status : "failed",
-                error : response.statusCode
-            });
-        }else{
-            try{
-                response = JSON.parse(response.getBody());
-                if (!response.error) {
-                    console.log(response);
-                }else{
-                    res.status(response.statusCode).send({
-                        status : "failed",
-                        error : response.message
-                    });
+       session_id = JSON.parse(response.getBody());
+        if (!("error" in session_id)) {
+            request("POST", url, {
+                qs: {
+                    method: "createUser",
+                    input_type: "JSON",
+                    response_type: "JSON",
+                    rest_data: "{\"session\":\""+session_id+"\",\"data\":{\"user_name\":\""+username+"\",\"first_name\":\""+first_name+"\",\"last_name\":\""+last_name+"\",\"kme_user_id_c\":\""+id+"\",\"mku_user_type_c\":\"Registrado\",\"email\":\""+email+"\"}}"
                 }
-            }catch(err){
-                res.send(response.getBody());
-            
-            }
+            }).done(function(response) {
+                response = JSON.parse(response.getBody());
+
+                if (!("error" in response)) {
+                    return true;
+                }else{
+                    return false;
+                }
+
+            });
         }
     });
 }
