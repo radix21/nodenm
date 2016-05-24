@@ -178,12 +178,16 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
             if (response.status === 'connected') {
                 var access_token =   FB.getAuthResponse()['accessToken'];
                 FB.api('/me?fields=name,email,picture', function (response) {
-                    sessionStorage.name = response.name;
-                    sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture";
+                    arrayname=response.name.split(" ");
+                    name=arrayname[0]+" "+arrayname[1];
+                    sessionStorage.name = name;
+                    sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture?width=9999";
                     console.log(sessionStorage)
                     username=response.email;
+                    console.log(response.email);
                     username=username.replace("@","");
                     username=username.replace(".","");
+                   
                     email = response.email;
                     auth.exists($http, username).success(function(response){
                         if(response.status == "ok" && response.exists){
@@ -207,9 +211,11 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                     if (response.authResponse) {
                         var access_token =   FB.getAuthResponse()['accessToken'];
                         FB.api('/me?fields=name,email, picture', function (response) {
-                            sessionStorage.name = response.name;
+                            arrayname=response.name.split(" ");
+                            name=arrayname[0]+" "+arrayname[1];
+                            sessionStorage.name = name;
 
-                            sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture";;
+                            sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture?width=9999";;
                             console.log(sessionStorage)
                             username=response.email;
                             username=username.replace("@","");
