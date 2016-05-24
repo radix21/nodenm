@@ -1,3 +1,4 @@
+var crypto = require("crypto");
 /**
  * @api{get} /account/login
  * @apiName loginView
@@ -171,6 +172,11 @@ register = function(req, res){
                     req.session.user.info = response.user;
                     req.session.user.token = response.token;
                     req.session.user.logged = true;
+
+                    userCRM = registerUserCRM("http://crm.marketinguniversity.co/custom/service/v4_1_custom/rest.php", req.session.user);
+                    if (!userCRM) {
+                        console.log("error register user in CRM");
+                    }
                     res.send({
                         status : "ok"
                     })
@@ -186,7 +192,7 @@ register = function(req, res){
             
             }
         }
-    })
+    });
 }
 
 /**
@@ -238,5 +244,90 @@ user_exists = function(req, res){
             }
         }
     })
+}
+
+/**
+ * @api{get} /api/account/exists/:username User exists?
+ * @apiName register_user_CRM
+ * @apiDescription Function that return is a username is already taken
+ * @apiGroup account
+ * @apiSuccessExample Success-response
+ * HTTP/1.1 200 OK
+ * {
+ *      status : {String},
+ *      exists : {Boolean}
+ * }
+ ***/
+registerUserCRM = function(url, user) {
+    var id = user.info.id,
+        username = user.info.username,
+        first_name = user.info.first_name,
+        last_name = user.info.last_name,
+        email = user.info.email
+    request("POST", url, {
+        qs: {
+            method: "loginCRM",
+            input_type: "JSON",
+            response_type: "JSON",
+            rest_data: "{\"user_auth\":{\"user_name\":\"KME\",\"password\":\""+crypto.createHash('md5').update("Km3123").digest("hex")+"\"}}"
+        }
+    }).done(function(response) {
+       session_id = JSON.parse(response.getBody());
+        if (!("error" in session_id)) {
+            request("POST", url, {
+                qs: {
+                    method: "createUser",
+                    input_type: "JSON",
+                    response_type: "JSON",
+                    rest_data: "{\"session\":\""+session_id+"\",\"data\":{\"user_name\":\""+username+"\",\"first_name\":\""+first_name+"\",\"last_name\":\""+last_name+"\",\"kme_user_id_c\":\""+id+"\",\"mku_user_type_c\":\"Registrado\",\"email\":\""+email+"\"}}"
+                }
+            }).done(function(response) {
+                response = JSON.parse(response.getBody());
+
+                if (!("error" in response)) {
+                    return true;
+                }else{
+                    return false;
+                }
+
+            });
+        }
+    });
+}
+
+/**
+ * @api{get} /api/account/getmutoken/
+ * @apiName getMUToken
+ * @apiDescription Function that return token encrypt in md5(Date now, userid, token)
+ * @apiGroup account
+ * @apiSuccessExample Success-response
+ * HTTP/1.1 200 OK
+ * {
+ *      status : {String},
+ *      mutoken : {String}
+ * }
+ * @apiErrorExample user is not session
+ *  HTTP/1.1 500 ERROR
+ *  {
+ *      "status" : "failed",
+ *      "message" : "not user found!"
+ *  }
+ ***/
+getMUToken = function(req, res) {
+    if (req.session.user != undefined){
+        var datetime = new Date().toISOString().substring(0,10),
+            userid = req.session.user.info.id,
+            token = req.session.user.token;
+
+        res.status(200).send({
+            status : "success",
+            mutoken : crypto.createHash('md5').update(datetime+"~"+userid+"~"+token).digest("hex")
+        });
+    }else{
+        res.status(500).send({
+            status : "failed",
+            error : "not user found!"
+        });
+    }
 }
 
