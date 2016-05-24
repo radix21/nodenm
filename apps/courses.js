@@ -474,10 +474,7 @@ course_data_student = function(req, res){
                 res.send(str);
 
             }catch(err){
-                res.send({
-                    "status" : "error",
-                    "message" : "Error Parsing data"
-                })
+                res.send(str);
             }
         })
     
@@ -524,9 +521,11 @@ courseView = function(req, res){
 
                     })
                 }catch(err){
-                    res.send({
-                        "status" : "error",
-                        "message" : "Error Parsing data"
+                    res.render(client_folder(req.hostname) + "courses/simpleCourse.html",{
+                        user : req.session.user,
+                        slug : req.params.slug,
+                        dataStudent : str
+
                     })
                 }
             })

@@ -4,13 +4,21 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
     $scope.resources = [];
     for(module in data.modules){
         for(submodule in data.modules[module].submodules){
+
+	    $scope.dataSimpleCourse.modules[module].submodules[submodule].completed = true;
             for(content in data.modules[module].submodules[submodule].contents){
                 if(content > 0){
                     $scope.resources.push(data.modules[module].submodules[submodule].contents[content]);
                 }
+		val = data.modules[module].submodules[submodule].contents[content];
+		if(!val.content_button_info.passed && val.content_button_info.obligatory){
+		    $scope.dataSimpleCourse.modules[module].submodules[submodule].completed = false;
+		}
             }
+		
         }
     }
+    
     $scope.downloadFile = function(id){
         document.querySelector("#content"+id).click();
     }

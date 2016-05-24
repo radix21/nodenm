@@ -51,11 +51,11 @@ app.get("*", function(req, res){
             message : "Access Forbidden"
         })
     }else{
-
-        fs.exists('views/pages/'+folder+req.path+".html", function(exists){
+	
+        fs.exists('views/pages/'+folder+req.path+(req.path.split(".html").length > 0 ? "" : ".html"), function(exists){
             if(exists){
 
-                res.render("pages/"+folder+req.path+".html");
+                res.render("pages/"+folder+req.path+(req.path.split(".html").length > 0 ? "" : ".html"));
             }else{
             
             res.render("pages/"+folder+"/404.html");

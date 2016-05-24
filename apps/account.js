@@ -240,3 +240,8 @@ user_exists = function(req, res){
     })
 }
 
+getMUToken = function(req, res){
+    md5 = require("md5");
+    date = new Date();
+     
+}

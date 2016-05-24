@@ -27,8 +27,11 @@
                 <div class="row">
                     <div class="col-xs-5 col-xs-offset-5">
                         <p class="text text--blanco text--xbold text-right margin--t1">
+			<% if(user.info.first_name != ""){%>
                         <%= user.info.first_name %> <%= user.info.last_name %>
+			<%}else{%>
                         {{ sessionName }}
+			<%}%>
                         </p>
                     </div>
                     <div class="col-xs-2 padding--r0 padding--l0 nav-topper__avatarUser" style="">

@@ -11,7 +11,7 @@
             first_name : `<%- tutor.first_name%>`,
             last_name : `<%- tutor.last_name %>`,
             pk : `<%- tutor.pk %>`,
-            avatar : `<%- tutor.avatar.split("?")[0] %>`,
+            avatar : "",
             about : `<%- tutor.about %>`,
             jobtitle : `<%- tutor.jobtitle %>`
         })
@@ -130,7 +130,8 @@ data.modules = [];
         <% for(val in module.submodules){%>
 
             <% submodule = module.submodules[val];%>
-
+	    console.log("<%- submodule.module_pk %>");
+	    console.log("<%- submodule.completed %>")
             data.modules[<%= m %>].submodules.push({
                 completed : "<%- submodule.completed %>" == "true",
                 tasks: [],
@@ -186,7 +187,7 @@ data.modules = [];
                         "show_message_effectivity": <%= content.content_button_info.show_message_effectivity %>, 
                         "exam_score": <%- content.content_button_info.exam_score %>, 
                         "num_attempts": parseInt("0"+`<%= content.content_button_info.num_attempts %>`), 
-                        "passed": `<%= content.content_button_info.passed %>`, 
+                        "passed": <%= content.content_button_info.passed %>, 
                         "available":  <%= content.content_button_info.available %>, 
                         "show_button":  <%= content.content_button_info.show_button %>,
                         "show_report":  <%= content.content_button_info.show_report %>, 
@@ -198,6 +199,7 @@ data.modules = [];
                         "show_exam":  <%= content.content_button_info.show_exam %>,
                         "initial_date": `<%= content.content_button_info.initial_date %>`,
                         "final_date": `<%= content.content_button_info.final_date %>`,
+			"obligatory" : <%- content.obligatory %>
                         },
                         "content_position": `<%= content.content_position %>`, 
                         "content_pk": <%= content.content_pk%>, 

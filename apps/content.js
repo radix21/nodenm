@@ -19,6 +19,23 @@ take_test = function(req, res){
     }else{
         
         url = KME_API.take_test(req.hostname) + "?content="+req.query.content+"&module="+req.query.module+"&token="+req.session.user.token+"&user="+req.session.user.info.username;
+	request("GET", url).done(function(response){
+	    if(response.statusCode > 300){
+		res.status(response.statusCode).send({
+		    status : "error",
+		    error : response.statusCode
+		})	
+	    }else{
+		try{
+		    response = JSON.parse(response.getBody())
+		    res.send(response)
+		   
+		}catch(err){
+		    res.send(response.getBody())
+		}
+	    }
+	})
+	/**
         str = "";
         data = http.get(url, function(response){
             response.on("error", function(err){
@@ -45,6 +62,7 @@ take_test = function(req, res){
                 "message" : err
             })
         }).end()
+	*/
     }
 
 }
@@ -69,6 +87,7 @@ fetch_exam = function(req, res){
         })
     }else{
         url = KME_API.fetch_exam(req.hostname)+parseInt(req.query.course)+"/"+req.query.ubs+"/"+req.query.module+"/"+req.query.content+"/"+req.query.exam;
+	
         request("GET", url,{
             qs : {
                 token : req.session.user.token,
@@ -143,7 +162,6 @@ fetch_user_slide = function(req, res){
         })
     }else{
         url = KME_API.fetch_user_slide(req.hostname) + req.query.course + "/" + req.query.ubs + "/"+ req.query.module + "/" + req.query.content + "/" + req.query.exam+"?token="+req.session.user.token+"&user="+req.session.user.info.username+"&choices="+req.query.choices+"&position="+req.query.position+"&actual_position="+req.query.actual_position;
-        console.log(url);
         request("GET", url).done(function(response){
             if(response.statusCode > 300){
                 res.status(response.statusCode).send({
@@ -190,6 +208,22 @@ finish_exam = function(req, res){
         }
         url = KME_API.finish_exam(req.hostname) + "?exam="+exam+"&token="+req.session.user.token+"&user="+req.session.user.info.username+"&choices="+(req.query.choices == undefined ? "{}" : req.query.choices)+"&actual_position="+(req.query.actual_position == undefined ? 0 : req.query.actual_position);
         str = "";
+	request("GET", url).done(function(response){
+	    if(response.statusCode > 300){
+		res.status(response.statusCode).send({
+		    status : "error",
+		    error : response.statusCode	
+		})
+	    }else{
+		try{
+		    response = JSON.parse(response.getBody())
+		    res.send(response);
+		}catch(err){
+		    res.send(response.getBody())
+		}
+	    }
+	})
+	/**
         data = http.get(url, function(response){
             response.on("error", function(err){
                 res.status(400).send({
@@ -215,6 +249,7 @@ finish_exam = function(req, res){
                 "message" : err
             })
         }).end()
+	*/
     }
 
 }
