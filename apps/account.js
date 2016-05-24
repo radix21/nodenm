@@ -152,6 +152,7 @@ logout = function(req, res){
 
 register = function(req, res){
     url = KME_API.register(req.hostname);
+    json_response = {};
     request("POST", url,{ 
         qs: {
             username: req.body.username,
@@ -172,20 +173,23 @@ register = function(req, res){
                     req.session.user.info = response.user;
                     req.session.user.token = response.token;
                     req.session.user.logged = true;
-
+                    
                     userCRM = registerUserCRM("http://crm.marketinguniversity.co/custom/service/v4_1_custom/rest.php", req.session.user);
                     if (!userCRM) {
-                        console.log("error register user in CRM");
+                        json_response = {
+                            status : "warning",
+                            message: "user is not created in CRM"
+                        };
                     }
-                    res.send({
+                    json_response = {
                         status : "ok"
-                    })
+                    }
 
                 }else{
-                    res.send({
+                   json_response = {
                         status : "failed",
                         message : response.message
-                    })
+                    }
                 }
             }catch(err){
                 res.send(response.getBody());
@@ -193,6 +197,8 @@ register = function(req, res){
             }
         }
     });
+
+    res.send(json_response);
 }
 
 /**
@@ -247,9 +253,8 @@ user_exists = function(req, res){
 }
 
 /**
- * @api{get} /api/account/exists/:username User exists?
  * @apiName register_user_CRM
- * @apiDescription Function that return is a username is already taken
+ * @apiDescription Function that return true or false if user is created in CRM
  * @apiGroup account
  * @apiSuccessExample Success-response
  * HTTP/1.1 200 OK
@@ -263,35 +268,56 @@ registerUserCRM = function(url, user) {
         username = user.info.username,
         first_name = user.info.first_name,
         last_name = user.info.last_name,
-        email = user.info.email
+        email = user.info.email,
+        session_id = "";
+    console.log("paso por aqui")
     request("POST", url, {
         qs: {
             method: "loginCRM",
             input_type: "JSON",
             response_type: "JSON",
-            rest_data: "{\"user_auth\":{\"user_name\":\"KME\",\"password\":\""+crypto.createHash('md5').update("Km3123").digest("hex")+"\"}}"
-        }
-    }).done(function(response) {
-       session_id = JSON.parse(response.getBody());
-        if (!("error" in session_id)) {
-            request("POST", url, {
-                qs: {
-                    method: "createUser",
-                    input_type: "JSON",
-                    response_type: "JSON",
-                    rest_data: "{\"session\":\""+session_id+"\",\"data\":{\"user_name\":\""+username+"\",\"first_name\":\""+first_name+"\",\"last_name\":\""+last_name+"\",\"kme_user_id_c\":\""+id+"\",\"mku_user_type_c\":\"Registrado\",\"email\":\""+email+"\"}}"
+            rest_data: JSON.stringify({
+                user_auth: {
+                    user_name: "KME",
+                    password: crypto.createHash('md5').update("Km3123").digest("hex")
                 }
-            }).done(function(response) {
-                response = JSON.parse(response.getBody());
-
-                if (!("error" in response)) {
-                    return true;
-                }else{
-                    return false;
-                }
-
-            });
+            })
         }
+    }).done(function(response1) {
+        session_id = JSON.parse(response1.getBody());
+        
+        if (typeof session_id != "string") {
+            return false;   
+        }
+        
+        request("POST", url, {
+            qs: {
+                method: "createUser",
+                input_type: "JSON",
+                response_type: "JSON",
+                rest_data: JSON.stringify({
+                    session: session_id,
+                    data:{
+                        user_name: username,
+                        first_name: first_name,
+                        last_name: last_name,
+                        kme_user_id_c: id,
+                        mku_user_type_c: "Registrado",
+                        email: email
+                    }
+                })
+            }
+        }).done(function(response2) {
+         
+            response = JSON.parse(response2.getBody());
+         
+            if (typeof response == "string") {
+                return true;
+            }else{
+                return false;
+            }
+
+        });
     });
 }
 
