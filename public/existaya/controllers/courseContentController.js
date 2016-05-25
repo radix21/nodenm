@@ -23,6 +23,9 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         }
     }
     // Evaluation
+    $scope.getLetter = function (index) {
+    return String.fromCharCode(65 + index);
+    }
     $scope.markContentAsSeen = function(content, module){
         if(content !=undefined  && module != undefined){
         for(m in $scope.dataSimpleCourse.modules){
@@ -145,6 +148,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         $scope.arrowLeft = false;
         $scope.arrowRight = true;
         $scope.finish = false;
+        $scope.finishExam=false;
         $scope.confirmFinish = false;
         prev_choices = $scope.question_choices;
         prev_position = $scope.actual_position;
@@ -188,6 +192,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
                 if($scope.numberAllslide == $scope.numberQuestion){
                     $scope.arrowRight = false;
                     $scope.finish = true;
+                    $scope.finishExam = true;
                 }
             }).error(function(){
             })
@@ -261,6 +266,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
     $scope.fetch_user_slide = function(course, ubs, module, content, exam, choices, callback){
         $scope.arrowLeft = $scope.position > 0;
         $scope.arrowRight = $scope.position < $scope.examData.extras.nr_slides - 1;
+        $scope.finishExam = $scope.position == $scope.examData.extras.nr_slides - 1;
         $scope.loader = true;
         $scope.question_choices = {};
         if(callback != undefined){

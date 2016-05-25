@@ -709,7 +709,7 @@ data.modules = [];
                 </div>  
                 <div class="statement container">
                     <span class="col-md-1 text-center">
-                        <span class="numberQuestion">{{numberQuestion}}</span>
+                        <span class="numberQuestion ">{{examSlide.fields.position + 1}}</span>
                     </span>
 
                     <span class="col-md-11">
@@ -728,7 +728,7 @@ data.modules = [];
                             <div ng-repeat="option in user_answers track by $index">
                                 <div class="col-md-6">
                                     <div class="optionBg row">
-                                        <span class="col-md-1 letter letterId-{{option.id}}" ng-class="{inactiveChoice:{{option.selected}}, block_cursor : {{disableChoices}} }" ng-click="saveAnswer(option.id)">{{ $index + 1}}</span>
+                                        <span class="col-md-1 letter letterId-{{option.id}}" ng-class="{inactiveChoice:{{option.selected}}, block_cursor : {{disableChoices}} }" ng-click="saveAnswer(option.id)">{{getLetter($index)}}</span>
                                         <span id="{{option.id}}" class="col-md-11 labelField">{{option.option}} </span>
                                     </div>
                                 </div>
@@ -747,7 +747,7 @@ data.modules = [];
                     </div> 
                     <div class="col-md-9 col-xs-9 col-sm-9 col-lg-9"> 
                         <div class="navButtons pull-right">
-                            <a href="" ng-click="finish_exam(contentId, moduleId, examData.pk)" class="btnFinish not-active-button">Terminar</i></a>
+                            <a href="" ng-click="finish_exam(contentId, moduleId, examData.pk)" class="btnFinish not-active-button" ng-show="finishExam">Terminar</i></a>
                         <a href="" class="next_slide" ng-click="next_slide()" ng-show="arrowRight">
                             <i class="fa fa-chevron-right"></i>
                         </a> 
@@ -764,5 +764,6 @@ data.modules = [];
     </div>
 
 </div>
+
 
 <% include ../footer.html%>
