@@ -11,6 +11,7 @@
  * }
  ***/
 take_test = function(req, res){
+    var hrstart = process.hrtime();
     if(req.session.user == undefined || req.session.user.token == undefined){
         res.send({
             status : "failed",
@@ -46,7 +47,8 @@ take_test = function(req, res){
             })
         }).end()
     }
-
+    hrend = process.hrtime(hrstart);;
+    console.info("Execution time (take_test): %ds %dms", hrend[0], hrend[1]/1000000);
 }
 /**
  * @api{get} /api/content/json_fetch_exam/ Get exam status
@@ -62,6 +64,7 @@ take_test = function(req, res){
 *
  ***/
 fetch_exam = function(req, res){
+    var hrstart = process.hrtime();
     if(req.session.user == undefined || req.session.user.token == undefined){
         res.send({
             status : "failed",
@@ -120,6 +123,7 @@ fetch_exam = function(req, res){
         }).end()
         */
     }
+    console.info("Execution time (fetch_exam): %ds %dms", hrend[0], hrend[1]/1000000);
 
 }
 /**
@@ -136,6 +140,7 @@ fetch_exam = function(req, res){
 *
  ***/
 fetch_user_slide = function(req, res){
+    var hrstart = process.hrtime();
     if(req.session.user == undefined || req.session.user.token == undefined){
         res.send({
             status : "failed",
@@ -160,7 +165,7 @@ fetch_user_slide = function(req, res){
             }
         })
     }
-
+    console.info("Execution time (fetch_user_slide): %ds %dms", hrend[0], hrend[1]/1000000);
 }
 
 /**
@@ -177,6 +182,7 @@ fetch_user_slide = function(req, res){
 
  ***/
 finish_exam = function(req, res){
+    var hrstart = process.hrtime();
     if(req.session.user == undefined || req.session.user.token == undefined){
         res.send({
             status : "failed",
@@ -216,5 +222,5 @@ finish_exam = function(req, res){
             })
         }).end()
     }
-
+    console.info("Execution time (finish_exam): %ds %dms", hrend[0], hrend[1]/1000000);
 }
