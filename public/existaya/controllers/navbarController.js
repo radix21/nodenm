@@ -177,14 +177,14 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
                 var access_token =   FB.getAuthResponse()['accessToken'];
+                $scope.Waiting=true;
                 FB.api('/me?fields=name,email,picture', function (response) {
                     arrayname=response.name.split(" ");
                     name=arrayname[0]+" "+arrayname[1];
                     sessionStorage.name = name;
                     sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture?width=9999";
-                    console.log(sessionStorage)
+                    
                     username=response.email;
-                    console.log(response.email);
                     username=username.replace("@","");
                     username=username.replace(".","");
                    
@@ -193,6 +193,7 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                         if(response.status == "ok" && response.exists){
                             password = email+username;
                             auth.ajax($http, $scope, username, password, email);
+                            
                         }else{
                             password = email+username;
                             auth.register($http, username, password, email).success(function(response){
