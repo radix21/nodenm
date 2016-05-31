@@ -503,12 +503,13 @@ course_data_student = function(req, res){
  **/
 
 courseView = function(req, res){
+    var hrstart = process.hrtime();
     if(req.session.user == undefined){
         res.redirect("/");
     }else{
         str = "";
         url_course_view = KME_API.get_course_data_student(req.hostname) + "/"+req.params.slug+"?user="+req.session.user.info.username+"&token="+req.session.user.token;
-        data = http.get(url_course_view, function(response){
+        /*data = http.get(url_course_view, function(response){
             response.on("error", function(err){
             })
             response.on("data", function(data){
@@ -536,9 +537,31 @@ courseView = function(req, res){
                 status : "error",
                 message : err
             })
-        }).end();
+        }).end();*/
+        request("GET", url_course_view).done(function(response) {
+            if (response.statusCode > 300) {
+                res.status(response.statusCode).send(response);
+            }else{
+                try{
+                    str = JSON.parse(response.getBody());    
+                    res.render(client_folder(req.hostname) + "courses/simpleCourse.html",{
+                        user : req.session.user,
+                        slug : req.params.slug,
+                        dataStudent : str
+                    })
+                }catch(err){
+                    res.send({
+                        status: "error",
+                        message : "Error Parsing data"
+                    });
+                }                
+                
+            }
+        });
 
     }
+    hrend = process.hrtime(hrstart);;
+    console.info("Execution time (courseView): %ds %dms", hrend[0], hrend[1]/1000000);
 }
 
 /**
