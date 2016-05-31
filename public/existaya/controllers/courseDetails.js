@@ -3,7 +3,7 @@ app.controller("courseDetails", ["$http", "$scope", "$location", "$rootScope","c
     console.log(213);
     $scope.inscribeUserOnCOurse = function(){
         document.querySelector(".loaderGIF").style.display="auto";
-        /**courses.inscribe($routeParams.slug).success(function(response){
+        /*courses.inscribe($routeParams.slug).success(function(response){
             if(response.status == "ok"){
                 $location.path("#/course/"+$routeParams.slug);
             }
