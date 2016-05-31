@@ -270,7 +270,7 @@ registerUserCRM = function(url, user) {
         last_name = user.info.last_name,
         email = user.info.email,
         session_id = "";
-    console.log("paso por aqui")
+    
     request("POST", url, {
         qs: {
             method: "loginCRM",
