@@ -13,7 +13,7 @@ module.exports = {
         app.get("/course/:slug", courseView);
         app.get("/api/course/:slug", course_data_student);
         app.get("/api/certifications/my_certifications", my_certifications);
-        app.get("/api/course/inscribe/:user/:slug", inscribe_on_course);
+        app.get("/api/course/inscribe/:user/:slug/:session", inscribe_on_course);
     }
 }
 

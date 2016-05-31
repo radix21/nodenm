@@ -693,6 +693,7 @@ app.directive("sessionsList", ["$rootScope", function($rootScope){
             scope.checkWeeks = function(session_index){
                         
                     session = session_index;
+                    $rootScope.pk=session.pk;
                     $rootScope.weeks = Math.round( parseInt(session.total_seconds) / 604800);
                     $rootScope.hours = Math.round(parseInt(data.duration) / $rootScope.weeks);
             }
