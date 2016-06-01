@@ -19,10 +19,10 @@ data.avatar = '<%= user.info.avatar %>'
                         <img src="/existaya/images/avatarDefault.png" alt="" class="img-responsive center-block img-circle" ng-if="dataUser.avatar == ''">
 
                         <div>
-                            <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name != ''">{{dataUser.name}} {{dataUser.lastname}}</p>
-                            <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name == ''">{{dataUser.username}}</p>
+                            <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name != ''" ng-cloak>{{dataUser.name}} {{dataUser.lastname}}</p>
+                            <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name == ''" ng-cloak>{{dataUser.username}}</p>
                         </div>
-                        <p class="text text--gris text--lite text--sm margin--b2">{{dataUser.jobtitle}}</p>
+                        <p class="text text--gris text--lite text--sm margin--b2" ng-cloak>{{dataUser.jobtitle}}</p>
                         <div class="alert alert--progress alert--bigger" role="alert">
 
                             <p class="text text--gris text--lite text-left">
@@ -53,11 +53,11 @@ data.avatar = '<%= user.info.avatar %>'
                                 </td>
                                 <td>
                                     
-                                     <a href="/profile#/cursosFinalizados" aria-controls="cursosFinalizados" role="tab" data-toggle="tab" class="text text--xbold text--gris_osc margin--t0">Cursos completados</a>
+                                     <a href="/profile#/cursosFinalizados" aria-controls="cursosFinalizados" role="tab" data-toggle="tab" class="text text--xbold text--gris_osc margin--t0" ng-cloak >Cursos completados</a>
                                     
                                 </td>
                                 <td class="text-right">
-                                    <span class="label label-verde text--md">
+                                    <span class="label label-verde text--md" ng-cloak>
                                         {{ completed_courses.length }}
                                     </span>
                                 </td>
@@ -70,12 +70,12 @@ data.avatar = '<%= user.info.avatar %>'
                                 </td>
                                 <td>
                                  
-                                     <a href="/profile/#my_courses" aria-controls="cursosIniciados" role="tab" data-toggle="tab" class="text text--xbold text--gris_osc margin--t0">Cursos en progresos</a>
+                                     <a href="/profile/#my_courses" aria-controls="cursosIniciados" role="tab" data-toggle="tab" class="text text--xbold text--gris_osc margin--t0" ng-cloak>Cursos en progresos</a>
 
                                     
                                 </td>
                                 <td class="text-right">
-                                    <span class="label label-naranja text--md">
+                                    <span class="label label-naranja text--md" ng-cloak > 
                                         {{dataMyCourses.length}}
                                     </span>
                                 </td>
