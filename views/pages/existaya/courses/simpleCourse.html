@@ -342,7 +342,7 @@ data.modules = [];
 
                                                 <ul class="nav nav-tabs nav-justified nav-tabs--detalleClase" role="tablist">
                                                     <li role="presentation" class="moduleTab" ng-repeat="module in pack" ng-class="{active:$first}">
-                                                    <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill" ng-click="markContentAsSeen(module.submodules[0].contents[0].content_pk, module.submodules[0].module_pk)">
+                                                    <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill" ng-click="markContentAsSeen(module.submodules[0].contents[0].content_pk, module.submodules[0].module_pk)" style="height: 65px;">
                                                         {{ module.module_name }}
 
                                                     </a>
