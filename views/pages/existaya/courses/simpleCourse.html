@@ -263,6 +263,13 @@ data.modules = [];
                     })
                 <%}%>
                 <%}%>
+        var  charge=setInterval(function(){
+            if($("#category").length > 0){
+                $("#category").html(data.course.type);
+                $("#namecourse").html(data.course.name);
+                clearInterval(charge);
+            }
+        },100)
 </script>
 <script src="/existaya/controllers/courseContentController.js"></script>
 <div ng-controller="courseContentController">
