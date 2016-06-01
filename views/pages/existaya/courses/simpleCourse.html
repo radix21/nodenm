@@ -263,6 +263,13 @@ data.modules = [];
                     })
                 <%}%>
                 <%}%>
+        var  charge=setInterval(function(){
+            if($("#category").length > 0){
+                $("#category").html(data.course.type);
+                $("#namecourse").html(data.course.name);
+                clearInterval(charge);
+            }
+        },100)
 </script>
 <script src="/existaya/controllers/courseContentController.js"></script>
 <div ng-controller="courseContentController">
@@ -341,7 +348,7 @@ data.modules = [];
                                             <div class="item" ng-repeat="pack in modulesPack" ng-class="{ active:$first}">
 
                                                 <ul class="nav nav-tabs nav-justified nav-tabs--detalleClase" role="tablist">
-                                                    <li role="presentation" class="moduleTab" ng-repeat="module in pack" ng-class="{active:$first}">
+                                                    <li role="presentation" class="moduleTab" ng-repeat="module in pack" ng-class="{active:$first}" style="width:200px;">
                                                     <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill" ng-click="markContentAsSeen(module.submodules[0].contents[0].content_pk, module.submodules[0].module_pk)" style="height: 65px;">
                                                         {{ module.module_name }}
 
