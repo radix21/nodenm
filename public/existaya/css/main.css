@@ -979,13 +979,15 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 }
 .carousel--tabsDetalle .carousel-control.right
 {
-    top: -2.2em;
-    right: 0;
+    top: 0px;
+    right: 1%;
+    height: 65px;
 }
 .carousel--tabsDetalle .carousel-control.left
 {
-    top: -2.2em;
-    right: 2.2em;
+    top: 0px;
+    right: 96%;
+    height: 65px;
     left: auto;
 }
 .carousel--tabsDetalle .carousel-control > span
@@ -993,6 +995,11 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
     font-size: .9em;
     top: 50%;
     margin-top: -.5em !important;
+}
+
+.module-nav{
+    padding-left: 4%;
+    padding-right: 5%;
 }
 
 .panel-verde
