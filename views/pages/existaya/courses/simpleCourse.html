@@ -467,7 +467,7 @@ data.modules = [];
                                 <dt class="text--azul_osc">
                                 {{ module.module_name }}
                                 </dt>
-                                <dd class="text--azul_osc">
+                                <dd">
                                 {{module.module_description}}
                                 </dd>
                             </dl>
@@ -488,7 +488,7 @@ data.modules = [];
                             <ul>
                                 <li ng-repeat="requisite in dataSimpleCourse.course.prerequisites">
                                 {{requisite.name}}
-                                <a href="/course/{{requisite.slug}}/details" class="text--azul">(Ver informaci{on )</a>
+                                <a href="/course/{{requisite.slug}}/details" class="text--azul">(Ver información )</a>
                                 </li>
                             </ul>
                             </p>

@@ -1095,12 +1095,12 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 }
 
 a {
-    color: #7e7e7e;
+    /*color: #7e7e7e;*/
     text-decoration: none;
 }
 
 a:hover {
-    color: white;
+    color: #23527c;
     text-decoration: none;
 }
 
