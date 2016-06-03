@@ -732,11 +732,19 @@ data.modules = [];
                             <div class="text-center" ng-if="examSlide.fields.question.extras.get_image_data != null"> 
                                 <img id="questionImage" class="img-responsive" alt="">
                             </div>
+
                             <div ng-repeat="option in user_answers track by $index">
+                                
                                 <div class="col-md-6">
-                                    <div class="optionBg row">
+                                    <div class="optionBg row" ng-show="unique">
                                         <span class="col-md-1 letter letterId-{{option.id}}" ng-class="{inactiveChoice:{{option.selected}}, block_cursor : {{disableChoices}} }" ng-click="saveAnswer(option.id)">{{getLetter($index)}}</span>
                                         <span id="{{option.id}}" class="col-md-11 labelField">{{option.option}} </span>
+
+                                    </div>
+                                    <div class="optionBg row" ng-show="multiple">
+                                        <span class="col-md-1 letter letterId-{{option.id}}" ng-class="{inactiveChoice:{{option.selected}}, block_cursor : {{disableChoices}} }" ng-click="saveAnswermu(option.id)">{{getLetter($index)}}</span>
+                                        <span id="{{option.id}}" class="col-md-11 labelField">{{option.option}} </span>
+                                        
                                     </div>
                                 </div>
                             </div>
