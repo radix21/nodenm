@@ -28,8 +28,8 @@
                         </div>
                     </div>
                     <div class="col-xs-2 text-center">
-                        <div class="c100 center p{{certification.percentage}} center-block">
-                            <span>{{ certification.percentage}}%</span>
+                        <div class="c100 center p{{certification.percentage | number: 0}} center-block">
+                            <span>{{ certification.percentage | number: 0}}%</span>
                             <div class="slice">
                                 <div class="bar"></div>
                                 <div class="fill"></div>
@@ -57,11 +57,11 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <p class="text text--gris text--xbold text-center margin--b0">
-                                    {{ course.percentage }}%
+                                    {{ course.percentage | number: 0 }}%
                                     </p>
                                     <div class="clearfix"></div>
                                     <div class="progress progress--blanco progress--green margin--t1">
-                                        <div class="progress-bar progress-bar--green" role="progressbar" aria-valuenow="{{ course.percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ course.percentage }}%;"></div>
+                                        <div class="progress-bar progress-bar--green" role="progressbar" aria-valuenow="{{ course.percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ course.percentage | number: 0}}%;"></div>
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
