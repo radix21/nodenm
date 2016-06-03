@@ -335,7 +335,12 @@ app.run(["$rootScope","$location", "$http", "$window", function($rootScope, $loc
 
     //end Evaluations
 }])
-
+app.filter('format_date', function() {
+    return function(date) {
+        var temp = Date.parse(date);
+        return temp
+    }
+});
 var funciones =
 {
     tabs_internos_perfil_cursos : function ()
