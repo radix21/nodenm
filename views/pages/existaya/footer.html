@@ -88,12 +88,15 @@
 <script>
 var  interval=setInterval(function(){
         if(location.pathname == "/profile"){
-        if($(".nav-interno").length > 0){
-        $(".nav-interno").removeClass("hidden");
-        clearInterval(interval);
-        }
+            if($(".nav-interno").length > 0){
+                $(".nav-interno").removeClass("hidden");
+                clearInterval(interval);
+            }
+        }else if(location.pathname != "/"){
+            $(".sidebar-footer__top").addClass("sidebar-footer__top--internas")
+            clearInterval(interval);
         }else{
-        clearInterval(interval);
+            clearInterval(interval);
         }
 
         },100)
