@@ -143,14 +143,19 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
 
     } 
     $scope.saveAnswermu = function(val){
-       
-        $scope.question_choices[""+val] = val; 
-        console.log("questionchoice",$scope.question_choices);
+        if($(".letterId-" + val).hasClass("activeAnswer")){
+           $(".letterId-" + val).removeClass("activeAnswer");
+           $scope.question_choices[""+val] = null; 
+        }else{
+            $(".letterId-" + val).addClass("activeAnswer");
+            $scope.question_choices[""+val] = val; 
+        }
+        
         //styles
         $(".letter").each(function(){
         
         });
-        $(".letterId-" + val).addClass("activeAnswer");
+        
         $(".btnFinish").removeClass("not-active-button");
 
         //percentage
@@ -242,7 +247,6 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
 
 
         $scope.actual_position +=1;
-        console.log("posicion alctual",$scope.actual_position);
         $scope.question_choices = {};
         params += "&exam="+$scope.examData.pk+"&contentId="+$scope.contentId;
         $http.get('/api/content/json_fetch_exam/?'+params)
@@ -327,7 +331,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         return null; 
     }
     $scope.fetch_user_slide = function(course, ubs, module, content, exam, choices, callback){
-        console.log("fetch user slide");
+        
         $scope.arrowLeft = $scope.position > 0;
         $scope.arrowRight = $scope.position < $scope.examData.extras.nr_slides - 1;
         $scope.finishExam = $scope.position == $scope.examData.extras.nr_slides - 1;
@@ -391,7 +395,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
     }
 
     $scope.fetch_exam = function(course, ubs, module, content, exam, callback){
-        console.log("entra al fetch exam");
+        
         if(callback != undefined){
             $http.get("/api/content/json_fetch_exam?course="+course+"&ubs="+ubs+"&module="+module+"&content="+content+"&exam="+exam)
                 .success(callback)
@@ -399,7 +403,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
             $http.get("/api/content/json_fetch_exam?course="+course+"&ubs="+ubs+"&module="+module+"&content="+content+"&exam="+exam)
                 .success(function(response){
                     response = response[0];
-                    console.log("el response",response);
+
                     $scope.examData = typeof(response) == "string" ? JSON.parse(response) : response;
                 })
         }
@@ -410,7 +414,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         response = response[0];
         $scope.examData = typeof(response) == "string" ? JSON.parse(response) : response;
         $scope.exam_id = $scope.examData.pk;
-        console.log("entra al launch");
+
         $scope.fetch_user_slide(data.course.pk, data.course.ubs, $scope.moduleId, $scope.contentId, $scope.exam_info.exam, $scope.choices);
     }
     $scope.launchExam = function(response_data){
@@ -421,7 +425,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         $scope.exam_info = response_data;
 
         $scope.fetch_exam(data.course.pk, data.course.ubs, $scope.moduleId, $scope.contentId, response_data.exam, $scope.launch_fetch_user_slide);
-        console.log("lo llama en el launch exam");
+        
         return null
     }
     // This function start the exam
@@ -429,7 +433,6 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         $scope.actual_position = 0;
         var dict_choices = JSON.stringify($scope.choices);
         already_graded=false;
-        console.log("init user",dict_choices);
         //$scope.ajax_fetch_user_slide($scope.options);
 
     };
