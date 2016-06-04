@@ -318,14 +318,23 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
     $scope.finish_exam = function(content, module, exam, callback){
         $scope.confirmFinish = true;
         if(callback){
-
             $http.get("/api/content/json_finish_exam/?content="+content+"&module="+module+"&exam="+exam+"&choices="+JSON.stringify($scope.question_choices)+"&actual_position="+$scope.position)
                 .success(response)
 
         }else{
-
             $http.get("/api/content/json_finish_exam/?content="+content+"&module="+module+"&exam="+exam+"&choices="+JSON.stringify($scope.question_choices)+"&actual_position="+$scope.position)
                 .success(function(response){
+                    if (response.score<response.aprobation){
+                        swal({   title: "Puntaje: "+response.score,   text: "No haz obtenido el puntaje necesario para aprobar la evaluación, revisa el material e intantalo nuevamente. Recuerda que tienes una cantidad limitada de intentos.",  
+                         type: "info",   showCancelButton: false,    confirmButtonText: "Continuar",  
+                        closeOnConfirm: false }, function(){   location.reload(); });
+
+                    }else{
+                        swal({   title: "Puntaje: "+response.score,   text: "Felicitaciones haz aprobado la evaluación",  
+                         type: "success",   showCancelButton: false,    confirmButtonText: "Continuar",  
+                        closeOnConfirm: false }, function(){   location.reload(); });
+                    }
+                    
                 })
         }
         return null; 
