@@ -949,6 +949,13 @@ app.controller('tribes',['$scope','courses','$http', '$rootScope','$sce','$timeo
             $scope.alert_post = true;
         }
     }
+    $scope.$watch("confirm_post", function() {
+        if ($scope.confirm_post == true) {
+            $timeout(function() {
+                $scope.closeAlert();
+            }, 2000);
+        }
+    }, true);
     $scope.closeAlert = function(){
         $(".boxPost").toggleClass("paddingNone");
         $scope.post = '';
