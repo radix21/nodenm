@@ -8,5 +8,6 @@ module.exports = {
         app.post("/api/account/is_authenticated", isAuthenticated);
         app.get("/api/account/exists/:username", user_exists);
         app.get("/api/account/getmutoken/", getMUToken);
+        app.post("/api/account/uploadavatar/", uploadAvatar);
     }
 }
