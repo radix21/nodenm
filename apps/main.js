@@ -91,7 +91,11 @@ KME_API = {
     },
     user_exists : function(hostname){
         return SERVER(hostname) + "/api/exists/";
+    },
+    upload_avatar: function(hostname) {
+        return SERVER(hostname)+"/api/avatar/upload"
     }
+
 
 }
     

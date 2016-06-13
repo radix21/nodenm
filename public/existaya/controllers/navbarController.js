@@ -187,6 +187,13 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                     username=response.email;
                     username=username.replace("@","");
                     username=username.replace(".","");
+
+                    $http.post("/api/account/uploadavatar/", {
+                        username: username,
+                        url: sessionStorage.avatar
+                    }).success(function(response) {
+                        console.log(response);
+                    });
                    
                     email = response.email;
                     auth.exists($http, username).success(function(response){
@@ -217,11 +224,18 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                             sessionStorage.name = name;
 
                             sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture?width=9999";;
-                            console.log(sessionStorage)
+                            
                             username=response.email;
                             username=username.replace("@","");
                             username=username.replace(".","");
                             email=response.email;
+
+                            $http.post("/api/account/uploadavatar/", {
+                                username: username,
+                                url: sessionStorage.avatar
+                            }).success(function(response) {
+                                console.log(response);
+                            });
                             auth.exists($http, username).success(function(response){
                                 if(response.status == "ok" && response.exists){
                                     password = email+username;

@@ -357,3 +357,45 @@ getMUToken = function(req, res) {
     }
 }
 
+/**
+ * @api{get} /api/account/uploadavatar/
+ * @apiName uploadAvatar
+ * @apiDescription Function that modify the profile image of user
+ * @apiGroup account
+ * @apiSuccessExample Success-response
+ * HTTP/1.1 200 OK
+ * {
+ *      status : {String}
+ * }
+ * @apiErrorExample user is not session
+ *  HTTP/1.1 500 ERROR
+ *  {
+ *      "status" : "failed",
+ *      "error" : {String}
+ *  }
+ ***/
+uploadAvatar = function(req, res) {
+    var username = req.body.username;
+    var url = req.body.url;
+    
+    request('GET', KME_API.upload_avatar(req.hostname), {
+        qs: {
+            username: username,
+            avatar_url: url
+        },
+    }).done(function(response){
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "failed",
+                error : response.statusCode
+            });
+        }else{
+            try{
+                response = JSON.parse(response.getBody())
+                res.send(response);
+            }catch(err){
+                res.send(500).send(response.getBody())
+            }
+        }
+    })
+}
