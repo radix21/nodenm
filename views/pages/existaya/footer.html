@@ -1,4 +1,4 @@
- <% if (user.logged){ %>
+<% if (typeof(user) !== 'undefined' && user.logged){ %>
 <footer class="col-xs-12 sidebar-footer" style="margin-top:4em;">
     <div class="row">
  <% } else { %>
