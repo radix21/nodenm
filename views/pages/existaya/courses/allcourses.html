@@ -25,11 +25,12 @@
                         data.push({
                             name : "<%= course.name.trim() %>",
                             description : "<%= course.description %>",
-                            duration : "<% course.duration %>" == '' ? null : "<%= course.duration %>" ,
+                            duration : "<%= course.duration %>" == ''? null:"<%= course.duration %>",
                             image : "<%= course.image %>",
                             score : <%= course.score %>,
                             slug : "<%= course.slug %>",
-                            tutors : []
+                            tutors : [],
+                            uuid : "<%= course.uuid %>",
                         })
                         <% for( t in course.tutors){%>
                             <% tutor = course.tutors[t];%>
