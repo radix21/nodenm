@@ -607,6 +607,7 @@ app.directive("coursesList", ["courses","$http", "$rootScope",function(courses, 
                     console.log("[DEBUG] - error with filter :"+scope.filter);
                     break;
             }
+            window.list = scope.listCourses;
         },
         scope : {
             filter : "@",
