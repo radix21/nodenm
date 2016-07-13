@@ -123,7 +123,7 @@ CLIENTS = {
     },
     "test.marketinguniversity.com" : {
         folder : "existaya",
-        server : "http://http://testmarketing.kmelx.com",
+        server : "http://testmarketing.kmelx.com",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
    
     },
