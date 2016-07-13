@@ -121,7 +121,7 @@ CLIENTS = {
         server : "http://marketing.kmelx.com",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
-    "test.marketinguniversity.com" : {
+    "test.marketinguniversity.co" : {
         folder : "existaya",
         server : "http://testmarketing.kmelx.com",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
