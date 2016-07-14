@@ -330,6 +330,7 @@
 </div>
 <script>
 buttons =  document.querySelectorAll(".inscribeUser");
+document.querySelector(".session_pk").value = data.sessions[0].pk;
 for(b in buttons){
     button = buttons[b];
     button.onclick = function(event){
@@ -341,16 +342,34 @@ for(b in buttons){
         if (!session){
             session=null;
         }
+        console.log(session);
         xhr.open("GET","/api/course/inscribe/"+user+"/"+slug+"/"+session);
         xhr.onreadystatechange = function(){
             response = xhr.response;
             response = JSON.parse(response);
-            console.log(typeof(response));
-
             document.querySelector(".loaderGIF").style.display="none";
-            console.log(response.status);
             if(response.status == "ok"){
-                swal({   title: "inscripción Exitosa",   text: "Te haz inscrito correctamente a este curso",   type: "success",   showCancelButton: false,    confirmButtonText: "Continuar",   closeOnConfirm: false }, function(){   window.location.assign("/course/"+slug)+"/details"; });
+                session = data.sessions.filter(function(value){
+                    return value.pk == session;
+                })
+                session = session[0];
+                if(new Date() < new Date(session.initial_date.substring(0,10))){
+                    swal({
+                        title : "Proximamente",
+                        text : "Este curso iniciara: "+ session.initial_date.substring(0,10)+", puedes verlo hasta entonces en la pestaña de cursos proximos en tu perfil",
+                        type : "success",
+                        showCancelButton : false,
+                        confirmButtonText : "Cerrar",
+                        closeOnConfirm : true
+                    }, function(){
+                        location.reload();
+                    }) 
+                }else{
+                    swal({   title: "inscripción Exitosa",   text: "Te haz inscrito correctamente a este curso",   type: "success",   showCancelButton: false,    confirmButtonText: "Continuar",   closeOnConfirm: false }, function(){   
+
+                        window.location.assign("/course/"+slug)+"/details"; 
+                    });
+                }
                 
             }else{
                 sweetAlert("No fue posible realizar la inscripción", "Intentalo nuevamente con una session disponible", "error");
