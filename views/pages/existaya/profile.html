@@ -15,7 +15,7 @@ data.avatar = '<%= user.info.avatar %>'
             <div class="col-xs-3 sidebar-perfil sidebar-add__montainR margin--b5">
                 <div class="row">
                     <div class="col-xs-12 sidebar-perfil__top text-center" ng-controller="profile">
-                        <img src="{{dataUser.avatar}}" alt="" class="img-responsive center-block img-circle" ng-if="dataUser.avatar != ''">
+                        <img src="{{dataUser.avatar.split('?')[0]}}" alt="" class="img-responsive center-block img-circle" ng-if="dataUser.avatar != ''">
                         <img src="/existaya/images/avatarDefault.png" alt="" class="img-responsive center-block img-circle" ng-if="dataUser.avatar == ''">
 
                         <div>

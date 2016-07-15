@@ -38,7 +38,7 @@
                     <div class="col-xs-5 col-xs-offset-5">
                         <p class="text text--blanco text--xbold text-right margin--t1">
                         <%if(user.info.first_name && user.info.last_name){%>
-                            <%= user.info.first_name %> <%= user.info.last_name %>
+                            <%= user.info.first_name.split(' ')[0] %> <%= user.info.last_name.split(' ')[0] %>
                         <% }else{ %>
                             {{ sessionName }}
                         <% } %>
