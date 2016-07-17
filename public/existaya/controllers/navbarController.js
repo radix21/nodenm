@@ -145,6 +145,7 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
     }
 
     $scope.signIn = function(){
+        sessionStorage.clear();
          if(!$scope._username || !$scope._password){
             $scope.alertFields = true;
         }else{
@@ -153,6 +154,8 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
  
     }
     $scope.singUp =  function(){
+
+        sessionStorage.clear();
         if(!$scope.username || !$scope.password || !$scope.email){
             $scope.alertFields = true;
         }else{
@@ -174,6 +177,7 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
     jsonData = config;
 
     $scope.FBLogin = function (register) {
+        sessionStorage.clear();
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
                 var access_token =   FB.getAuthResponse()['accessToken'];
