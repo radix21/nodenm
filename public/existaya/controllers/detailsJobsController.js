@@ -6,6 +6,8 @@ app.controller('detailsJobsController', ['$scope', '$http', '$location', functio
         //Inicializamos variables 
         $scope.detailJob = {};
         $scope.empresa = {};
+        $scope.skill_requeridos = {};
+
         var oferta_empleo_id = getOfertaEmpleoId();
         //Obtenemos el id de la oferta 
         console.log(oferta_empleo_id);
@@ -58,6 +60,9 @@ app.controller('detailsJobsController', ['$scope', '$http', '$location', functio
 
                 //Consultamos la empresa
                 getEmpresa(data['stp_empresas_stp_ofertas_empleo_1stp_empresas_ida']);
+
+                //Consultamos los skills requeridos 
+                ofertaGetSkillsRequerida(oferta_empleo_id);
 
             });
 
@@ -167,6 +172,38 @@ app.controller('detailsJobsController', ['$scope', '$http', '$location', functio
         }
 
         /**
+         * Función para obtener los skills requeridos 
+         * @returns {undefined}
+         */
+        function ofertaGetSkillsRequerida(oferta_empleo_id) {
+            var offerData = {
+                'session': '',
+                oferta_id: oferta_empleo_id,
+            };
+
+            var request = $http({
+                method: "post",
+                url: app.urlCrmProvider,
+                params: {
+                    'method': 'ofertaGetSkillsRequerida',
+                    'input_type': 'JSON',
+                    'response_type': 'JSON',
+                    'rest_data': offerData
+
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
+
+            /* Check whether the HTTP Request is successful or not. */
+            request.success(function (data) {
+
+                //Asignamos la respuesta 
+                $scope.skill_requeridos = data;
+            });
+
+        }
+
+        /**
          * 
          * @returns {undefined}
          */
@@ -177,5 +214,7 @@ app.controller('detailsJobsController', ['$scope', '$http', '$location', functio
         //Inicializamos variables
         init();
     }]);
+
+
 
 

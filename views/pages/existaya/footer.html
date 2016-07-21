@@ -1,103 +1,105 @@
 <% if (typeof(user) !== 'undefined' && user.logged){ %>
 <footer class="col-xs-12 sidebar-footer" style="margin-top:4em;">
     <div class="row">
- <% } else { %>
- <footer class="col-xs-12 sidebar-footer">
-    <div class="row">
-        <div class="col-xs-12 sidebar-footer__top">
-            <div class="container">
-                <p class="text text--lite text--md text-center">
-                Mantente al día de nuestros nuevos cursos, suscribete a nuestro newsletter
-                </p>
+        <% } else { %>
+        <footer class="col-xs-12 sidebar-footer">
+            <div class="row">
+                <div ng-controller="Newsletter">
+                    <div class="col-xs-12 sidebar-footer__top">
+                        <div class="container">
+                            <p class="text text--lite text--md text-center">
+                                Mantente al día de nuestros nuevos cursos, suscribete a nuestro newsletter
+                            </p>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-10 col-lg-offset-1 col-xs-12 margin--t1">
+                                <form name="newsletter_form" id="newsletter_form" ng-submit="subscription()">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <input type="text" required="" class="form-control input-lg" id="newsletter_name" name="newsletter_name" ng-model="newsletter_name" placeholder="Nombre">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group" ng-class="{ 'has-error': newsletter_form.newsletter_email.$invalid }">
 
-                <div class="clearfix"></div>
-
-                <div class="col-lg-10 col-lg-offset-1 col-xs-12 margin--t1">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <div class="form-group">
-                                <input type="text" class="form-control input-lg" id="exampleInputEmail1" placeholder="Nombre">
+                                                <input type="email" required="" class="form-control input-lg" id="newsletter_email" name="newsletter_email" ng-model="newsletter_email" placeholder="Correo Electrónico">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <button class="btn btn-azul btn-block btn-lg" ng-disabled="newsletter_form.$invalid">
+                                                <span class="text--upper">SUSCRIBIRME</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
+                        </div>  
+                    </div>
+                </div>
+                <% } %>
+                <div class="col-xs-12 sidebar-footer__bottom">
+                    <div class="container">
+                        <div class="col-xs-2 col-xs-offset-1">
+                            <img src="/existaya/images/logo1.png" alt="" class="img-responsive pull-left margin--t1">
                         </div>
-                        <div class="col-xs-4">
-                            <div class="form-group">
-                                <input type="email" class="form-control input-lg" id="exampleInputEmail1" placeholder="Correo Electrónico">
-                            </div>
+                        <div class="col-xs-2">
+                            <ul class="list-simple list-xs">
+                                <li>
+                                    <a href="#">Cursos rápidos</a>
+                                </li>
+                                <li>
+                                    <a href="#">Especializaciones</a>
+                                </li>
+                                <li>
+                                    <a href="#">Biblioteca y Recursos</a>
+                                </li>
+                                <li>
+                                    <a href="bolsa-de-empleo.html">Bolsa de empleo</a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="col-xs-4">
-                            <a href="#" class="btn btn-azul btn-block btn-lg">
-                                <span class="text--upper">SUSCRIBIRME</span>
-                            </a>
+                        <div class="col-xs-2">
+                            <ul class="list-simple list-xs">
+                                <li>
+                                    <a href="#">Preguntas frecuentes</a>
+                                </li>
+                                <li>
+                                    <a href="#">Términos y condiciones</a>
+                                </li>
+                                <li>
+                                    <a href="#">Políticas de privacidad</a>
+                                </li>
+                                <li>
+                                    <a href="#">Nuestro blog</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-3">
+                            <p class="text text--xbold text--gris">
+                                Contáctanos <a href="#" class="sidebar-footer__iconSocial sidebar-footer__iconSocial--facebook"><span class="icon-facebook"></span></a> <a href="#" class="sidebar-footer__iconSocial sidebar-footer__iconSocial--twitter"><span class="icon-twitter"></span></a>
+                            </p>
+                            <p class="text text--gris text--xs margin--t2">
+                                ©Marketing.university 2015
+                            </p>
                         </div>
                     </div>
                 </div>
-
-            </div>  
-        </div>
-  <% } %>
-        <div class="col-xs-12 sidebar-footer__bottom">
-            <div class="container">
-                <div class="col-xs-2 col-xs-offset-1">
-                    <img src="/existaya/images/logo1.png" alt="" class="img-responsive pull-left margin--t1">
-                </div>
-                <div class="col-xs-2">
-                    <ul class="list-simple list-xs">
-                        <li>
-                        <a href="#">Cursos rápidos</a>
-                        </li>
-                        <li>
-                        <a href="#">Especializaciones</a>
-                        </li>
-                        <li>
-                        <a href="#">Biblioteca y Recursos</a>
-                        </li>
-                        <li>
-                        <a href="bolsa-de-empleo.html">Bolsa de empleo</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-xs-2">
-                    <ul class="list-simple list-xs">
-                        <li>
-                        <a href="#">Preguntas frecuentes</a>
-                        </li>
-                        <li>
-                        <a href="#">Términos y condiciones</a>
-                        </li>
-                        <li>
-                        <a href="#">Políticas de privacidad</a>
-                        </li>
-                        <li>
-                        <a href="#">Nuestro blog</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-xs-3">
-                    <p class="text text--xbold text--gris">
-                    Contáctanos <a href="#" class="sidebar-footer__iconSocial sidebar-footer__iconSocial--facebook"><span class="icon-facebook"></span></a> <a href="#" class="sidebar-footer__iconSocial sidebar-footer__iconSocial--twitter"><span class="icon-twitter"></span></a>
-                    </p>
-                    <p class="text text--gris text--xs margin--t2">
-                    ©Marketing.university 2015
-                    </p>
-                </div>
             </div>
-        </div>
-    </div>
-</footer>
+        </footer>
 
-<script>
-var  interval=setInterval(function(){
-        if(location.pathname == "/profile"){
-            if($(".nav-interno").length > 0){
-                $(".nav-interno").removeClass("hidden");
-                clearInterval(interval);
-            }
-        }else if(location.pathname != "/"){
-            $(".sidebar-footer__top").addClass("sidebar-footer__top--internas")
-            clearInterval(interval);
-        }else{
-            clearInterval(interval);
-        }
+        <script>
+            var interval = setInterval(function () {
+                if (location.pathname == "/profile") {
+                    if ($(".nav-interno").length > 0) {
+                        $(".nav-interno").removeClass("hidden");
+                        clearInterval(interval);
+                    }
+                } else if (location.pathname != "/") {
+                    $(".sidebar-footer__top").addClass("sidebar-footer__top--internas")
+                    clearInterval(interval);
+                } else {
+                    clearInterval(interval);
+                }
 
-        },100)
-</script>
+            }, 100)
+        </script>
