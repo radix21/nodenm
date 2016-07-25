@@ -3,7 +3,7 @@ app.urlCrmProvider = 'http://crm.marketinguniversity.co/custom/service/v4_1_cust
 
 
 // Get the complete list of Jobs offers
-app.controller('jobsController', ['$scope', '$http', function ($scope, $http) {
+app.controller('jobsController', ['$scope', '$http', 'jobsServices', function ($scope, $http, jobsServices) {
         //Inicializamos variables 
         $scope.name = '';
         $scope.ubicacion_c = '';
@@ -25,50 +25,38 @@ app.controller('jobsController', ['$scope', '$http', function ($scope, $http) {
             if ($scope.ubicacion_c !== '') {
                 filter.ubicacion_c = $scope.ubicacion_c;
             }
+
+            if ($scope.salario !== '') {
+                filter.salario = $scope.salario;
+            }
+
             //console.log(filter);
             getServices(filter);
         };
 
         //Carga servicios
         function getServices(filtros) {
+            jobsServices.ofertaSearch(filtros)
+                    .then(function (data) {
+                        var color = ['naranja', 'marina', 'rojo', 'verde'];
+                        //Establece colores 
+                        if (Object.keys(data).length > 0) {
+                            angular.forEach(data, function (value, index) {
+                                data[index]['color'] = color[index % 4];
 
-            //Si no se pasa el filtro estado solo se visualizan los de estado Publicado
-            if (angular.isDefined(filtros['estado_c']) === false) {
-                filtros['estado_c'] = 'Publicado';
-            }
+                                //Establecemos logo si no tiene nada 
+                            });
+                        }
 
-            var offerData = {
-                'session': '',
-                'array_filtros': filtros
-            };
+                        //console.log(data);
+                        $scope.jobList = data;
 
-            var request = $http({
-                method: "post",
-                url: app.urlCrmProvider,
-                params: {
-                    'method': 'ofertaSearch',
-                    'input_type': 'JSON',
-                    'response_type': 'JSON',
-                    'rest_data': offerData
-                },
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            });
-
-            /* Check whether the HTTP Request is successful or not. */
-            request.success(function (data) {
-                var color = ['naranja', 'marina', 'rojo', 'verde'];
-                //Establece colores 
-                if (Object.keys(data).length > 0) {
-                    angular.forEach(data, function (value, index) {
-                        data[index]['color'] = color[index % 4];
-
-                        //Establecemos logo si no tiene nada 
+                        //Obligatorio reiniciar el promise para que no quede en 
+                        //cache la información 
+                        jobsServices.reset();
+                    }, function (err) {
+                        console.log(err);
                     });
-                }
-
-                //console.log(data);
-                $scope.jobList = data;
-            });
         }
 
         /*

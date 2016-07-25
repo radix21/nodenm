@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="form-group">
-                                            <input type="email" class="form-control input-gris" placeholder="All Industries">
+                                            <input type="text" class="form-control input-gris" placeholder="All Industries">
                                         </div>
                                     </div>
                                 </div>
@@ -46,18 +46,16 @@
                     </div>
                 </form>
                 <div class="clearfix"></div>
-
                 <div class="col-xs-8">
                     <table class="table table-hover table--bolsa">
                         <tr ng-repeat="bjlist in jobList">
                             <td width="15%">
-                                <img src="{{bjlist.logo_c}}" alt="" class="img-responsive pull-left img-rounde">
+                                <img ng-src="{{bjlist.logo_c}}" alt="" class="img-responsive pull-left img-rounde">
                             </td>
                             <td width="50%" class="text-left">
                                 <a ng-href="detailsJobs?id={{bjlist.id}}">
                                     <h3 class="text text--xbold text--gris margin--t0 margin--b0">{{bjlist.name}}</h3>
                                 </a>
-
                                 <p class="text text--sm text--gris">
                                     <span class="text--azul icon-location"></span> {{bjlist.ubicacion_c}} <span class="text--verde icon-time"></span>+{{bjlist.experiencia_cargo}} Años de Experiencia
                                 </p>
@@ -66,7 +64,6 @@
                                 <div class="row">
                                     <div class="panel panel-default panel-horizontal panel-horizontal--{{bjlist.color}}">
                                         <div class="panel-heading">
-
                                             <h3 class="panel-title text--xbold">{{bjlist.jornada_name}}</h3>
                                         </div>
                                         <div class="panel-body">
@@ -83,33 +80,34 @@
                         </tr>
                     </table>
                     <div class="clearfix"></div>
-
-                    <nav class="margin--t1">
-                        <ul class="pagination">
-                            <li>
-                                <a href="" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">2</a></li>
-                            <li><a href="">3</a></li>
-                            <li><a href="">4</a></li>
-                            <li><a href="">5</a></li>
-                            <li>
-                                <a href="" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <div ng-if="jobList.length > 4">
+                        <nav class="margin--t1">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">3</a></li>
+                                <li><a href="">4</a></li>
+                                <li><a href="">5</a></li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
                 <div class="col-xs-4 text-left">
                     <div class="col-xs-12 vertical-middle" ng-repeat="featuredJob in featuredJobs">
                         <h3 class="text text--md text--xbold margin--b05">
                             FEATURED JOBS
                         </h3>
-                        <img src="{{featuredJob.logo_c}}" alt="" class="img-responsive.center-block">
+                        <img ng-src="{{featuredJob.logo_c}}" alt="" class="img-responsive.center-block">
 
                         <div class="clearfix"></div>
 

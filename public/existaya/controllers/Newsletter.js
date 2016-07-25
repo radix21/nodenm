@@ -39,6 +39,5 @@ app.controller('Newsletter', ['$scope', '$http', function ($scope, $http) {
                 
                 alert(msg);
             });
-
         };
     }]);

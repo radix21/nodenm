@@ -15,13 +15,12 @@
                                 <form name="newsletter_form" id="newsletter_form" ng-submit="subscription()">
                                     <div class="row">
                                         <div class="col-xs-4">
-                                            <div class="form-group">
+                                            <div class="form-group" ng-class="{'has-error': newsletter_form.newsletter_name.$invalid}">
                                                 <input type="text" required="" class="form-control input-lg" id="newsletter_name" name="newsletter_name" ng-model="newsletter_name" placeholder="Nombre">
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
-                                            <div class="form-group" ng-class="{ 'has-error': newsletter_form.newsletter_email.$invalid }">
-
+                                            <div class="form-group" ng-class="{'has-error': newsletter_form.newsletter_email.$invalid}">
                                                 <input type="email" required="" class="form-control input-lg" id="newsletter_email" name="newsletter_email" ng-model="newsletter_email" placeholder="Correo Electrónico">
                                             </div>
                                         </div>
