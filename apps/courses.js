@@ -122,7 +122,6 @@ getPublicCourses = function(req, res){
 getAllCourses = function(req, res){
     url_all = KME_API.all_courses(req.hostname);
     str = "";
-    console.log("lulo"+req.session.user.logged);
     data = http.get(url_all, function(response){
         response.on("error", function(err){
             res.status(500).send(err);
