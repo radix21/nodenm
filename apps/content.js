@@ -19,7 +19,7 @@ take_test = function(req, res){
         })
     }else{
         
-        url = KME_API.take_test(req.hostname) + "?content="+req.query.content+"&module="+req.query.module+"&token="+req.session.user.token+"&user="+req.session.user.info.username;
+        url = KME_API.take_test(req.hostname) + "/?content="+req.query.content+"&module="+req.query.module+"&token="+req.session.user.token+"&user="+req.session.user.info.username;
         str = "";
         data = http.get(url, function(response){
             response.on("error", function(err){
@@ -71,7 +71,7 @@ fetch_exam = function(req, res){
             message : "User is not authenticated"
         })
     }else{
-        url = KME_API.fetch_exam(req.hostname)+parseInt(req.query.course)+"/"+req.query.ubs+"/"+req.query.module+"/"+req.query.content+"/"+req.query.exam;
+        url = KME_API.fetch_exam(req.hostname)+parseInt(req.query.course)+"/"+req.query.ubs+"/"+req.query.module+"/"+req.query.content+"/"+req.query.exam+"/";
         request("GET", url,{
             qs : {
                 token : req.session.user.token,
@@ -147,7 +147,7 @@ fetch_user_slide = function(req, res){
             message : "User is not authenticated"
         })
     }else{
-        url = KME_API.fetch_user_slide(req.hostname) + req.query.course + "/" + req.query.ubs + "/"+ req.query.module + "/" + req.query.content + "/" + req.query.exam+"?token="+req.session.user.token+"&user="+req.session.user.info.username+"&choices="+req.query.choices+"&position="+req.query.position+"&actual_position="+req.query.actual_position;
+        url = KME_API.fetch_user_slide(req.hostname) + req.query.course + "/" + req.query.ubs + "/"+ req.query.module + "/" + req.query.content + "/" + req.query.exam+"/?token="+req.session.user.token+"&user="+req.session.user.info.username+"&choices="+req.query.choices+"&position="+req.query.position+"&actual_position="+req.query.actual_position;
         console.log(url);
         request("GET", url).done(function(response){
             if(response.statusCode > 300){
@@ -194,7 +194,7 @@ finish_exam = function(req, res){
         }else{
             exam = req.query.exam
         }
-        url = KME_API.finish_exam(req.hostname) + "?exam="+exam+"&token="+req.session.user.token+"&user="+req.session.user.info.username+"&choices="+(req.query.choices == undefined ? "{}" : req.query.choices)+"&actual_position="+(req.query.actual_position == undefined ? 0 : req.query.actual_position);
+        url = KME_API.finish_exam(req.hostname) + "/?exam="+exam+"&token="+req.session.user.token+"&user="+req.session.user.info.username+"&choices="+(req.query.choices == undefined ? "{}" : req.query.choices)+"&actual_position="+(req.query.actual_position == undefined ? 0 : req.query.actual_position);
         str = "";
         data = http.get(url, function(response){
             response.on("error", function(err){
