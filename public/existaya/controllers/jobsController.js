@@ -7,7 +7,9 @@ app.controller('jobsController', ['$scope', '$http', 'jobsServices', function ($
         //Inicializamos variables 
         $scope.name = '';
         $scope.ubicacion_c = '';
+        $scope.jornada_c = '';
         $scope.featuredJobs = {};
+        $scope.jornadaList = {};
 
         //Carga Al iniciar Controlador
         init();
@@ -30,33 +32,36 @@ app.controller('jobsController', ['$scope', '$http', 'jobsServices', function ($
                 filter.salario = $scope.salario;
             }
 
+            if ($scope.jornada_c !== '') {
+                filter.jornada_c = $scope.jornada_c;
+            }
+
             //console.log(filter);
             getServices(filter);
         };
 
         //Carga servicios
         function getServices(filtros) {
-            jobsServices.ofertaSearch(filtros)
-                    .then(function (data) {
-                        var color = ['naranja', 'marina', 'rojo', 'verde'];
-                        //Establece colores 
-                        if (Object.keys(data).length > 0) {
-                            angular.forEach(data, function (value, index) {
-                                data[index]['color'] = color[index % 4];
+            jobsServices.ofertaSearch(filtros).then(function (data) {
+                var color = ['naranja', 'marina', 'rojo', 'verde'];
+                //Establece colores 
+                if (Object.keys(data).length > 0) {
+                    angular.forEach(data, function (value, index) {
+                        data[index]['color'] = color[index % 4];
 
-                                //Establecemos logo si no tiene nada 
-                            });
-                        }
-
-                        //console.log(data);
-                        $scope.jobList = data;
-
-                        //Obligatorio reiniciar el promise para que no quede en 
-                        //cache la información 
-                        jobsServices.reset();
-                    }, function (err) {
-                        console.log(err);
+                        //Establecemos logo si no tiene nada 
                     });
+                }
+                //console.log(data);
+                $scope.jobList = data;
+            });
+        }
+
+        //Carga Lista Jornada
+        function getJornadaList() {
+            jobsServices.getList('jornada_c_list').then(function (response) {
+                $scope.jornadaList = response;
+            });
         }
 
         /*
@@ -102,6 +107,8 @@ app.controller('jobsController', ['$scope', '$http', 'jobsServices', function ($
         function init() {
             getServices({'estado_c': 'Publicado'});
             getFeaturedJobs();
+            getJornadaList();
+
         }
 
     }]);

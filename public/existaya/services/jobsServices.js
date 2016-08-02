@@ -3,63 +3,79 @@
  */
 // URL to CRM Provider
 app.urlRest = 'http://crm.marketinguniversity.co/custom/service/v4_1_custom/rest.php';
-app.factory('jobsServices', ['$http', '$q', function ($http, $q)
+app.factory('jobsServices', ['$http', function ($http)
     {
-        var obj = {};
-        var def = $q.defer();
+        var obj = {
+//----------------------------------------------------------------------------->
+            /**
+             * Función para obtener las ofertas de empleo pasando como parametros 
+             * los filtros 
+             * @param {object} filtros
+             * @returns {$q@call;defer.promise}
+             */
+            ofertaSearch: function (filtros) {
+                //Si no se pasa el filtro estado solo se visualizan los de estado Publicado
+                if (angular.isDefined(filtros['estado_c']) === false) {
+                    filtros['estado_c'] = 'Publicado';
+                }
 
-        /**
-         * Función para obtener las ofertas de empleo pasando como parametros 
-         * los filtros 
-         * @param {object} filtros
-         * @returns {$q@call;defer.promise}
-         */
-        obj.ofertaSearch = function (filtros) {
+                var offerData = {
+                    'session': '',
+                    'array_filtros': filtros
+                };
 
-            //Si no se pasa el filtro estado solo se visualizan los de estado Publicado
-            if (angular.isDefined(filtros['estado_c']) === false) {
-                filtros['estado_c'] = 'Publicado';
-            }
-
-            var offerData = {
-                'session': '',
-                'array_filtros': filtros
-            };
-
-            var request = $http({
-                method: "post",
-                url: app.urlRest,
-                params: {
+                var params = {
                     'method': 'ofertaSearch',
                     'input_type': 'JSON',
                     'response_type': 'JSON',
                     'rest_data': offerData
-                },
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).then(function (response) {
-                def.resolve(response.data);
-            }, function (response) {
-                def.reject('error');
-            });
+                };
 
-            return def.promise;
+                return $http({
+                    method: "post",
+                    url: app.urlRest,
+                    params: params,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).then(function (response) {
+                    return response.data;
+                });
 
-        };
+            },
 //----------------------------------------------------------------------------->
-        //Necesario para reset promise 
-        obj.loadInitialData = function () {
-            // tries to load data and resolve or rejects promise
-        };
+            /**
+             * Función para cargar listas, pasando como parametro su 
+             */
+            getList: function (listName) {
+
+                if (listName.length <= 0 || (listName.trim()) === '') {
+                    return;
+                }
+
+                var offerData = {
+                    'listName': listName
+                };
+
+                var params = {
+                    'method': 'getList',
+                    'input_type': 'JSON',
+                    'response_type': 'JSON',
+                    'rest_data': offerData
+                };
+
+                return $http({
+                    method: "post",
+                    url: app.urlRest,
+                    params: params,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).then(function (response) {
+                    return response.data;
+                });
+
+
+            },
 //----------------------------------------------------------------------------->
-        //Al llamar esta funcion limpia el promise para evitar que quede 
-        //en cache los datos y tome los nuevos datos de llamados 
-        obj.reset = function () {
-            def.reject();  // Reject just in case
-            def = $q.defer();
-            obj.loadInitialData();
         };
 
-//----------------------------------------------------------------------------->
         return obj;
 
     }]);

@@ -268,7 +268,9 @@
                                                     <input type="text" style="width: 25%" class="form-control input-gris" placeholder="Ciudad" name="ubicacion_c" id="ubicacion_c"  ng-model="ubicacion_c">
                                                     <span>&nbsp; </span>
                                                     <input type="text" style="width: 20%" class="form-control input-gris" id="salario" name="salario" ng-model="salario" placeholder="Salario"><span>&nbsp; </span>
-                                                    <input type="text" style="width: 20%" class="form-control input-gris" id="" placeholder="Tiempo">
+                                                    <select class="form-control input-gris" id="jornada_c" name="jornada_c" ng-model="jornada_c" style="width: 20%" ng-options="x as y for (x, y) in jornadaList">
+                                                        <option value="" label="<--Jornada-->"><--Jornada--></option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-xs-2">

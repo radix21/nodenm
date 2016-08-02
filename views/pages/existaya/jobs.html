@@ -8,7 +8,7 @@
                 Bolsa de empleo
             </h1>
             <p class="text text--lg text--gris text-center text-space1 margin--t05">
-                Encuentra un empleo ideal para ti en la industria del Marketong
+                Encuentra oportunidades para Colaborar en la Industria del Marketing Digital
             </p>
         </div>
     </section>    
@@ -20,19 +20,26 @@
                         <div class="row">
                             <div class="col-xs-10">
                                 <div class="row">
-                                    <div class="col-xs-4">
+                                    <div class="col-xs-3">
                                         <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control input-gris" placeholder="Keywords" ng-model="name">
+                                            <input type="text" name="name" id="name" class="form-control input-gris" placeholder="¿Qué Buscas?" ng-model="name">
                                         </div>
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="col-xs-3">
                                         <div class="form-group">
-                                            <input type="text" name="ubicacion_c" id="ubicacion_c" class="form-control input-gris" placeholder="All Locations" ng-model="ubicacion_c">
+                                            <input type="text" name="ubicacion_c" id="ubicacion_c" class="form-control input-gris" placeholder="Ciudad / Ubicación" ng-model="ubicacion_c">
                                         </div>
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="col-xs-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control input-gris" placeholder="All Industries">
+                                            <input type="text" class="form-control input-gris" placeholder="Categoría">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <div class="form-group">
+                                            <select class="form-control input-gris" id="jornada_c" name="jornada_c" ng-model="jornada_c" ng-options="x as y for (x, y) in jornadaList">
+                                                <option value="" label="Jornada">Jornada</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +112,7 @@
                 <div class="col-xs-4 text-left">
                     <div class="col-xs-12 vertical-middle" ng-repeat="featuredJob in featuredJobs">
                         <h3 class="text text--md text--xbold margin--b05">
-                            FEATURED JOBS
+                            OPORTUNIDAD DESTACADA
                         </h3>
                         <img ng-src="{{featuredJob.logo_c}}" alt="" class="img-responsive.center-block">
 
