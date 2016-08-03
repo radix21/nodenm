@@ -805,7 +805,20 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .nav-tabs--detalleClase.nav-justified
 {
     border:none;
+    height: 65px;
 }
+
+.nav-tabs--detalleClase.nav-justified >li
+{
+    height: 62px;
+}
+
+
+.nav-tabs--detalleClase.nav-justified >li:hover{
+
+    height: 62px;
+}
+
 
 .nav-tabs--detalleClase.nav-justified > li > a
 {
@@ -831,9 +844,19 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
     border-top:none !important;
     border-left:none !important;
     border-right:none !important;
-    border-bottom:3px solid #cbcbcb;
+    border-bottom:solid #cbcbcb;
     border-radius: 0;
+    height: 62px;
 }
+.nav-tabs--detalleClase.nav-justified > li > a
+{
+    border:none;
+    border-bottom:3px solid #CBCBCB;
+    text-align: left;
+    padding-left: 3em;
+    height: 65px;
+}
+
 
 .nav-tabs--detalleClase.nav-justified > li.active > a
 {
@@ -841,6 +864,8 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
     border:none;
     border-bottom: 3px solid #6e8e2d;
     color: #6e8e2d;
+    text-align: left;
+    padding-left: 3em;
 }
 
 .nav-tabs--detalleClase.nav-justified > li.active > a:hover,
@@ -848,7 +873,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .nav-tabs--detalleClase.nav-justified > li.active > a:active
 {
     background:#f5f5f5 !important;
-    border-bottom: 3px solid #6e8e2d;
+    border-bottom:3px solid #6e8e2d;
     color: #6e8e2d;
     border-top-color: initial;
     border-top-style: none;
@@ -858,11 +883,19 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
     border-right-width: initial;
     border-bottom-color: rgb(110, 142, 45) !important;
     border-bottom-style: solid !important; 
-    border-bottom-width: 3px;
     border-left-color: initial;
     border-left-style: none;
     border-left-width: initial;
+    height: 65px;
 }
+
+.nav-tabs--detalleClase.nav-justified > li:hover
+{
+    background:#f5f5f5;
+    border-bottom:3px solid #CBCBCB;
+}
+
+
 .nav-tabs--detalleClase.nav-justified > li.active > a > span
 {
     color: #6e8e2d;
@@ -877,20 +910,20 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
     position: relative;
     padding: 0 0.25em;
 }
-.nav-pills--setps > li:after
+/**.nav-pills--setps > li:after
 {
-    background: white;
-    border-radius: 50%;
-    content: '';
-    opacity: 0.5;
-    position: absolute;
-    width: .6em;
-    height: .6em;
-    top: 50%;
-    left: 55%;
-    margin-top: -.3em;
-    z-index: 30;
-}
+background: white;
+border-radius: 50%;
+content: '';
+opacity: 0.5;
+position: absolute;
+width: .6em;
+height: .6em;
+top: 50%;
+left: 55%;
+margin-top: -.3em;
+z-index: 30;
+}*/
 .nav-pills--setps > li:hover:after
 {
     opacity: 1;
@@ -1119,7 +1152,7 @@ a:focus {
 .bg-nameTutor {
     /**background : #3c3c3c;
     opacity: 0.8;*/
-    text-shadow: 3px 3px 3px #000;
+text-shadow: 3px 3px 3px #000;
 }
 .sidebar-imageCurso>a>img{
     -webkit-filter:contrast(100%) brightness(70%);
@@ -1149,8 +1182,8 @@ a:focus {
 }
 .courseDetailTitle{
     /*height: 108px;/
-}
-.courseDetailDescription{
+    }
+    .courseDetailDescription{
     /*height: 63px;*/
 }
 .sidebar-imageCurso>a{
@@ -1209,9 +1242,33 @@ a:focus {
 }
 .certification>a.active{
 
-        background: #3874b8;
+    background: #3874b8;
     color: white;
 }
 .avatar_navbar{
     width: 3em !important;
+}
+.nav-tabs--detalleClase.nav-justified > li.active > a > span {
+    color: #6e8e2d;
+}
+.nav-tabs--detalleClase.nav-justified > li > a > span {
+    color: #929292;
+    font-size: 2em;
+    font-weight: 700;
+    position: absolute;
+    left: 0.5em;
+    top: 0.25em;
+    line-height: 1em;
+}
+.nav-pills--setps > li > a, .nav-pills--setps > li.active > a, .nav-pills--setps > li > a:active, .nav-pills--setps > li > a:focus, .nav-pills--setps > li > a:hover {
+    background: #ececec;
+    border-radius: 0;
+    color: #7e7e7e;
+    display: block;
+    height: 2em;
+    padding: .25em .5em;
+}
+
+.nav-pills--setps > li.visited > a, .nav-pills--setps > li.visited > a:active, .nav-pills--setps > li.visited > a:focus, .nav-pills--setps > li.visited > a:hover {
+    color: white;
 }
