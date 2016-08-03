@@ -83,7 +83,9 @@ pk : `<%- skill.pk %>`
 })
 <%}%>
 data.modules = [];
+var index = 0;
 <% for(m in dataStudent.modules ){%>
+    index+=1;
     <% module = dataStudent.modules[m];%>
         data.modules.push({
             tasks: [],
@@ -95,6 +97,7 @@ data.modules = [];
             contents: [], 
             module_image: `<%= module.module_image %>`, 
             position: <%= module.position %>,
+            module_pos : index,
             percentage_done: <%= module.percentage_done  %>,
         
         })
@@ -340,7 +343,13 @@ data.modules = [];
                             </div>
                         </div>
                     </div>
+                <div class="col-xs-12">
+                    <a class="btn btn-rojo btn-lg margin--t1" href="/profile">
+                        Salir de Clase
+                    </a>
                 </div>
+                </div>
+
                 <div class="col-xs-10">
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade in active" id="salon">
@@ -351,8 +360,9 @@ data.modules = [];
                                             <div class="item" ng-repeat="pack in modulesPack" ng-class="{ active:$first}">
 
                                                 <ul class="nav nav-tabs nav-justified nav-tabs--detalleClase" role="tablist">
-                                                    <li role="presentation" class="moduleTab" ng-repeat="module in pack" ng-class="{active:$first}" style="width:200px;">
-                                                    <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill" ng-click="markContentAsSeen(module.submodules[0].contents[0].content_pk, module.submodules[0].module_pk)" style="height: 65px;">
+                                                    <li role="presentation" class="moduleTab" ng-repeat="module in pack" ng-class="{active:$first}">
+                                                    <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill" ng-click="markContentAsSeen(module.submodules[0].contents[0].content_pk, module.submodules[0].module_pk)">
+                                                        <span>{{ module.module_pos }}</span>
                                                         {{ module.module_name }}
 
                                                     </a>
@@ -374,7 +384,9 @@ data.modules = [];
                                             <div class="col-xs-12 list-simple">
                                                 <ul class="nav nav-pills nav-pills--setps nav-justified" style="margin-top: 5px; margin-bottom: 5px;">
                                                     <li  ng-repeat="submodule in module.submodules" ng-class="{active:$first,visited:$first, visited:submodule.completed}"  ng-click="markContentAsSeen(submodule.contents[0].content_pk, submodule.module_pk)"> 
-                                                    <a href="#module{{module.module_pk}}submodule{{submodule.module_pk}}" aria-controls="module{{module.module_pk}}-submodule{{submodule.module_pk}}" role="tab" data-toggle="tab"</a>
+                                                        <a href="#module{{module.module_pk}}submodule{{submodule.module_pk}}" aria-controls="module{{module.module_pk}}-submodule{{submodule.module_pk}}" role="tab" data-toggle="tab">
+                                                            {{ module.module_pos }}.{{$index+1}}
+                                                        </a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -581,7 +593,7 @@ data.modules = [];
                                 <div class="modalTopic" ng-show="open">
                                     <div class="container">
                                         <a href="" ng-click="openTopic()"><i class="fa fa-home"></i> {{tribesDetails.name}}</a> <i class="fa fa-caret-right"></i> {{topicName}}
-                                        <a href="" ng-click="openTopic()" class="closeModalTopic pull-right"><strong>X</strong></a>	
+                                        <a href="" ng-click="openTopic()" class="closeModalTopic pull-right"><strong>X</strong></a> 
                                     </div> 
                                     <div class="clearfix"></div>
                                     <h4 class="well descriptionBgTopics"><strong>Asunto:</strong> {{topicDescription}}</h4>
