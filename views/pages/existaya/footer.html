@@ -1,39 +1,40 @@
- <% if (user.logged){ %>
+<% if (typeof(user) !== 'undefined' && user.logged){ %>
 <footer class="col-xs-12 sidebar-footer" style="margin-top:4em;">
     <div class="row">
  <% } else { %>
  <footer class="col-xs-12 sidebar-footer">
-    <div class="row">
-        <div class="col-xs-12 sidebar-footer__top">
-            <div class="container">
-                <p class="text text--lite text--md text-center">
-                Mantente al día de nuestros nuevos cursos, suscribete a nuestro newsletter
-                </p>
-
-                <div class="clearfix"></div>
-
-                <div class="col-lg-10 col-lg-offset-1 col-xs-12 margin--t1">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <div class="form-group">
-                                <input type="text" class="form-control input-lg" id="exampleInputEmail1" placeholder="Nombre">
-                            </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <div class="form-group">
-                                <input type="email" class="form-control input-lg" id="exampleInputEmail1" placeholder="Correo Electrónico">
-                            </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <a href="#" class="btn btn-azul btn-block btn-lg">
-                                <span class="text--upper">SUSCRIBIRME</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>  
-        </div>
+     <div class="row">
+         <div ng-controller="Newsletter">
+             <div class="col-xs-12 sidebar-footer__top">
+                 <div class="container">
+                     <p class="text text--lite text--md text-center">
+                         Mantente al día de nuestros nuevos cursos, suscribete a nuestro newsletter
+                     </p>
+                     <div class="clearfix"></div>
+                     <div class="col-lg-10 col-lg-offset-1 col-xs-12 margin--t1">
+                         <form name="newsletter_form" id="newsletter_form" ng-submit="subscription()">
+                             <div class="row">
+                                 <div class="col-xs-4">
+                                     <div class="form-group" ng-class="{'has-error': newsletter_form.newsletter_name.$invalid}">
+                                         <input type="text" required="" class="form-control input-lg" id="newsletter_name" name="newsletter_name" ng-model="newsletter_name" placeholder="Nombre">
+                                     </div>
+                                 </div>
+                                 <div class="col-xs-4">
+                                     <div class="form-group" ng-class="{'has-error': newsletter_form.newsletter_email.$invalid}">
+                                         <input type="email" required="" class="form-control input-lg" id="newsletter_email" name="newsletter_email" ng-model="newsletter_email" placeholder="Correo Electrónico">
+                                     </div>
+                                 </div>
+                                 <div class="col-xs-4">
+                                     <button class="btn btn-azul btn-block btn-lg" ng-disabled="newsletter_form.$invalid">
+                                         <span class="text--upper">SUSCRIBIRME</span>
+                                     </button>
+                                 </div>
+                             </div>
+                         </form>
+                     </div>
+                 </div>  
+             </div>
+         </div>
   <% } %>
         <div class="col-xs-12 sidebar-footer__bottom">
             <div class="container">
