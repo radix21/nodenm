@@ -151,15 +151,9 @@ logout = function(req, res){
  * */
 
 register = function(req, res){
-    url = KME_API.register(req.hostname);
+    url = KME_API.register(req.hostname)+"/?username="+req.body.username+"&password="+req.body.password+"&email="+req.body.email;
     json_response = {};
-    request("POST", url,{ 
-        qs: {
-            username: req.body.username,
-            password: req.body.password,
-            email : req.body.email
-        },
-    }).done(function(response){
+    request("GET", url).done(function(response){
         if(response.statusCode > 300){
             res.status(response.statusCode).send({
                 status : "failed",
@@ -173,7 +167,6 @@ register = function(req, res){
                     req.session.user.info = response.user;
                     req.session.user.token = response.token;
                     req.session.user.logged = true;
-                    
                     userCRM = registerUserCRM("http://crm.marketinguniversity.co/custom/service/v4_1_custom/rest.php", req.session.user);
                     if (!userCRM) {
                         json_response = {
@@ -184,7 +177,8 @@ register = function(req, res){
                     json_response = {
                         status : "ok"
                     }
-
+                    res.send(json_response);
+                 
                 }else{
                    json_response = {
                         status : "failed",
@@ -192,13 +186,13 @@ register = function(req, res){
                     }
                 }
             }catch(err){
+
                 res.send(response.getBody());
             
             }
         }
     });
 
-    res.send(json_response);
 }
 
 /**
