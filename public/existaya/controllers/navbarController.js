@@ -130,6 +130,7 @@ app.controller("navbarController", ['$scope','$http','$rootScope', "$location", 
 }]);
 app.controller("loginController", ["auth","$scope","$http","$rootScope", "$location", function(auth, $scope, $http, $rootScope, $location){
     $rootScope.$watch("dataUser", function(){
+        $scope.logindiv=true;
         if($rootScope.dataUser == null){
             $rootScope.authenticated = false;
             $scope.authenticated = false;
@@ -143,7 +144,11 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
     if(sessionStorage.dataUser != undefined){
         $rootScope.dataUser = JSON.parse(sessionStorage.dataUser);
     }
-
+    $scope.signdiv = function(){
+        console.log("lollama");
+          $scope.logindiv=false;
+          $scope.singupdiv=true;
+    }
     $scope.signIn = function(){
          if(!$scope._username || !$scope._password){
             $scope.alertFields = true;
@@ -153,9 +158,12 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
  
     }
     $scope.singUp =  function(){
-        if(!$scope.username || !$scope.password || !$scope.email){
+        if(!$scope.username || !$scope.password || !$scope.password2 || !$scope.email || !$scope.tos){
             $scope.alertFields = true;
+        }else if($scope.password != $scope.password2 ){
+            $scope.alertData = true;
         }else{
+                console.log("ve era igual");
             auth.register($http, $scope.username, $scope.password, $scope.email).success(function(response){
                 if(response.status == 'ok'){
                     console.log(true); 

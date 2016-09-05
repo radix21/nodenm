@@ -152,86 +152,116 @@
 <div ng-controller="loginController">
 
     <div class="modal modal--ingreso fade" id="js-ingreso" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-        <div class="modal-dialog modal-sm" id="modal_login">
+        <div class="modal-dialog modal-lg" role="document" id="modal_login">
             <div class="modal-content">
                 <div class="modal-header">
-                    <img src="/existaya/images/logo2.png" alt="" class="img-responsive center-block">
+                    
                 </div>
                 <div class="modal-body">
-                    <div role="tabpanel">
-
-                        <ul class="nav nav-tabs nav-justified nav-ingreso" role="tablist">
-                            <li role="presentation" class="active">
-                            <a href="#registro" aria-controls="registro" role="tab" data-toggle="tab">Regístrate</a>
-                            </li>
-                            <li role="presentation">
-                            <a href="#ingreso" aria-controls="ingreso" role="tab" data-toggle="tab">Iniciar Sesión</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="registro">
-                                <span class="alert alert-danger" ng-if="showError">{{ message }}</span>
-                                <a href="#" class="btn btn-facebook btn-block" ng-click="FBLogin(true)">
-                                    <span class="icon-facebook margin--r2"></span> 
-                                    Regístrate con facebook
-                                </a>   
-                                <p class="text text-center text--gris">
-                                O
-                                </p>
-                                <form>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control--form" placeholder="Nombre Completo" ng-model="username" required>
-                                        <input type="email" class="form-control form-control--form" placeholder="Correo Electrónico" ng-model="email" required>
-                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="password" required>
-                                    </div>
-                                    <div class="alert alert-danger text-center" ng-show="alertError"><span id="errorLogin">{{error}}</span></div>
-                                    <div class="text-center" style="margin-left: 40%;" ng-show="Waiting">
-                                    <img src="/existaya/images/preloader.gif" alt="loader" class="img-responsive" width="30%">
-                                    </div>
-                                    <div class="col-xs-12 bg-gris margin--b1">
-                                        <p class="text text--xs text--gris">
-                                        Al hacer clic en “crear una cuenta”, aceptas las Condiciones y confirmas que leíste nuestra Política de datos, incluido el uso de cookies.
-                                        </p>
-                                    </div>
-                                    <div class="col-xs-12 margin--b1">
-                                        <div class="row">
-                                            <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="singUp()" value="Crear una cuenta">
-                                            
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="ingreso">
-                                <a href="#" class="btn btn-facebook btn-block" ng-click="FBLogin(false)">
-                                    <span class="icon-facebook margin--r2"></span> 
-                                    Iniciar con facebook
-                                </a> 
-
-
-                                <p class="text text-center text--gris">
-                                O
-                                </p>
-                                <form>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control--form" placeholder="Nombre de usuario" ng-model="_username" required>
-                                        <input type="password" class="form-control form-control--form" placeholder="Contraseña" ng-model="_password" required>
-                                    </div>
-                                    <div class="alert alert-danger text-center" ng-show="alertFields"><span>Todos los campos se deben diligenciar</span></div>
-                                    <div class="alert alert-danger text-center" ng-show="alertData"><span>El nombre de usuario y/o la contraseña son incorrectos.</span></div>
-
-                                    <div class="alert alert-danger text-center" ng-show="alertError"><span>{{error}}</span></div>
-                                    <div class="text-center" style="margin-left: 40%;" ng-show="Waiting">
-                                    <img src="/existaya/images/preloader.gif" alt="loader" class="img-responsive" width="30%">
-                                    </div>
-                                    <input type="submit" class="btn btn-verde btn--lite btn-block text--upper" ng-click="signIn()" value="iniciar sesión">
-
-                                    <!-- <a class="text text--azul text--sm text-center center-block margin-">Olvíde mi contraseña </a>-->
-                                </form>
-                            </div>
+                <div class="col-md-12 margin--t1 margin--b1">
+                <a href="#" role="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/existaya/images/close-popup.png"></a>
+                <img src="/existaya/images/logo1.png" alt="" class="img-responsive center-block">
+                </div>
+            <div ng-show="logindiv">
+                <div class="col-md-10 col-md-offset-1">
+                    <p class="text text--md text--gris text-center text--lite">
+                    <br>Accede a tu cuenta con tu red social favorita o digita tu usuario(correo electrónico) y contraseña para ingresar.
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 margin--t2 text-center login-buttons-side">
+                <div class="col-md-12 margin--b05" ng-click="FBLogin(false)" ><a href="#" title="Igresar con Facebook"><img src="existaya/images/login-fb-btn.png" class="img-responsive center-block"  ></a></div>
+                </div>
+                <div class="col-md-6 margin--t2 register-side">
+                    <form  class="login-form">
+                        <div class="form-group">
+                            <label class="text--gris text-uppercase">Correo Electrónico</label>
+                            <input type="text" class="form-control " placeholder="Correo Electrónico" ng-model="_username" required>
                         </div>
+                        <div class="form-group">
+                            <label class="text--gris text-uppercase">Contraseña</label>
+                            <input type="password" class="form-control " placeholder="Contraseña" ng-model="_password" required>
+                        </div>
+                        <div class="form-group">
+                            <a href="olvidar-contrasena.html">¿Olvidó su contraseña?</a>
+                        </div>
+                        <div class="alert alert-danger text-center" ng-show="alertFields"><span>Todos los campos se deben diligenciar</span></div>
+                            <div class="alert alert-danger text-center" ng-show="alertData"><span>El nombre de usuario y/o la contraseña son incorrectos.</span></div>
+
+                            <div class="alert alert-danger text-center" ng-show="alertError"><span>{{error}}</span></div>
+                            <div class="text-center" style="margin-left: 40%;" ng-show="Waiting">
+                                <img src="/existaya/images/preloader.gif" alt="loader" class="img-responsive" width="30%">
+                            </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-verde btn--lite text--upper" ng-click="signIn()">Iniciar Sesión</button>
+                        </div>
+                    </form>
+                    
                     </div>
+                <div class="clearfix"></div>
+                <div class="ingreso-footer-modal text-center">
+                    <h1 class="text-uppercase text text--azul_osc text--lg text--xbold margin--b0">¿Aún no te haz registrado?</h1>
+                    <p class="text--gris margin--b0 text--md"><a ng-click="signdiv()" href="#" data-toggle="modal" data-target="#js-nuevo-registro" class="text--verde text--bold">Haz click aquí</a> y haz parte de esta comunidad de aprendizaje </p>
+                    <p>
                 </div>
             </div>
+            <div ng-show="singupdiv">
+                <div class="col-md-10 col-md-offset-1">
+                    <p class="text text--md text--gris text-center text--lite">
+                    <br>Crea una cuenta con tu red social favoria o ingresa tu nombre, correo electrónico y una contraseña para continuar.
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 margin--t2 text-center login-buttons-side">
+                <div class="col-md-12 margin--b05" ng-click="FBLogin(true)" ><a href="#" title="Igresar con Facebook"><img src="existaya/images/login-fb-btn.png" class="img-responsive center-block"  ></a></div>
+                </div>
+                <div class="col-md-6 margin--t2 register-side">
+                    <form  class="login-form">             
+                        <div class="form-group">
+                            <label class="text--gris text-uppercase">Nombre Completo</label>
+                            <input type="text" class="form-control " placeholder="Nombre Completo" ng-model="username" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label class="text--gris text-uppercase">Correo Electrónico</label>
+                            <input type="email" class="form-control " placeholder="Correo Electrónico" ng-model="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="text--gris text-uppercase">Contraseña</label>
+                            <input type="password" class="form-control " placeholder="Contraseña" ng-model="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="text--gris text-uppercase">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="" required="true"  ng-model="password2" placeholder="Confirmar contraseña">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                            <input type="checkbox" ng-model="tos" required="true"> <a href="#">Acepto política de privacidad y tratamiento de datos.</a>
+                            </label>
+                        </div>
+                        
+                        <div class="alert alert-danger text-center" ng-show="alertFields"><span>Todos los campos se deben diligenciar</span></div>
+                        <div class="alert alert-danger text-center" ng-show="alertData"><span>La contraseña no coincide.</span></div>
+
+                            <div class="alert alert-danger text-center" ng-show="alertError"><span>{{error}}</span></div>
+                            <div class="text-center" style="margin-left: 40%;" ng-show="Waiting">
+                            <img src="/existaya/images/preloader.gif" alt="loader" class="img-responsive" width="30%">
+                            </div>
+                        <div class="form-group text-center">
+                        <button  class="btn btn-verde btn--lite text--upper" ng-click="singUp()">Crear Cuenta</button>
+                        </div>
+                    </form>
+                    </div>
+                <div class="clearfix"></div>
+                <div class="ingreso-footer-modal text-center">
+                <p class="text--gris margin--b0">Al hacer clic en "crear una cuenta", aceptas las condiciones y confirmas que leíste nuestra política de datos, incluídos el uso de cookies.</p>
+
+                <p>
+                </div>
+                </div>
+                    
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

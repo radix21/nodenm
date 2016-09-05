@@ -151,7 +151,12 @@ logout = function(req, res){
  * */
 
 register = function(req, res){
+    console.log("entra al register");
     url = KME_API.register(req.hostname);
+    console.log("username"+req.body.username);
+    console.log("password"+req.body.password);
+    console.log("email"+req.body.email);
+    console.log("url"+url);
     json_response = {};
     request("POST", url,{ 
         qs: {
@@ -160,6 +165,7 @@ register = function(req, res){
             email : req.body.email
         },
     }).done(function(response){
+
         if(response.statusCode > 300){
             res.status(response.statusCode).send({
                 status : "failed",
@@ -168,6 +174,7 @@ register = function(req, res){
         }else{
             try{
                 response = JSON.parse(response.getBody());
+                console.log(response.status+"yu");
                 if(response.status == "ok"){
                     req.session.user = {};
                     req.session.user.info = response.user;
