@@ -455,6 +455,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .panel-group--detalleCurso{background:none;}
 .panel-group--detalleCurso .panel-default{background:none;border:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;margin-top:0 !important;border-bottom:1px solid #d7d5d5}
 .panel-group--detalleCurso .panel-heading{background:none;padding:0 !important;}
+.modal--ingreso .ingreso-footer-modal{background-color: #f7f8fc;padding: 1.5em;}
 .panel-group--detalleCurso .panel-heading > a{
     color:#626262;
     display:block;
@@ -487,6 +488,10 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
     box-shadow:none;
     margin-top:0 !important;
     border-bottom:1px solid #d7d5d5
+}
+.login-form .form-group .form-control{
+    background-color: #f7f8fc;
+    border-color: #ecf0f1;
 }
 
 

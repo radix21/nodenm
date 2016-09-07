@@ -6,6 +6,7 @@ app.controller("footer", function($scope){
         $scope.subscription = true;
     }
 });
+
 app.controller("navbarController", ['$scope','$http','$rootScope', "$location", function($scope, $http, $rootScope, $location){
 
     $rootScope.showMenu =false;
@@ -145,7 +146,6 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
         $rootScope.dataUser = JSON.parse(sessionStorage.dataUser);
     }
     $scope.signdiv = function(){
-        console.log("lollama");
           $scope.logindiv=false;
           $scope.singupdiv=true;
     }
@@ -163,10 +163,8 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
         }else if($scope.password != $scope.password2 ){
             $scope.alertData = true;
         }else{
-                console.log("ve era igual");
             auth.register($http, $scope.username, $scope.password, $scope.email).success(function(response){
                 if(response.status == 'ok'){
-                    console.log(true); 
                     location.href = "profile"; 
                 }else{
                     $scope.showError = true;
@@ -193,24 +191,22 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                     sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture?width=9999";
                     
                     username=response.email;
-                    username=username.replace("@","");
-                    username=username.replace(".","");
-
+                    /**
                     $http.post("/api/account/uploadavatar/", {
                         username: username,
                         url: sessionStorage.avatar
                     }).success(function(response) {
                         console.log(response);
                     });
-                   
+                    */
                     email = response.email;
                     auth.exists($http, username).success(function(response){
                         if(response.status == "ok" && response.exists){
-                            password = email+username;
+                            password = email;
                             auth.ajax($http, $scope, username, password, email);
                             
                         }else{
-                            password = email+username;
+                            password = email;
                             auth.register($http, username, password, email).success(function(response){
                                 if(response.status == "ok"){
                                     location.href = "/profile";    
@@ -234,22 +230,20 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
                             sessionStorage.avatar = "https://graph.facebook.com/"+response.id+"/picture?width=9999";;
                             
                             username=response.email;
-                            username=username.replace("@","");
-                            username=username.replace(".","");
                             email=response.email;
 
-                            $http.post("/api/account/uploadavatar/", {
+                            /*$http.post("/api/account/uploadavatar/", {
                                 username: username,
                                 url: sessionStorage.avatar
                             }).success(function(response) {
                                 console.log(response);
-                            });
+                            });*/
                             auth.exists($http, username).success(function(response){
                                 if(response.status == "ok" && response.exists){
-                                    password = email+username;
+                                    password = email;
                                     auth.ajax($http, $scope, username, password, email);
                                 }else{
-                                    password = email+username;
+                                    password = email;
                                     auth.register($http, username, password, email).success(function(response){
                                         if(response.status == "ok"){
                                             location.href = "/profile";    

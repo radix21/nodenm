@@ -23,6 +23,17 @@ loginView = function(req, res){
     });
 }
 
+recover = function(req, res){
+    res.render(client_folder(req.hostname)+"olvidar-contrasena",{
+        data : null
+    });
+}
+restart = function(req, res){
+    res.render(client_folder(req.hostname)+"restablecer-contrasena",{
+        key : req.params.key,
+        uid : req.params.uid
+    });
+}
 /**
  * 
  *
@@ -151,21 +162,9 @@ logout = function(req, res){
  * */
 
 register = function(req, res){
-    console.log("entra al register");
-    url = KME_API.register(req.hostname);
-    console.log("username"+req.body.username);
-    console.log("password"+req.body.password);
-    console.log("email"+req.body.email);
-    console.log("url"+url);
+    url = KME_API.register(req.hostname)+"/?username="+req.body.email+"&password="+req.body.password+"&email="+req.body.email;
     json_response = {};
-    request("POST", url,{ 
-        qs: {
-            username: req.body.username,
-            password: req.body.password,
-            email : req.body.email
-        },
-    }).done(function(response){
-
+    request("GET", url).done(function(response){
         if(response.statusCode > 300){
             res.status(response.statusCode).send({
                 status : "failed",
@@ -174,13 +173,11 @@ register = function(req, res){
         }else{
             try{
                 response = JSON.parse(response.getBody());
-                console.log(response.status+"yu");
                 if(response.status == "ok"){
                     req.session.user = {};
                     req.session.user.info = response.user;
                     req.session.user.token = response.token;
                     req.session.user.logged = true;
-                    
                     userCRM = registerUserCRM("http://crm.marketinguniversity.co/custom/service/v4_1_custom/rest.php", req.session.user);
                     if (!userCRM) {
                         json_response = {
@@ -191,7 +188,8 @@ register = function(req, res){
                     json_response = {
                         status : "ok"
                     }
-
+                    res.send(json_response);
+                 
                 }else{
                    json_response = {
                         status : "failed",
@@ -199,13 +197,13 @@ register = function(req, res){
                     }
                 }
             }catch(err){
+
                 res.send(response.getBody());
             
             }
         }
     });
 
-    res.send(json_response);
 }
 
 /**
@@ -381,7 +379,8 @@ getMUToken = function(req, res) {
  *      "error" : {String}
  *  }
  ***/
-uploadAvatar = function(req, res) {
+ 
+ uploadAvatar = function(req, res) {
     var username = req.body.username;
     var url = req.body.url;
     
@@ -389,6 +388,51 @@ uploadAvatar = function(req, res) {
         qs: {
             username: username,
             avatar_url: url
+        },
+    }).done(function(response){
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "failed",
+                error : response.statusCode
+            });
+        }else{
+            try{
+                response = JSON.parse(response.getBody())
+                res.send(response);
+            }catch(err){
+                res.send(500).send(response.getBody())
+            }
+        }
+    })
+}
+restartPasswd = function(req, res) {
+    request('GET', KME_API.restart_passwd(req.hostname), {
+        qs: {
+            password: req.body.password,
+            key:req.body.key,
+            uidb:req.body.uid, 
+        },
+    }).done(function(response){
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "failed",
+                error : response.statusCode
+            });
+        }else{
+            try{
+                response = JSON.parse(response.getBody())
+                res.send(response);
+            }catch(err){
+                res.send(500).send(response.getBody())
+            }
+        }
+    })
+}
+resetPasswd = function(req, res) {
+    var username = req.body.username;
+    request('GET', KME_API.reset_passwd(req.hostname), {
+        qs: {
+            username: username
         },
     }).done(function(response){
         if(response.statusCode > 300){

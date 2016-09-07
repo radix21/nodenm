@@ -35,7 +35,7 @@
             </div>
             <div class="col-xs-3">
                 <div class="row">
-                    <div class="col-xs-5 col-xs-offset-5">
+                    <div class="col-xs-7 col-xs-offset-3">
                         <p class="text text--blanco text--xbold text-right margin--t1">
                         <%if(user.info.first_name && user.info.last_name){%>
                             <%= user.info.first_name %> <%= user.info.last_name %>
@@ -160,7 +160,7 @@
                 <div class="modal-body">
                 <div class="col-md-12 margin--t1 margin--b1">
                 <a href="#" role="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/existaya/images/close-popup.png"></a>
-                <img src="/existaya/images/logo1.png" alt="" class="img-responsive center-block">
+                <img src="/existaya/images/logo1.png" alt="" class="img-responsive center-block img-responsive center-block margin--t1">
                 </div>
             <div ng-show="logindiv">
                 <div class="col-md-10 col-md-offset-1">
@@ -183,7 +183,7 @@
                             <input type="password" class="form-control " placeholder="Contraseña" ng-model="_password" required>
                         </div>
                         <div class="form-group">
-                            <a href="olvidar-contrasena.html">¿Olvidó su contraseña?</a>
+                            <a href="/account/recover">¿Olvidó su contraseña?</a>
                         </div>
                         <div class="alert alert-danger text-center" ng-show="alertFields"><span>Todos los campos se deben diligenciar</span></div>
                             <div class="alert alert-danger text-center" ng-show="alertData"><span>El nombre de usuario y/o la contraseña son incorrectos.</span></div>
@@ -202,8 +202,9 @@
                 <div class="ingreso-footer-modal text-center">
                     <h1 class="text-uppercase text text--azul_osc text--lg text--xbold margin--b0">¿Aún no te haz registrado?</h1>
                     <p class="text--gris margin--b0 text--md"><a ng-click="signdiv()" href="#" data-toggle="modal" data-target="#js-nuevo-registro" class="text--verde text--bold">Haz click aquí</a> y haz parte de esta comunidad de aprendizaje </p>
-                    <p>
+                    
                 </div>
+
             </div>
             <div ng-show="singupdiv">
                 <div class="col-md-10 col-md-offset-1">
@@ -254,9 +255,8 @@
                 <div class="clearfix"></div>
                 <div class="ingreso-footer-modal text-center">
                 <p class="text--gris margin--b0">Al hacer clic en "crear una cuenta", aceptas las condiciones y confirmas que leíste nuestra política de datos, incluídos el uso de cookies.</p>
-
-                <p>
                 </div>
+               
                 </div>
                     
                 </div>
