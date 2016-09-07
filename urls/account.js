@@ -9,5 +9,9 @@ module.exports = {
         app.get("/api/account/exists/:username", user_exists);
         app.get("/api/account/getmutoken/", getMUToken);
         app.post("/api/account/uploadavatar/", uploadAvatar);
+        app.post("/api/account/resetpasswd/", resetPasswd);
+        app.post("/api/account/restartpasswd/", restartPasswd);
+        app.get("/account/recover/", recover);
+        app.get("/account/reset/:uid/:key/", restart);
     }
 }

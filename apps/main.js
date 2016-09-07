@@ -92,6 +92,12 @@ KME_API = {
     user_exists : function(hostname){
         return SERVER(hostname) + "/api/exists/";
     },
+    reset_passwd : function(hostname){
+        return SERVER(hostname) + "/api/restart_pswd/";
+    },
+    restart_passwd : function(hostname){
+        return SERVER(hostname) + "/api/reset_key/";
+    },
     upload_avatar: function(hostname) {
         return SERVER(hostname)+"/api/avatar/upload"
     }
@@ -107,7 +113,7 @@ CLIENTS = {
     },
     "kmelx.com" : {
         folder : "kmelx",
-        server : "http://kmelx.com:5000",
+        server : "http://kmelx.com",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
 
     },

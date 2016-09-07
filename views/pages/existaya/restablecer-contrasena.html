@@ -1,0 +1,38 @@
+<% include head.html %>
+<navbar></navbar>
+<script type="text/javascript">
+	var key = `<%= key %>`;
+	var uid = `<%= uid %>`;
+</script>
+<script src="/existaya/controllers/accountController.js"></script>
+<script src="/sweetalert/dist/sweetalert.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="/sweetalert/dist/sweetalert.css">
+<section class="col-xs-12 sidebar-blueGrandient sidebar-add__montain">
+ <div class="sidebar-parallax visible-lg">
+        <img src="/existaya/images/nubes-left.png" alt="" id="nubes_left1" class="sidebar-parallax__nubes1" />
+        <img src="/existaya/images/nubes-right.png" alt="" id="nubes_left2" class="sidebar-parallax__nubes2" />
+    </div>
+<div class="container" ng-controller="accountController">
+<h1 class="text text--azul_osc text--xxxlg text--xbold margin--b0 text-center text-space1">
+Restablece tu contraseña
+</h1>
+<p class="text text--azul_osc text-center text--lg">Introduzca su nueva contraseña</p>
+<div class="clearfix"></div>
+<div class="col-md-6 col-md-offset-3 margin--t4 margin--b4">
+<form  class="login-form">
+<div class="form-group">
+<label  class="text--gris  text-uppercase">Contraseña</label>
+<input type="password" class="form-control " placeholder="Contraseña" ng-model="password" required>
+</div>
+<div class="form-group">
+<label  class="text--gris  text-uppercase">Confirmar contraseña</label>
+<input type="password" class="form-control " placeholder="Confirmar contraseña" ng-model="password2" required>
+</div>
+<div class="form-group text-center">
+<button type="submit" ng-click="restart()" class="btn btn-rojo btn--lite text--upper">Restablecer Contraseña</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<% include footer.html %>

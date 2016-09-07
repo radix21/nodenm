@@ -23,6 +23,17 @@ loginView = function(req, res){
     });
 }
 
+recover = function(req, res){
+    res.render(client_folder(req.hostname)+"olvidar-contrasena",{
+        data : null
+    });
+}
+restart = function(req, res){
+    res.render(client_folder(req.hostname)+"restablecer-contrasena",{
+        key : req.params.key,
+        uid : req.params.uid
+    });
+}
 /**
  * 
  *
@@ -151,7 +162,7 @@ logout = function(req, res){
  * */
 
 register = function(req, res){
-    url = KME_API.register(req.hostname)+"/?username="+req.body.username+"&password="+req.body.password+"&email="+req.body.email;
+    url = KME_API.register(req.hostname)+"/?username="+req.body.email+"&password="+req.body.password+"&email="+req.body.email;
     json_response = {};
     request("GET", url).done(function(response){
         if(response.statusCode > 300){
@@ -368,7 +379,8 @@ getMUToken = function(req, res) {
  *      "error" : {String}
  *  }
  ***/
-uploadAvatar = function(req, res) {
+ 
+ uploadAvatar = function(req, res) {
     var username = req.body.username;
     var url = req.body.url;
     
@@ -376,6 +388,51 @@ uploadAvatar = function(req, res) {
         qs: {
             username: username,
             avatar_url: url
+        },
+    }).done(function(response){
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "failed",
+                error : response.statusCode
+            });
+        }else{
+            try{
+                response = JSON.parse(response.getBody())
+                res.send(response);
+            }catch(err){
+                res.send(500).send(response.getBody())
+            }
+        }
+    })
+}
+restartPasswd = function(req, res) {
+    request('GET', KME_API.restart_passwd(req.hostname), {
+        qs: {
+            password: req.body.password,
+            key:req.body.key,
+            uidb:req.body.uid, 
+        },
+    }).done(function(response){
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "failed",
+                error : response.statusCode
+            });
+        }else{
+            try{
+                response = JSON.parse(response.getBody())
+                res.send(response);
+            }catch(err){
+                res.send(500).send(response.getBody())
+            }
+        }
+    })
+}
+resetPasswd = function(req, res) {
+    var username = req.body.username;
+    request('GET', KME_API.reset_passwd(req.hostname), {
+        qs: {
+            username: username
         },
     }).done(function(response){
         if(response.statusCode > 300){
