@@ -162,7 +162,9 @@ logout = function(req, res){
  * */
 
 register = function(req, res){
+    console.log("pero si la llama");
     url = KME_API.register(req.hostname)+"/?username="+req.body.email+"&password="+req.body.password+"&email="+req.body.email;
+    console.log(url);
     json_response = {};
     request("GET", url).done(function(response){
         if(response.statusCode > 300){

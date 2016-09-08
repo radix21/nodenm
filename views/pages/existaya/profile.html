@@ -5,6 +5,7 @@ data = {};
 data.name = `<%- user.info.first_name %>`;
 data.username = `<%- user.info.username %>`;
 data.last_name = `<%- user.info.last_name %>`;
+data.points = `<%- user.info.points %>`;
 data.jobtitle = `<%- user.info.jobtitle %>`;
 data.avatar = '<%= user.info.avatar %>'
 </script>
@@ -15,15 +16,22 @@ data.avatar = '<%= user.info.avatar %>'
             <div class="col-xs-3 sidebar-perfil sidebar-add__montainR margin--b5">
                 <div class="row">
                     <div class="col-xs-12 sidebar-perfil__top text-center" ng-controller="profile">
-                        <img src="{{dataUser.avatar}}" alt="" class="img-responsive center-block img-circle" ng-if="dataUser.avatar != ''">
-                        <img src="/existaya/images/avatarDefault.png" alt="" class="img-responsive center-block img-circle" ng-if="dataUser.avatar == ''">
+                        <img ng-cloak src="/existaya/images/level-1.png" ng-if="dataUser.points <=200" alt="" class="img-responsive center-block img-circle" >
+                        <img ng-cloak src="/existaya/images/level-2.png" ng-if="dataUser.points >200 && dataUser.points <=500" alt="" class="img-responsive center-block img-circle" >
+                        <img ng-cloak src="/existaya/images/level-3.png" ng-if="dataUser.points >500 && dataUser.points <=1000" alt="" class="img-responsive center-block img-circle" >
+                        <img ng-cloak src="/existaya/images/level-4.png" ng-if="dataUser.points >1000 && dataUser.points <=2000" alt="" class="img-responsive center-block img-circle" >
+                        <img ng-cloak src="/existaya/images/level-5.png" ng-if="dataUser.points >2000 && dataUser.points <=3000" alt="" class="img-responsive center-block img-circle" >
+                        <img ng-cloak src="/existaya/images/level-6.png" ng-if="dataUser.points >3000 && dataUser.points <=4000" alt="" class="img-responsive center-block img-circle" >
+                        <img ng-cloak src="/existaya/images/level-7.png" ng-if="dataUser.points >4000 && dataUser.points <=5000" alt="" class="img-responsive center-block img-circle" >
+                        <img ng-cloak src="/existaya/images/level-8.png" ng-if="dataUser.points >5000 && dataUser.points <=6000" alt="" class="img-responsive center-block img-circle" >
+                        <img ng-cloak src="/existaya/images/level-9.png" ng-if="dataUser.points >6000 " alt="" class="img-responsive center-block img-circle" >
+                        
 
                         <div>
-                            <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name != ''" ng-cloak>{{dataUser.name}} {{dataUser.lastname}}</p>
-                            <p class="text text--gris text--xbold text--md margin--t1" ng-if="dataUser.name == ''" ng-cloak>{{dataUser.username}}</p>
+                            <p class="text text--gris text--xbold text--md margin--t1" ng-cloak>{{dataUser.points}} Puntos</p>
                         </div>
                         <p class="text text--gris text--lite text--sm margin--b2" ng-cloak>{{dataUser.jobtitle}}</p>
-                        <div class="alert alert--progress alert--bigger" role="alert">
+                        <!--<div class="alert alert--progress alert--bigger" role="alert">
 
                             <p class="text text--gris text--lite text-left">
                             Nivel Marketing Ninja
@@ -37,11 +45,11 @@ data.avatar = '<%= user.info.avatar %>'
                             <div class="progress progress--green margin--t1">
                                 <div class="progress-bar progress-bar--green" role="progressbar" aria-valuenow="{{info.pts}}" aria-valuemin="0" aria-valuemax="100" style="width: {{info.pts}}%;"></div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="col-xs-12">
-                        <h2 class="text text--lg text--lite">
-                            Detalles
+                        <h2 class="text text--lg text-center">
+                            Mi Marketing DOJO
                         </h2>
                         <table class="table table-hover table--detallePerfil">
                             <tr>

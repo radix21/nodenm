@@ -1201,7 +1201,7 @@ text-shadow: 3px 3px 3px #000;
 .courseImageCatalog{height:167px; width: 100%; background: #fff;}
 
 .sidebar-perfil__top > img {
-    border: 2px solid #3874b8;
+    /*border: 2px solid #3874b8;*/
     width: 130px;
 }
 
