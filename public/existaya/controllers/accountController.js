@@ -18,6 +18,7 @@ app.controller("accountController", ['$scope','$http','$rootScope', "$location",
             $scope.alertFields = true;
         }else if($scope.password != $scope.password2 ){
             $scope.alertData = true;
+            $scope.Waiting=false;
         }else{
             $http.post("/api/account/restartpasswd/", {
                 password: $scope.password,

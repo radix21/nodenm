@@ -152,6 +152,7 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
     $scope.signIn = function(){
          if(!$scope._username || !$scope._password){
             $scope.alertFields = true;
+            $scope.Waiting=false;
         }else{
             auth.ajax($http, $scope, $scope._username, $scope._password)
         }
@@ -160,14 +161,17 @@ app.controller("loginController", ["auth","$scope","$http","$rootScope", "$locat
     $scope.singUp =  function(){
         if(!$scope.username || !$scope.password || !$scope.password2 || !$scope.email || !$scope.tos){
             $scope.alertFields = true;
+            $scope.Waiting=false;
         }else if($scope.password != $scope.password2 ){
             $scope.alertData = true;
+            $scope.Waiting=false;
         }else{
             auth.register($http, $scope.username, $scope.password, $scope.email).success(function(response){
                 if(response.status == 'ok'){
                     location.href = "profile"; 
                 }else{
                     $scope.showError = true;
+                    $scope.Waiting=false;
                     $scope.message =  response.message;
 
                 }
