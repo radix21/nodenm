@@ -42,8 +42,10 @@ app.factory("auth", ["$rootScope","$location",function($rootScope, $location){
                     $scope.error = response.message;
                     if($scope.error == "username and/or password are incorrect"){
                         $scope.alertData = true;
+                        $scope.Waiting=false;
                     }else{
                         $scope.alertError = true;
+                        $scope.Waiting=false;
                     }
 
                     $scope.loader = false;
