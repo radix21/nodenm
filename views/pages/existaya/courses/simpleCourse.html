@@ -390,7 +390,7 @@ var index = 0;
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-xs-9 list-simple">
+                                            <div class="list-simple" ng-class="{'col-xs-9' : module.quantityContents > 0, 'col-xs-12' : module.quantityContents == 0}">
                                                 <div class="tab-content">
 
                                                     <div ng-repeat="submodule in module.submodules" role="tabpanel" class="tab-pane" id="module{{module.module_pk}}submodule{{module.submodules[$index].module_pk}}" ng-class="{active:$first}"> 
@@ -427,7 +427,7 @@ var index = 0;
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-3 sidebar-right text-center">
+                                            <div class="col-xs-3 sidebar-right text-center" ng-class="{ 'hidden' : module.quantityContents == 0}">
                                                 <p class="text text--lite text--gris margin--b1 margin--t05 text--xbold">
                                                 Progreso Módulo {{module.position +1}} 
                                                 </p>

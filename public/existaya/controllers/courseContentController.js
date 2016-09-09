@@ -1,6 +1,11 @@
 app.controller("courseContentController",[ "$scope", "$http", function($scope, $http){
     $scope.dataSimpleCourse = data;
     $scope.modulesPack = split_array_for_slides($scope.dataSimpleCourse.modules, 4);
+    for(var i=0; i < $scope.modulesPack.length; i++){
+	for(var j=0; j< $scope.modulesPack[i].length; j++){
+	    $scope.modulesPack[i][j].quantityContents = $scope.modulesPack[i][j].contents.length;
+	}
+    }
     $scope.resources = [];
     for(module in data.modules){
         for(submodule in data.modules[module].submodules){
