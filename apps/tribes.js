@@ -77,27 +77,25 @@ get_topic = function(req, res){
             "message" : "User is not authenticated" 
         })
     }else{
-    url = KME_API.get_topic(req.hostname) + req.params.id + "?token="+req.session.user.token;
+    url = KME_API.get_topic(req.hostname) + req.params.id + "/?token="+req.session.user.token;
     str = "";
-    data = http.get(url, function(response){
-        response.on("error", function(err){
-            console.log(err);
-        })
-        response.on("data", function(data){
-            str+=data;
-        });
-        response.on("end", function(){
+    request("GET", url).done(function(response){
+        if(response.statusCode > 300){
+            res.status(response.statusCode).send({
+                status : "error",
+                error : response.statusCode
+            })
+        
+        }else{
             try{
-                str = JSON.parse(str);
-                res.send(str);
+                response = JSON.parse(response.getBody());
+                res.send(response);
             }catch(err){
-                res.status(500).send(err) ;
+                res.send(response.getBody());
             }
-        })
+        }
     
-    }).on("error", function(err){
-        console.log(err);
-    }).end()
+    })
     }
 
 }
@@ -121,6 +119,8 @@ send_post = function(req, res){
         })
     }else{
         url = KME_API.send_post(req.hostname) +"?topic="+ req.params.id+"&message="+req.params.comment+"&token="+req.session.user.token+"&user="+req.session.user.info.username;
+        if (req.params.parent)
+            url += "&parent_id="+req.params.parent
         str = "";
         data = http.get(url, function(response){
             response.on("error", function(err){
