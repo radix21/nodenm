@@ -1277,3 +1277,6 @@ text-shadow: 3px 3px 3px #000;
 .nav-pills--setps > li.visited > a, .nav-pills--setps > li.visited > a:active, .nav-pills--setps > li.visited > a:focus, .nav-pills--setps > li.visited > a:hover {
     color: white;
 }
+.embed-responsive-16by9{
+    overflow : auto !important;
+}
