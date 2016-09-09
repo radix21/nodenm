@@ -360,7 +360,7 @@ var index = 0;
                                             <div class="item" ng-repeat="pack in modulesPack" ng-class="{ active:$first}">
 
                                                 <ul class="nav nav-tabs nav-justified nav-tabs--detalleClase" role="tablist">
-                                                    <li role="presentation" class="moduleTab" ng-repeat="module in pack" ng-class="{active:$first}">
+                                                    <li role="presentation" class="moduleTab" ng-repeat="module in pack" ng-class="{active:module.position == 0}">
                                                     <a href="#module{{module.module_pk}}" aria-controls="leccion1" role="tab" data-toggle="pill" ng-click="markContentAsSeen(module.submodules[0].contents[0].content_pk, module.submodules[0].module_pk)">
                                                         <span>{{ module.module_pos }}</span>
                                                         {{ module.module_name }}
@@ -380,7 +380,7 @@ var index = 0;
                                     </div>
                                     <div class="tab-content">
 
-                                        <div role="tabpanel" class="tab-pane" ng-repeat="module in dataSimpleCourse.modules" id="module{{module.module_pk}}" ng-class="{active:$first}">
+                                        <div role="tabpanel" class="tab-pane" ng-repeat="module in dataSimpleCourse.modules" id="module{{module.module_pk}}" ng-class="{active:module.position==0}">
                                             <div class="col-xs-12 list-simple">
                                                 <ul class="nav nav-pills nav-pills--setps nav-justified" style="margin-top: 5px; margin-bottom: 5px;">
                                                     <li  ng-repeat="submodule in module.submodules" ng-class="{active:$first,visited:$first, visited:submodule.completed}"  ng-click="markContentAsSeen(submodule.contents[0].content_pk, submodule.module_pk)"> 
