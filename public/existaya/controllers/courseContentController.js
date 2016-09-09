@@ -934,15 +934,19 @@ app.controller('tribes',['$scope','courses','$http', '$rootScope','$sce','$timeo
     $scope.post = '';
     $scope.confirm_post = false;
     $scope.alert_post = false;
-    $scope.addPost = function(post,id){
+    $scope.addPost = function(post,id, parent){
+        var url = '/api/tribes/send_post/' + id + '/' + post
+        if (parent)
+            url+='/'+parent+"/";
         if(post != ''){
-            $http.post('/api/tribes/send_post/' + id + '/' + post)
+            $http.post(url)
                 .success(function(response){
                     $scope.confirm_post = true;
                     document.querySelector("#message-box").innerHTML = "";
-                    $http.get('/api/tribes/get_topic/' + id)
+                    $http.get('/api/tribes/get_topic/' + id+'/')
                     .success(function(response){
                         $scope.comments = response.comments;
+                        $scope.$apply();
                         $scope.parseHtml =  function(html){
                             return $sce.trustAsHtml(html); 
                         }
