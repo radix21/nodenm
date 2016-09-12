@@ -344,6 +344,7 @@ for(b in buttons){
         xhr.open("GET","/api/course/inscribe/"+user+"/"+slug+"/"+session);
         xhr.onreadystatechange = function(){
             response = xhr.response;
+            console.log(response);
             response = JSON.parse(response);
             console.log(typeof(response));
 

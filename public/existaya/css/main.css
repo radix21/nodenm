@@ -302,6 +302,11 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .btn-especializaciones{background:#c0d7bf;border:1px solid #fff;color:#444b51;}
 .btn-especializaciones:hover,.btn-especializaciones:focus,.btn-especializaciones:active,.btn-especializaciones.active{background:#c0d7bf;color:#444b51}
 .btn-azul{background:#83a7c4;color:#fff;}
+.btn-azul2 {
+    background: #3874b8;
+    color: #fff;
+    padding: 0.5em 2em;
+}
 .btn-azul:hover,.btn-azul:focus,.btn-azul:active,.btn-azul.active{background:#6997bc;color:#fff}
 .btn-facebook{background:#3874b8;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;color:#fff;}
 .btn-facebook:hover,.btn-facebook:focus,.btn-facebook:active,.btn-facebook.active{background:#2664a9;color:#fff}
@@ -1087,14 +1092,17 @@ z-index: 30;
 #modal_login{
     z-index: 1100;
 }
-#background_gray{width: 100%; visibility: visible; -khtml-opacity: 1; -moz-opacity: 1; opacity: 1; -ms-filter: "alpha(Opacity=85)"; -moz-transition: opacity ease-out 200ms; -webkit-transition: opacity ease-out 200ms; -o-transition: opacity ease-out 200ms; transition: opacity ease-out 200ms; background: #000; position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 10000; min-height: 100%; }
+#background_gray{width: 100%; visibility: visible; -khtml-opacity: 1; -moz-opacity: 1; opacity: 1; -ms-filter: "alpha(Opacity=85)"; -moz-transition: opacity ease-out 200ms; -webkit-transition: opacity ease-out 200ms; -o-transition: opacity ease-out 200ms; transition: opacity ease-out 200ms; background: #fff; position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 10000; min-height: 100%; }
 #background_gray>a{margin-right:3%; margin-top: 1.5%; }
 #typeform-wrapper{background: #FFFFFF; width: 90%; position: fixed; top: 7%; left: 5%; z-index: 100001; }
 .containerAnswers{width: 100%; top: 0; background: #FFF; padding:1% 0; margin-bottom:25px;}
 .containerFilds{margin: 50px 0;}
 .frameTest{padding-top:25px; overflow:auto;height: 450px;}
 .not-active-button { pointer-events: none; background: #ccc !important;}
-.activeAnswer {background: #4fb0ae !important; color: #FFF;}
+.activeAnswer {    background-color: #f5f5f5;
+    border-color: #598c15;
+    color: #598c15;
+    color: #FFF;}
 .inactiveChoice {pointer-events: none;background: #4fb0ae; color: #FFF; }
 .block_cursor {pointer-events:none;}
 #questionImage {margin: auto; margin-bottom: 40px; border-radius: 5px;}
@@ -1105,13 +1113,52 @@ z-index: 30;
 
 .bg-modal{background: rgba(11, 11, 11, 0.61); position: absolute; width: 100%; min-height: 100%; height: 1180px; z-index: 999;padding: 5%;}
 .container-quest {background: #FFF; padding:20px 10px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.43); font-size: 1.2em;}
-.numberQuestion {background: #4fb0ae; padding: 13px; border-radius: 50%; padding-bottom: 5px; padding-top: 1px;font-size: 1.4em; color: #FFF;}
+
+.numberQuestion {
+    background-color: #3874b8;
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.8em;
+    margin-right: 0.4em;}
+.questionText {
+    font-size: 1.4em;
+}
+.evaluation-questions-container {
+    margin: auto;
+    max-width: 940px;
+    min-width: 480px;
+}
+.evaluationNumbrerAnswer {
+    background-color: #598c15;
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    font-weight: bold;
+    line-height: 35px;
+    text-transform: uppercase;
+    margin-right: 0.4em;
+}
+
 .optionBg{ background: #F8F8F8; border: 1px solid #ccc; padding: 10px; margin: 5px 0;border-radius: 5px;}
 .containerFilds{margin: 50px 0;}
-.letter {background: #F8F8F8; padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px;}
-.letter:hover {background: #4fb0ae; color:#FFF; cursor:pointer;}
+.letter {background: #F8F8F8; padding: 5px 10px; border-radius: 5px;}
+.letter:hover { color:#FFF; cursor:pointer;}
 .labelField {color: #4fb0ae ;}
-.navQuestion {background: #EEE; height: 60px; width: 100%; margin-top: 40px; position:absolute;z-index: 2;bottom:0}
+.navQuestion {    margin: auto;
+    max-width: 940px;
+    min-width: 480px;}
 .navButtons a {background: #4fb0ae; padding: 10px 15px; border-radius: 7px; color:#FFF; float:right;margin: 10px 2px;}
 .navButtons a:hover {background: #9ACDCC;}
 .btnFinish {background:#7EC181 !important;}
