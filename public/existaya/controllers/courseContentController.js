@@ -1,4 +1,4 @@
-app.controller("courseContentController",[ "$scope", "$http", function($scope, $http){
+app.controller("courseContentController",[ "$scope","$sce","$http", function($scope, $sce, $http){
     $scope.dataSimpleCourse = data;
     $scope.modulesPack = split_array_for_slides($scope.dataSimpleCourse.modules, 4);
     for(var i=0; i < $scope.modulesPack.length; i++){
@@ -123,6 +123,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
             }
             try{
                 img = document.querySelector("#questionImage");
+
                 src = $scope.examSlide.fields.question.extras.get_image_data.split(",")[0];
                 img.src =config.SERVICE_SERVER+ "/content/question/images/"+ $scope.examSlide.fields.question.pk+"/"+src;
                 img.style.border = "8px solid #ccc"; 
@@ -291,6 +292,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
                 })
             })
     }
+   
 
     $scope.prevSlide = function(){
         //$scope.numberQuestion = 1 - $scope.actual_position;
@@ -344,6 +346,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         }
         return null; 
     }
+
     $scope.fetch_user_slide = function(course, ubs, module, content, exam, choices, callback){
         
         $scope.arrowLeft = $scope.position > 0;
@@ -352,6 +355,9 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
         $scope.loader = true;
         $scope.unique = true;
         $scope.multiple = false;
+        $scope.parseHtml =  function(html){
+        return $sce.trustAsHtml(html); 
+        }
         $scope.question_choices = {};
         if(callback != undefined){
 
@@ -368,6 +374,7 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
                     }
                     $scope.examSlide = slide;
                     $scope.user_answers = JSON.parse(slide.extras.json_user_answers);
+                    $scope.questionvideo = slide.fields.diapositive.fields.text;
                     $scope.disableChoices = false;
                     for(choice in $scope.user_answers){
                         if($scope.user_answers[choice].selected){
@@ -507,13 +514,15 @@ app.controller("courseContentController",[ "$scope", "$http", function($scope, $
                 if(response.status == 'ok'){
                     //$scope.updateExam(response); 
                     $scope.launchExam(response);
+
                 }
             }).error(function(a,b,c,d){
                 console.log(b,d);
 
             });
     }
-    $scope.open_test = function(input){
+    $scope.open_test = function(input,name){
+        $scope.EvaluationName = name;
         $scope.moduleId = input[0];
         $scope.contentId = input[1];
         $scope.modulePosition = 0;

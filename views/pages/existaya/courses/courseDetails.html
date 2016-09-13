@@ -345,10 +345,8 @@ for(b in buttons){
         xhr.onreadystatechange = function(){
             response = xhr.response;
             response = JSON.parse(response);
-            console.log(typeof(response));
 
             document.querySelector(".loaderGIF").style.display="none";
-            console.log(response.status);
             if(response.status == "ok"){
                 swal({   title: "inscripción Exitosa",   text: "Te haz inscrito correctamente a este curso",   type: "success",   showCancelButton: false,    confirmButtonText: "Continuar",   closeOnConfirm: false }, function(){   window.location.assign("/course/"+slug)+"/details"; });
                 

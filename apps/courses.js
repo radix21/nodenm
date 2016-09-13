@@ -619,11 +619,9 @@ my_certifications = function(req, res){
 inscribe_on_course = function(req, res){
     if (req.params.session!="null"){
     url = KME_API.inscribe_user(req.hostname)+req.params.user+"/?slug="+req.params.slug+"&session="+req.params.session+"&token="+req.session.user.token;
-    
     }else{
     url = KME_API.inscribe_user(req.hostname)+req.params.user+"/?slug="+req.params.slug+"&token="+req.session.user.token;
     }
-    console.log(url);
     request("GET", url).done(function(response){
         if(response.statusCode > 300){
             res.status(response.statusCode).send({
