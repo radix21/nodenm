@@ -125,7 +125,6 @@ app.controller("courseContentController",[ "$scope","$sce","$http", function($sc
                 img = document.querySelector("#questionImage");
 
                 src = $scope.examSlide.fields.question.extras.get_image_data.split(",")[0];
-                console.log($scope.examSlide.fields.question.extras);
                 img.src =config.SERVICE_SERVER+ "/content/question/images/"+ $scope.examSlide.fields.question.pk+"/"+src;
                 img.style.border = "8px solid #ccc"; 
             }catch(err){
@@ -142,7 +141,6 @@ app.controller("courseContentController",[ "$scope","$sce","$http", function($sc
                     var slide = response[0];
                     $scope.examSlide = slide;
                     $scope.user_answers = JSON.parse(slide.extras.json_user_answers);
-                    console.log(response);
                     for(val in $scope.user_answers){
                         $scope.question_choices[$scope.user_answers[val].id] = null;
                     }
@@ -516,13 +514,15 @@ app.controller("courseContentController",[ "$scope","$sce","$http", function($sc
                 if(response.status == 'ok'){
                     //$scope.updateExam(response); 
                     $scope.launchExam(response);
+
                 }
             }).error(function(a,b,c,d){
                 console.log(b,d);
 
             });
     }
-    $scope.open_test = function(input){
+    $scope.open_test = function(input,name){
+        $scope.EvaluationName = name;
         $scope.moduleId = input[0];
         $scope.contentId = input[1];
         $scope.modulePosition = 0;

@@ -247,6 +247,7 @@ var index = 0;
                             "final_date": `<%= content.content_button_info.final_date %>`,
                             },
                             "content_position": `<%= content.content_position %>`, 
+                            "content_name" : `<%= content.content_name %>`,
                             "content_pk": <%= content.content_pk%>, 
                             'template': "<%= content.template %>", 
                             "can_open" : <%= content.can_open %>,
@@ -446,7 +447,7 @@ var index = 0;
                                                 80
                                                 </p>
                                                 <div class="clearfix"></div>
-                                                <a class="btn btn-verde btn-lg margin--t1" ng-click="open_test(json_modules[module.contents[0].content_pk])" data-mode="1" target="_blank" ng-disabled="!module.contents[0].content_button_info.show_button">
+                                                <a class="btn btn-verde btn-lg margin--t1" ng-click="open_test(json_modules[module.contents[0].content_pk], module.contents[0].content_name)" data-mode="1" target="_blank" ng-disabled="!module.contents[0].content_button_info.show_button">
                                                     Realizar Evaluación
                                                 </a>
                                             </div>
@@ -702,7 +703,7 @@ var index = 0;
                                         </strong>
                                     </td>
                                     <td>
-                                        <a class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper" ng-click="open_test(json_modules[evaluation.content_pk])" data-mode="1" target="_blank" ng-disabled="!evaluation.content_button_info.show_button">
+                                        <a class="btn btn-gosh btn-xsm btn-gosh--verde pull-right text--upper" ng-click="open_test(json_modules[evaluation.content_pk],evaluation.content_name)" data-mode="1" target="_blank" ng-disabled="!evaluation.content_button_info.show_button">
                                             Hacer Evaluación
                                         </a>
 
@@ -750,60 +751,26 @@ var index = 0;
                 </a>
             </div>
            <div class="col-xs-6">
-                <p id="category" class="text text--blanco text--m text--xbold text-space1 margin--t0 margin--b0 text--upper text-center"></p>
-                <h1 id="namecourse" class="text text--blanco text--lg margin--t0 margin--b0 text-center"></h1>
-                <ul class="nav nav-pills nav-interno ">
-                    <li id="courseView" >
-                    <a href="/profile/" >Mi dojo</a>
-                    </li>
-                    <li>
-                    <a href="/all_courses/" >Cursos</a>
-                    </li>
-                    <li id="certificationsView">
-                    <a href="/all_certifications/">Certificaciones</a>
-                    </li>
-                    <li>
-                    <a href="/jobs">Empleos</a>
-                    </li>
-                    <li>
-                    <a target="_blank" href="http://blog.marketinguniversity.co/">Blog</a>
-                    </li>
-                    <li>
-                    <a href="#" aria-controls="blog" role="tab" data-toggle="tab">Comunidad</a>
-                    </li>
-
-
-                </ul>
+                <p id="evaluationTitle" class="text--blanco text--md text--bold margin--t1 text-center">
+                {{EvaluationName}}
+                </p>
+                                
             </div>
             <div class="col-xs-3">
                 <div class="row">
                     
-                   <a class="pull-right">
-            <img src="https://s3-eu-west-1.amazonaws.com/share.typeform.com/close.gif"  ng-click="close_test()">
-        </a>
-                    <div class="hidden col-xs-2 padding--r0 padding--l0 nav-topper__avatarUser">
-                        <div class="row">
-                            <a href="/profile">
-                                <img src="<%= user.info.avatar %>" alt="" class="img-responsive pull-right img-circle" >
-                            </a>
-                        </div>
-                    </div>
+                   <a class="pull-right" href="#">
+            <img src="/existaya/images/close-app-white.png"  ng-click="close_test()">
+        </a> 
+                    
                 </div>
             </div>
         </div>
     </nav>
     
 </div>
-        <section class="col-xs-12 " ng-cloak >
+        <section class="col-xs-12 " ng-cloak style="margin-top: 2%;" >
     <div class="evaluation-questions-container">
- <script type="text/javascript">var  charge=setInterval(function(){
-            
-              
-                $("#namecourse").html("lulo con carne");
-                clearInterval(charge);
-                $(".nav-interno").addClass("hidden");
-            
-        },100)</script>
    
                 <div class="confirm_finish" ng-show="confirmFinish">
                     Evaluación Terminada - las respuestas se han guardado.
@@ -826,9 +793,43 @@ var index = 0;
                             <div class="text-center" ng-if="examSlide.fields.question.extras.get_image_data != null"> 
                                 <img id="questionImage" class="img-responsive" alt="">
                             </div>
-                             <div class="text-center" ng-if="examSlide.fields.diapositive.fields.text"> 
+                            <div ng-if="examSlide.fields.diapositive.fields.text">
+                             <div class="text-center col-md-6" > 
                                <p ng-bind-html="parseHtml(examSlide.fields.diapositive.fields.text)"></p> 
                             </div>
+                            <span ng-show="unique" style="color: #777;" ng-cloak > <i class="fa fa-dot-circle-o" aria-hidden="true"></i> Selección Única </span>
+                            <span ng-show="multiple" style="color: #777;" ng-cloak > <i class="fa fa-check-square-o" aria-hidden="true"></i> Selección Múltiple </span>
+                            <p>
+                            <div ng-repeat="option in user_answers track by $index">
+                                
+                                <div class="">
+
+                                    <div class="list-group list-group-answers  col-md-6" ng-show="unique">
+
+                                        <a href="#" style=" background-color: white;" class="letter letterId-{{option.id}} list-group-item col-md-12" ng-class="{inactiveChoice:{{option.selected}}, block_cursor : {{disableChoices}} }" ng-click="saveAnswer(option.id)">
+                                        <div class="col-md-2 text-center"><span class="evaluationNumbrerAnswer">{{getLetter($index)}}</span></div>
+                                        <div class="col-md-10">{{option.option}}</div>
+                                        </a>
+
+                            
+                                        
+
+                                    </div>
+                                    <div class="list-group list-group-answers  col-md-12" ng-show="multiple">
+                                        <a href="#" style=" background-color: white;" class="letter letterId-{{option.id}} list-group-item col-md-12" ng-class="{inactiveChoice:{{option.selected}}, block_cursor : {{disableChoices}} }" ng-click="saveAnswermu(option.id)">
+                                        <div class="col-md-1 text-center"><span style="border-radius: 20%;" class="evaluationNumbrerAnswer">{{getLetter($index)}}</span></div>
+                                        <div class="col-md-11">{{option.option}}</div>
+                                        </a>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div ng-if="!examSlide.fields.diapositive.fields.text">
+                            <span ng-show="unique" style="color: #777;" ng-cloak > <i class="fa fa-dot-circle-o" aria-hidden="true"></i> Selección Única </span>
+                            <span ng-show="multiple" style="color: #777;" ng-cloak > <i class="fa fa-check-square-o" aria-hidden="true"></i> Selección Múltiple </span>
+                            <p>
                             <div ng-repeat="option in user_answers track by $index">
                                 
                                 <div class="">
@@ -846,7 +847,7 @@ var index = 0;
                                     </div>
                                     <div class="list-group list-group-answers  col-md-12" ng-show="multiple">
                                         <a href="#" style=" background-color: white;" class="letter letterId-{{option.id}} list-group-item col-md-12" ng-class="{inactiveChoice:{{option.selected}}, block_cursor : {{disableChoices}} }" ng-click="saveAnswermu(option.id)">
-                                        <div class="col-md-1 text-center"><span class="evaluationNumbrerAnswer">{{getLetter($index)}}</span></div>
+                                        <div class="col-md-1 text-center"><span style="border-radius: 20%;" class="evaluationNumbrerAnswer">{{getLetter($index)}}</span></div>
                                         <div class="col-md-11">{{option.option}}</div>
                                         </a>
                                         
@@ -854,13 +855,14 @@ var index = 0;
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         </div>
 
                     </div>
                     
                 </ul>
 
-                <div class="navQuestion">
+                <div class="navQuestion row bg-evaluation-nav navbar-fixed-bottom">
                     <div class="col-md-8">
                     <span id="questions-info" class="text--bold text--gris text--sm">{{examSlide.fields.position + 1}} de {{examData.extras.nr_slides}} preguntas </span>
                     <div class="progress progress-evaluation">
