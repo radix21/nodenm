@@ -1,5 +1,5 @@
 express = require("express");
-DEFAULT_SERVER = "http://marketing.kmelx.com:5000";
+DEFAULT_SERVER = "http://marketing.kmelx.com";
 SERVER = function(hostname){
     return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
 }
@@ -111,28 +111,28 @@ KME_API = {
 CLIENTS = {
     "www.marketinguniversity.co" : {
         folder : "existaya",
-        server : "http://marketing.kmelx.com:5000",
+        server : "http://marketing.kmelx.com",
         token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "kmelx.com" : {
         folder : "kmelx",
-        server : "http://kmelx.com:5000",
+        server : "http://kmelx.com",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
 
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com:5000",
+        server : "http://marketing.kmelx.com",
         token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "safe-beyond-13324.herokuapp.com" : {
         folder: "existaya",
-        server : "http://marketing.kmelx.com:5000",
+        server : "http://marketing.kmelx.com",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "127.0.0.1" : {
         folder : "existaya",
-        server : "http://marketing.kmelx.com:5000",
+        server : "http://marketing.kmelx.com",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     }
 
