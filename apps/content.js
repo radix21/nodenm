@@ -50,6 +50,45 @@ take_test = function(req, res){
     hrend = process.hrtime(hrstart);;
     console.info("Execution time (take_test): %ds %dms", hrend[0], hrend[1]/1000000);
 }
+exam_data = function(req, res){
+    console.log(req.params);
+    if(req.session.user == undefined || req.session.user.token == undefined){
+        res.send({
+            status : "failed",
+            message : "User is not authenticated"
+        })
+    }else{
+        
+        url = KME_API.exam_data(req.hostname) + "/?exam="+req.params.exam;
+        str = "";
+        console.log(url);
+        data = http.get(url, function(response){
+            response.on("error", function(err){
+                res.status(400).send({
+                    status: "failed",
+                    message : err
+                })
+            });
+            response.on("data", function(data){
+                str += data;
+            });
+
+            response.on("end", function(){
+                try{
+                    res.send(JSON.parse(str));
+                }catch(err){
+                    res.send(str);
+                }
+            })
+        
+        }).on("error", function(err){
+            res.status(500).send({
+                "status" : "error",
+                "message" : err
+            })
+        }).end()
+    }
+}
 /**
  * @api{get} /api/content/json_fetch_exam/ Get exam status
  * @apiName fetch_exam

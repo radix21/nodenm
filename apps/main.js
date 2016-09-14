@@ -1,5 +1,5 @@
 express = require("express");
-DEFAULT_SERVER = "http://marketing.kmelx.com";
+DEFAULT_SERVER = "http://marketing.kmelx.com:5000";
 SERVER = function(hostname){
     return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
 }
@@ -80,6 +80,9 @@ KME_API = {
     finish_exam : function(hostname){
         return SERVER(hostname) + "/api/contents/json_finish_exam/";
     },
+    exam_data : function(hostname){
+        return SERVER(hostname) + "/api/contents/exam_data/";
+    },
     my_certifications : function(hostname){
         return SERVER(hostname) + "/api/courses/get_user_certifications/";
     },
@@ -108,28 +111,28 @@ KME_API = {
 CLIENTS = {
     "www.marketinguniversity.co" : {
         folder : "existaya",
-        server : "http://marketing.kmelx.com",
+        server : "http://marketing.kmelx.com:5000",
         token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "kmelx.com" : {
         folder : "kmelx",
-        server : "http://kmelx.com",
+        server : "http://kmelx.com:5000",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
 
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com",
+        server : "http://marketing.kmelx.com:5000",
         token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "safe-beyond-13324.herokuapp.com" : {
         folder: "existaya",
-        server : "http://marketing.kmelx.com",
+        server : "http://marketing.kmelx.com:5000",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "127.0.0.1" : {
         folder : "existaya",
-        server : "http://marketing.kmelx.com",
+        server : "http://marketing.kmelx.com:5000",
         token :  "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     }
 

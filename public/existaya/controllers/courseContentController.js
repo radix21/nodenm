@@ -331,15 +331,10 @@ app.controller("courseContentController",[ "$scope","$sce","$http", function($sc
         }else{
             $http.get("/api/content/json_finish_exam/?content="+content+"&module="+module+"&exam="+exam+"&choices="+JSON.stringify($scope.question_choices)+"&actual_position="+$scope.position)
                 .success(function(response){
-                    if (response.score<response.aprobation){
-                        swal({   title: "Puntaje: "+response.score,   text: "No haz obtenido el puntaje necesario para aprobar la evaluación, revisa el material e intantalo nuevamente. Recuerda que tienes una cantidad limitada de intentos.",  
-                         type: "info",   showCancelButton: false,    confirmButtonText: "Continuar",  
-                        closeOnConfirm: false }, function(){   location.reload(); });
-
-                    }else{
-                        swal({   title: "Puntaje: "+response.score,   text: "Felicitaciones haz aprobado la evaluación",  
-                         type: "success",   showCancelButton: false,    confirmButtonText: "Continuar",  
-                        closeOnConfirm: false }, function(){   location.reload(); });
+                    $scope.ShowResults=true;
+                    $scope.score=response.score;
+                    if (response.score>=response.aprobation || response.aprobation == null){
+                        $scope.pass=true;
                     }
                     
                 })
@@ -539,6 +534,18 @@ app.controller("courseContentController",[ "$scope","$sce","$http", function($sc
 
         $scope.show_test = false;   
         location.reload();
+    }
+    $scope.show_feedback = function(exam){
+        console.log(exam);
+        $http.get("/api/content/exam_data/"+exam+"/")
+                .success(function(response){
+                    console.log(response);
+                    $scope.examResData = response;
+                    
+
+                })
+
+        $scope.feedback = true;   
     }
 
     // This function update exam status
