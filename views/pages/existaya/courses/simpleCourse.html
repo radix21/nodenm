@@ -794,8 +794,8 @@ var index = 0;
                              <div class="text-center col-md-6" > 
                                <p ng-bind-html="parseHtml(examSlide.fields.diapositive.fields.text)"></p> 
                             </div>
-                            <span ng-show="unique" style="color: #777;" ng-cloak > <i class="fa fa-dot-circle-o" aria-hidden="true"></i> Selección Única </span>
-                            <span ng-show="multiple" style="color: #777;" ng-cloak > <i class="fa fa-check-square-o" aria-hidden="true"></i> Selección Múltiple </span>
+                                <span ng-show="unique" style="color: #777;" ng-cloak > <i class="fa fa-dot-circle-o" aria-hidden="true"></i> Selección Única </span>
+                                <span ng-show="multiple" style="color: #777;" ng-cloak > <i class="fa fa-check-square-o" aria-hidden="true"></i> Selección Múltiple </span>
                             <p>
                             <div ng-repeat="option in user_answers track by $index">
                                 
@@ -824,8 +824,8 @@ var index = 0;
                             </div>
                             </div>
                             <div ng-if="!examSlide.fields.diapositive.fields.text">
-                            <span ng-show="unique" style="color: #777;" ng-cloak > <i class="fa fa-dot-circle-o" aria-hidden="true"></i> Selección Única </span>
-                            <span ng-show="multiple" style="color: #777;" ng-cloak > <i class="fa fa-check-square-o" aria-hidden="true"></i> Selección Múltiple </span>
+                                <span ng-show="unique" style="color: #777;" ng-cloak > <i class="fa fa-dot-circle-o" aria-hidden="true"></i> Selección Única </span>
+                                <span ng-show="multiple" style="color: #777;" ng-cloak > <i class="fa fa-check-square-o" aria-hidden="true"></i> Selección Múltiple </span>
                             <p>
                             <div ng-repeat="option in user_answers track by $index">
                                 
@@ -861,24 +861,21 @@ var index = 0;
 
                 <div class="navQuestion row bg-evaluation-nav navbar-fixed-bottom">
                     <div class="col-md-8">
-                    <span id="questions-info" class="text--bold text--gris text--sm">{{examSlide.fields.position + 1}} de {{examData.extras.nr_slides}} preguntas </span>
-                    <div class="progress progress-evaluation">
-                    <div class="progress-bar progress-bar-success" id="evaluationProgressBar" role="progressbar" aria-valuenow="{{examSlide.fields.position + 1}}" aria-valuemin="0" aria-valuemax="{{examData.extras.nr_slides}}" style="width: {{((examSlide.fields.position + 1)*100)/examData.extras.nr_slides }}%;">
-                    </div>
-                    </div>
+                        <span id="questions-info" class="text--bold text--gris text--sm">{{examSlide.fields.position + 1}} de {{examData.extras.nr_slides}} preguntas </span>
+                        <div class="progress progress-evaluation">
+                            <div class="progress-bar progress-bar-success" id="evaluationProgressBar" role="progressbar" aria-valuenow="{{examSlide.fields.position + 1}}" aria-valuemin="0" aria-valuemax="{{examData.extras.nr_slides}}" style="width: {{((examSlide.fields.position + 1)*100)/examData.extras.nr_slides }}%;">
+                            </div>
+                        </div>
                     </div> 
                     <div class="col-md-4 text-right"> 
-
                         <div class=" pull-right">
-                            
-                        
-                        <a href="" class="btn btn-azul2 text-uppercase margin--t05 " ng-click="prev_slide()" ng-show="arrowLeft">
-                           Anterior
-                        </a> 
-                        <a href="" class="btn btn-azul2 text-uppercase margin--t05 " ng-click="next_slide()" ng-show="arrowRight">
-                            Siguiente
-                        </a> 
-                        <a href=""  ng-show="finishExam" ng-click="finish_exam(contentId, moduleId, examData.pk)" class="btn btnFinish text-uppercase margin--t05 btn-verde">Finalizar</a>
+                            <a href="" class="btn btn-azul2 text-uppercase margin--t05 " ng-click="prev_slide()" ng-show="arrowLeft">
+                               Anterior
+                            </a> 
+                            <a href="" class="btn btn-azul2 text-uppercase margin--t05 " ng-click="next_slide()" ng-show="arrowRight">
+                                Siguiente
+                            </a> 
+                            <a href=""  ng-show="finishExam" ng-click="finish_exam(contentId, moduleId, examData.pk)" class="btn btnFinish text-uppercase margin--t05 btn-verde">Finalizar</a>
                         </div>
 
                     </div>
@@ -889,99 +886,98 @@ var index = 0;
     <section ng-if="ShowResults && feedback" class="col-xs-12 " ng-cloak style="margin-top: 2%;" >
         <div class="evaluation-questions-container">
         <div ng-repeat="answer in examResData track by $index">
-        <div class="statement container">
+            <div class="statement container">
+                <span class="col-md-1 text-center">
+                    <span class="numberQuestion ">{{$index + 1 }}</span>
+                </span>
 
-        <span class="col-md-1 text-center">
-            <span class="numberQuestion ">{{$index + 1 }}</span>
-        </span>
-
-        <span class="questionText col-md-11">
-           {{answer.question}}
-        </span>
-        </div>
-        <div class="clearfix"></div>
-        <div ng-repeat="option in answer.answers" >
-        <div class="col-md-11 col-md-offset-1 well well-sm">
-        <div class="col-md-1 text-center">
-        <i ng-if="option.state" class="fa fa-check-circle-o  text--verde text--lg" aria-hidden="true"></i>
-        <i ng-if="!option.state" class="fa fa-times-circle-o text--rojo text--lg" aria-hidden="true"></i></div>
-        <div class="col-md-11"><div class="row">{{option.answer}}</div></div>
-        </div>
-        <div ng-if="option.feedback" class="col-md-11 col-md-offset-1 text--gris text--sm text-justify">
-        <div class="row">
-        {{option.feedback}}
-        </div>
-        </div>
-        <p></p>
-        </div>
-        <div class="col-md-11 col-md-offset-1 text--gris text--sm text-justify">
-        <div class="row"></div>
-        </div>
+                <span class="questionText col-md-11">
+                   {{answer.question}}
+                </span>
+            </div>
+            <div class="clearfix"></div>
+            <div ng-repeat="option in answer.answers" >
+                <div class="col-md-11 col-md-offset-1 well well-sm">
+                    <div class="col-md-1 text-center">
+                        <i ng-if="option.state" class="fa fa-check-circle-o  text--verde text--lg" aria-hidden="true"></i>
+                        <i ng-if="!option.state" class="fa fa-times-circle-o text--rojo text--lg" aria-hidden="true"></i></div>
+                    <div class="col-md-11"><div class="row">{{option.answer}}</div></div>
+                </div>
+                <div ng-if="option.feedback" class="col-md-11 col-md-offset-1 text--gris text--sm text-justify">
+                    <div class="row">
+                        {{option.feedback}}
+                    </div>
+                </div>
+                <p></p>
+            </div>
+            <div class="col-md-11 col-md-offset-1 text--gris text--sm text-justify">
+                <div class="row"></div>
+            </div>
         </div>
         </div>
         <div class="col-md-6 text-right">
-<a href="#" role="button" ng-click="hide_feedback()" class="btn btn-azul2 text-uppercase margin--t05">Anterior</a>
-</div>
-<div class="col-md-6 text-left">
-<a href="#" ng-click="close_test()" role="button" class="btn btn-azul2 text-uppercase margin--t05">Salir</a>
-</div>
+            <a href="#" role="button" ng-click="hide_feedback()" class="btn btn-azul2 text-uppercase margin--t05">Anterior</a>
+        </div>
+        <div class="col-md-6 text-left">
+            <a href="#" ng-click="close_test()" role="button" class="btn btn-azul2 text-uppercase margin--t05">Salir</a>
+        </div>
     </section>
 
     <section ng-if="ShowResults && !feedback" class="col-xs-12 " ng-cloak style="margin-top: 2%;" >
-                <div class="evaluation-questions-container">
+        <div class="evaluation-questions-container">
         <div class="col-md-4">
-        <div class="panel panel-default margin--t2">
-        <div class="panel-heading text-uppercase text-center text--bold text--negro">Tu porcentaje de acierto</div>
-        <div class="panel-body">
-        <p class="text--gris text-center margin--b0">Tu porcentaje de acierto en la evaluación fue de:</p>
-        <div class="c100 p{{score}} big {{color}}" >
-        <span>{{score}}</span>
-        <div class="slice">
-        <div class="bar"></div>
-        <div class="fill"></div>
-        </div>
-        </div>
-        <!-- pendiente en el api 
-        <p class="text--gris_osc text-center margin--t0 text--bold text--md text--italic">7 preguntas de 10 posibles</p>
-        -->
-        </div>
-        </div>
+            <div class="panel panel-default margin--t2">
+            <div class="panel-heading text-uppercase text-center text--bold text--negro">Tu porcentaje de acierto</div>
+            <div class="panel-body">
+                <p class="text--gris text-center margin--b0">Tu porcentaje de acierto en la evaluación fue de:</p>
+                <div class="c100 p{{score}} big {{color}}" >
+                    <span>{{score}}</span>
+                    <div class="slice">
+                        <div class="bar"></div>
+                        <div class="fill"></div>
+                    </div>
+                </div>
+                <!-- pendiente en el api 
+                <p class="text--gris_osc text-center margin--t0 text--bold text--md text--italic">7 preguntas de 10 posibles</p>
+                -->
+            </div>
+            </div>
         </div>
         <div class="col-md-8">
-        <p class="text--gris_osc text--xbold text-uppercase margin--t2 text--xlg">Tus Resultados</p>
-        <div ng-if="!pass">
-        <h2 class="text-relaway text--md text-uppercase text--bold text--azul margin--b0">¡Buen Intento!</h2>
-        <p class="text--azul text--bold">Lo hiciste bien pero puedes mejorar</p>
-        <p class="text--gris text-justify">
-        El espacio digital está creciendo a un ritmo fenomenal , conduciendo la creación de empleo y oportunidades. Ahora es el
-        momento de construir tus habilidades de marketing digital y garantizar que te mantengas actualizado en el mercado
-        competitivo de hoy.
-        </p>
-        <p class="text--gris text-justify">
-        Puedes hacer clic en el botón Ver Retroalimentación para obtener información más detallada sobre tus resultados o,
-        por qué no fortaleces tus conocimientos en marketing digital con uno de nuestros cursos?
-        </p>
-        </div>
-        <div ng-if="pass">
-        <h2 class="text-relaway text--md text-uppercase text--bold text--azul margin--b0">¡Felicitaciones!</h2>
-        <p class="text--azul text--bold">Estás muy cerca de convertirte en un experto en Marketing Digital</p>
-        <p class="text--gris text-justify">
-        Has marcado un impresionante {{score}}% en la evaluación de diagnóstico . Ya tienes un buen conocimiento de los fundamentos de marketing digital;
-        lo que significa que con una cualificación acreditada puedes desarrollar aún más tu carrera digital.
-        </p>
-        <p class="text--gris text-justify">
-        Puedes hacer clic en el botón Ver Retroalimentación para obtener información más detallada sobre tus resultados o,
-        por qué no fortaleces tus conocimientos en marketing digital con uno de nuestros cursos?
-        </p>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-md-6 text-center">
-        <a href="#" ng-click="show_feedback(examData.pk)"role="button" class="btn btn-azul2 text-uppercase margin--t05">Ver retroalimentación</a>
-        </div>
-        <div class="col-md-6 text-center">
-        <a href="#" ng-click="close_test()" role="button" class="btn btn-azul2 text-uppercase margin--t05">Finalizar</a>
-        </div>
-        <div class="clearfix"></div>
+            <p class="text--gris_osc text--xbold text-uppercase margin--t2 text--xlg">Tus Resultados</p>
+            <div ng-if="!pass">
+                <h2 class="text-relaway text--md text-uppercase text--bold text--azul margin--b0">¡Buen Intento!</h2>
+                <p class="text--azul text--bold">Lo hiciste bien pero puedes mejorar</p>
+                <p class="text--gris text-justify">
+                El espacio digital está creciendo a un ritmo fenomenal , conduciendo la creación de empleo y oportunidades. Ahora es el
+                momento de construir tus habilidades de marketing digital y garantizar que te mantengas actualizado en el mercado
+                competitivo de hoy.
+                </p>
+                <p class="text--gris text-justify">
+                Puedes hacer clic en el botón Ver Retroalimentación para obtener información más detallada sobre tus resultados o,
+                por qué no fortaleces tus conocimientos en marketing digital con uno de nuestros cursos?
+                </p>
+            </div>
+            <div ng-if="pass">
+                <h2 class="text-relaway text--md text-uppercase text--bold text--azul margin--b0">¡Felicitaciones!</h2>
+                <p class="text--azul text--bold">Estás muy cerca de convertirte en un experto en Marketing Digital</p>
+                <p class="text--gris text-justify">
+                Has marcado un impresionante {{score}}% en la evaluación de diagnóstico . Ya tienes un buen conocimiento de los fundamentos de marketing digital;
+                lo que significa que con una cualificación acreditada puedes desarrollar aún más tu carrera digital.
+                </p>
+                <p class="text--gris text-justify">
+                Puedes hacer clic en el botón Ver Retroalimentación para obtener información más detallada sobre tus resultados o,
+                por qué no fortaleces tus conocimientos en marketing digital con uno de nuestros cursos?
+                </p>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-6 text-center">
+                <a href="#" ng-click="show_feedback(examData.pk)"role="button" class="btn btn-azul2 text-uppercase margin--t05">Ver retroalimentación</a>
+            </div>
+            <div class="col-md-6 text-center">
+                <a href="#" ng-click="close_test()" role="button" class="btn btn-azul2 text-uppercase margin--t05">Finalizar</a>
+            </div>
+            <div class="clearfix"></div>
         </div>
         </div>
         </section>
