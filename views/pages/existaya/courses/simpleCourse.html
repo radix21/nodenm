@@ -900,18 +900,31 @@ var index = 0;
         </span>
         </div>
         <div class="clearfix"></div>
-        <div ng-repeat="option in answer.answers" class="col-md-11 col-md-offset-1 well well-sm">
+        <div ng-repeat="option in answer.answers" >
+        <div class="col-md-11 col-md-offset-1 well well-sm">
         <div class="col-md-1 text-center">
         <i ng-if="option.state" class="fa fa-check-circle-o  text--verde text--lg" aria-hidden="true"></i>
         <i ng-if="!option.state" class="fa fa-times-circle-o text--rojo text--lg" aria-hidden="true"></i></div>
         <div class="col-md-11"><div class="row">{{option.answer}}</div></div>
+        </div>
+        <div ng-if="option.feedback" class="col-md-11 col-md-offset-1 text--gris text--sm text-justify">
+        <div class="row">
+        {{option.feedback}}
+        </div>
+        </div>
+        <p></p>
         </div>
         <div class="col-md-11 col-md-offset-1 text--gris text--sm text-justify">
         <div class="row"></div>
         </div>
         </div>
         </div>
-        
+        <div class="col-md-6 text-right">
+<a href="#" role="button" ng-click="hide_feedback()" class="btn btn-azul2 text-uppercase margin--t05">Anterior</a>
+</div>
+<div class="col-md-6 text-left">
+<a href="#" ng-click="close_test()" role="button" class="btn btn-azul2 text-uppercase margin--t05">Salir</a>
+</div>
     </section>
 
     <section ng-if="ShowResults && !feedback" class="col-xs-12 " ng-cloak style="margin-top: 2%;" >
@@ -921,14 +934,16 @@ var index = 0;
         <div class="panel-heading text-uppercase text-center text--bold text--negro">Tu porcentaje de acierto</div>
         <div class="panel-body">
         <p class="text--gris text-center margin--b0">Tu porcentaje de acierto en la evaluación fue de:</p>
-        <div class="c100 p{{score}} big ">
+        <div class="c100 p{{score}} big {{color}}" >
         <span>{{score}}</span>
         <div class="slice">
         <div class="bar"></div>
         <div class="fill"></div>
         </div>
         </div>
+        <!-- pendiente en el api 
         <p class="text--gris_osc text-center margin--t0 text--bold text--md text--italic">7 preguntas de 10 posibles</p>
+        -->
         </div>
         </div>
         </div>

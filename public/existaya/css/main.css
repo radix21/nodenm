@@ -185,6 +185,7 @@
 .text--gris_cla{color:#989fab; height: 57px;}
 .text--gris_osc{color:#454546}
 .text--verde{color:#6e8e2d}
+.text--rojo{color:#eb0000}
 .text--space1{letter-space:-1px}
 .text--nunito{font-family:'Nunito',sans-serif}
 .text--upper{text-transform:uppercase}
@@ -447,6 +448,8 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .alert--bigger{padding:.5em 1.2em}
 .progress--green{height:.8em;}
 .progress--green .progress-bar{background-color:#6e8e2d}
+.progress--red{height:.8em;}
+.progress--red .progress-bar{background-color:#eb0000}
 .table--detallePerfil > tbody > tr > td{padding:1em .25em .7em;border-bottom:1px solid #b3b3b3;border-top:none;vertical-align:middle}
 .table--recursos > tbody > tr > th{background:#e6e6e6;border-top:none;color:#002b62;font-weight:800;vertical-align:middle}
 .table--recursos > tbody > tr > td{color:#454546;vertical-align:middle}

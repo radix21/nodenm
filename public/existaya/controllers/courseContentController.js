@@ -335,6 +335,8 @@ app.controller("courseContentController",[ "$scope","$sce","$http", function($sc
                     $scope.score=response.score;
                     if (response.score>=response.aprobation || response.aprobation == null){
                         $scope.pass=true;
+                    }else{
+                        $scope.color="red"
                     }
                     
                 })
@@ -536,16 +538,17 @@ app.controller("courseContentController",[ "$scope","$sce","$http", function($sc
         location.reload();
     }
     $scope.show_feedback = function(exam){
-        console.log(exam);
         $http.get("/api/content/exam_data/"+exam+"/")
                 .success(function(response){
-                    console.log(response);
                     $scope.examResData = response;
                     
 
                 })
 
         $scope.feedback = true;   
+    }
+    $scope.hide_feedback = function(exam){
+        $scope.feedback = false;   
     }
 
     // This function update exam status
