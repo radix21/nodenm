@@ -80,6 +80,9 @@ KME_API = {
     finish_exam : function(hostname){
         return SERVER(hostname) + "/api/contents/json_finish_exam/";
     },
+    exam_data : function(hostname){
+        return SERVER(hostname) + "/api/contents/exam_data/";
+    },
     my_certifications : function(hostname){
         return SERVER(hostname) + "/api/courses/get_user_certifications/";
     },
