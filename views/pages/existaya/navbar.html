@@ -1,4 +1,4 @@
-<div ng-controller="navbarController">
+<div ng-controller="navbarController" >
     <% if (user.logged){ %>
     <nav class="col-xs-12 nav-topper nav-topper--perfil" style="z-index:9999;">
         <div class="container">
@@ -88,7 +88,9 @@
         </div>
     </nav>
     <% }else{ %>
-    <nav class="col-xs-12 nav-topper">
+    <nav class="col-xs-12 nav-topper" style="
+    position: fixed;
+    z-index: 9999;">
         <div class="container" ng-init="algo()">
             <div class="row-same-height row-xs-full-height">
                 <div class="col-xs-2 col-xs-height col-xs-full-height col-middle">
@@ -96,7 +98,7 @@
                         <img src="/existaya/images/logo1.png" id="logoOri" alt="Marketing University" class="img-responsive pull-left logowidth" >
                     </a>
                     <div ng-show="{{authenticated_navbar}}" class="top-main-menu">
-                        <ul class="nav nav-complete navbar-nav navbar-right">
+                        <ul class="nav nav-complete navbar-nav navbar-right" >
                             <li class="active"><a ng-href="/all_courses" ng-click="activeMenu($event)">CURSOS</a></li>
                             <li><a ng-href="/all_certifications" ng-click="activeMenu($event)">CERTIFICACIONES</a></li>
                             <li><a ng-href="/jobs" ng-click="activeMenu($event)">BOLSA DE EMPLEO</a></li>
@@ -118,7 +120,7 @@
                     <div class="col-xs-12 sidebar-contentMenu" ng-if="!seeMenu">
                         <div class="navbar-right">
                            
-                            <ul class="nav nav-complete navbar-nav " ng-if="!authenticated_navbar">
+                            <ul class="nav nav-complete navbar-nav " style="padding-top: 8px;" ng-if="!authenticated_navbar">
                                 <li class="active"><a href="/all_courses">CURSOS</a></li>
                                 <li><a href="/all_certifications">CERTIFICACIONES</a></li>
                                 <li><a href="#" class="hidden">EVENTOS</a></li>

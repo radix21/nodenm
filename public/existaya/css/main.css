@@ -724,7 +724,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .sidebar-imageCurso__nombre{position:absolute;bottom:-1em}
 .sidebar-imageCurso__image{border:3px solid #5998c8;margin-right:.5em;width:70px; height: 70px;}
 .sidebar-imageCurso__qualy{color:#fff;position:absolute;top:1em}
-.sidebar-add__montain{position:relative;}
+.sidebar-add__montain{position:relative;padding-top: 7em;}
 .sidebar-add__montain:after{background:url("../images/spoiler1-r.png") 0 0;bottom:-120px;content:'';display:block;height:176px;position:absolute;right:0;width:599px;z-index:1}
 .sidebar-add__montain:before{background:url("../images/spoiler1-l.png") 0 0;bottom:-119px;content:'';display:block;height:176px;position:absolute;left:0;width:599px;z-index:1}
 .sidebar-add__montainR{position:relative;}
