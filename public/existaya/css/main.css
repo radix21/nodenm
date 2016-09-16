@@ -348,7 +348,7 @@ body{font-family:'Raleway',sans-serif;font-size:16px;margin:0;overflow-x:hidden;
 .bg-azul1{background-color: #447eae}
 
 
-.nav-topper{background:#fff;border-bottom:2px solid #d6d6d6;padding-top:1em;padding-bottom:1em;}
+.nav-topper {background: #fff;border-bottom: 2px solid #d6d6d6;padding-top: 1em;padding-bottom: 0.5em;}
 .nav-topper__iconMenu{background:#accce6;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;color:#fff;font-size:1.4em;display:block;height:1.7em;padding:.25em .45em;text-align:center;width:1.8em;}
 .nav-topper__iconMenu:hover,.nav-topper__iconMenu:active,.nav-topper__iconMenu:focus{text-decoration:none;color:#fff}
 .nav-topper__avatarUser img{margin-top:.5em;height:auto;width:1.5em}
