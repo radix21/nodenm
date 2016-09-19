@@ -7,8 +7,9 @@ app.controller('detailsJobsController', ['$scope', '$http', '$location', functio
         $scope.detailJob = {};
         $scope.empresa = {};
         $scope.skill_requeridos = {};
-
+        $scope.oferta_empleo_id='';
         var oferta_empleo_id = getOfertaEmpleoId();
+        $scope.oferta_empleo_id = oferta_empleo_id;
         //Obtenemos el id de la oferta 
         console.log(oferta_empleo_id);
 
