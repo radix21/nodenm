@@ -1,5 +1,5 @@
 express = require("express");
-DEFAULT_SERVER = "http://marketing.kmelx.com";
+DEFAULT_SERVER = "http://marketing.kmelx.com:5000";
 SERVER = function(hostname){
     return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
 }
@@ -122,7 +122,7 @@ CLIENTS = {
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com",
+        server : "http://marketing.kmelx.com:5000",
         token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "safe-beyond-13324.herokuapp.com" : {

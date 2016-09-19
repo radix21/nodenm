@@ -5,7 +5,7 @@ module.exports = {
         app.post("/api/account/login", login);
         app.get("/api/account/logout/", logout);
         app.post("/api/account/register/", register);
-        app.get("/api/account/is_authenticated", isAuthenticated);
+        app.post("/api/account/is_authenticated", isAuthenticated);
         app.get("/api/account/exists/:username", user_exists);
         app.get("/api/account/getmutoken/", getMUToken);
         app.post("/api/account/uploadavatar/", uploadAvatar);

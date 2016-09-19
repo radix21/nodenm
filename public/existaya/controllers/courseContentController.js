@@ -519,7 +519,6 @@ app.controller("courseContentController",[ "$scope","$sce","$http", function($sc
             });
     }
     $scope.open_test = function(input,name){
-        console.log(input);
         $scope.EvaluationName = name;
         $scope.moduleId = input[0];
         $scope.contentId = input[1];
