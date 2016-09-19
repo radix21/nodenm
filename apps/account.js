@@ -221,7 +221,8 @@ register = function(req, res){
 isAuthenticated = function(req, res){
     logged = req.session.user != undefined ? req.session.user.logged : false;
     response = {
-        "logged" : logged
+        "logged" : logged,
+        "data" : req.session
     }
     res.send(response);
 }
