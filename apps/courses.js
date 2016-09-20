@@ -36,6 +36,24 @@ getMyCourses = function(req, res){
         res.send(response);
     }else{
          request('GET', KME_API.my_courses(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username).done(function (response) {
+            var respo= JSON.parse(response.getBody());
+            respo['diagnostic'] = DIAGNOSTIC_URL;
+            res.send(respo);
+        });
+
+    }
+
+};
+getDiagnostic= function(req, res){
+    str = "";
+    if(req.session.user == undefined || !req.session.user.logged){
+        response = {
+            "status" : "failed",
+            "message" : "User is not authenticated"
+        }
+        res.send(response);
+    }else{
+         request('GET', KME_API.get_diagnostic(req.hostname)+"?token="+req.session.user.token+"&user="+req.session.user.info.username+"&uuid="+DIAGNOSTIC_URL).done(function (response) {
             res.send(JSON.parse(response.getBody()))
         });
 

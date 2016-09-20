@@ -1,5 +1,6 @@
 express = require("express");
-DEFAULT_SERVER = "http://marketing.kmelx.com";
+DEFAULT_SERVER = "http://marketing.kmelx.com:5000";
+DIAGNOSTIC_URL= '9ac95ab7'
 SERVER = function(hostname){
     return CLIENTS[hostname] == undefined ? DEFAULT_SERVER : CLIENTS[hostname]["server"];
 }
@@ -21,6 +22,9 @@ KME_API = {
     },
     my_courses : function(hostname){
         return SERVER(hostname) + "/api/courses/my_courses";
+    },
+    get_diagnostic : function(hostname){
+        return SERVER(hostname) + "/api/courses/get_diagnostic/";
     },
     public_courses : function(hostname){
         console.log(SERVER(hostname));
@@ -122,7 +126,7 @@ CLIENTS = {
     },
     "localhost" :{
         folder : "existaya",
-        server : "http://marketing.kmelx.com",
+        server : "http://marketing.kmelx.com:5000",
         token : "52qBjI45Z9Bt2QdTD820IjD2opBKwf56"
     },
     "safe-beyond-13324.herokuapp.com" : {
