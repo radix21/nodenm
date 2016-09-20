@@ -625,7 +625,12 @@ app.directive("coursesCatalog", ["$rootScope", "courses",  function($rootScope, 
         switch(scope.type){
             case "me":
                 courses.myCourses().success(function(response){
-                    scope.dataMyCourses = response.courses;
+                    DIAGNOSTIC_URL=response.diagnostic;
+                    console.log(response);
+                    function RemoveDiagnostic(course) {
+                        return course.uuid != DIAGNOSTIC_URL ;
+                    }
+                    scope.dataMyCourses=response.courses.filter(RemoveDiagnostic);
                     $rootScope.dataMyCourses = response.courses;
                 }).error(function(a,b,c,d){
                     console.log("[DEBUG] - error: "+b+" track:"+d );

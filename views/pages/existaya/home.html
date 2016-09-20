@@ -1,6 +1,8 @@
 <% include head.html %>
+<script src="/existaya/controllers/homeController.js"></script>
 <navbar></navbar>
-<section class="col-xs-12 sidebar-blueGrandient sidebar-add__montain">
+<div ng-controller="homeController">
+<section ng-show="!show_test" class="col-xs-12 sidebar-blueGrandient sidebar-add__montain">
 
     <div class="sidebar-parallax visible-lg">
         <img src="existaya/images/nubes-left.png" alt="" id="nubes_left1" class="sidebar-parallax__nubes1" />
@@ -84,7 +86,7 @@
     </div>
 </section>
 
-<section class="col-xs-12 sidebar-section2 sidebar-blanco">
+<section ng-show="!show_test" class="col-xs-12 sidebar-section2 sidebar-blanco">
     <div class="container">
         <div class="col-xs-10 col-xs-offset-1">
             <h1 class="text text--azul_mid text--lg text--xbold text-center">
@@ -238,7 +240,9 @@
         </div>
     </div>
 </section>
-<section class="col-xs-12 sidebar-verde1 sidebar-section">
+<script>
+</script>
+<section ng-show="!show_test"  class="col-xs-12 sidebar-verde1 sidebar-section">
     <div class="container margin--t3 margin--b3">
         <div class="col-md-10 col-md-offset-1 col-xs-12">
         <div class="col-xs-4">
@@ -251,17 +255,19 @@
             <h2 class="text text--azul_mid text--lg text--bold text-left margin--t05">
             Este rápido diagnóstico te permitirá conocer tu nivel de conocimiento en las principales áreas del marketing digital
             </h2>
-            <p class="text text--md text--gris text-left text--lite margin--b05">
-            Preguntas: 20, Tiempo: 12 Minutos
+            <p ng-if="EnableDiagnostic" class="text text--md text--gris text-left text--lite margin--b05">
+            Preguntas: {{contentQuestions}}, Tiempo: {{contentDuration}} Minutos
             </p>
-            <a data-toggle="modal" data-target="#js-testEvaluacion" class="btn btn--academy2 btn-rojo btn--left btn-xlg margin--t1">
+            <a data-toggle="modal" ng-disabled="!EnableDiagnostic" data-target="#js-evaluacion" class="btn btn--academy2 btn-rojo btn--left btn-xlg margin--t1">
                 <span class="text--upper">REALIZAR DIAGNÓSTICO</span>
             </a>
+           
         </div>
         </div>
     </div>
+
 </section>
-<section class="col-xs-12 sidebar-verde1 sidebar-section">
+<section ng-show="!show_test" class="col-xs-12 sidebar-verde1 sidebar-section">
     <div class="container">
         <div class="col-xs-10 col-xs-offset-1">
             <h1 class="text text--azul_mid text--lg text--xbold text-center text--upper">
@@ -347,7 +353,7 @@
     </div>
 </section>
 
-<section class="col-xs-12 sidebar-blueGrandient sidebar-blueGrandient--cero1 sidebar-add__montainR">
+<section ng-show="!show_test" class="col-xs-12 sidebar-blueGrandient sidebar-blueGrandient--cero1 sidebar-add__montainR">
     <div class="sidebar-parallax visible-lg">
         <img src="existaya/images/nubes-left.png" alt="" id="nubes_left1" class="sidebar-parallax__nubes1" />
         <img src="existaya/images/nubes-right.png" alt="" id="nubes_left2" class="sidebar-parallax__nubes2" />
@@ -390,7 +396,7 @@
     </div>
 </section>
 
-<section class="col-xs-12 sidebar-section3 sidebar-blanco">
+<section ng-show="!show_test" class="col-xs-12 sidebar-section3 sidebar-blanco">
     <div class="container">
         <h1 class="text text--xxxlg text--azul_mid text-center text--xbold">
             CONTAMOS CON MÁS DE 100 AGENCIAS<br>
@@ -457,6 +463,72 @@
         </div>
     </div>
 </section>
+
+<!-- Modal -->           
+<div class="modal modal--ingreso fade" id="js-evaluacion" tabindex="-1" style="z-index:9999;" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+            <div class="col-md-12 margin--t1 margin--b0">
+                <a href="#" role="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/existaya/images/close-popup.png"></a>
+            </div>
+            <div class="col-xs-12 margin--t0 margin--b1">
+                <h1 class="text text--azul_mid text--xxxxlg text--xbold margin--b0 text-center text-space1 text--upper margin--t0">
+                Diagnostico
+                </h1>
+                <p class="text text--gris text--md text-center text--lite">
+                {{EvaluationName}}
+                </p>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-10 col-xs-offset-1 margin--t1">
+            <div class="col-xs-6">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="text text--xlg text--gris_osc text--xbold text--upper text-center">
+            PREGUNTAS
+            </h3>
+            </div>
+            <div class="panel-body">
+                <p class="text text--xxxxlg text--gris_osc text--xbold text--upper text-center margin--b0">
+                {{contentQuestions}}
+                </p>
+                <p class="text text--gris_osc text--lite text-center margin--t0">
+                Preguntas
+                </p>
+            </div>
+            </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="text text--xlg text--gris_osc text--xbold text--upper text-center">
+                    TIEMPO
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p class="text text--xxxxlg text--gris_osc text--xbold text--upper text-center margin--b0">
+                     {{contentDuration}}
+                    </p>
+                    <p class="text text--gris_osc text--lite text-center margin--t0">
+                    Minutos
+                    </p>
+                </div>
+                </div>
+            </div>
+            <div class="col-xs-12 margin--t3 margin--b3 text-center">
+                <a class="btn btn-verde btn-lg margin--t1" ng-click="open_test()" data-mode="1" target="_blank">
+
+                <span class="text--upper">INICIAR DIAGNOSTICO</span>
+            </a>
+
+            </div>
+            </div>
+            </div>
+    </div>
+    </div>
+</div>
+<% include quest.html %>
 <% include footer.html %>
 <!--  MODAL DE INGRESO  -->
 
