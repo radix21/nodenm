@@ -424,6 +424,18 @@ var index = 0;
 
                                                                 </td>
                                                             </tr>
+                                                            <tr ng-repeat="link in submodule.objects">
+                                                                <td>
+                                                                    {{ link.object_name }}
+                                                                </td>
+                                                                <td>
+                                                                    <strong>{{object_description}}</strong>
+                                                                </td>
+                                                                <td>
+                                                                    <a class="btn btn-ghosh btn-xsm btn-gosh--verde pull-right text--upper" ng-href="{{link.url}}">Ver</a>
+
+                                                                </td>
+                                                            </tr>
                                                         </tbody></table>
                                                     </div>
                                                 </div>
